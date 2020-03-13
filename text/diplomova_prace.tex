@@ -1,0 +1,136 @@
+\documentclass[a4paper,oneside,12pt]{book}
+
+% KODOVANI, CESTINA
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{graphicx}
+
+\DeclareGraphicsRule{*}{mps}{*}{}
+
+% MATEMATIKA, CITACE, ...
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{amsmath}
+
+% DEFINICNI BLOK
+\theoremstyle{definition}
+\newtheorem{df}{Definice}
+\newtheorem*{zn}{Značení}
+\newtheorem*{pr}{Příklad}
+
+\theoremstyle{plain}
+\newtheorem{vt}{Věta}
+\newtheorem*{tv}{Tvrzení}
+\newtheorem{lm}{Lemma}
+\newtheorem*{tpp}{The Party Problem}
+\newtheorem*{hp}{Hypotéza}
+
+\theoremstyle{remark}
+\newtheorem{po}{Poznámka}
+
+%--------------------------------------------------
+
+\begin{document}
+
+% ------------------------------ Titulní strana ------------------------------ %
+\thispagestyle{empty}
+\begin{center}
+  {\Huge
+  Západočeská univerzita v~Plzni\\[3pt]
+  Fakulta aplikovaných věd
+  }
+
+	\vspace{60mm}
+
+  {\huge \MakeUppercase{Diplomová práce}}\\[3pt]
+  {\Large \textbf{Semidefinitní programování v kombinatorické optimalizaci}\par}
+\end{center}
+
+\vfill
+
+{\large
+  \begin{tabular}{ll}
+    Autor: & Ondřej Špaček\\
+    Vedoucí práce: & Doc. Ing. Roman Čada, Ph.D.\\[30pt]
+    Plzeň, 2020 &
+  \end{tabular}
+}
+
+\clearpage{\pagestyle{empty}}
+
+% ------------------------- Prohlášení a poděkování -------------------------- %
+\newpage
+\thispagestyle{empty}
+{\Large
+\noindent\textbf{Prohlášení}}\\[3pt]
+Prohlašuji, že jsem svou diplomovou práci vypracoval samostatně s použitím odborné literatury uvedené v seznamu, který je uveden na konci této práce.\\[30pt]
+\begin{tabular}{lcc}
+V Plzni dne .................... & ~~~~~~~~~~~~~~~~~~~~~~~~ & ........................................\\
+                                 &                          & podpis\\ 
+\end{tabular}
+
+\vfill
+{\Large
+\noindent\textbf{Poděkování}}\\[3pt]
+Především bych chtěl poděkovat svému vedoucímu diplomové práce Doc.~Ing.~Romanu~Čadovi,~Ph.D. za spoustu času, který mi věnoval a cenné rady při řešení problémů spojených s vypracováním diplomové práce.
+
+% ------------------------- Abstrakt a klíčová slova ------------------------- %
+\newpage
+\thispagestyle{empty}
+{\Large
+\noindent\textbf{Abstrakt}}\\[3pt]
+
+\vfill
+{\Large
+\noindent\textbf{Klíčová slova}}\\[3pt]
+
+% -------------------------- Abstract and keywords --------------------------- %
+\newpage
+\thispagestyle{empty}
+{\Large
+\noindent\textbf{Abstract}}\\[3pt]
+
+\vfill
+{\Large
+\noindent\textbf{Keywords}}\\[3pt]
+
+% --------------------------------- Značení ---------------------------------- %
+\newpage
+\thispagestyle{empty}
+\input{XX_znaceni}
+
+% ---------------------------------- Obsah ----------------------------------- %
+\tableofcontents
+\setcounter{page}{1}
+\pagebreak
+
+% ----------------------------------- Úvod ----------------------------------- %
+{\pagestyle{plain}
+\input{XX_uvod}
+\clearpage
+}
+
+% -------------------------------- ČÁST: TEORIE ------------------------------ %
+\input{01_teorie}
+\clearpage
+
+% ------------------------- ČÁST: KOMBINATORICKÉ ÚLOHY ----------------------- %
+\input{02_kombinatoricke_ulohy}
+\clearpage
+
+% ----------------------------- ČÁST: IMPLEMENTACE --------------------------- %
+\input{03_implementace}
+\clearpage
+
+% ---------------------------------- Závěr ----------------------------------- %
+\input{XX_zaver}
+\clearpage
+
+% ---------------------------- Použitá literatura ---------------------------- %
+\bibliography{citace}
+\bibliographystyle{plain}
+
+\end{document}
