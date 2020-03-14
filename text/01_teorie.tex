@@ -8,14 +8,27 @@ Mějme dva body $x_1, x_2 \in \mathbb{R}^n$ takové, že $x_1 \neq x_2$ a parame
     y = \theta x_1 + (1 - \theta) x_2
     \label{line}
 \end{equation}
-popisuje přímku procházející body $x_1$ a $x_2$. Pro $\theta = 0$ dostáváme bod $x_2$ a pro $\theta = 1$ bod $x_1$. Omezíme-li tedy $\theta$ na interval $\langle 0, 1 \rangle$, dostaneme úsečku s koncovými body $x_1$ a $x_2$. Výraz \ref{line} lze přepsat do tvaru
-\begin{equation}
+popisuje \textbf{přímku} procházející body $x_1$ a $x_2$. Pro $\theta = 0$ dostáváme bod $x_2$ a pro $\theta = 1$ bod $x_1$. Omezíme-li tedy $\theta$ na interval $\langle 0, 1 \rangle$, dostaneme \textbf{úsečku} s koncovými body $x_1$ a $x_2$. Výraz \ref{line} lze přepsat do tvaru
+$$
     y = x_2 + \theta (x_1 - x_2),
-\end{equation}
+$$
 který můžeme interpretovat jako součet počátečního bodu $x_2$ a nějakého násobku směrového vektoru $x_1 - x_2$.
 
-Říkáme, že množina $C \subseteq \mathbb{R}^n$ je afinní, jestliže přímka procházející libovolnými dvěma různými body z $C$ leží v $C$.
+\noindent Říkáme, že $C \subseteq \mathbb{R}^n$ je \textbf{afinní prostor}, jestliže přímka procházející libovolnými dvěma různými body z $C$ leží v $C$. Tedy $C$ obsahuje lineární kombinace libovolných dvou bodů z $C$, jestliže součet koeficientů lineární kombinace je roven jedné. To lze zobecnit i pro více než dva body. Lineární kombinace $\theta_1 x_1 + \dots + \theta_k x_k$ bodů $x_1, \dots, x_k$ taková, že $\theta_1 + \dots + \theta_k = 1$, se nazývá \textbf{afinní kombinace} bodů $x_1, \dots, x_k$. Indukcí z definice afinního prostoru lze snadno ukázat, že pokud $C$ je afinní prostor, $x_1, \dots, x_k \in C$ a $\theta_1 + \dots + \theta_k = 1$, potom bod $\theta_1 x_1 + \dots + \theta_k x_k \in C$.
 
+\noindent Nechť $C$ je afinní prostor a $x_0 \in C$, potom množina
+$$
+    V = C - x_0 = \left\{ x - x_0 \mid c \in C \right\}
+$$
+je \textbf{vektorový prostor}, tj. množina, která je uzavřená na sčítání a násobení skalárem.
+
+\noindent Afinní prostor $C$ lze vyjádřit jako
+$$
+    C = V + x_0 = \left\{ v + x_0 \mid v \in V \right\},
+$$
+kde $V$ je vektorový prostor a $x_0$ je počátek. Poznamenejme, že vektorový prostor $V$ asociovaný s afinním prostorem $C$ nezávisí na volbě počátku $x_0$.
+
+\noindent \textbf{Dimenze} afinního prostoru $C = V + x_0$ je definována jako dimenze vektorového prostoru $V = C - x_0$, kde $x_0$ je libovolný prvek z $C$.
 
 
 \chapter{Lineární programování}
