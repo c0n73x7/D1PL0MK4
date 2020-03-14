@@ -8,4 +8,5 @@ Wolfram skripty pro vygenerování obrázků.
 
 ## ./mosek
 MOSEK modely naprogramováné v Pythonu.
+
 https://www.mosek.com/
