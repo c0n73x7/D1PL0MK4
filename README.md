@@ -7,7 +7,7 @@ Práce napsaná v TeXu s vyexportovaným pdf.
 Wolfram skripty pro vygenerování SVG obrázků.
 
 ## ./mosek
-MOSEK modely naprogramováné v Pythonu.
+MOSEK modely naprogramované v Pythonu.
 
 https://www.python.org/
 
