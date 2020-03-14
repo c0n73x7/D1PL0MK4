@@ -4,7 +4,7 @@
 Práce napsaná v TeXu s vyexportovaným pdf.
 
 ## ./obrazky
-Wolfram skripty pro vygenerování obrázků.
+Wolfram skripty pro vygenerování SVG obrázků.
 
 ## ./mosek
 MOSEK modely naprogramováné v Pythonu.
