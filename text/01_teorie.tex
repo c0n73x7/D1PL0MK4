@@ -28,8 +28,26 @@ $$
 $$
 kde $V$ je vektorový prostor a $x_0$ je počátek. Poznamenejme, že vektorový prostor $V$ asociovaný s afinním prostorem $C$ nezávisí na volbě počátku $x_0$.
 
-\noindent \textbf{Dimenze} afinního prostoru $C = V + x_0$ je definována jako dimenze vektorového prostoru $V = C - x_0$, kde $x_0$ je libovolný prvek z $C$.
+\noindent \textbf{Dimenze} afinního prostoru $C = V + x_0$ je definována jako dimenze vektorového prostoru $V = C - x_0$, kde $x_0$ je libovolný prvek z $C$. Množina všech affiních kombinací bodů množiny $C \subseteq \mathbb{R}^n$ se nazývá \textbf{affiní obal} množiny $C$. Affiní kužel množiny $C$ budeme značit
+$$
+    \textbf{aff } C = \left\{ \theta_1 x_1 + \dots + \theta_k x_k \mid x_1, \dots, x_k \in C, \theta_1 + \dots + \theta_k = 1 \right\}.
+$$
+Affiní kužel je nejmenší affiní prostor, který obsahuje množinu $C$. Tedy, jestliže $S$ je affiní prostor takový, že $C \subseteq S$, potom $\textbf{aff }C \subseteq S$.
 
+\noindent Říkáme, že množina $C$ je \textbf{konvexní}, jestliže úsečka mezi libovolnými dvěma body z $C$ leží také v $C$. Jinak řečeno, jestliže pro libovolné dva body $x_1, x_2 \in C$ a libovolné $\theta \in \langle 0, 1 \rangle$ platí, že $\theta x_1 + (1 - \theta) x_2 \in C$. Poznamenejme, že každý afinní prostor je zároveň konvexní množinou. Podobně jako affiní kombinaci definujeme \textbf{konvexní kombinaci} bodů $x_1, \dots, x_k$ jako $\theta_1 x_1 + \dots + \theta_k x_k$, kde $\theta_1 + \dots + \theta_k = 1, \theta_i \geq 0$ pro $i = 1, \dots, k$. \textbf{Konvexní obal} množiny $C$ je množina všech konvexních kombinací bodů z množiny $C$, značíme
+$$
+    \textbf{conv }C = \left\{ \theta_1 x_1 + \dots + \theta_k x_k \mid x_i \in C, \theta_i \geq 0, i = 1, \dots, k, \theta_1 + \dots + \theta_k = 1 \right\}.
+$$
+Analogicky, konvexní obal množiny $C$ je nejmenší konvexní množina, která obsahuje množinu $C$.
+
+\noindent Pro ilustraci mějme množinu $C$, která je tvořena čtyřmi body jako na obrázku~\ref{img:conv}. Její konvexní obal $\textbf{conv }C$ je čtyřúhelník společně se svým vnitřkem a její affiní obal $\textbf{aff }C$ je celá rovina $\mathbb{R}^2$.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.3\columnwidth]{img/conv.png}
+    \caption{Množina $C$ tvořená čtyřmi body a její konvexní obal $\textbf{conv }C$.}
+    \label{img:conv}
+\end{figure}
 
 \chapter{Lineární programování}
 %polyedr, formulace, dualita, ...
