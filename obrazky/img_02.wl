@@ -20,8 +20,3 @@ exportChart[file_] := (
 );
 
 exportChart[StringJoin[{$ScriptCommandLine[[2]], ".svg"}]];
-
-
-
-
-
