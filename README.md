@@ -12,3 +12,7 @@ MOSEK modely naprogramované v Pythonu.
 https://www.python.org/
 
 https://www.mosek.com/
+
+### Použité python balíky
+- numpy `pip install numpy`
+- mosek `pip install -f https://download.mosek.com/stable/wheel/index.html Mosek`
