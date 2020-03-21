@@ -1,6 +1,6 @@
 import json
 import numpy as np
-from mosek.fusion import *
+from mosek.fusion import Model, Domain, Expr, ObjectiveSense
 
 
 A = np.array([[-1., 3., 1., 0.], [4., -1., 0., 1.]])
