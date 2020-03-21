@@ -1,5 +1,5 @@
-import numpy as np
 import json
+import numpy as np
 from mosek.fusion import *
 
 
