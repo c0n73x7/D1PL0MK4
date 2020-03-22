@@ -99,36 +99,69 @@ Především bych chtěl poděkovat svému vedoucímu diplomové práce Doc.~Ing
 \noindent\textbf{Keywords}}\\[3pt]
 
 % --------------------------------- Značení ---------------------------------- %
-\newpage
-\thispagestyle{empty}
-\input{XX_znaceni}
+%\newpage
+%\thispagestyle{empty}
+%\input{kapitoly/znaceni}
 
 % ---------------------------------- Obsah ----------------------------------- %
 \tableofcontents
+
 \setcounter{page}{1}
+
 \pagebreak
 
+
 % ----------------------------------- Úvod ----------------------------------- %
-{\pagestyle{plain}
-\input{XX_uvod}
-\clearpage
+{
+  \pagestyle{plain}
+  
+  \input{kapitoly/uvod}
+  
+  \clearpage
 }
 
+
 % -------------------------------- ČÁST: TEORIE ------------------------------ %
-\input{01_teorie}
+\part{Teorie}
+
+\input{kapitoly/01_zakladni_geometricke_pojmy}
+
+\input{kapitoly/02_linearni_programovani}
+
+\input{kapitoly/03_semidefinitni_programovani}
+
+\input{kapitoly/04_kuzelove_programovani}
+
 \clearpage
+
 
 % ------------------------- ČÁST: KOMBINATORICKÉ ÚLOHY ----------------------- %
-\input{02_kombinatoricke_ulohy}
+\part{Kombinatorické úlohy}
+
+\input{kapitoly/05_shannonova_kapacita}
+
+\input{kapitoly/06_maximalni_rez}
+
+\input{kapitoly/07_obchodni_cestujici}
+
 \clearpage
+
 
 % ----------------------------- ČÁST: IMPLEMENTACE --------------------------- %
-\input{03_implementace}
+\part{Implementace}
+
+\input{kapitoly/08_lovaszova_theta_funkce}
+
+\input{kapitoly/09_maximalni_rez}
+
 \clearpage
 
+
 % ---------------------------------- Závěr ----------------------------------- %
-\input{XX_zaver}
+\input{kapitoly/zaver}
+
 \clearpage
+
 
 % ---------------------------- Použitá literatura ---------------------------- %
 \bibliography{citace}

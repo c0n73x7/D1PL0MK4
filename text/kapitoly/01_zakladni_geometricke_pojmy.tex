@@ -1,5 +1,3 @@
-\part{Teorie}
-
 \chapter{Základní geometrické pojmy}
 
 \section{Přímky a úsečky}
@@ -144,26 +142,3 @@ kde $a \neq 0$ a $x_0$ je libovolný bod z nadroviny $\left\{ x \mid a^T x = b \
 \end{figure}
 
 \section{Polyedry a polytopy}
-
-
-\chapter{Lineární programování}
-
-\section{Formulace úlohy}
-
-Úlohou lineárního programování rozumíme minimalizaci nebo maximalizaci lineární \textbf{účelové funkce} vzhledem k lineárním \textbf{omezením}, kde tato omezení mohou být dána soustavou lineární rovnic a nerovnic. Úlohu lineárního programování lze formulovat v několika tvarech, které se liší zadáním omezení. Úloha lineárního programování ve \textbf{standardním tvaru} má svá omezení dána soustavou lineárních rovnic $Ax = b$. Tedy
-\begin{equation}
-    \min \left\{ c^T x \mid Ax = b, x \geq 0 \right\}, \tag{LP-P}
-    \label{eq:LP-P}
-\end{equation}
-kde $A \in \mathbb{R}^{m \times n}$, $b \in \mathbb{R}^n$, $x \in \mathbb{R}^n$ a $c \in \mathbb{R}^n$. \textbf{Přípustná množina řešení} je průnikem affiního prostoru, který je definován soustavou rovnic $Ax = b$ a \textbf{nezáporného ortantu}, tj. množiny $\left\{ x \in \mathbb{R}^n \mid x_i \geq 0, i = 1, \dots, n \right\}$. Obě tyto množiny jsou konvexní a tedy i jejich průnik je rovněž konvexní množina. Dále, protože přípustnou množinu máme popsanou soustavou konečně mnoha lineárních rovnic a nerovnic, geometricky se na úlohu \ref{eq:LP-P} můžeme koukat jako na minimalizaci lineární funkce přes polyedr, který je definován touto soustavou. 
-
-\section{Dualita}
-
-\section{Komplementární skluzovost}
-
-\chapter{Semidefinitní programování}
-%spektraedr, formulace, dualita, semidefinitní kužel, duální kužel, ...
-%vektorové programování a jeho ekvivalence, formulace úloh
-
-\chapter{Kuželové programování}
-%jen stručně pro úplnost
