@@ -5,7 +5,8 @@ from mosek.fusion import Model, Domain, Expr, ObjectiveSense
 
 A = np.array([[-1., 3., 1., 0.], [4., -1., 0., 1.]])
 b = np.array([4., 6.])
-c = np.array([1., -8, 0., 0.])
+c = np.array([1., 1., 0., 0.])
+
 
 with Model('ex1') as M:
     # variable x
@@ -14,7 +15,7 @@ with Model('ex1') as M:
     M.constraint('c1', Expr.dot(A[0, :], x), Domain.equalsTo(b[0]))
     M.constraint('c2', Expr.dot(A[1, :], x), Domain.equalsTo(b[1]))
     # objective function
-    M.objective('obj', ObjectiveSense.Minimize, Expr.dot(c, x))
+    M.objective('obj', ObjectiveSense.Maximize, Expr.dot(c, x))
     # solve
     M.solve()
     # solution

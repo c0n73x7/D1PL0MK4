@@ -7,7 +7,7 @@ exportChart[file_] := (
                 4*x - y <= 6, 
                 {x, 0, 2.5}, 
                 {y, 0, 2.5},
-                FrameLabel -> {x, y},
+                FrameLabel -> {Subscript[x, 1], Subscript[x, 2]},
                 RotateLabel -> False,
                 PlotTheme -> {
                     "Web",

@@ -2,13 +2,53 @@
 
 \section{Formulace úlohy}
 
-Úlohou lineárního programování rozumíme minimalizaci nebo maximalizaci lineární \textbf{účelové funkce} vzhledem k lineárním \textbf{omezením}, kde tato omezení jsou dána soustavou lineární rovnic a nerovnic. Úlohu lineárního programování lze formulovat v několika tvarech, které se liší zadáním omezení. Úloha ve \textbf{standardním tvaru} má svá omezení dána soustavou lineárních rovnic $Ax = b$. Tedy
-\begin{equation}
-    \min \left\{ c^T x \mid Ax = b, x \geq 0 \right\}, \tag{LP-P}
+Úlohou lineárního programování rozumíme minimalizaci nebo maximalizaci lineární \textbf{účelové funkce} vzhledem k lineárním \textbf{omezením}, kde tato omezení jsou dána soustavou lineární rovnic a nerovnic. Úlohu lineárního programování lze formulovat v několika tvarech ekvivalentních, které se liší zadáním omezení. Úloha ve \textbf{standardním tvaru} má svá omezení dána soustavou lineárních rovnic $Ax = b$. Tedy:
+\begin{equation}\tag{LP-P}
+    \max \left\{ c^T x \mid Ax \leq b, x \geq 0 \right\},
     \label{eq:LP-P}
 \end{equation}
-kde $A \in \mathbb{R}^{m \times n}$, $b \in \mathbb{R}^n$, $x \in \mathbb{R}^n$ a $c \in \mathbb{R}^n$. \textbf{Přípustná množina řešení} je průnikem affiního prostoru, který je definován soustavou rovnic $Ax = b$ a \textbf{nezáporného ortantu}, tj. množiny $\left\{ x \in \mathbb{R}^n \mid x_i \geq 0, i = 1, \dots, n \right\}$. Obě tyto množiny jsou konvexní a tedy i jejich průnik je rovněž konvexní množina. Dále, protože přípustnou množinu máme popsanou soustavou konečně mnoha lineárních rovnic a nerovnic, geometricky se na úlohu \ref{eq:LP-P} můžeme koukat jako na minimalizaci lineární funkce přes polyedr, který je definován touto soustavou. 
+kde $A \in \mathbb{R}^{m \times n}$, $b \in \mathbb{R}^n$, $x \in \mathbb{R}^n$ a $c \in \mathbb{R}^n$. \textbf{Přípustná množina řešení} je průnikem affiního prostoru, který je definován soustavou rovnic $Ax = b$ a \textbf{nezáporného ortantu}, tj. množiny $\left\{ x \in \mathbb{R}^n \mid x_i \geq 0, i = 1, \dots, n \right\}$. Obě tyto množiny jsou konvexní a tedy i jejich průnik je rovněž konvexní množina. Dále, protože přípustnou množinu máme popsanou soustavou konečně mnoha lineárních rovnic a nerovnic, geometricky se na úlohu \ref{eq:LP-P} můžeme koukat jako na maximalizaci lineární funkce přes polyedr, který je definován touto soustavou.
+
+\begin{pr}
+Mějme následující úlohu:
+\begin{equation}\tag{P1}
+    \begin{split}
+        \max x_1 + x_2      & \\
+        - x_1 + 3 x_2 + x_3 &= 4 \\
+        4 x_1 -   x_2 + x_4 &= 6 \\
+        x &\geq 0.
+    \end{split}
+    \label{eq:P1}
+\end{equation}
+
+Projekce přípustné množiny řešení do roviny $(x_1, x_2)$ je zobrazena na obrázku~\ref{fig:ex1}. Řešením úlohy je vektor $x^* = (2, 2, 0, 0)$ s cenou $4$. Implementace v softwaru MOSEK: \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/ex1.py}.
+\end{pr}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/ex1.png}   
+    \caption{Přípustná množina řešení k úloze~\ref{eq:P1}.}
+    \label{fig:ex1}
+\end{figure}
 
 \section{Dualita}
+Úloha \ref{eq:LP-P} se nazývá \textbf{primární úloha}. Ke každé primární úloze můžeme přiřadit příslušnou \textbf{duální úlohu}. Je to opět úloha lineárního programování, která pro případ \ref{eq:LP-P} je ve tvaru:
+\begin{equation}\tag{LP-D}
+    \min \left\{ b^T y \mid A^T y \geq c, y \geq 0 \right\}.
+    \label{eq:LP-D}
+\end{equation}
+
+\begin{pr}
+Duální úloha k úloze \ref{eq:P1} je ve tvaru:
+\begin{equation}\tag{P2}
+    \begin{split}
+        \min 4 y_1 + 6 y_2  & \\
+        - y_1 + 4 y_2       &\geq 1 \\
+        3 y_1 -   y_2       &\geq 1 \\
+        y &\geq 0.
+    \end{split}
+    \label{eq:P2}
+\end{equation}
+\end{pr}
 
 \section{Komplementární skluzovost}
