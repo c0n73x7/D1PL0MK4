@@ -49,6 +49,37 @@ Duální úloha k úloze \ref{eq:P1} je ve tvaru:
     \end{split}
     \label{eq:P2}
 \end{equation}
+
+Přípustná množina řešení je zobrazena na obrázku~\ref{fig:ex2}. Řešením úlohy je vektor $y^* \approx (0.4546, 0.3636)$ s cenou $4$. Implementace v softwaru MOSEK: \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/ex2.py}.
 \end{pr}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/ex2.png}   
+    \caption{Přípustná množina řešení k úloze~\ref{eq:P2}.}
+    \label{fig:ex2}
+\end{figure}
+
+Všimněme si, že v příkladech \ref{eq:P1} a \ref{eq:P2} mají řešení $x^*$ i $y^*$ stejnou cenu. To není náhoda a tento fakt je obsahem silné věty o dualitě, kterou dokázala skupina kolem Alberta W. Tuckera v roce 1948. Začneme slabou větou o dualitě.
+
+\begin{vt}[Slabá o dualitě]
+    Nechť $\tilde{x}$ je přípustné řešení \ref{eq:LP-P} a $\tilde{y}$ je přípustné řešení \ref{eq:LP-D}. Potom $c^T \tilde{x} \leq b^T \tilde{y}$.
+\end{vt}
+
+Tedy každé přípustné řešení $\tilde{y}$ duální úlohy \ref{eq:LP-D} nám dává horní odhad na maximum účelové funkce primární úlohy \ref{eq:LP-P}. Graficky můžeme slabou větu o dualitě interpretovat jako na obrázku~\ref{fig:weak_duality}. Zatím tedy nevíme, zda vždy existují přípustná (optimální) řešení $x^*$ pro úlohu \ref{eq:LP-P} a $y^*$ pro úlohu \ref{eq:LP-D}, pro která platí $c^T x^* = b^T y^*$. Kladnou odpověď dostaneme z již zmíněné silné věty od dualitě.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/weak_duality.png}   
+    \caption{Slabá věta o dualitě.}
+    \label{fig:weak_duality}
+\end{figure}
+
+\begin{vt}[Silná o dualitě]
+    Jestliže úlohy \ref{eq:LP-P} a \ref{eq:LP-D} mají přípustná řešení. Potom
+    $$
+        \max \left\{ c^T x \mid Ax \leq b, x \geq 0 \right\} = \min \left\{ b^T y \mid A^T y \geq c, y \geq 0 \right\}.
+    $$ 
+\end{vt}
 
 \section{Komplementární skluzovost}
