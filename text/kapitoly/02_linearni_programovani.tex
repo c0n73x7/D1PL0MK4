@@ -4,7 +4,7 @@
 
 Úlohou lineárního programování rozumíme minimalizaci nebo maximalizaci lineární \textbf{účelové funkce} vzhledem k lineárním \textbf{omezením}, kde tato omezení jsou dána soustavou lineární rovnic a nerovnic. Úlohu lineárního programování lze formulovat v několika tvarech ekvivalentních, které se liší zadáním omezení. Úloha ve \textbf{standardním tvaru} má svá omezení dána soustavou lineárních rovnic $Ax = b$. Tedy:
 \begin{equation}\tag{LP-P}
-    \max \left\{ c^T x \mid Ax \leq b, x \geq 0 \right\},
+    \max \left\{ c^T x \mid Ax = b, x \geq 0 \right\},
     \label{eq:LP-P}
 \end{equation}
 kde $A \in \mathbb{R}^{m \times n}$, $b \in \mathbb{R}^n$, $x \in \mathbb{R}^n$ a $c \in \mathbb{R}^n$. \textbf{Přípustná množina řešení} je průnikem affiního prostoru, který je definován soustavou rovnic $Ax = b$ a \textbf{nezáporného ortantu}, tj. množiny $\left\{ x \in \mathbb{R}^n \mid x_i \geq 0, i = 1, \dots, n \right\}$. Obě tyto množiny jsou konvexní a tedy i jejich průnik je rovněž konvexní množina. Dále, protože přípustnou množinu máme popsanou soustavou konečně mnoha lineárních rovnic a nerovnic, geometricky se na úlohu \ref{eq:LP-P} můžeme koukat jako na maximalizaci lineární funkce přes polyedr, který je definován touto soustavou.
@@ -78,8 +78,65 @@ Tedy každé přípustné řešení $\tilde{y}$ duální úlohy \ref{eq:LP-D} n�
 \begin{vt}[Silná o dualitě]
     Jestliže úlohy \ref{eq:LP-P} a \ref{eq:LP-D} mají přípustná řešení. Potom
     $$
-        \max \left\{ c^T x \mid Ax \leq b, x \geq 0 \right\} = \min \left\{ b^T y \mid A^T y \geq c, y \geq 0 \right\}.
+        \max \left\{ c^T x \mid Ax = b, x \geq 0 \right\} = \min \left\{ b^T y \mid A^T y \geq c, y \geq 0 \right\}.
     $$ 
 \end{vt}
+Se znalostí silné věty o dualitě můžeme obrázek~\ref{fig:weak_duality} upravit na obrázek~\ref{fig:strong_duality}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/strong_duality.png}
+    \caption{Ceny přípustných řešení primární a příslušné duální úlohy.}
+    \label{fig:strong_duality}
+\end{figure}
 
 \section{Komplementární skluzovost}
+
+Nejprve si uvedeme jinou formulaci primární a duální úlohy lineárního programování, ze které se lépe odvodí tzv. podmínka komplementární skluzovosti.
+
+\begin{equation}\tag{LP-P2}
+    \max \left\{ c^T x \mid Ax \leq b, x \geq 0 \right\},
+    \label{eq:LP-P2}
+\end{equation}
+
+\begin{equation}\tag{LP-D2}
+    \min \left\{ b^T y \mid A^T y = c, y \geq 0 \right\}.
+    \label{eq:LP-D2}
+\end{equation}
+
+Nechť $\tilde{x}$ je připustné řešení úlohy \ref{eq:LP-P2} a $\tilde{y}$ je přípustné řešení úlohy \ref{eq:LP-D2}. \textbf{Dualitní rozdíl} $\tilde{x}$ a $\tilde{y}$ je číslo $b^T \tilde{y} - c^T \tilde{x} \geq 0$. Ze silné věty o dualitě samozřejmě plyne, že pro optimální řešení $x^*$ úlohy \ref{eq:LP-P2} a $y^*$ úlohy \ref{eq:LP-D2} je dualitní rozdíl roven $0$. Vyjdeme z dualitního rozdílu:
+$$
+    b^T y^* - c^T x^* = y^{*^T} b - y^{*^T} A x^* = y^{*^T} \left( b - A x^* \right) = 0.
+$$
+Poslední rovnost přepíšeme maticově:
+$$
+    \left[ y_1^*, \dots, y_m^* \right] \left(
+        \begin{bmatrix}
+            b_1    \\
+            \vdots \\
+            b_m
+        \end{bmatrix}
+        -
+        \begin{bmatrix}
+            a_{11} & \dots & a_{1n} \\
+            \vdots & \     & \vdots \\
+            a_{m1} & \dots & a_{mn}
+        \end{bmatrix}
+        \begin{bmatrix}
+            x_1^*  \\
+            \vdots \\
+            x_n^*
+        \end{bmatrix}
+    \right)
+    =
+    \begin{bmatrix}
+    0      \\
+    \vdots \\
+    0
+    \end{bmatrix}.
+$$
+Dostáváme tedy soustavu rovnic $y_i^* \left( b_i - a_{i\_} x^* \right) = 0$, kde $i = 1, \dots, m$. Tedy buď $y_i^* = 0$ nebo $ b_i - a_{i\_} x^* = 0$. \textbf{Podmínka komplementární skluzovosti} je splněna, jestliže pro přípustná řešení $\tilde{x}, \tilde{y}$ platí buď $\tilde{y}_i = 0$ nebo $b_i - a_{i\_} \tilde{x} = 0$, $i = 1, \dots, m$. Pokud nastane $b_i - a_{i\_} \tilde{x} = 0$, potom říkáme, že \textbf{vazba $a_{i\_} \tilde{x} \leq b_i$ je aktivní}.
+
+\begin{vt}
+    Nechť $\tilde{x}$ je přípustné řešení \ref{eq:LP-P2} a $\tilde{y}$ je přípustné řešení \ref{eq:LP-D2}. Potom $\tilde{x}, \tilde{y}$ jsou optimální právě tehdy, když platí podmínka komplementární skluzovosti.
+\end{vt}
