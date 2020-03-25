@@ -2,26 +2,26 @@
 
 \section{Formulace úlohy}
 
-Úlohou lineárního programování rozumíme minimalizaci nebo maximalizaci lineární \textbf{účelové funkce} vzhledem k lineárním \textbf{omezením}, kde tato omezení jsou dána soustavou lineární rovnic a nerovnic. Úlohu lineárního programování lze formulovat v několika tvarech ekvivalentních, které se liší zadáním omezení. Úloha ve \textbf{standardním tvaru} má svá omezení dána soustavou lineárních rovnic $Ax = b$. Tedy:
+Úlohou lineárního programování rozumíme minimalizaci nebo maximalizaci lineární \textbf{účelové funkce} vzhledem k lineárním \textbf{omezením}, kde tato omezení jsou dána soustavou lineární rovnic a nerovnic. Úlohu lineárního programování lze formulovat v několika ekvivalentních tvarech, které se liší zadáním omezení. Úloha v \textbf{kanonickém tvaru} má svá omezení dána soustavou lineárních nerovnic $Ax \leq b$. Tedy:
 \begin{equation}\tag{LP-P}
-    \max \left\{ c^T x \mid Ax = b, x \geq 0 \right\},
+    \max \left\{ c^T x \mid Ax \leq b, x \geq 0 \right\},
     \label{eq:LP-P}
 \end{equation}
-kde $A \in \mathbb{R}^{m \times n}$, $b \in \mathbb{R}^n$, $x \in \mathbb{R}^n$ a $c \in \mathbb{R}^n$. \textbf{Přípustná množina řešení} je průnikem affiního prostoru, který je definován soustavou rovnic $Ax = b$ a \textbf{nezáporného ortantu}, tj. množiny $\left\{ x \in \mathbb{R}^n \mid x_i \geq 0, i = 1, \dots, n \right\}$. Obě tyto množiny jsou konvexní a tedy i jejich průnik je rovněž konvexní množina. Dále, protože přípustnou množinu máme popsanou soustavou konečně mnoha lineárních rovnic a nerovnic, geometricky se na úlohu \ref{eq:LP-P} můžeme koukat jako na maximalizaci lineární funkce přes polyedr, který je definován touto soustavou.
+kde $A \in \mathbb{R}^{m \times n}$, $b \in \mathbb{R}^n$, $x \in \mathbb{R}^n$ a $c \in \mathbb{R}^n$. \textbf{Přípustná množina řešení} je průnikem poloprostorů, které jsou definovány soustavou nerovnic $Ax \leq b$ a \textbf{nezáporného ortantu}, tj. množiny $\left\{ x \in \mathbb{R}^n \mid x_i \geq 0, i = 1, \dots, n \right\}$. Obě tyto množiny jsou konvexní a tedy i jejich průnik je rovněž konvexní množina. Dále, protože přípustnou množinu máme popsanou soustavou konečně mnoha lineárních nerovnic, geometricky se na úlohu \ref{eq:LP-P} můžeme koukat jako na maximalizaci lineární funkce přes polyedr, který je definován touto soustavou.
 
 \begin{pr}
 Mějme následující úlohu:
 \begin{equation}\tag{P1}
     \begin{split}
-        \max x_1 + x_2      & \\
-        - x_1 + 3 x_2 + x_3 &= 4 \\
-        4 x_1 -   x_2 + x_4 &= 6 \\
+        \max x_1 + x_2 &       \\
+        - x_1 + 3 x_2  &\leq 4 \\
+        4 x_1 -   x_2  &\leq 6 \\
         x &\geq 0.
     \end{split}
     \label{eq:P1}
 \end{equation}
 
-Projekce přípustné množiny řešení do roviny $(x_1, x_2)$ je zobrazena na obrázku~\ref{fig:ex1}. Řešením úlohy je vektor $x^* = (2, 2, 0, 0)$ s cenou $4$. Implementace v softwaru MOSEK: \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/ex1.py}.
+Přípustná množina řešení je zobrazena na obrázku~\ref{fig:ex1}. Řešením úlohy je vektor $x^* = (2, 2)$ s cenou $4$. Implementace v softwaru MOSEK: \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/ex1.py}.
 \end{pr}
 
 \begin{figure}[h!]
@@ -42,9 +42,9 @@ Projekce přípustné množiny řešení do roviny $(x_1, x_2)$ je zobrazena na 
 Duální úloha k úloze \ref{eq:P1} je ve tvaru:
 \begin{equation}\tag{P2}
     \begin{split}
-        \min 4 y_1 + 6 y_2  & \\
-        - y_1 + 4 y_2       &\geq 1 \\
-        3 y_1 -   y_2       &\geq 1 \\
+        \min 4 y_1 + 6 y_2 &    \\
+        - y_1 + 4 y_2      &\geq 1 \\
+        3 y_1 -   y_2      &\geq 1 \\
         y &\geq 0.
     \end{split}
     \label{eq:P2}
@@ -78,7 +78,7 @@ Tedy každé přípustné řešení $\tilde{y}$ duální úlohy \ref{eq:LP-D} n�
 \begin{vt}[Silná o dualitě]
     Jestliže úlohy \ref{eq:LP-P} a \ref{eq:LP-D} mají přípustná řešení. Potom
     $$
-        \max \left\{ c^T x \mid Ax = b, x \geq 0 \right\} = \min \left\{ b^T y \mid A^T y \geq c, y \geq 0 \right\}.
+        \max \left\{ c^T x \mid Ax \leq b, x \geq 0 \right\} = \min \left\{ b^T y \mid A^T y \geq c, y \geq 0 \right\}.
     $$ 
 \end{vt}
 Se znalostí silné věty o dualitě můžeme obrázek~\ref{fig:weak_duality} upravit na obrázek~\ref{fig:strong_duality}.
@@ -92,19 +92,20 @@ Se znalostí silné věty o dualitě můžeme obrázek~\ref{fig:weak_duality} up
 
 \section{Komplementární skluzovost}
 
-Nejprve si uvedeme jinou formulaci primární a duální úlohy lineárního programování, ze které se lépe odvodí tzv. podmínka komplementární skluzovosti.
+Pro odvození tzv. podmínky komplementární skluzovosti nejprve převedeme úlohy \ref{eq:LP-P} a \ref{eq:LP-D} do jiných tvarů. V primární úloze povolíme $x \in \mathbb{R}^n$. Tedy primární úloha je ve tvaru:
 
 \begin{equation}\tag{LP-P2}
-    \max \left\{ c^T x \mid Ax \leq b, x \geq 0 \right\},
+    \max \left\{ c^T x \mid Ax \leq b \right\}.
     \label{eq:LP-P2}
 \end{equation}
+A příslušná duální úloha je ve tvaru:
 
 \begin{equation}\tag{LP-D2}
     \min \left\{ b^T y \mid A^T y = c, y \geq 0 \right\}.
     \label{eq:LP-D2}
 \end{equation}
 
-Nechť $\tilde{x}$ je připustné řešení úlohy \ref{eq:LP-P2} a $\tilde{y}$ je přípustné řešení úlohy \ref{eq:LP-D2}. \textbf{Dualitní rozdíl} $\tilde{x}$ a $\tilde{y}$ je číslo $b^T \tilde{y} - c^T \tilde{x} \geq 0$. Ze silné věty o dualitě samozřejmě plyne, že pro optimální řešení $x^*$ úlohy \ref{eq:LP-P2} a $y^*$ úlohy \ref{eq:LP-D2} je dualitní rozdíl roven $0$. Vyjdeme z dualitního rozdílu:
+Nechť $\tilde{x}$ je připustné řešení a $x^*$ je optimální řešení úlohy \ref{eq:LP-P2}, $\tilde{y}$ je přípustné řešení a $y^*$ je optimální řešení úlohy \ref{eq:LP-D2}. \textbf{Dualitní rozdíl} $\tilde{x}$ a $\tilde{y}$ je číslo $b^T \tilde{y} - c^T \tilde{x} \geq 0$. Ze silné věty o dualitě samozřejmě plyne, že pro optimální řešení $x^*$ a $y^*$ je dualitní rozdíl roven $0$. Vyjdeme z dualitního rozdílu optimálních řešení:
 $$
     b^T y^* - c^T x^* = y^{*^T} b - y^{*^T} A x^* = y^{*^T} \left( b - A x^* \right) = 0.
 $$

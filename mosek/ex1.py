@@ -3,17 +3,17 @@ import numpy as np
 from mosek.fusion import Model, Domain, Expr, ObjectiveSense
 
 
-A = np.array([[-1., 3., 1., 0.], [4., -1., 0., 1.]])
+A = np.array([[-1., 3.], [4., -1.]])
 b = np.array([4., 6.])
-c = np.array([1., 1., 0., 0.])
+c = np.array([1., 1.])
 
 
 with Model('ex1') as M:
     # variable x
-    x = M.variable('x', 4, Domain.greaterThan(0.))
+    x = M.variable('x', 2, Domain.greaterThan(0.))
     # constraints
-    M.constraint('c1', Expr.dot(A[0, :], x), Domain.equalsTo(b[0]))
-    M.constraint('c2', Expr.dot(A[1, :], x), Domain.equalsTo(b[1]))
+    M.constraint('c1', Expr.dot(A[0, :], x), Domain.lessThan(b[0]))
+    M.constraint('c2', Expr.dot(A[1, :], x), Domain.lessThan(b[1]))
     # objective function
     M.objective('obj', ObjectiveSense.Maximize, Expr.dot(c, x))
     # solve
