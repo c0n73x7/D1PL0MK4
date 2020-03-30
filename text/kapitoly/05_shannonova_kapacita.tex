@@ -1,1 +1,11 @@
 \chapter{Shannonova kapacita}
+
+Představme si zašuměný komunikační kanál, kterým posíláme zprávy. Zpráva je složena ze symbolů nějaké konečné abecedy a vlivem šumu mohou být některé symbylo špatně interpretovány. Naším cílem je vybrat co největší množinu slov takových, že žádná dvě slova z množiny nejsou zaměnitelná. Velikosti této množiny se říká \textbf{Shannonova kapacita} kanálu.
+
+Problém si formalizujeme v řeči teorie grafů. Mějme neorientovaný graf $G = (V, E)$, kde množina vrcholů představuje symboly z naší abecedy a dva vrcholy $x, y$ jsou spojeny hranou, pokud vrchol $x$ může být vlivem šumu zaměněn za $y$. $\alpha(G)$ značí největší nezávislou množinu v grafu $G$. Uvažujeme-li pouze zprávy délky $k = 1$ je maximální počet nezaměnitelných zpráv roven právě $\alpha(G)$. Pro popis zpráv delších než jen o jednom symbolu, definujeme \textbf{silný součin} $G \cdot H$ grafů $G$ a $H$ tak, že
+$$
+    V(G \cdot H) = V(G) \times V(H),
+$$
+$$
+    E(G \cdot H) = \left\{ (i,u)(j,v) \mid \left(ij \in E(G) \wedge uv \in E(H)\right) \vee \left(ij \in E(G) \wedge u = v\right) \vee \left( i = j \wedge uv \in E(H) \right)  \right\}.
+$$
