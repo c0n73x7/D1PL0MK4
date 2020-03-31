@@ -1,11 +1,25 @@
 \chapter{Shannonova kapacita}
 
-Představme si zašuměný komunikační kanál, kterým posíláme zprávy. Zpráva je složena ze symbolů nějaké konečné abecedy a vlivem šumu mohou být některé symbylo špatně interpretovány. Naším cílem je vybrat co největší množinu slov takových, že žádná dvě slova z množiny nejsou zaměnitelná. Velikosti této množiny se říká \textbf{Shannonova kapacita} kanálu.
+Představme si zašuměný komunikační kanál, kterým posíláme zprávy, které jsou složeny ze symbolů (písmen) nějaké konečné abecedy. Vlivem šumu mohou být některé symboly špatně interpretovány a naším cílem je vybrat co největší množinu slov takovou, že žádná dvě slova z množiny nejsou zaměnitelná. Velikosti této množiny se říká \textbf{Shannonova kapacita} kanálu.
 
-Problém si formalizujeme v řeči teorie grafů. Mějme neorientovaný graf $G = (V, E)$, kde množina vrcholů představuje symboly z naší abecedy a dva vrcholy $x, y$ jsou spojeny hranou, pokud vrchol $x$ může být vlivem šumu zaměněn za $y$. $\alpha(G)$ značí největší nezávislou množinu v grafu $G$. Uvažujeme-li pouze zprávy délky $k = 1$ je maximální počet nezaměnitelných zpráv roven právě $\alpha(G)$. Pro popis zpráv delších než jen o jednom symbolu, definujeme \textbf{silný součin} $G \cdot H$ grafů $G$ a $H$ tak, že
+Problém si formalizujeme v řeči teorie grafů. Mějme neorientovaný graf $G = (V, E)$, kde množina vrcholů představuje symboly z konečné abecedy a dva vrcholy $x, y$ jsou spojeny hranou, pokud vrchol $x$ může být vlivem šumu zaměněn za $y$.
+
+Maximální počet nezaměnitelných zpráv délky $1$ je roven $\alpha(G)$, kde $\alpha(G)$ značí velikost největší nezávislé množiny v grafu $G$. Pro popis delších zpráv definujeme \textbf{silný součin} $G \cdot H$ grafů $G$ a $H$ následovně:
 $$
     V(G \cdot H) = V(G) \times V(H),
 $$
-$$
-    E(G \cdot H) = \left\{ (i,u)(j,v) \mid \left(ij \in E(G) \wedge uv \in E(H)\right) \vee \left(ij \in E(G) \wedge u = v\right) \vee \left( i = j \wedge uv \in E(H) \right)  \right\}.
-$$
+\begin{equation*}
+    \begin{split}
+    E(G \cdot H) = &\left\{ (i,u)(j,v) \mid ij \in E(G) \wedge uv \in E(H) \right\} \cup \\
+                   &\left\{ (i,u)(j,v) \mid ij \in E(G) \wedge u = v \right\} \cup \\
+                   &\left\{ (i,u)(j,v) \mid i = j \wedge uv \in E(H) \right\}.
+    \end{split}
+\end{equation*}
+Pro ilustraci viz obrázek~\ref{fig:strong_product_P3_P4}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/strong_product_P3_P4.png}   
+    \caption{$P_3 \cdot P_4$}
+    \label{fig:strong_product_P3_P4}
+\end{figure}
