@@ -35,3 +35,44 @@ $$
 Neví se, zda pro libovolný graf $G$ existuje vůběc nějaký algoritmus, kterým bychom určili hodnotu $\Theta(G)$. Přesto je alespoň něco známo. Pro perfektní grafy Claude E. Shannon ukázal, že $\Theta(G) = \alpha(G)$. To také znamená, že pro perfektní grafy lze $\Theta(G)$ určit v polynomiálním čase. Dalším kdo se problémem zabýval byl László Lovász, který velmi hezkým způsobem ukázal, že kružnice délky $5$ má kapacitu $\sqrt{5}$. Na Lovászův postup se dále podíváme, protože vede k obecnému hornímu odhadu na $\Theta(G)$.
 
 \section{$\Theta(C_5) = \sqrt{5}$}
+
+\textbf{Tenzorový součin} vektorů $\mathbf{u} = \left(u_1, \dots, u_n \right)$ a $\mathbf{v} = \left(v_1, \dots, v_m \right)$ je
+$$
+    \mathbf{u} \circ \mathbf{v} = \left( u_1 v_1, \dots, u_1 v_m, u_2 v_1, \dots, u_n v_m \right).
+$$
+
+Užitečné bude následující pozorování, které dává do souvisloti skalární a tenzorový součin.
+
+\begin{pz}
+    Nechť $\mathbf{x}, \mathbf{u}$ jsou vektory délky $n$ a $\mathbf{y}, \mathbf{v}$ jsou vektory délky $m$. Potom platí
+    \begin{equation}
+        \left( x \circ y \right)^T \left( u \circ v \right) = \left( x^T u \right) \left( y^T v \right).
+    \end{equation}
+\end{pz}
+
+\begin{proof}
+    Levá strana:
+    \begin{equation*}
+        \begin{split}
+        & \left(x_1 y_1, x_1 y_2, \dots, x_1 y_m, \dots, x_n y_m \right)^T \left( u_1 v_1, u_1 v_2, \dots, u_1 v_m, \dots, u_n v_m \right) = \\
+        & x_1 y_1 u_1 v_1 + x_1 y_2 u_1 v_2 + \dots + x_1 y_m u_1 v_m + \dots + x_m y_m u_n v_m
+        \end{split}
+    \end{equation*}
+    Pravá strana:
+    \begin{equation*}
+        \begin{split}
+            & \left( x_1 u_1 + \dots + x_n u_n \right) \cdot \left( y_1 v_1 + \dots + y_n v_m \right) = \\
+            & x_1 y_1 u_1 v_1 + x_1 y_2 u_1 v_2 + \dots + x_1 y_m u_1 v_m + \dots + x_m y_m u_n v_m
+        \end{split}
+    \end{equation*}
+\end{proof}
+
+Mějme graf $G = (V,E)$, kde $V = \left\{ 1, \dots, n \right\}$. Systém $\left( \textbf{v}_1, \dots, \textbf{v}_n \right)$ jednotkových vektorů v Euklidovském prostoru takový, že
+$$
+    \forall ij \notin E \implies \textbf{v}_i \perp \textbf{v}_j
+$$
+nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že každý graf má nějakou ortonormální reprezentaci, např. $1 \mapsto \mathbf{e}_1, \dots, n \mapsto \mathbf{e}_n$.
+
+\begin{lm}
+    Nechť $\left( \mathbf{u}_1, \dots, \mathbf{u}_n \right)$ je ortonormální reprezentace grafu $G$ a $\left( \mathbf{v}_1, \dots, \mathbf{v}_m \right)$ je ortonormální reprezentace grafu $H$. Potom $\mathbf{u}_i \circ \mathbf{v}_j$ je ortonormální reprezentace grafu $G \cdot H$.
+\end{lm}
