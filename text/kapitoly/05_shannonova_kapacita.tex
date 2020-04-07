@@ -27,9 +27,9 @@ Pro graf $P_4 = a-b-c-d-e$ je silný součin $P_4 \cdot P_4$ zobrazen na obrázk
     \label{fig:strong_product_P4_P4}
 \end{figure}
 
-Pro jednoduchost budeme silný součin $k$ kopií grafu $G$ značit $G^k$. Tedy $\alpha(G^k)$ je maximální počet nezaměnitelných zpráv délky $k$. \textbf{Shannonova kapacita} grafu $G$ je číslo
+Pro jednoduchost budeme silný součin $k$ kopií grafu $G$ značit $G^k$. Tedy $\alpha(G^k)$ je maximální počet nezaměnitelných zpráv délky $k$. \textbf{Shannonova kapacita} grafu $G$ je definována jako
 $$
-    \Theta(G) = \lim_{k \rightarrow +\infty} \alpha(G^k)^{1/k}.
+    \Theta(G) = \sup \left\{ \alpha(G^k)^{1/k} \mid k = 1, 2, \dots \right\}.
 $$
 
 Neví se, zda pro libovolný graf $G$ existuje vůběc nějaký algoritmus, kterým bychom určili hodnotu $\Theta(G)$. Přesto je alespoň něco známo. Pro perfektní grafy Claude E. Shannon ukázal, že $\Theta(G) = \alpha(G)$. To také znamená, že pro perfektní grafy lze $\Theta(G)$ určit v polynomiálním čase. Dalším kdo se problémem zabýval byl László Lovász, který velmi hezkým způsobem ukázal, že kružnice délky $5$ má kapacitu $\sqrt{5}$. Na Lovászův postup se dále podíváme, protože vede k obecnému hornímu odhadu na $\Theta(G)$.
@@ -79,7 +79,7 @@ nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že ka�
 \end{lm}
 
 \begin{proof}
-    TODO -- easy..
+    Použijeme vztah \ref{eq:tensor_scalar_product}. $\left( u_i \circ v_j \right)^T \left( u_k \circ v_l \right) = \left( u_i^T u_k \right) \left( v_j^T v_l \right) = 0 \iff ik \notin E(G) \vee jl \notin E(H)$.
 \end{proof}
 
 \begin{figure}[h!]
@@ -93,7 +93,7 @@ nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že ka�
 $$
     \min_c \max_{i = 1, \dots, n} \frac{1}{\left( c^T u_i \right)^2}.
 $$
-Vektoru $c$, pro který nastává minimum říkáme \textbf{handle} dané ortonormální reprezentace.
+Vektoru $c$, pro který nastává minimum říkáme \textbf{\uv{rukojeť}} (anglicky handle) dané ortonormální reprezentace.
 
 Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny ortonormální reprezentace grafu $G$. Ortonormální reprezentaci, pro kterou nastává minumum nazýváme \textbf{optimální}.
 
@@ -104,7 +104,10 @@ Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je práv
 \end{lm}
 
 \begin{proof}
-    TODO -- easy..
+    Nechť $\left( u_1, \dots, u_n \right)$ je optimální ortonormální reprezentace grafu $G$ s \uv{rukojetí} $c$ a $\left( v_1, \dots, v_m \right)$ je optimální ortonormální reprezentace grafu $H$ s \uv{rukojetí} $d$. Pak $c \circ d$ je jednotkový vektor a platí:
+    $$
+        \vartheta(G \cdot H) \leq \max_{i,j} \frac{1}{\left( \left( c \circ d \right)^T \left( u_i \circ v_j \right) \right)^2} = \max_i \frac{1}{\left( c^T u_i \right)^2} \cdot \max_j \frac{1}{\left( d^T v_j \right)^2} = \vartheta(G)\vartheta(H).
+    $$
 \end{proof}
 
 \begin{lm}
@@ -112,7 +115,7 @@ Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je práv
 \end{lm}
 
 \begin{proof}
-    TODO -- easy..
+    TODO (máš to někde na papíře)
 \end{proof}
 
 \begin{lm}
@@ -120,7 +123,7 @@ Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je práv
 \end{lm}
 
 \begin{proof}
-    TODO -- easy..
+    TODO (máš to někde na papíře)
 \end{proof}
 
 \begin{vt}
@@ -128,5 +131,9 @@ Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je práv
 \end{vt}
 
 \begin{proof}
-
+    TODO (obě nerovnosti, obrázek, spherical cosine theorem)
 \end{proof}
+
+\section{Určení hodnoty $\vartheta(G)$}
+
+formulace semidefinitního programu, odkaz na implementaci a napočítané hodnoty theta funkce pro nějaké grafy ($C_7$, ...)
