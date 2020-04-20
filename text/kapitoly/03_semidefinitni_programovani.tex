@@ -1,11 +1,66 @@
 \chapter{Semidefinitní programování}
 
-zatím je struktura.. 
+Na semidefinitní programování se můžeme koukat jako na zobecnění lineárního programování, kde proměnné jsou symetrické matice. Jedná se tedy o optimalizaci lineární funkce vzhledem k tzv. lineárním maticovým nerovnostem.
 
-\section{Formulace úlohy}
-\noindent příklad
+\section{Vsuvka z lineární algebry}
 
-\section{Vsuvka o semidefinitních maticích}
+Množinu všech symetrických matic značíme $S^n$. Říkáme, že $A \in S^n$ je
+\begin{enumerate}
+    \item pozitivně definitní, jestliže $\forall x:\ x^TAx >0$,
+    \item pozitivně semidefinitní, jestliže $\forall x \neq 0:\ x^TAx \geq 0$.
+\end{enumerate}
+
+Množinu všech pozitivně semidefinitních matic značíme $S_+^n$ a množinu všech pozitivně definitních matic značíme $S_{++}^n$. 
+
+\begin{vt}
+    Množina $S_+^n$ tvoří konvexní kužel.
+\end{vt}
+
+\begin{proof}
+    $\Theta_1, \Theta_2 \geq 0$, $A, B \in S_+^n$
+    $$
+        x^T \left( \Theta_1 A + \Theta_2 B \right) x = x^T \Theta_1 A x + x^T \Theta_2 B x \geq 0.
+    $$
+\end{proof}
+
+Množině $S_+^n$ se říká pozitivně semidefinitní kužel. \textbf{??chci ukázat i uzavřenost a další vlastnosti??}
+
+Definujeme tzv. L\"{o}wnerovo částečné uspořádání
+$$
+    A \succeq B \iff A - B \in S_+^n.
+$$
+
+Stopa matice $A \in R^{n \times n}$ je $\textbf{Tr}(A) = \sum_{i=1}^n A_{ii}$.
+
+\begin{df}
+    Lineární maticová nerovnost (LMI) je ve tvaru
+    $$
+        A_0 + \sum_{i=1}^n A_i x_i \succeq 0,
+    $$
+    kde $A_i \in S^n$.
+\end{df}
+
+\begin{df}
+    Říkáme, že $S \subset \mathbb{R}^n$ je spektraedr, jestliže lze napsat ve tvaru
+    $$
+        S = \left\{ (x_1, \dots, x_m) \in \mathbb{R}^m \mid A_0 + \sum_{i=1}^m A_i x_i \succeq 0 \right\}
+    $$
+    pro nějaké symetrické matice $A_0, \dots, A_m \in S^n$.
+\end{df}
+
+Spektraedr je tedy množina, která je definována konečným počtem LMI. Můžeme si všimnout analogie s definicí polyedru, který je přípustnou množinu pro lineární program. Podobně spektraedr je přípustnou množinou pro semidefinitní program.
+
+Geometricky je spektraedr definován jako průnik pozitivně semidefinitního kuželu $S_+^n$ a afinního podprostoru $\textbf{span}\left\{ A_1, \dots, A_m \right\}$ posunutého do $A_0$.
+
+Spektraedry jsou uzavřené množiny, neboť LMI je ekvivalentní nekonečně mnoha skalárních nerovností ve tvaru $v^T(A_0 + \sum_{i=1}^m A_ix_i)v \geq 0$, jednu pro každou hodnotu $v \in \mathbb{R}^n$.
+
+Vždy můžeme několik LMI \uv{scucnout} do jedné. Stačí zvolit matice $A_i$ blokově diagonální. Odtud vídíme, že polyedr je speciálním případem spektraedru. Polyedr bude mít všechny matice $A_i$ diagonální.
+
+\begin{pr}
+    eliptická křivka
+\end{pr}
+
+\section*{WIP}
 
 kritéria pozitivní definitnosti a semidefinitnosti matic
 
@@ -27,12 +82,10 @@ $S, T$ jsou pozitivně definitní $\implies$ $S + T$ je pozitivně definitní
 $x^T (S+T) x = x^T S x + x^T T x > 0$
 \end{proof}
 
-
-\section{Semidefinitní kužel}
-
+\subsection*{Formulace primární úlohy}
 
 
-\section{Dualita}
+\subsection*{Dualita}
 \noindent Lagrangovo funkce a dualita konvexního programování;
 
 \noindent z toho dualitu semidefinitního programování;
@@ -41,7 +94,7 @@ $x^T (S+T) x = x^T S x + x^T T x > 0$
 
 \noindent příklad
 
-\section{Relaxace}
+\subsection*{Relaxace}
 \noindent vektorové programování
 
 %spektraedr, formulace, dualita, semidefinitní kužel, duální kužel, ...
