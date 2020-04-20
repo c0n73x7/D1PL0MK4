@@ -4,13 +4,43 @@ Na semidefinitní programování se můžeme koukat jako na zobecnění lineárn
 
 \section{Vsuvka z lineární algebry}
 
-Množinu všech symetrických matic značíme $S^n$. Říkáme, že $A \in S^n$ je
-\begin{enumerate}
-    \item pozitivně definitní, jestliže $\forall x:\ x^TAx >0$,
-    \item pozitivně semidefinitní, jestliže $\forall x \neq 0:\ x^TAx \geq 0$.
-\end{enumerate}
+\subsection*{Pozitivně definitní matice}
 
-Množinu všech pozitivně semidefinitních matic značíme $S_+^n$ a množinu všech pozitivně definitních matic značíme $S_{++}^n$. 
+Pracujeme s reálnými symetrickými maticemi $S = S^T$. Ty mají všechna vlastní čísla reálná a některé z nich mají zajímavou vlastnost, že všechna jejich vlastní čísla jsou kladná. Takovým maticím říkáme, že jsou pozitivně definitní. Alternativní definice (energy test): $S$ je pozitivně definitní, jestliže $x^TSx > 0$ pro všechny nenulové vektory $x$.
+
+\begin{pr}
+$$
+    x^T S x = 
+    \begin{bmatrix}
+        x_1 & x_2
+    \end{bmatrix}
+    \begin{bmatrix}
+        2 & 4 \\
+        4 & 9
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1 \\
+        x_2
+    \end{bmatrix} =
+    2 x_1^2 + 8 x_1 x_2 + 9 x_2^2
+$$
+Je pro všechny $x$ nenulové $x^TSx > 0$? Ano, protože můžeme výraz přepsat na součet čtverců:
+$$
+    x^TSx = 2 x_1^2 + 8 x_1 x_2 + 9 x_2^2 = 2 (x_1 + 2 x_2)^2 + x_2^2.
+$$
+TODO: obrázek kyblíčku
+\end{pr}
+
+\textbf{??další kritéria??}
+
+\subsection*{Pozitivně semidefinitní matice}
+
+\textbf{??modifikované kriteria??}
+\textbf{??Potřebuju nějak rozdělit do sekcí s nadpisy ať to není chaos??}
+
+\subsection*{Pozitivně semidefinitní kužel}
+
+Množinu všech symetrických matic značíme $S^n$, množinu všech pozitivně semidefinitních matic značíme $S_+^n$ a množinu všech pozitivně definitních matic značíme $S_{++}^n$. 
 
 \begin{vt}
     Množina $S_+^n$ tvoří konvexní kužel.
@@ -23,14 +53,14 @@ Množinu všech pozitivně semidefinitních matic značíme $S_+^n$ a množinu v
     $$
 \end{proof}
 
-Množině $S_+^n$ se říká pozitivně semidefinitní kužel. \textbf{??chci ukázat i uzavřenost a další vlastnosti??}
+Množině $S_+^n$ se říká pozitivně semidefinitní kužel. \textbf{??chci ukázat i uzavřenost a další vlastnosti, jak se česky řekne proper cone??}
+
+\subsection*{Spektraedry}
 
 Definujeme tzv. L\"{o}wnerovo částečné uspořádání
 $$
     A \succeq B \iff A - B \in S_+^n.
 $$
-
-Stopa matice $A \in R^{n \times n}$ je $\textbf{Tr}(A) = \sum_{i=1}^n A_{ii}$.
 
 \begin{df}
     Lineární maticová nerovnost (LMI) je ve tvaru
@@ -60,7 +90,10 @@ Vždy můžeme několik LMI \uv{scucnout} do jedné. Stačí zvolit matice $A_i$
     eliptická křivka
 \end{pr}
 
+
 \section*{WIP}
+
+Stopa matice $A \in R^{n \times n}$ je $\textbf{Tr}(A) = \sum_{i=1}^n A_{ii}$.
 
 kritéria pozitivní definitnosti a semidefinitnosti matic
 
