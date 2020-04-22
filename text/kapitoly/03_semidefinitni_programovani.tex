@@ -4,9 +4,9 @@ Na semidefinitní programování se můžeme koukat jako na zobecnění lineárn
 
 \section{Vsuvka z lineární algebry}
 
-\subsection*{Pozitivně definitní matice}
+\subsection*{Pozitivně definitní a semidefinitní matice}
 
-Pracujeme s reálnými symetrickými maticemi $S = S^T$. Ty mají všechna vlastní čísla reálná a některé z nich mají zajímavou vlastnost, že všechna jejich vlastní čísla jsou kladná. Takovým maticím říkáme, že jsou pozitivně definitní. Alternativní definice (energy test): $S$ je pozitivně definitní, jestliže $x^TSx > 0$ pro všechny nenulové vektory $x$.
+Pracujeme s reálnými symetrickými maticemi $S = S^T$. Ty mají všechna vlastní čísla reálná a některé z nich mají zajímavou vlastnost, že všechna jejich vlastní čísla jsou kladná. Takovým maticím říkáme, že jsou pozitivně definitní. Alternativní definicí je, že matice $S$ je pozitivně definitní, jestliže $x^TSx > 0$ pro všechny nenulové vektory $x$ (tzv. energy test).
 
 \begin{pr}
 $$
@@ -31,12 +31,57 @@ $$
 TODO: obrázek kyblíčku
 \end{pr}
 
-\textbf{??další kritéria??}
 
-\subsection*{Pozitivně semidefinitní matice}
+\begin{vt}
+    $S = S^T$ je pozitivně definitní, jestliže lze napsat jako $S = A^T A$ pro nějakou matici $A$, která má lineárně nezávislé sloupce.
+\end{vt}
+\begin{proof}
+    \begin{equation}
+    \label{eq:tmp}
+        x^TSx = x^TA^TAx = (Ax)^T(Ax) = \lVert Ax \rVert^2 \geq 0
+    \end{equation}
+    $\lVert Ax \rVert^2 > 0$ jestliže sloupce matice $A$ jsou lineárně nezávislé
+\end{proof}
 
-\textbf{??modifikované kriteria??}
-\textbf{??Potřebuju nějak rozdělit do sekcí s nadpisy ať to není chaos??}
+\begin{pr}
+    $$
+        S = 
+        \begin{bmatrix}
+            2 & 3 & 4 \\
+            3 & 5 & 7 \\
+            4 & 7 & 10
+        \end{bmatrix} =
+        \begin{bmatrix}
+            1 & 1 \\
+            1 & 2 \\
+            1 & 3
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 1 & 1 \\
+            1 & 2 & 3
+        \end{bmatrix} =
+        AA^T
+    $$
+    $A$ má lineárně závislé sloupečky, tj. $S$ není pozitivně definitní
+\end{pr}
+
+\begin{vt}
+    $S = S^T$ je pozitivně definitní, jestliže všechny hlavní minory $S$ jsou kladné.
+\end{vt}
+
+\begin{pr}
+    TODO
+\end{pr}
+
+\begin{vt}
+    $S = S^T$ je pozitivně definitní, jestliže jsou všechny pivoty při eliminaci kladné.
+\end{vt}
+
+\begin{pr}
+    TODO
+\end{pr}
+
+\noindent\textbf{??pozitivně semidefinitní matice -- energy test $\geq 0$, $S=A^TA$ povoleny LZ sloupečky, hlavní minory nezáporné, pivoty nezáporné??}
 
 \subsection*{Pozitivně semidefinitní kužel}
 
@@ -94,18 +139,6 @@ Vždy můžeme několik LMI \uv{scucnout} do jedné. Stačí zvolit matice $A_i$
 \section*{WIP}
 
 Stopa matice $A \in R^{n \times n}$ je $\textbf{Tr}(A) = \sum_{i=1}^n A_{ii}$.
-
-kritéria pozitivní definitnosti a semidefinitnosti matic
-
-\begin{enumerate}
-    \item $S$ je symetrická pozitivně definitní
-    \item $\lambda_i > 0, i=1, \dots, n$
-    \item energie $x^TSx > 0$ (příklad ve 2D)
-    \item $S = A^TA$ (sloupce $A$ jsou lineárně nezávislé)
-    \item všechny hlavní minory jsou $> 0$
-    \item všechny pivoty při eliminaci jsou $> 0$
-\end{enumerate}
-
 
 \begin{vt}
 $S, T$ jsou pozitivně definitní $\implies$ $S + T$ je pozitivně definitní
