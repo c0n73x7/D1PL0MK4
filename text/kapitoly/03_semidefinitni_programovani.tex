@@ -4,6 +4,8 @@ Na semidefinitní programování se můžeme koukat jako na zobecnění lineárn
 
 \section{Vsuvka z lineární algebry}
 
+\noindent \textbf{!!kapitolku asi přepíšu, ale obsahově bych to viděl takhle!!}
+
 \subsection*{Pozitivně definitní a semidefinitní matice}
 
 Pracujeme s reálnými symetrickými maticemi $S = S^T$. Ty mají všechna vlastní čísla reálná a některé z nich mají zajímavou vlastnost, že všechna jejich vlastní čísla jsou kladná. Takovým maticím říkáme, že jsou pozitivně definitní. Alternativní definicí je, že matice $S$ je pozitivně definitní, jestliže $x^TSx > 0$ pro všechny nenulové vektory $x$ (tzv. energy test).
@@ -33,14 +35,14 @@ TODO: obrázek kyblíčku
 
 
 \begin{vt}
-    $S = S^T$ je pozitivně definitní, jestliže lze napsat jako $S = A^T A$ pro nějakou matici $A$, která má lineárně nezávislé sloupce.
+    $S = S^T$ je pozitivně definitní, jestliže lze napsat jako $S = A^T A$ pro nějakou matici $A$, která má lineárně nezávislé sloupečky.
 \end{vt}
 \begin{proof}
     \begin{equation}
     \label{eq:tmp}
         x^TSx = x^TA^TAx = (Ax)^T(Ax) = \lVert Ax \rVert^2 \geq 0
     \end{equation}
-    $\lVert Ax \rVert^2 > 0$ jestliže sloupce matice $A$ jsou lineárně nezávislé
+    $\lVert Ax \rVert^2 > 0$, jestliže sloupečky matice $A$ jsou lineárně nezávislé
 \end{proof}
 
 \begin{pr}
@@ -70,7 +72,15 @@ TODO: obrázek kyblíčku
 \end{vt}
 
 \begin{pr}
-    TODO
+    $$  S =
+        \begin{bmatrix}
+            3 & 4 \\
+            4 & 6
+        \end{bmatrix},
+        D_1 = 3,
+        D_2 = 3 \cdot 6 - 4 \cdot 4 = 2 
+    $$
+    hlavní minory $D_1, D_2 > 0$; matice $S$ je pozitivně definitní 
 \end{pr}
 
 \begin{vt}
@@ -78,10 +88,29 @@ TODO: obrázek kyblíčku
 \end{vt}
 
 \begin{pr}
-    TODO
+    $$  S =
+        \begin{bmatrix}
+            3 & 4 \\
+            4 & 6
+        \end{bmatrix}
+        \sim
+        \begin{bmatrix}
+            3 & 4 \\
+            0 & \frac{2}{3}
+        \end{bmatrix},
+        p_1 = 3, p_2 = \frac{2}{3} 
+    $$
+    pivoty $p_1, p_2 > 0$; matice $S$ je pozitivně definitní
 \end{pr}
 
-\noindent\textbf{??pozitivně semidefinitní matice -- energy test $\geq 0$, $S=A^TA$ povoleny LZ sloupečky, hlavní minory nezáporné, pivoty nezáporné??}
+Pro pozitivní semidefinitnost modifikujeme předchozí tvrzení a definice následovně:
+\begin{enumerate}
+    \item $S = S^T$ je pozitivně semidefinitní, jestliže všechna její čísla jsou nezáporná.
+    \item $S = S^T$ je pozitivně semidefinitní, jestliže $x^TSx \geq 0$ pro všechny nenulové vektory $x$.
+    \item $S = S^T$ je pozitivně semidefinitní, jestliže lze napsat jako $S = A^T A$ pro nějakou matici $A$.
+    \item $S = S^T$ je pozitivně semidefinitní, jestliže všechny hlavní minory $S$ jsou nezáporné.
+    \item $S = S^T$ je pozitivně semidefinitní, jestliže jsou všechny pivoty při eliminaci nezáporné.
+\end{enumerate}
 
 \subsection*{Pozitivně semidefinitní kužel}
 
@@ -135,6 +164,23 @@ Vždy můžeme několik LMI \uv{scucnout} do jedné. Stačí zvolit matice $A_i$
     eliptická křivka
 \end{pr}
 
+\section{Primární úloha}
+
+Semidefinitní program je lineární optimalizační problém přes spektraedr. Primární úlohu ve standardním tvaru můžeme napsat jako:
+\begin{equation}\tag{SDP-P}
+    \min \left\{ \langle C, X \rangle \mid \langle A_i, X \rangle = b_i, i=1, \dots, m; X \succeq 0 \right\},
+    \label{eq:SDP-P}
+\end{equation}
+kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{ij}Y_{ij}$ a $X \in S^n$ je proměnná, nad kterou provádíme minimalizaci.
+
+\begin{pr}
+    \textbf{!!!najít pěknej příklad s pěknou přípustnou množinou!!!}
+\end{pr}
+
+Úlohy s racionálními daty nemusí mít racionální optimální řešení.
+
+\section{Dualita}
+
 
 \section*{WIP}
 
@@ -148,10 +194,10 @@ $S, T$ jsou pozitivně definitní $\implies$ $S + T$ je pozitivně definitní
 $x^T (S+T) x = x^T S x + x^T T x > 0$
 \end{proof}
 
-\subsection*{Formulace primární úlohy}
 
 
-\subsection*{Dualita}
+
+
 \noindent Lagrangovo funkce a dualita konvexního programování;
 
 \noindent z toho dualitu semidefinitního programování;
