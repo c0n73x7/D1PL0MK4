@@ -4,11 +4,9 @@ Na semidefinitní programování se můžeme koukat jako na zobecnění lineárn
 
 \section{Vsuvka z lineární algebry}
 
-\noindent \textbf{!!kapitolku asi přepíšu, ale obsahově bych to viděl takhle!!}
+\subsection*{Pozitivně definitní matice}
 
-\subsection*{Pozitivně definitní a semidefinitní matice}
-
-Pracujeme s reálnými symetrickými maticemi $S = S^T$. Ty mají všechna vlastní čísla reálná a některé z nich mají zajímavou vlastnost, že všechna jejich vlastní čísla jsou kladná. Takovým maticím říkáme, že jsou pozitivně definitní. Alternativní definicí je, že matice $S$ je pozitivně definitní, jestliže $x^TSx > 0$ pro všechny nenulové vektory $x$ (tzv. energy test).
+Pracujeme s reálnými symetrickými maticemi $S = S^T$. Ty mají všechna vlastní čísla reálná a některé z nich mají zajímavou vlastnost, že všechna jejich vlastní čísla jsou kladná. Takovým maticím říkáme, že jsou pozitivně definitní. Alternativní definicí je, že matice $S$ je pozitivně definitní, jestliže $x^TSx > 0$ pro všechny nenulové vektory $x$.
 
 \begin{pr}
 $$
@@ -33,6 +31,7 @@ $$
 TODO: obrázek kyblíčku
 \end{pr}
 
+Ukážeme si několik kritérií, jak otestovat pozitivní definitnost dané matice.
 
 \begin{vt}
     $S = S^T$ je pozitivně definitní, jestliže lze napsat jako $S = A^T A$ pro nějakou matici $A$, která má lineárně nezávislé sloupečky.
@@ -67,6 +66,8 @@ TODO: obrázek kyblíčku
     $A$ má lineárně závislé sloupečky, tj. $S$ není pozitivně definitní
 \end{pr}
 
+Dalším testem je tzv. Sylvesterovo kritérium.
+
 \begin{vt}
     $S = S^T$ je pozitivně definitní, jestliže všechny hlavní minory $S$ jsou kladné.
 \end{vt}
@@ -83,8 +84,10 @@ TODO: obrázek kyblíčku
     hlavní minory $D_1, D_2 > 0$; matice $S$ je pozitivně definitní 
 \end{pr}
 
+A poslední, které si uvedeme souvisí s Gaussovou eliminací.
+
 \begin{vt}
-    $S = S^T$ je pozitivně definitní, jestliže jsou všechny pivoty při eliminaci kladné.
+    $S = S^T$ je pozitivně definitní, jestliže jsou všechny pivoty při Gaussově eliminaci kladné.
 \end{vt}
 
 \begin{pr}
@@ -103,7 +106,9 @@ TODO: obrázek kyblíčku
     pivoty $p_1, p_2 > 0$; matice $S$ je pozitivně definitní
 \end{pr}
 
-Pro pozitivní semidefinitnost modifikujeme předchozí tvrzení a definice následovně:
+\subsection*{Pozitivně semidefinitní matice}
+
+Pro pozitivní semidefinitnost modifikujeme předcházejí definice a tvrzení pro pozitivně definitní matice následovně:
 \begin{enumerate}
     \item $S = S^T$ je pozitivně semidefinitní, jestliže všechna její čísla jsou nezáporná.
     \item $S = S^T$ je pozitivně semidefinitní, jestliže $x^TSx \geq 0$ pro všechny nenulové vektory $x$.
@@ -127,7 +132,9 @@ Množinu všech symetrických matic značíme $S^n$, množinu všech pozitivně 
     $$
 \end{proof}
 
-Množině $S_+^n$ se říká pozitivně semidefinitní kužel. \textbf{??chci ukázat i uzavřenost a další vlastnosti, jak se česky řekne proper cone??}
+Množině $S_+^n$ se říká pozitivně semidefinitní kužel.
+
+\noindent\textbf{??chci ukázat i uzavřenost a další vlastnosti, jak se česky řekne proper cone??}
 
 \subsection*{Spektraedry}
 
@@ -158,10 +165,18 @@ Geometricky je spektraedr definován jako průnik pozitivně semidefinitního ku
 
 Spektraedry jsou uzavřené množiny, neboť LMI je ekvivalentní nekonečně mnoha skalárních nerovností ve tvaru $v^T(A_0 + \sum_{i=1}^m A_ix_i)v \geq 0$, jednu pro každou hodnotu $v \in \mathbb{R}^n$.
 
-Vždy můžeme několik LMI \uv{scucnout} do jedné. Stačí zvolit matice $A_i$ blokově diagonální. Odtud vídíme, že polyedr je speciálním případem spektraedru. Polyedr bude mít všechny matice $A_i$ diagonální.
+Vždy můžeme několik LMI \uv{scucnout} do jedné. Stačí zvolit matice $A_i$ blokově diagonální. Odtud snadno vídíme, že polyedr je speciálním případem spektraedru. Polyedr bude mít všechny matice $A_i$ diagonální.
 
 \begin{pr}
-    eliptická křivka
+    $$
+        \left\{ (x, y) \in \mathbb{R}^2 \mid A(x,y) =
+        \begin{bmatrix}
+            x + 1 & 0      & y \\
+            0     & 2      & -x - 1 \\
+            y     & -x - 1 & 2
+        \end{bmatrix}
+        \succeq 0 \right\}
+    $$
 \end{pr}
 
 \section{Primární úloha}
@@ -174,13 +189,81 @@ Semidefinitní program je lineární optimalizační problém přes spektraedr. 
 kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{ij}Y_{ij}$ a $X \in S^n$ je proměnná, nad kterou provádíme minimalizaci.
 
 \begin{pr}
-    \textbf{!!!najít pěknej příklad s pěknou přípustnou množinou!!!}
-\end{pr}
+    $$
+        \min \left\{
+            \left\langle
+            \begin{bmatrix}
+                2 & 1 \\
+                1 & 0
+            \end{bmatrix},
+            \begin{bmatrix}
+                x_{11} & x_{12} \\
+                x_{12} & x_{22}
+            \end{bmatrix}
+            \right\rangle \middle|
+            \left\langle
+            \begin{bmatrix}
+                1 & 0 \\
+                0 & 1
+            \end{bmatrix},
+            \begin{bmatrix}
+                x_{11} & x_{12} \\
+                x_{12} & x_{22}
+            \end{bmatrix}
+            \right\rangle = 1,
+            \begin{bmatrix}
+                x_{11} & x_{12} \\
+                x_{12} & x_{22}
+            \end{bmatrix} \succeq 0
+        \right\}
+    $$
+    Po úpravě:
+    $$
+        \min \left\{
+            2 x_{11} + 2 x_{12} \middle| x_{11} + x_{22} = 1, 
+            \begin{bmatrix}
+                x_{11} & x_{12} \\
+                x_{12} & x_{22}
+            \end{bmatrix} \succeq 0
+        \right\}.
+    $$
+    Jak vypadá přípustná množina? Použijeme Sylvesterovo kritérium, tj.
+    $$
+        x_{11} \geq 0, x_{11} x_{22} - x_{12}^2 \geq 0.
+    $$
+    Z LMI vyjádříme $x_{22}$, tj.
+    $$
+        x_{22} = 1 - x_{11}
+    $$
+    Dosadíme do přechozího a dostaneme
+    $$
+        x_{11} \geq 0, x_{11} \left(1 - x_{11}\right) - x_{12}^2 \geq 0
+    $$
+    Po úpravě
+    $$
+        x_{11} \geq 0, \left(x_{11} - \frac{1}{2}\right)^2 + x_{12}^2 \leq \frac{1}{4}
+    $$
+    Vidíme tedy, že přípustná množina (zobrazena na obrázku~TODO) je kruh s poloměrem $\frac{1}{2}$ a se středem v bodě $(x_{11}, x_{12}) = (\frac{1}{2}, 0)$. Řešením úlohy je matice
+    $$
+        X^* \approx
+        \begin{bmatrix}
+            TODO & TODO \\
+            TODO & TODO
+        \end{bmatrix}
+    $$
+    s cenou $TODO$. Implementace v softwaru MOSEK: \url{TODO}.
 
-Úlohy s racionálními daty nemusí mít racionální optimální řešení.
+    \noindent \textbf{TODO: obrázek přípustné množiny s optimálním řešením z mosek implementace}
+\end{pr}
 
 \section{Dualita}
 
+$$
+    \max \left\{ b^Ty \ \middle|\ \sum_{i=1}^m A_i y_i \preceq C \right\},
+$$
+kde $b = (b_1, \dots, b_m)$ a $y = (y_1, \dots, y_m)$ jsou duální proměnné.
+
+\subsection*{Odvození duální úlohy}
 
 \section*{WIP}
 
@@ -195,10 +278,10 @@ $x^T (S+T) x = x^T S x + x^T T x > 0$
 \end{proof}
 
 
+Úlohy s racionálními daty nemusí mít racionální optimální řešení.
 
 
-
-\noindent Lagrangovo funkce a dualita konvexního programování;
+\noindent Lagrangovo funkce a dualita konvexního programování (příloha?);
 
 \noindent z toho dualitu semidefinitního programování;
 
