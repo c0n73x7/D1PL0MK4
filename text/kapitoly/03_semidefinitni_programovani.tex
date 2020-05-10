@@ -247,11 +247,11 @@ kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{
     $$
         X^* \approx
         \begin{bmatrix}
-            TODO & TODO \\
-            TODO & TODO
+            0.1464  & -0.3536 \\
+            -0.3536 &  0.8536
         \end{bmatrix}
     $$
-    s cenou $TODO$. Implementace v softwaru MOSEK: \url{TODO}.
+    s cenou $\approx -0.4142$. Implementace v softwaru MOSEK: \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/ex3.py}.
 
     \noindent \textbf{TODO: obrázek přípustné množiny s optimálním řešením z mosek implementace}
 \end{pr}
@@ -263,9 +263,45 @@ $$
 $$
 kde $b = (b_1, \dots, b_m)$ a $y = (y_1, \dots, y_m)$ jsou duální proměnné.
 
-\subsection*{Odvození duální úlohy}
+Vztah mezi primární a duální úlohou je podobně jako u lineárního programování v tom, že řešení jedné úlohy lze použít jako odhad na úlohu druhou. Nechť $X$ je libovolné přípustné řešení primární úlohy a $y$ je libovolné přípustné řešení duální úlohy. Potom
+$$
+    \langle C, X \rangle - b^T y =
+    \langle C, X \rangle - \sum_{i=1}^m y_i \langle A_i, X \rangle =
+    \left\langle C - \sum_{i=1}^m A_i y_i, X \right\rangle \geq 0
+$$
+
 
 \section*{WIP}
+\subsection*{Odvození duální úlohy}
+
+\noindent Lagrangeovo funkce
+$$
+    L(X, \lambda, Z) = \langle C, X \rangle - \sum_{i=1}^m \lambda_i \left( \langle A_i, X \rangle - b_i \right) - \langle Z, X \rangle
+$$
+
+\noindent primární úloha odpovídá
+$$
+    \min_{X \in S^n} \max_{\lambda \in \mathbb{R}^m, Z \succeq 0} L(X, \lambda, Z)
+$$
+
+\noindent z Lagrangeovy duality
+$$
+    g(\lambda, Z) = \inf_{X \in S^n} L(X, \lambda, Z) = 
+    \begin{cases}
+        \lambda^T b & \dots\ C - \sum_{i=1}^m \lambda_i A_i - Z = 0, \\
+        -\infty     & \dots\ \text{jinak.}
+    \end{cases}
+$$
+
+\noindent eliminujeme $Z$
+$$
+    \sup \left\{ b^T \lambda\ \middle|\ \sum_{i=1}^m A_i \lambda_i \preceq C \right\}
+$$
+
+
+
+
+
 
 Stopa matice $A \in R^{n \times n}$ je $\textbf{Tr}(A) = \sum_{i=1}^n A_{ii}$.
 
