@@ -2,10 +2,38 @@
 
 \section{Podmíněná optimalizace}
 
-\subsection{Omezení typu nerovnosti}
+\begin{equation}\label{eq:constrained_optimization_problem}
+    \begin{split}
+        &\min\ f(x) \\
+        &g_i(x) \leq 0, i = 1, \dots, m \\
+        &h_i(x) = 0, i = 1, \dots, p
+    \end{split}
+\end{equation}
 
-\subsection{Omezení typu rovnosti}
+Hledáme $x \in \mathbb{R}^n$, které minimalizuje $f(x)$, vzhledem k omezením $g_i(x)$ a $h_i(x)$. Proměnné $x$ říkáme \textbf{optimalizační proměnná}, funkci $f(x)$ říkáme \textbf{cenová} nebo \textbf{účelová funkce}. Výrazy $g_i(x) \leq 0$ jsou \textbf{omezení typu nerovnosti} a $h_i(x) = 0$ jsou \textbf{omezení typu rovnosti}. Pokud $m = p = 0$ problém~\ref{eq:constrained_optimization_problem} je \textbf{neomezený}, jinak je \textbf{omezený}.
 
-\section{Konvexní programování}
+\textbf{Definiční obor} $\mathcal{D}$ úlohy~\ref{eq:constrained_optimization_problem} je
+$$
+    \mathcal{D} = \bigcap_{i=1}^m \textbf{dom}\ g_i \cap \bigcap_{i=1}^p \textbf{dom}\ h_i.
+$$
+Říkáme, že bod $x \in \mathcal{D}$ je \textbf{přípustný}, jestliže splňuje všechna omezení $g_i(x) \leq 0$ a $h_i(x) = 0$. Úloha~\ref{eq_constrained_optimization_problem} je \textbf{přípustná}, jestliže existuje alespoň jeden bod $x \in \mathcal{D}$, který je přípustný. Množina všech přípustných bodů $x \in \mathcal{D}$ se nazývá \textbf{přípustná množina}.
 
-\section{Lagrangeova dualita konvexního programování}
+\textbf{Optimální hodnota} $x^*$ úlohy~\ref{eq:constrained_optimization_problem} je definována jako
+$$
+    x^* = \left\{ f(x) \mid g_i(x) \leq 0, i = 1, \dots, m, h_i(x) = 0, i = 1, \dots, p \right\}.
+$$
+
+\section{Konvexní optimalizace}
+
+\begin{equation}\label{eq:convex_optimization_problem}
+    \begin{split}
+        &\min\ f(x) \\
+        &g_i(x) \leq 0, i = 1, \dots, m \\
+        &a_i^Tx = b_i, i = 1, \dots, p
+    \end{split}
+\end{equation}
+
+Oproti obecné úloze~\ref{eq:constrained_optimization_problem} jsou funkce $f(x), g_i(x)$ konvexní a funkce $h_i(x) = a_i^Tx - b_i$ jsou afinní. Přípustná množina takové úlohy je konvexní množinou.
+
+\section{Lagrangeova dualita}
+
