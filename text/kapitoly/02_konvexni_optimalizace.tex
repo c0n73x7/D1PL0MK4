@@ -1,8 +1,8 @@
 \chapter{Konvexní optimalizace}
 
-\section{Podmíněná optimalizace}
+\section{Obecná podmíněná úloha}
 
-\begin{equation}\label{eq:constrained_optimization_problem}
+\begin{equation}\label{eq:constrained_problem}
     \begin{split}
         &\min\ f(x) \\
         &g_i(x) \leq 0, i = 1, \dots, m \\
@@ -10,22 +10,22 @@
     \end{split}
 \end{equation}
 
-Hledáme $x \in \mathbb{R}^n$, které minimalizuje $f(x)$, vzhledem k omezením $g_i(x)$ a $h_i(x)$. Proměnné $x$ říkáme \textbf{optimalizační proměnná}, funkci $f(x)$ říkáme \textbf{cenová} nebo \textbf{účelová funkce}. Výrazy $g_i(x) \leq 0$ jsou \textbf{omezení typu nerovnosti} a $h_i(x) = 0$ jsou \textbf{omezení typu rovnosti}. Pokud $m = p = 0$ problém~\ref{eq:constrained_optimization_problem} je \textbf{neomezený}, jinak je \textbf{omezený}.
+Hledáme $x \in \mathbb{R}^n$, které minimalizuje $f(x)$, vzhledem k omezením $g_i(x)$ a $h_i(x)$. Proměnné $x$ říkáme \textbf{optimalizační proměnná}, funkci $f(x)$ říkáme \textbf{cenová} nebo \textbf{účelová funkce}. Výrazy $g_i(x) \leq 0$ jsou \textbf{omezení typu nerovnosti} a $h_i(x) = 0$ jsou \textbf{omezení typu rovnosti}. Pokud $m = p = 0$ problém~\ref{eq:constrained_problem} je \textbf{neomezený}, jinak je \textbf{omezený}.
 
-\textbf{Definiční obor} $\mathcal{D}$ úlohy~\ref{eq:constrained_optimization_problem} je
+\textbf{Definiční obor} $\mathcal{D}$ úlohy~\ref{eq:constrained_problem} je
 $$
     \mathcal{D} = \bigcap_{i=1}^m \textbf{dom}\ g_i \cap \bigcap_{i=1}^p \textbf{dom}\ h_i.
 $$
-Říkáme, že bod $x \in \mathcal{D}$ je \textbf{přípustný}, jestliže splňuje všechna omezení $g_i(x) \leq 0$ a $h_i(x) = 0$. Úloha~\ref{eq_constrained_optimization_problem} je \textbf{přípustná}, jestliže existuje alespoň jeden bod $x \in \mathcal{D}$, který je přípustný. Množina všech přípustných bodů $x \in \mathcal{D}$ se nazývá \textbf{přípustná množina}.
+Říkáme, že bod $x \in \mathcal{D}$ je \textbf{přípustný}, jestliže splňuje všechna omezení $g_i(x) \leq 0$ a $h_i(x) = 0$. Úloha~\ref{eq:constrained_problem} je \textbf{přípustná}, jestliže existuje alespoň jeden bod $x \in \mathcal{D}$, který je přípustný. Množina všech přípustných bodů $x \in \mathcal{D}$ se nazývá \textbf{přípustná množina}.
 
-\textbf{Optimální hodnota} $x^*$ úlohy~\ref{eq:constrained_optimization_problem} je definována jako
+\textbf{Optimální hodnota} $x^*$ úlohy~\ref{eq:constrained_problem} je definována jako
 $$
     x^* = \left\{ f(x) \mid g_i(x) \leq 0, i = 1, \dots, m, h_i(x) = 0, i = 1, \dots, p \right\}.
 $$
 
-\section{Konvexní optimalizace}
+\section{Konvexní podmíněná úloha}
 
-\begin{equation}\label{eq:convex_optimization_problem}
+\begin{equation}\label{eq:convex_problem}
     \begin{split}
         &\min\ f(x) \\
         &g_i(x) \leq 0, i = 1, \dots, m \\
@@ -33,7 +33,48 @@ $$
     \end{split}
 \end{equation}
 
-Oproti obecné úloze~\ref{eq:constrained_optimization_problem} jsou funkce $f(x), g_i(x)$ konvexní a funkce $h_i(x) = a_i^Tx - b_i$ jsou afinní. Přípustná množina takové úlohy je konvexní množinou.
+Oproti obecné úloze~\ref{eq:constrained_problem} jsou funkce $f(x), g_i(x)$ konvexní a funkce $h_i(x) = a_i^Tx - b_i$ jsou afinní. Přípustná množina takové úlohy je konvexní množinou.
 
 \section{Lagrangeova dualita}
 
+Mějme úlohu~\ref{eq:constrained_problem} s $\mathcal{D} \neq 0$. Zobrazení $L:\ \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R}^p \rightarrow \mathbb{R}$ takové, že
+\begin{equation}
+    L(x, \lambda, \mu) = f(x) + \sum_{i=1}^m \lambda_i g_i(x) + \sum_{i=1}^p \mu_i h_i(x)
+\end{equation}
+se nazývá \textbf{Lagrangeova funkce}. Definiční obor $\textbf{dom}\ L = \mathcal{D} \times \mathbb{R}^m \times \mathbb{R}^p$. Vektory $\lambda$ a $\mu$ nazýváme \textbf{duální proměnné} a prvkům těchto vektorů říkáme \textbf{Lagrangeovy multiplikátory}. Dále definujeme \textbf{duální funkci} $d:\ \mathbb{R}^m \times \mathbb{R}^p \rightarrow \mathbb{R}$ jako infimum Lagrangeovy funkce $L$ přes všechna $x \in \mathcal{D}$. Tedy
+\begin{equation}
+    d(\lambda, \mu) = \inf_{x \in \mathcal{D}} L(x, \lambda, \mu) = \inf_{x \in \mathcal{D}} \left( f(x) + \sum_{i=1}^m \lambda_i g_i(x) + \sum_{i=1}^p \mu_i h_i(x) \right).
+\end{equation}
+
+Poznamenejme, že duální funkce je konkávní bez ohledu na to, zda je úloha konvexní a je-li $L$ zdola neomezená v proměnné $x$, potom duální funkce nabývá hodnoty $-\infty$.
+
+\subsection{Dolní odhad na $x^*$}\label{s:lower_bound}
+
+Nechť $\tilde{x}$ je přípustný bod. Pro $\lambda \geq 0$ je
+$$
+    \sum_{i=1}^m \lambda_i g_i(\tilde{x}) + \sum_{i=1}^p \mu_i h_i(\tilde{x}) \leq 0.
+$$
+Potom pro Lagrangeovu funkci můžeme psát
+$$
+    L(\tilde{x}, \lambda, \mu) = f(\tilde{x}) + \sum_{i=1}^m \lambda_i g_i(\tilde{x}) + \sum_{i=1}^p h_i(\tilde{x}) \leq f(\tilde{x}).
+$$
+A tedy pro duální funkci platí
+$$
+    d(\lambda, \mu) = \inf_{x \in \mathcal{D}} L(x, \lambda, \mu) \leq L(\tilde{x}, \lambda, \mu) \leq f(\tilde{x}).
+$$
+
+\subsection{Duální úloha}
+
+V části~\ref{s:lower_bound} jsme si ukázali, že duální funkce dává dolní odhad na optimální hodnotu $x^*$ úlohy~\ref{eq:constrained_problem}. Stále jsme si ale neřekli, jaký je nejlepší dolní odhad, který pomocí duální funkce jsme schopni dostat. To nás dostává k následující optimalizační úloze.
+\begin{equation}\label{eq:dual_problem}
+    \begin{split}
+        &\max d(\lambda, \mu) \\
+        &\lambda \geq 0
+    \end{split}
+\end{equation}
+
+Úloze~\ref{eq:dual_problem} se říká \textbf{Lagrangeova duální úloha} příslušná k úloze~\ref{eq:constrained_problem}, kterou nazýváme \textbf{primární úlohou}.
+
+\subsection{Slabá dualita}
+
+\subsection{Silná dualita a Slaterova podmínka}
