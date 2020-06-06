@@ -77,4 +77,18 @@ V části~\ref{s:lower_bound} jsme si ukázali, že duální funkce dává doln�
 
 \subsection{Slabá dualita}
 
+Optimální řešení Lagrangeovy duální úlohy označíme $d^*$, které je už z definice nejlepší dolní odhad na optimální řešení primární úlohy $p^*$. Tato nerovnost platí i pokud primární úloha není konvexní. Této nerovnosti říkáme \textbf{slabá dualita}. Rozdíl optimálních řešení $p^* - d^*$ označujeme jako \textbf{optimální dualitní rozdíl} primární úlohy. Poznamenejme, že optimální dualitní rozdíl je vždy nezáporný.
+
+\textbf{???Použití: primární úlohu je těžké vyřešit, ale duální úloha je vždy konvexní, tak vyřeším tu a mám alespoň dolní odhad na úlohu primární.???}
+
 \subsection{Silná dualita a Slaterova podmínka}
+
+Pokud je optimální dualitní rozdíl $p^* - d^* = 0$, pak říkáme, že platí silná dualita. Silná dualita obecně neplatí, ale pro primární úlohu, která splňuje nějaké další podmínky to možné je. Jednou takovou podmínkou je \textbf{Slaterova podmínka}:
+
+\begin{equation}
+    \exists x \in \textbf{relint}\ \mathcal{D}:\ f_i(x) < 0, i = 1, \dots, m, Ax = b.
+\end{equation}
+
+\begin{vt}
+    Nechť primární úloha je konvexní a platí Slaterova podmínka, potom $p^* = d^*$.
+\end{vt}
