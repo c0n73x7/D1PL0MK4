@@ -32,17 +32,54 @@ Přípustná množina řešení je zobrazena na obrázku~\ref{fig:ex1}. Řešen�
 \end{figure}
 
 \section{Dualita}
-Úloha \ref{eq:LP-P} se nazývá \textbf{primární úloha}. Ke každé primární úloze můžeme přiřadit příslušnou \textbf{duální úlohu}. Je to opět úloha lineárního programování, která pro případ \ref{eq:LP-P} je ve tvaru:
+
+Pomocí Lagrangeovy duality odvodíme duální úlohu k primární úloze~\ref{eq:LP-P}. Máme tedy optimalizační úlohu
+\begin{equation*}
+    \min \left\{ -c^Tx \mid Ax \leq b, x \geq 0 \right\}.
+\end{equation*}
+
+\noindent Pro ní vytvoříme Lagrangeovu funkci
+\begin{equation*}
+    \begin{split}
+        L(x, \lambda) &= -c^Tx + \lambda^T \left( Ax - b \right) - \lambda^Tx \\
+                      &= -b^T\lambda + \left( A^T\lambda - c - \lambda \right)^Tx.
+    \end{split}
+\end{equation*}
+
+\noindent Z Lagrangeovo funkce přejdeme k duální funkci
+\begin{equation*}
+    \begin{split}
+        d(\lambda)  &= \inf_x L(x, \lambda) \\
+                    &= \inf_x -b^T\lambda + \left( A^T\lambda - c - \lambda \right)^Tx \\
+                    &=
+                    \begin{cases}
+                        -b^T\lambda & \text{pokud } A^T\lambda - c - \lambda = 0, \\
+                        -\infty     & \text{jinak}.
+                    \end{cases}
+    \end{split}
+\end{equation*}
+
+\noindent Tu nakonec použijeme v duální úloze:
+\begin{equation*}
+    \max \left\{ -b^T\lambda \mid A^T\lambda -c - \lambda = 0 \right\}
+\end{equation*}
+
+\begin{equation*}
+    \max \left\{ -b^T\lambda \mid A^T\lambda \geq c, \lambda \geq 0 \right\}
+\end{equation*}
+
 \begin{equation}\tag{LP-D}
-    \min \left\{ b^T y \mid A^T y \geq c, y \geq 0 \right\}.
+    \min \left\{ b^T\lambda \mid A^T\lambda \geq c, \lambda \geq 0 \right\}
     \label{eq:LP-D}
 \end{equation}
+
+\noindent Dostáváme tedy duální úlohu~\ref{eq:LP-D} k primární úloze~\ref{eq:LP-P}.
 
 \begin{pr}
 Duální úloha k úloze \ref{eq:P1} je ve tvaru:
 \begin{equation}\tag{P2}
     \begin{split}
-        \min 4 y_1 + 6 y_2 &    \\
+        \min 4 y_1 + 6 y_2 &       \\
         - y_1 + 4 y_2      &\geq 1 \\
         3 y_1 -   y_2      &\geq 1 \\
         y &\geq 0.
@@ -60,7 +97,7 @@ Přípustná množina řešení je zobrazena na obrázku~\ref{fig:ex2}. Řešen�
     \label{fig:ex2}
 \end{figure}
 
-Všimněme si, že v příkladech \ref{eq:P1} a \ref{eq:P2} mají řešení $x^*$ i $y^*$ stejnou cenu. To není náhoda a tento fakt je obsahem silné věty o dualitě, kterou dokázala skupina kolem Alberta W. Tuckera v roce 1948. Začneme slabou větou o dualitě.
+Všimněme si, že v příkladech \ref{eq:P1} a \ref{eq:P2} mají řešení $x^*$ i $y^*$ stejnou cenu. To není náhoda a tento fakt je obsahem silné věty o dualitě lineárního programování, kterou dokázala skupina kolem Alberta W. Tuckera v roce 1948. Začneme slabou větou o dualitě lineárního programování.
 
 \begin{vt}[Slabá o dualitě]
     Nechť $\tilde{x}$ je přípustné řešení \ref{eq:LP-P} a $\tilde{y}$ je přípustné řešení \ref{eq:LP-D}. Potom $c^T \tilde{x} \leq b^T \tilde{y}$.
@@ -141,3 +178,6 @@ Dostáváme tedy soustavu rovnic $y_i^* \left( b_i - a_{i\_} x^* \right) = 0$, k
 \begin{vt}
     Nechť $\tilde{x}$ je přípustné řešení \ref{eq:LP-P2} a $\tilde{y}$ je přípustné řešení \ref{eq:LP-D2}. Potom $\tilde{x}, \tilde{y}$ jsou optimální právě tehdy, když platí podmínka komplementární skluzovosti.
 \end{vt}
+
+
+\section{TODOs}
