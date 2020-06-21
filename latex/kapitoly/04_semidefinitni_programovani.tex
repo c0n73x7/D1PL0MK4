@@ -189,7 +189,7 @@ Semidefinitní program je lineární optimalizační problém přes spektraedr. 
 kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{ij}Y_{ij}$ a $X \in S^n$ je proměnná, nad kterou provádíme minimalizaci.
 
 \begin{pr}
-    $$
+    \begin{equation}\tag{P3}
         \min \left\{
             \left\langle
             \begin{bmatrix}
@@ -216,7 +216,8 @@ kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{
                 x_{12} & x_{22}
             \end{bmatrix} \succeq 0
         \right\}
-    $$
+        \label{eq:P3}
+    \end{equation}
     Po úpravě:
     $$
         \min \left\{
@@ -243,7 +244,7 @@ kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{
     $$
         x_{11} \geq 0, \left(x_{11} - \frac{1}{2}\right)^2 + x_{12}^2 \leq \frac{1}{4}
     $$
-    Vidíme tedy, že přípustná množina (zobrazena na obrázku~TODO) je kruh s poloměrem $\frac{1}{2}$ a se středem v bodě $(x_{11}, x_{12}) = (\frac{1}{2}, 0)$. Řešením úlohy je matice
+    Vidíme tedy, že přípustná množina (zobrazena na obrázku~\ref{fig:ex3}) je kruh s poloměrem $\frac{1}{2}$ a se středem v bodě $(x_{11}, x_{12}) = (\frac{1}{2}, 0)$. Řešením úlohy je matice
     $$
         X^* \approx
         \begin{bmatrix}
@@ -252,9 +253,14 @@ kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{
         \end{bmatrix}
     $$
     s cenou $\approx -0.4142$. Implementace v softwaru MOSEK: \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/ex3.py}.
-
-    \noindent \textbf{TODO: obrázek přípustné množiny s optimálním řešením z mosek implementace}
 \end{pr}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/ex3.png}   
+    \caption{Přípustná množina řešení k úloze~\ref{eq:P3}.}
+    \label{fig:ex3}
+\end{figure}
 
 \section{Dualita}
 

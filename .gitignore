@@ -2,6 +2,7 @@
 .vscode
 venv
 literatura
+.ipynb_checkpoints
 
 *.toc
 *.log
