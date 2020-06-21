@@ -79,16 +79,25 @@ V části~\ref{s:lower_bound} jsme si ukázali, že duální funkce dává doln�
 
 Optimální řešení Lagrangeovy duální úlohy označíme $d^*$, které je už z definice nejlepší dolní odhad na optimální řešení primární úlohy $p^*$. Tato nerovnost platí i pokud primární úloha není konvexní. Této nerovnosti říkáme \textbf{slabá dualita}. Rozdíl optimálních řešení $p^* - d^*$ označujeme jako \textbf{optimální dualitní rozdíl} primární úlohy. Poznamenejme, že optimální dualitní rozdíl je vždy nezáporný.
 
-\textbf{???Použití: primární úlohu je těžké vyřešit, ale duální úloha je vždy konvexní, tak vyřeším tu a mám alespoň dolní odhad na úlohu primární.???}
 
 \subsection{Silná dualita a Slaterova podmínka}
 
-Pokud je optimální dualitní rozdíl $p^* - d^* = 0$, pak říkáme, že platí silná dualita. Silná dualita obecně neplatí, ale pro primární úlohu, která splňuje nějaké další podmínky to možné je. Jednou takovou podmínkou je \textbf{Slaterova podmínka}:
-
-\begin{equation}
+Pokud je optimální dualitní rozdíl $p^* - d^* = 0$, pak říkáme, že platí silná dualita. Silná dualita obecně neplatí, ale pro primární úlohu, která splňuje nějaké další podmínky to možné je. Těmto podmínkám se říká \textbf{podmínky kvalifikace omezení}. Jednou takovou je \textbf{Slaterova podmínka}:
+$$
     \exists x \in \textbf{relint}\ \mathcal{D}:\ f_i(x) < 0, i = 1, \dots, m, Ax = b.
-\end{equation}
+$$
 
-\begin{vt}
-    Nechť primární úloha je konvexní a platí Slaterova podmínka, potom $p^* = d^*$.
+Bodu $x \in \mathcal{D}$, který splňuje Slaterovu podmínku, říkáme, že je \textbf{striktně přípustný}, protože omezení typu nerovnosti jsou ostré. Pokud jsou některé funkce $f_i$ afinní, můžeme Slaterovu podmínku modifikovat. Nechť tedy $f_1, \dots, f_k, k \leq m$, jsou afinní funkce. Potom \textbf{modifikovaná Slaterova podmínka} má tvar:
+$$
+    \exists x \in \textbf{relint}\ \mathcal{D}:\ f_i(x) \leq 0, i = 1, \dots, k, f_i(x) < 0, i = k+1, \dots, m, Ax = b.
+$$
+
+Pro úlohu~\ref{eq:convex_problem} platí následující věta.
+\begin{vt}[Slaterova]
+    Nechť primární úloha je konvexní a platí (modifikovaná) Slaterova podmínka, potom $p^* = d^*$.
 \end{vt}
+
+
+\section*{TODO}
+\subsubsection*{Použití duální úlohy}
+obecnou primární úlohu je těžké vyřešit, ale duální úloha je vždy konvexní, tak vyřeším tu a mám alespoň dolní odhad na primární úlohu

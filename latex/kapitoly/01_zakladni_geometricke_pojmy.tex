@@ -141,43 +141,17 @@ kde $a \neq 0$ a $x_0$ je libovolný bod z nadroviny $\left\{ x \mid a^T x = b \
     \label{fig:hyperplane_halfspace}
 \end{figure}
 
-\section{Polyedry a polytopy -- PŘEPSAT / DOPLNIT}
+\section{Polyedry a polytopy}
 
-Mějmě konečně mnoho uzavřených poloprostorů v $\mathbb{R}^n$. Množina, která vznikne jejich průnikem se nazývá \textbf{polytop}. Je-li navíc polytop omezený, potom ho nazýváme \textbf{polyedr}. Polyedr lze také ekvivalentně definovat jako konvexní obal konečně mnoha bodů v $\mathbb{R}^n$. Důležitý fakt říká Minkowského-Weyleova věta.
-%Příkladem polyedrů v $\mathbb{R}^3$ jsou např. platónská tělesa, viz obrázek~\ref{fig:platon_solids}. 
+Polytopy jsou zobecněním konvexních mnohoúhelníků v rovině do více dimenzí. Polytop v $\mathbb{R}^3$ je konvexní množina, která je ohraničena konečně mnoha konvexními mnohoúhelníky (příkladem polytopů v $\mathbb{R}^3$ jsou např. Platónská tělesa). Na takovou množinu je možné nahlížet dvěma způsoby. \textbf{H-polyedr} je průnik konečně mnoha uzavřených poloprostorů v $\mathbb{R}^n$, kde \textbf{H-polytop} je omezený H-polyedr. \textbf{V-polytop} je konvexní obal konečně mnoha bodů v $\mathbb{R}^n$. Následující věta říká, že H-polytop a V-polytop jsou matematicky ekvivalentní množiny.
 
-\begin{vt}[Minkowski-Weyl]
-    TODO
+\begin{vt}
+    Každý V-polytop je H-polytop. Každý H-polytop je V-polytop.
 \end{vt}
 
-%každý polytop $P$ je konečně generovaný a můžeme ho vyjadřit jako
-%$$
-%    P = \textbf{conv }(u_1, \dots, u_r) + \textbf{cone }(v_1, \dots, v_s),
-%$$
-%kde $u_i, v_i$ jsou extremální vrcholy $P$.
+Poznamenejme, že V-polytop a H-polytop jsou sice ekvivalentní množiny, ale z algoritmického hlediska je velký rozdíl, zda pracujeme s bodovou množinou, nebo s uzavřenými poloprostory. Pro ilustraci: mějme lineární funkci, kterou chceme minimalizovat na daném polytopu. Pro V-polytop se jedná o triviální problém, protože stačí pro každý bod z množiny $V$ určit hodnotu dané funkce a vybrat minimum. Na druhou stranu pro H-polytop se jedná o netriviální problém, kterým se zabývá lineární programování. Dále budeme mluvit jen o \textbf{polyedrech} a \textbf{polytopech}.
 
-%\begin{figure}[h!]
-%    \centering
-%    \begin{subfigure}[b]{0.3\textwidth}
-%        \centering
-%        \includegraphics[width=\textwidth]{img/dodecahedron.png}   
-%        \caption{Dodecahedron.}
-%    \end{subfigure}
-%
-%    \hfill
-%
-%    \begin{subfigure}[b]{0.3\textwidth}
-%        \centering
-%        \includegraphics[width=\textwidth]{img/icosahedron.png}   
-%        \caption{Icosahedron.}
-%    \end{subfigure}
-%
-%        \begin{subfigure}[b]{0.3\textwidth}
-%        \centering
-%        \includegraphics[width=\textwidth]{img/octahedron.png}   
-%        \caption{Octahedron.}
-%    \end{subfigure}
-%
-%    \caption{Platónská tělesa.}
-%    \label{fig:platon_solids}
-%\end{figure}
+Důležitý fakt, že každý polyedr je konečně generovaný, říká Minkowského-Weylova věta.
+\begin{vt}[Minkowski-Weyl]
+    $P \subseteq \mathbb{R}^n$. Potom $P = \textbf{conv}(u_1, \dots, u_r) + \textbf{cone}(v_1, \dots, v_s)$, kde $u_i, v_i$ jsou extremální vrcholy $P$ právě tehdy, když $P = \left\{ x \in \mathbb{R}^n \mid Ax \leq b \right\}, A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m$.
+\end{vt}
