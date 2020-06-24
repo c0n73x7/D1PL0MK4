@@ -314,18 +314,44 @@ kde $\lambda = (\lambda_1, \dots, \lambda_m)$ je duální proměnná.
 
 \subsubsection*{Slabá dualita semidefinitního programování}
 
-Vztah mezi primární a duální úlohou je podobně jako u lineárního programování v tom, že řešení jedné úlohy lze použít jako odhad na úlohu druhou. Nechť $X$ je libovolné přípustné řešení primární úlohy a $y$ je libovolné přípustné řešení duální úlohy. Potom
-$$
+Vztah mezi primární a duální úlohou je stejně jako u lineárního programování takový, že řešení jedné úlohy lze použít jako odhad na úlohu druhou. Nechť $X$ je libovolné přípustné řešení primární úlohy a $y$ je libovolné přípustné řešení duální úlohy. Potom
+\begin{equation}
     \langle C, X \rangle - b^T y =
     \langle C, X \rangle - \sum_{i=1}^m y_i \langle A_i, X \rangle =
-    \left\langle C - \sum_{i=1}^m A_i y_i, X \right\rangle \geq 0
+    \left\langle C - \sum_{i=1}^m A_i y_i, X \right\rangle \geq 0.
+    \label{eq:weak_duality_SDP}
+\end{equation}
+Za pozornost stojí poslední nerovnost, která plyne z toho, že skalární součin dvou pozitivně semidefinitních matic je nezáporný. Odvození je následující: mějme dvě matice $S, T \succeq 0$. Matici $S$ můžeme napsat jako součet \uv{rank one} matic. Označme $r_S = rank(S)$, tj.
 $$
+    S = \sum_{i=1}^{r_S} \lambda_i s_i s_i^T,
+$$
+kde $s_i$ je i-tý sloupeček matice $S$.
+Dále se podíváme na součin $T \cdot S_i$. Tedy pro $i = 1, \dots, r_S$ platí
+$$
+    T \cdot S_i = \lambda_i s_i^T T s_i \geq 0,
+$$
+kde nerovnost plyne z toho, že matice $T$ je pozitivně semidefinitní.
+
+O nerovnosti~\ref{eq:weak_duality_SDP} se mluví jako o slabé dualitě semidefinitního programování.
 
 \subsubsection*{Silná dualita semidefinitního programování}
 
+\begin{vt}[podmínka optimality]
+    Nechť $X$ je přípustné řešení úlohy~\ref{eq:SDP-P} a $y$ je přípustné řešení úlohy~\ref{eq:SDP-D} taková, že splňují podmínku (komplementární skluzovosti)
+    $$
+        \left( C - \sum_{i=1}^m A_i y_i \right) X = 0.
+    $$
+    Potom $X$ je optimální řešení úlohy~\ref{eq:SDP-P} a $y$ je optimální řešení úlohy~\ref{eq:SDP-D}.
+\end{vt}
+
+Obracená implikace sama o sobe neplatí, což znamená, že obecně dualitní rozdíl u semidefinitního programování není nulový. Musíme přidat podmínku kvalifikace omezení, kterou je například již zmíněná Slaterova podmínka. Ta je pro úlohu~\ref{eq:SDP-P} ve tvaru $X \succ 0$ a pro úlohu~\ref{eq:SDP-D} ve tvaru $C - \sum_i A_i y_i \succ 0$.
+
+\begin{vt}[silná dualita semidefinitního programování]
+    Nechť úloha~\ref{eq:SDP-P} a úloha~\ref{eq:SDP-D} jsou striktně přípustné. Potom dualitní rozdíl jejich optimálních řešení je nulový.
+\end{vt}
 
 
-\section*{WIP}
+\section*{BACKLOG}
 
 Stopa matice $A \in R^{n \times n}$ je $\textbf{Tr}(A) = \sum_{i=1}^n A_{ii}$.
 
@@ -343,6 +369,8 @@ $x^T (S+T) x = x^T S x + x^T T x > 0$
 
 \noindent Jen 3 kužely s vlastnostmi jako PSD cone. Zmrzlina, a ještě jeden.
 \noindent Vnitřek $S_+^n$ je $S_{++}^n$.
+
+\noindent Fejérova věta
 
 
 %spektraedr, formulace, dualita, semidefinitní kužel, duální kužel, ...
