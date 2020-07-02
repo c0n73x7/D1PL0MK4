@@ -8,10 +8,10 @@ Představme si komunikační kanál, kterým posíláme zprávy. Tyto zprávy js
 
 Problém si formalizujeme v řeči teorie grafů. Mějme neorientovaný graf $G = (V, E)$, kde množina vrcholů představuje symboly z konečné abecedy a dva vrcholy $x, y$ jsou spojeny hranou, pokud vrchol $x$ může být vlivem šumu zaměněn za $y$.
 
-Maximální počet nezaměnitelných zpráv délky $1$ je roven $\alpha(G)$, kde $\alpha(G)$ značí velikost největší nezávislé množiny v grafu $G$. Pro popis delších zpráv definujeme \textbf{silný součin} $G \cdot H$ grafů $G$ a $H$ následovně:
-$$
+Maximální počet nezaměnitelných zpráv délky $1$ je roven $\alpha(G)$, kde $\alpha(G)$ značí velikost největší nezávislé množiny v grafu $G$. Pro popis delších zpráv definujeme \textbf{silný součin} $G \cdot H$ grafů $G$ a $H$ následovně
+\begin{equation*}
     V(G \cdot H) = V(G) \times V(H),
-$$
+\end{equation*}
 \begin{equation*}
     \begin{split}
     E(G \cdot H) = &\left\{ (i,u)(j,v) \mid ij \in E(G) \wedge uv \in E(H) \right\} \cup \\
@@ -21,7 +21,7 @@ $$
 \end{equation*}
 
 \begin{pr}
-Pro graf $P_4 = a-b-c-d-e$ je silný součin $P_4 \cdot P_4$ zobrazen na obrázku~\ref{fig:strong_product_P4_P4}. Z obrázku je hezky vidět, že např. zpráva $cd$ (na obrázku červeně) může být zaměněna s $bc$, $bd$, $be$, $cc$, $ce$, $dc$, $dd$ a $de$ (na obrázku oranžově). Podobně pro další zprávy.
+Pro graf $P_4 = a-b-c-d-e$ je silný součin $P_4 \cdot P_4$ zobrazen na obrázku~\ref{fig:strong_product_P4_P4}, ze kterého je hezky vidět, že např. zpráva $cd$ (na obrázku červeně) může být zaměněna s $bc$, $bd$, $be$, $cc$, $ce$, $dc$, $dd$ a $de$ (na obrázku oranžově). Podobně pro další zprávy.
 \end{pr}
 
 \begin{figure}[h!]
@@ -45,7 +45,7 @@ $$
     \mathbf{u} \circ \mathbf{v} = \left( u_1 v_1, \dots, u_1 v_m, u_2 v_1, \dots, u_n v_m \right).
 $$
 
-Užitečné bude následující pozorování, které dává do souvisloti skalární a tenzorový součin.
+Užitečné bude následující pozorování, které dává do souvislosti skalární a tenzorový součin.
 
 \begin{pz}
     Nechť $\mathbf{x}, \mathbf{u}$ jsou vektory délky $n$ a $\mathbf{y}, \mathbf{v}$ jsou vektory délky $m$. Potom platí
@@ -93,22 +93,20 @@ nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že ka�
     \label{fig:orthonormal_repr_GH}
 \end{figure}
 
-\textbf{Hodnotu} ortonormální reprezentace $\left(u_+, \dots, u_n \right)$ definujeme jako:
+\noindent \textbf{Hodnotu} ortonormální reprezentace $\left(u_1, \dots, u_n \right)$ definujeme jako
 $$
     \min_c \max_{i = 1, \dots, n} \frac{1}{\left( c^T u_i \right)^2}.
 $$
 Vektoru $c$, pro který nastává minimum říkáme \textbf{handle} dané ortonormální reprezentace.
 
-Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny ortonormální reprezentace grafu $G$. Ortonormální reprezentaci, pro kterou nastává minumum nazýváme \textbf{optimální}.
-
-Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je právě již zmíněným horním odhadem na $\Theta(G)$. Podívejme se na některé její vlastnosti.
+Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny ortonormální reprezentace grafu $G$. Ortonormální reprezentaci, pro kterou nastává minumum nazýváme \textbf{optimální}. Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je právě již zmíněným horním odhadem na $\Theta(G)$. Podívejme se na některé její vlastnosti.
 
 \begin{lm}
     $\vartheta(G \cdot H) \leq \vartheta(G) \vartheta(H)$
 \end{lm}
 
 \begin{proof}
-    Nechť $\left( u_1, \dots, u_n \right)$ je optimální ortonormální reprezentace grafu $G$ s \uv{rukojetí} $c$ a $\left( v_1, \dots, v_m \right)$ je optimální ortonormální reprezentace grafu $H$ s \uv{rukojetí} $d$. Pak $c \circ d$ je jednotkový vektor a platí:
+    Nechť $\left( u_1, \dots, u_n \right)$ je optimální ortonormální reprezentace grafu $G$ s handle $c$ a $\left( v_1, \dots, v_m \right)$ je optimální ortonormální reprezentace grafu $H$ s handle $d$. Pak $c \circ d$ je jednotkový vektor a platí
     $$
         \vartheta(G \cdot H) \leq \max_{i,j} \frac{1}{\left( \left( c \circ d \right)^T \left( u_i \circ v_j \right) \right)^2} = \max_i \frac{1}{\left( c^T u_i \right)^2} \cdot \max_j \frac{1}{\left( d^T v_j \right)^2} = \vartheta(G)\vartheta(H).
     $$
@@ -119,7 +117,30 @@ Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je práv
 \end{lm}
 
 \begin{proof}
-    TODO
+    Mějme maximální nezávislou množinu $I \subseteq V(G)$ v grafu $G$ a optimální ortonormální reprezentaci $\mathcal{U} = \left(\mathbf{u}_1, \dots, \mathbf{u}_n \right)$ grafu $G$ s handle $\mathbf{c}$. Platí
+    $$
+        \forall i,j \in I:\ i \neq j \implies \mathbf{u}_i \bot \mathbf{u}_j.
+    $$
+    Máme tedy systém ortonormálních vektorů $\left\{ u_i \in \mathcal{U} \mid i \in I \right\}$ v $\mathbb{R}^n$. Ten rozšíříme na ortonormální bázi $\mathcal{B}$. Potom $i$-tá souřadnice vektoru $\mathbf{c}$ v bázi $\mathcal{B}$ je $\mathbf{c}^T \mathbf{u}_i$. Tedy
+    $$
+        1 = \|\mathbf{c}\|^2 = \sum_{i=1}^n \left( \mathbf{c}^T \mathbf{u}_i \right)^2.
+    $$
+    Dále vynecháme přidáné vektory do ortonormální báze $\mathcal{B}$
+    $$
+        \sum_{i=1}^n \left( \mathbf{c}^T \mathbf{u}_i \right)^2 \geq \sum_{i \in I} \left( \mathbf{c}^T \mathbf{u}_i \right)^2.
+    $$
+    Poslední výraz přepíšeme
+    $$
+        \sum_{i \in I} \left( \mathbf{c}^T \mathbf{u}_i \right)^2 \geq |I| \cdot \min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2 = \alpha(G) \cdot \min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2.
+    $$
+    Přechozí výrazy dáme dohromady
+    $$
+        1 \geq \alpha(G) \cdot \min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2,
+    $$
+    a dostáváme
+    $$
+        \alpha(G) \leq \frac{1}{\min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2} = \max_{i \in I} \frac{1}{\left( \mathbf{c}^T \mathbf{u}_i \right)^2} \leq \max_{i \in V(G)} \frac{1}{\left( \mathbf{c}^T \mathbf{u}_i \right)^2} = \vartheta(G).
+    $$
 \end{proof}
 
 \begin{lm}
@@ -127,7 +148,18 @@ Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je práv
 \end{lm}
 
 \begin{proof}
-    TODO
+    Pro každé $k$ platí, že
+    $$
+        \alpha(G^k) \leq \vartheta(G^k) \leq \vartheta(G)^k.
+    $$
+    Odtud
+    $$
+        \sqrt[k]{\alpha(G^k)} \leq \vartheta(G),
+    $$
+    a limitním přechodem dostáváme požadovanou nerovnost
+    $$
+        \Theta(G) = \lim_{k \to \infty} \sqrt[k]{\alpha(G^k)} \leq \vartheta(G).
+    $$
 \end{proof}
 
 \begin{vt}
@@ -135,12 +167,12 @@ Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je práv
 \end{vt}
 
 \begin{proof}
-    TODO (obě nerovnosti, obrázek, spherical cosine theorem)
+    TODO
 \end{proof}
 
 
 \section{Barvení grafů}
-vztah $\vartheta$ k barvení ($\overline{G}$), ...
+vztah $\vartheta$ k barvení $\overline{G}$, ...
 
 
 \section{Semidefinitní programy pro $\vartheta(G)$}
