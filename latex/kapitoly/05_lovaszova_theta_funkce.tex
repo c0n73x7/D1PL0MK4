@@ -80,6 +80,7 @@ nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že ka�
 
 \begin{lm}
     Nechť $\left( \mathbf{u}_1, \dots, \mathbf{u}_n \right)$ je ortonormální reprezentace grafu $G$ a $\left( \mathbf{v}_1, \dots, \mathbf{v}_m \right)$ je ortonormální reprezentace grafu $H$. Potom $\mathbf{u}_i \circ \mathbf{v}_j$ je ortonormální reprezentace grafu $G \cdot H$.
+    \label{lemma:shannon}
 \end{lm}
 
 \begin{proof}
@@ -88,9 +89,8 @@ nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že ka�
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\textwidth]{img/shannon_lemma.png}   
-    \caption{Ortornomální reprezentace $G \cdot H$.}
-    \label{fig:orthonormal_repr_GH}
+    \includegraphics[width=0.5\textwidth]{img/shannon_lemma.png} 
+    \caption{Lemma~\ref{lemma:shannon}}
 \end{figure}
 
 \noindent \textbf{Hodnotu} ortonormální reprezentace $\left(u_1, \dots, u_n \right)$ definujeme jako
@@ -133,7 +133,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
     $$
         \sum_{i \in I} \left( \mathbf{c}^T \mathbf{u}_i \right)^2 \geq |I| \cdot \min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2 = \alpha(G) \cdot \min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2.
     $$
-    Přechozí výrazy dáme dohromady
+    Předchozí výrazy dáme dohromady
     $$
         1 \geq \alpha(G) \cdot \min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2,
     $$
@@ -169,6 +169,18 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
 \begin{proof}
     TODO
 \end{proof}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/umbrella_projection.png} 
+    \caption{TODO}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/umbrella.png} 
+    \caption{TODO}
+\end{figure}
 
 
 \section{Barvení grafů}

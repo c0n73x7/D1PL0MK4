@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70212" creator="Ipe 7.2.13">
-<info created="D:20200319113630" modified="D:20200404144024"/>
+<info created="D:20200319113630" modified="D:20200703084936"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -257,37 +257,28 @@ h
 <layer name="cone_hull"/>
 <layer name="alpha"/>
 <view layers="points alpha" active="alpha"/>
-<path layer="alpha" stroke="lightgreen" fill="lightgreen" opacity="50%" stroke-opacity="opaque">
+<path layer="alpha" stroke="black" opacity="50%" stroke-opacity="opaque">
 80 656 m
 80 640 l
 192 640 l
 192 656 l
 h
 </path>
-<path stroke="lightblue" fill="lightblue" opacity="50%" stroke-opacity="opaque">
+<path stroke="black" opacity="50%" stroke-opacity="opaque">
 80 784 m
 80 672 l
 192 672 l
 192 784 l
 h
 </path>
-<use layer="points" name="mark/disk(sx)" pos="96 768" size="normal" stroke="black"/>
-<use name="mark/disk(sx)" pos="96 736" size="normal" stroke="black"/>
-<use name="mark/disk(sx)" pos="96 688" size="normal" stroke="black"/>
-<use name="mark/disk(sx)" pos="128 768" size="normal" stroke="black"/>
-<use name="mark/disk(sx)" pos="128 736" size="normal" stroke="black"/>
-<use name="mark/disk(sx)" pos="128 688" size="normal" stroke="black"/>
-<text matrix="1 0 0 1 0.00016146 3.57956" transformations="translations" pos="96 704" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="baseline" style="math">\vdots</text>
+<text layer="points" matrix="1 0 0 1 0.00016146 3.57956" transformations="translations" pos="96 704" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="baseline" style="math">\vdots</text>
 <text matrix="1 0 0 1 0.00016146 3.57956" transformations="translations" pos="128 704" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="baseline" style="math">\vdots</text>
 <text matrix="1 0 0 1 2.35399 -0.0101527" transformations="translations" pos="144 768" stroke="black" type="label" width="11.623" height="1.052" depth="0" valign="center" style="math">\dots</text>
 <text matrix="1 0 0 1 2.35399 -0.0101527" transformations="translations" pos="144 736" stroke="black" type="label" width="11.623" height="1.052" depth="0" valign="center" style="math">\dots</text>
 <text matrix="1 0 0 1 2.35399 -0.0101527" transformations="translations" pos="144 688" stroke="black" type="label" width="11.623" height="1.052" depth="0" valign="center" style="math">\dots</text>
-<use name="mark/disk(sx)" pos="176 768" size="normal" stroke="black"/>
-<use name="mark/disk(sx)" pos="176 736" size="normal" stroke="black"/>
-<use name="mark/disk(sx)" pos="176 688" size="normal" stroke="black"/>
 <text matrix="1 0 0 1 0.0185415 -12.2791" transformations="translations" pos="176 720" stroke="black" type="label" width="2.767" height="14.999" depth="0" halign="center" valign="baseline" style="math">\vdots</text>
 <text matrix="1 0 0 1 2.80327 -12.4735" transformations="translations" pos="144 720" stroke="black" type="label" width="11.623" height="14.999" depth="0" valign="baseline" style="math">\ddots</text>
-<path layer="alpha" matrix="1 0 0 1 32 0" stroke="lightgreen" fill="lightgreen" opacity="50%" stroke-opacity="opaque">
+<path layer="alpha" matrix="1 0 0 1 32 0" stroke="black" opacity="50%" stroke-opacity="opaque">
 16 784 m
 16 672 l
 32 672 l
@@ -297,28 +288,22 @@ h
 <text matrix="1 0 0 1 39.7703 -12.0794" transformations="translations" pos="16 800" stroke="black" type="label" width="7.833" height="6.808" depth="0" halign="center" valign="baseline" style="math">G</text>
 <text matrix="1 0 0 1 -10.3207 4.21797" transformations="translations" pos="208 640" stroke="black" type="label" width="9.091" height="6.808" depth="0" valign="baseline" style="math">H</text>
 <text matrix="1 0 0 1 -56.5924 3.8937" transformations="translations" pos="192 784" stroke="black" type="label" width="24.119" height="6.808" depth="0" halign="center" valign="baseline" style="math">G \cdot H</text>
-<use matrix="1 0 0 1 -7.90478 0.00866887" name="mark/disk(sx)" pos="64 768" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -7.90478 0.00866887" name="mark/disk(sx)" pos="64 736" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 -7.90478 0.00866887" name="mark/disk(sx)" pos="64 688" size="normal" stroke="black"/>
 <text matrix="1 0 0 1 30.8499 -6.7812" transformations="translations" pos="23.6254 714.479" stroke="black" type="label" width="2.767" height="14.999" depth="0" valign="baseline" style="math">\vdots</text>
-<use matrix="1 0 0 1 0.0153346 -40.1996" name="mark/disk(sx)" pos="96 688" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 0.0153346 -40.1996" name="mark/disk(sx)" pos="128 688" size="normal" stroke="black"/>
-<use matrix="1 0 0 1 0.0153346 -40.1996" name="mark/disk(sx)" pos="176 688" size="normal" stroke="black"/>
 <text matrix="1 0 0 1 -0.436277 -0.405428" transformations="translations" pos="146.613 647.465" stroke="black" type="label" width="11.623" height="1.052" depth="0" valign="baseline" style="math">\dots</text>
-<text transformations="translations" pos="48 768" stroke="black" type="label" width="10.173" height="4.294" depth="1.49" halign="right" valign="baseline" style="math">u_1</text>
-<text transformations="translations" pos="48 736" stroke="black" type="label" width="10.173" height="4.294" depth="1.49" halign="right" valign="baseline" style="math">u_2</text>
-<text transformations="translations" pos="48 688" stroke="black" type="label" width="11.126" height="4.294" depth="1.49" halign="right" valign="baseline" style="math">u_n</text>
-<text matrix="1 0 0 1 0.00333807 8.88873" transformations="translations" pos="96 624" stroke="black" type="label" width="9.298" height="4.294" depth="1.49" halign="center" valign="baseline" style="math">v_1</text>
-<text matrix="1 0 0 1 0.00333807 8.88873" transformations="translations" pos="128 624" stroke="black" type="label" width="9.298" height="4.294" depth="1.49" halign="center" valign="baseline" style="math">v_2</text>
-<text matrix="1 0 0 1 0.00333807 8.88873" transformations="translations" pos="176 624" stroke="black" type="label" width="12.397" height="4.294" depth="1.49" halign="center" valign="baseline" style="math">v_m</text>
-<text matrix="1 0 0 1 -15.0715 5.15738" transformations="translations" pos="96 768" stroke="black" type="label" width="28.88" height="4.432" depth="1.49" valign="baseline" style="math">u_1 \circ v_1</text>
-<text matrix="1 0 0 1 -15.0715 5.15738" transformations="translations" pos="128 768" stroke="black" type="label" width="28.88" height="4.432" depth="1.49" valign="baseline" style="math">u_1\circ v_2</text>
-<text matrix="1 0 0 1 -15.0715 5.15738" transformations="translations" pos="176 768" stroke="black" type="label" width="31.978" height="4.432" depth="1.49" valign="baseline" style="math">u_1 \circ v_m</text>
-<text matrix="1 0 0 1 -15.0715 5.15738" transformations="translations" pos="96 736" stroke="black" type="label" width="28.88" height="4.432" depth="1.49" valign="baseline" style="math">u_2 \circ v_1</text>
-<text matrix="1 0 0 1 -15.0715 5.15738" transformations="translations" pos="128 736" stroke="black" type="label" width="28.88" height="4.432" depth="1.49" valign="baseline" style="math">u_2 \circ v_2</text>
-<text matrix="1 0 0 1 -15.0715 5.15738" transformations="translations" pos="176 736" stroke="black" type="label" width="31.978" height="4.432" depth="1.49" valign="baseline" style="math">u_2 \circ v_m</text>
-<text matrix="1 0 0 1 -15.0715 5.15738" transformations="translations" pos="96 688" stroke="black" type="label" width="29.834" height="4.432" depth="1.49" valign="baseline" style="math">u_n \circ v_1</text>
-<text matrix="1 0 0 1 -15.0715 5.15738" transformations="translations" pos="128 688" stroke="black" type="label" width="29.834" height="4.432" depth="1.49" valign="baseline" style="math">u_n \circ v_2</text>
-<text matrix="1 0 0 1 -15.0715 5.15738" transformations="translations" pos="176 688" stroke="black" type="label" width="32.932" height="4.432" depth="1.49" valign="baseline" style="math">u_n \circ v_m</text>
+<text matrix="1 0 0 1 7.96843 -0.378826" transformations="translations" pos="48 768" stroke="black" type="label" width="10.173" height="4.294" depth="1.49" halign="center" valign="center" style="math">u_1</text>
+<text matrix="1 0 0 1 7.96843 -0.378826" transformations="translations" pos="48 736" stroke="black" type="label" width="10.173" height="4.294" depth="1.49" halign="center" valign="center" style="math">u_2</text>
+<text matrix="1 0 0 1 7.96843 -0.378826" transformations="translations" pos="48 688" stroke="black" type="label" width="11.126" height="4.294" depth="1.49" halign="center" valign="center" style="math">u_n</text>
+<text matrix="1 0 0 1 0.0533862 23.8254" transformations="translations" pos="96 624" stroke="black" type="label" width="9.298" height="4.294" depth="1.49" halign="center" valign="center" style="math">v_1</text>
+<text matrix="1 0 0 1 0.0533862 23.8254" transformations="translations" pos="128 624" stroke="black" type="label" width="9.298" height="4.294" depth="1.49" halign="center" valign="center" style="math">v_2</text>
+<text matrix="1 0 0 1 0.0533862 23.8254" transformations="translations" pos="176 624" stroke="black" type="label" width="12.397" height="4.294" depth="1.49" halign="center" valign="center" style="math">v_m</text>
+<text matrix="1 0 0 1 -15.07 -2.50614" transformations="translations" pos="96 768" stroke="black" type="label" width="28.88" height="4.432" depth="1.49" valign="baseline" style="math">u_1 \circ v_1</text>
+<text matrix="1 0 0 1 -15.07 -2.50614" transformations="translations" pos="128 768" stroke="black" type="label" width="28.88" height="4.432" depth="1.49" valign="baseline" style="math">u_1\circ v_2</text>
+<text matrix="1 0 0 1 -15.07 -2.50614" transformations="translations" pos="176 768" stroke="black" type="label" width="31.978" height="4.432" depth="1.49" valign="baseline" style="math">u_1 \circ v_m</text>
+<text matrix="1 0 0 1 -14.9737 -2.28978" transformations="translations" pos="96 736" stroke="black" type="label" width="28.88" height="4.432" depth="1.49" valign="baseline" style="math">u_2 \circ v_1</text>
+<text matrix="1 0 0 1 -14.9737 -2.28978" transformations="translations" pos="128 736" stroke="black" type="label" width="28.88" height="4.432" depth="1.49" valign="baseline" style="math">u_2 \circ v_2</text>
+<text matrix="1 0 0 1 -14.9737 -2.28978" transformations="translations" pos="176 736" stroke="black" type="label" width="31.978" height="4.432" depth="1.49" valign="baseline" style="math">u_2 \circ v_m</text>
+<text matrix="1 0 0 1 -15.8653 -2.53309" transformations="translations" pos="96 688" stroke="black" type="label" width="29.834" height="4.432" depth="1.49" valign="baseline" style="math">u_n \circ v_1</text>
+<text matrix="1 0 0 1 -15.8653 -2.53309" transformations="translations" pos="128 688" stroke="black" type="label" width="29.834" height="4.432" depth="1.49" valign="baseline" style="math">u_n \circ v_2</text>
+<text matrix="1 0 0 1 -15.8653 -2.53309" transformations="translations" pos="176 688" stroke="black" type="label" width="32.932" height="4.432" depth="1.49" valign="baseline" style="math">u_n \circ v_m</text>
 </page>
 </ipe>

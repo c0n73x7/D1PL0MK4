@@ -39,20 +39,50 @@
 
 \begin{document}
 
+% ------------------------------ Titulní strana ------------------------------ %
+\thispagestyle{empty}
+\begin{center}
+  {\Huge
+  Západočeská univerzita v~Plzni\\[3pt]
+  Fakulta aplikovaných věd
+  }
+
+	\vspace{10mm}
+
+  {\Large
+  \begin{tabular}{c}
+		Studijní program: N1101 \\[3pt]
+		Studijní obor: 1101T016 \\
+  \end{tabular}
+  }
+
+  \vspace{40mm}
+
+  {\huge \MakeUppercase{Diplomová práce}}\\[3pt]
+  {\Large \textbf{Semidefinitní programování v kombinatorické optimalizaci}\par}
+\end{center}
+
+\vfill
+
+{\large
+  \begin{tabular}{ll}
+    Autor: & Ondřej Špaček\\
+    Vedoucí práce: & Doc. Ing. Roman Čada, Ph.D.\\[30pt]
+    Plzeň, 2020 &
+  \end{tabular}
+}
+\clearpage{\pagestyle{empty}}
+
+
 % ---------------------------------- Obsah ----------------------------------- %
 \tableofcontents
-
 \setcounter{page}{1}
-
 \pagebreak
-
 
 % ----------------------------------- Úvod ----------------------------------- %
 {
   \pagestyle{plain}
-  
   \input{kapitoly/uvod}
-  
   \clearpage
 }
 
@@ -61,13 +91,15 @@
 \part{Optimalizace}
 
 \input{kapitoly/01_zakladni_geometricke_pojmy}
+\clearpage
 
 \input{kapitoly/02_konvexni_optimalizace}
+\clearpage
 
 \input{kapitoly/03_linearni_programovani}
+\clearpage
 
 \input{kapitoly/04_semidefinitni_programovani}
-
 \clearpage
 
 
@@ -75,17 +107,16 @@
 \part{Kombinatorické úlohy}
 
 \input{kapitoly/05_lovaszova_theta_funkce}
-
-\input{kapitoly/06_maximalni_rez}
-
-\input{kapitoly/07_dalsi_ulohy}
-
 \clearpage
 
+\input{kapitoly/06_maximalni_rez}
+\clearpage
+
+\input{kapitoly/07_dalsi_ulohy}
+\clearpage
 
 % ---------------------------------- Závěr ----------------------------------- %
 \input{kapitoly/zaver}
-
 \clearpage
 
 
