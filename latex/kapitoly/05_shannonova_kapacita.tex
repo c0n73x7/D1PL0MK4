@@ -1,8 +1,6 @@
-\chapter{Lovászova Theta funkce}
+\chapter{Shannonova kapacita}
 
-\section{Shannonova kapacita}
-
-\subsection*{Definice úlohy}
+\section{Formulace úlohy}
 
 Představme si komunikační kanál, kterým posíláme zprávy. Tyto zprávy jsou složeny ze symbolů nějaké konečné abecedy. Vlivem šumu mohou být některé symboly druhou stranou špatně interpretovány a naším cílem je vybrat co největší množinu slov délky $k$ tak, aby žádná dvě odeslaná slova nebyla vlivem tohoto šumu zaměnitelná.
 
@@ -38,7 +36,7 @@ $$
 
 Neví se, zda pro libovolný graf $G$ existuje vůběc nějaký algoritmus, kterým bychom určili hodnotu $\Theta(G)$. Přesto je alespoň něco známo. Pro perfektní grafy Claude E. Shannon ukázal, že $\Theta(G) = \alpha(G)$. To také znamená, že pro perfektní grafy lze $\Theta(G)$ určit v polynomiálním čase. Dalším kdo se problémem zabýval byl László Lovász, který velmi hezkým způsobem ukázal, že kružnice délky $5$ má kapacitu $\sqrt{5}$. Na Lovászův postup se dále podíváme, protože vede k obecnému hornímu odhadu na $\Theta(G)$.
 
-\subsection*{$\Theta(C_5) = \sqrt{5}$}
+\section{$\Theta(C_5) = \sqrt{5}$}
 
 Nejprve potřebujeme zavést několik pojmů. \textbf{Tenzorový součin} vektorů $\mathbf{u} = \left(u_1, \dots, u_n \right)$ a $\mathbf{v} = \left(v_1, \dots, v_m \right)$ je
 $$
@@ -195,9 +193,9 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
         \frac{1 - \cos\frac{4\pi}{5}}{-\cos\frac{4\pi}{5}} = \frac{1 + \frac{1 + \sqrt{5}}{4}}{\frac{1 + \sqrt{5}}{4}} = \frac{5 + \sqrt{5}}{1 + \sqrt{5}} = \sqrt{5}.
     $$
     Dostáváme
-    \begin{equation}
+    $$
         \vartheta(C_5) \leq \sqrt{5}.
-    \end{equation}
+    $$
     Této ortonormální reprezentaci se říká \textbf{Lovászův deštník}, viz Obrázek~\ref{fig:umbrella}. Druhou nerovnost $\vartheta(C_5) \geq \sqrt{5}$ dostaneme snadno. Sice $\alpha(C_5) = 2$, ale $\alpha(C_5^2) = 5$. Z čehož plyne druhá nerovnost.
 \end{proof}
 
@@ -214,10 +212,6 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
     \caption{Lovászův deštník.}
     \label{fig:umbrella}
 \end{figure}
-
-
-\section{Barvení grafů}
-vztah $\vartheta$ k barvení $\overline{G}$, ...
 
 
 \section{Semidefinitní programy pro $\vartheta(G)$}
