@@ -216,4 +216,36 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
 
 \section{Semidefinitní programy pro $\vartheta(G)$}
 
-formulace / odvození semidefinitních programů pro $\vartheta$ funkci, udělat implementaci
+\subsection*{Program pro $1/\sqrt{\vartheta}$}
+$$
+    \vartheta(\mathcal{U}) = \min_{\|c\| = 1} \max_{i \in V} \frac{1}{\left( \mathbf{c}^T \mathbf{u}_i \right)^2}
+$$
+pokud $\mathbf{c}^T\mathbf{u}_i \leq 0$, potom $\mathbf{u}_i = -\mathbf{u}_i$; můžeme předpokládat, že $\mathbf{c}^T\mathbf{u}_i \geq 0$
+$$
+    \frac{1}{\sqrt{\vartheta(G)}} = \max_\mathcal{U} \frac{1}{\sqrt{\vartheta(G)}} = \max_\mathcal{U} \max_{\|c\| = 1} \min_{i \in V} \mathbf{c}^T\mathbf{u}_i
+$$
+dostáváme následující vektorový program
+\begin{equation*}
+    \begin{split}
+        &\max t \\
+        &\forall ij \in E(\bar{G}):\ \langle \mathbf{u}_i, \mathbf{u}_j \rangle = 0 \\
+        &\forall i \in V(G):\ \langle \mathbf{c}, \mathbf{u}_i \rangle \geq t \\
+        &\forall i \in V(G):\ \| \mathbf{u}_i \| = 1 \\
+        &\| c \| = 1
+    \end{split}
+\end{equation*}
+který je ekvivalentní se semidefinitním programem
+\begin{equation*}
+    \begin{split}
+        &\max t \\
+        &X_{ii} = 1 \\
+        &\forall ij \in E(\bar{G}):\ X_{ij} = 0\\
+        &X_{0i} \geq t, i = 1, \dots, n \\
+        &X \succeq 0
+    \end{split}
+\end{equation*}
+
+
+\subsection*{Program pro $\vartheta$}
+
+%formulace / odvození semidefinitních programů pro $\vartheta$ funkci, udělat implementaci
