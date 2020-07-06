@@ -217,35 +217,79 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
 \section{Semidefinitní programy pro $\vartheta(G)$}
 
 \subsection*{Program pro $1/\sqrt{\vartheta}$}
+
+První formulací je semidefinitní program, jehož řešením je hodnota $\frac{1}{\sqrt{\vartheta}}$. Mějme graf $G = (V,E)$. Hodnota Lovászovy Theta funkce $\vartheta(G)$ je z definice
 $$
-    \vartheta(\mathcal{U}) = \min_{\|c\| = 1} \max_{i \in V} \frac{1}{\left( \mathbf{c}^T \mathbf{u}_i \right)^2}
+    \vartheta(G) = \min_\mathcal{U} \vartheta(\mathcal{U}) = \min_\mathcal{U} \min_{\|c\|=1} \max_{i \in V(G)} \frac{1}{\left( \mathbf{c}^T \mathbf{u}_i \right)^2},
 $$
-pokud $\mathbf{c}^T\mathbf{u}_i \leq 0$, potom $\mathbf{u}_i = -\mathbf{u}_i$; můžeme předpokládat, že $\mathbf{c}^T\mathbf{u}_i \geq 0$
+kde $\mathcal{U}$ probíhá přes všechny ortonormální reprezentace grafu $G$. Pokud se stane, že $\left( \mathbf{c}^T \mathbf{u}_i \right)^2 \leq 0$, potom místo $\mathbf{u}_i$ budeme dále uvažovat vektor $-\mathbf{u}_i$. Můžeme tedy předpokládat, že $\forall i \in V(G):\ \left( \mathbf{c}^T \mathbf{u}_i \right)^2 \geq 0$. Potom hodnotu $1/\sqrt{\vartheta(G)}$ můžeme vyjádřit jako
 $$
-    \frac{1}{\sqrt{\vartheta(G)}} = \max_\mathcal{U} \frac{1}{\sqrt{\vartheta(G)}} = \max_\mathcal{U} \max_{\|c\| = 1} \min_{i \in V} \mathbf{c}^T\mathbf{u}_i
+    \frac{1}{\sqrt{\vartheta(G)}} = \max_\mathcal{U} \frac{1}{\sqrt{\vartheta(\mathcal{U})}} = \max_\mathcal{U} \max_{\|c\|=1} \min_{i \in V(G)} \mathbf{c}^T\mathbf{u}_i.
 $$
-dostáváme následující vektorový program
-\begin{equation*}
+Z čehož dostaneme následující vektorový program
+\begin{equation}\tag{VP1}
     \begin{split}
         &\max t \\
         &\forall ij \in E(\bar{G}):\ \langle \mathbf{u}_i, \mathbf{u}_j \rangle = 0 \\
         &\forall i \in V(G):\ \langle \mathbf{c}, \mathbf{u}_i \rangle \geq t \\
         &\forall i \in V(G):\ \| \mathbf{u}_i \| = 1 \\
-        &\| c \| = 1
+        &\| c \| = 1.
     \end{split}
-\end{equation*}
-který je ekvivalentní se semidefinitním programem
-\begin{equation*}
+    \label{eq:VP1}
+\end{equation}
+
+Z vektorového programu~\ref{eq:VP1} dále odvodíme semidefinitní program. Budeme uvažovat matici
+$$
+    X =
+    \begin{bmatrix}
+        \horzbar & \mathbf{c}^T   & \horzbar \\
+        \horzbar & \mathbf{u}_1^T & \horzbar \\
+                 & \vdots         & \\
+        \horzbar & \mathbf{u}_n^T & \horzbar
+    \end{bmatrix}
+    \begin{bmatrix}
+        \vertbar   & \vertbar     &       & \vertbar \\
+        \mathbf{c} & \mathbf{u}_1 & \dots & \mathbf{u}_n \\
+        \vertbar   & \vertbar     &       & \vertbar \\
+    \end{bmatrix},
+$$
+která je samozřejme pozitivně semidefinitní.
+Podmínkám $\forall i \in V(G):\ \| \mathbf{u}_i \| = 1$ a $\|c\|=1$ odpovídá podmínka $x_{ii} = 1$ pro $i = 0, 1, \dots, n$ (pro teď budeme indexovat matici $X$ od $0$). Podmínku $\forall ij \in E(\bar{G}):\ \langle \mathbf{u}_i, \mathbf{u}_j \rangle = 0$ přepíšeme na
+$$
+    \forall ij \in E(\bar{G}):\ x_{ij} = 0.
+$$
+A konečně poslední podmínku $\forall i \in V(G):\ \langle \mathbf{c}, \mathbf{u}_i \rangle \geq t$ přepíšeme takto
+$$
+    \forall i \in V(G):\ x_{0i} \geq t.
+$$
+Dostáváme tedy semidefinitní program
+\begin{equation}\tag{SDP1}
     \begin{split}
         &\max t \\
-        &X_{ii} = 1 \\
-        &\forall ij \in E(\bar{G}):\ X_{ij} = 0\\
-        &X_{0i} \geq t, i = 1, \dots, n \\
-        &X \succeq 0
+        &x_{ii} = 1, i = 0, 1, \dots, n \\
+        &\forall ij \in E(\bar{G}):\ x_{ij} = 0 \\
+        &\forall i \in V(G):\ x_{0i}  \geq t \\
+        &X \succeq 0.
     \end{split}
-\end{equation*}
+    \label{eq:SDP1}
+\end{equation}
 
 
 \subsection*{Program pro $\vartheta$}
 
-%formulace / odvození semidefinitních programů pro $\vartheta$ funkci, udělat implementaci
+V původním článku od L.~Lovásze \textbf{[CITACE]} je další semidefinitní program, jehož řešením je přímo hodnota $\vartheta(G)$.
+
+\begin{equation}\tag{SDP2}
+    \begin{split}
+        &\max \textbf{Tr}\ XJ \\
+        &\forall ij \in E(G):\ x_{ij} = 0 \\
+        &\textbf{Tr}\ X = 1 \\
+        &X \succeq 0,
+    \end{split}
+    \label{eq:SDP2}
+\end{equation}
+kde $J$ je matice samých jedniček.
+
+\section{Určení hodnoty $\vartheta$ pro konkrétní grafy}
+
+\textbf{TODO:} imlementace přechozích dvou formulací.
