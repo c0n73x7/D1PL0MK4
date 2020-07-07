@@ -1,5 +1,4 @@
 import json
-import mosek
 import numpy as np
 from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
 
