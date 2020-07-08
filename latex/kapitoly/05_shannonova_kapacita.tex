@@ -292,4 +292,72 @@ kde $J$ je matice samých jedniček.
 
 \section{Určení hodnoty $\vartheta$ pro konkrétní grafy}
 
-\textbf{TODO:} imlementace přechozích dvou formulací.
+Pomocí formulace \ref{eq:SDP2} určíme hodnotu $\vartheta$ pro $C_5$, $C_7$, Petersenův graf, $K_5$ a $S_5$. Nejdříve však uvedeme tzv. Sendvičovou větu.
+
+\begin{vt}
+    Mějme graf $G$ a jeho doplněk $\bar{G}$. Potom
+    $$
+        \alpha(G) \leq \vartheta(G) \leq \chi(\bar{G}).
+    $$
+\end{vt}
+
+\subsection*{$\alpha(G)$ pro vybrané grafy}
+Je zřejmé, že pro $\alpha(C_5) = 2$, $\alpha(C_7) = 3$, $\alpha(K_5) = 1$ a $\alpha(S_5) = 5$. Na obrázku~\ref{fig:alpha_petersen} je, pro Petersenův graf, nezávislá množina velikosti $4$. Probírkou všech možností zjistíme, že větší nezávislou množinu se nám najít nepodaří.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/alpha_petersen.jpeg}   
+    \caption{Největší nezávislá množina v $GP_{5,2}$.}
+    \label{fig:alpha_petersen}
+\end{figure}
+
+\subsection*{$\chi(\bar{G})$ pro vybrané grafy}
+
+Doplněk $C_5$ je opět $C_5$ a lichá kružnice má chromatické číslo $3$. $K_5$ má jako svůj doplněk diskrétní graf, který má chromatické číslo $1$. U hvězdy $S_5$ dostaneme jako doplněk graf s šesti vrcholy, kde pět z nich tvoří úplný graf a jeden vrchol nemá žádného souseda. Takový graf má chromatické číslo $5$. Pro Petersenův graf je jeho doplněk $T_5$, který má $\chi(T_5) = 5$ ($T_5$ viz Obrázek~\ref{fig:complement_petersen}). Nakonec doplněk k $C_7$ je na obrázku~\ref{fig:complement_c7} a opět probírkou všech možností zjistíme, že chromatické číslo je $4$.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/complement_petersen.jpeg}   
+    \caption{Triangular graf $T_5$.}
+    \label{fig:complement_petersen}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/complement_c7.jpeg}   
+    \caption{Obarvení $\bar{C_7}$.}
+    \label{fig:complement_c7}
+\end{figure}
+
+\subsection*{$\vartheta(G)$ pro vybrané grafy}
+
+Dříve jsme ukázali, že $\vartheta(C_5) = \sqrt{5} \approx 2.2361$. Navíc pro liché $n$ platí, že
+$$
+    \vartheta(C_n) = \frac{n \cdot \cos(\frac{\pi}{n})}{1 + \cos(\frac{\pi}{n})}.
+$$
+Dostáváme tedy, že $\vartheta({C_7}) \approx 3.3177$. Hodnoty $\vartheta$ pro zbylé grafy byly spočítány na počítači v softwaru Mosek v programovacím jazyku Python (viz \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/theta.py}). Byla využita formulace \ref{eq:SDP2}. V tabulce~\ref{tab:sandwitch} jsou shrnuty všechny zmíněné hodnoty.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ c | c c c }
+        $G$        & $\alpha(G)$ & $\vartheta(G)$ & $\chi(\bar{G})$ \\
+        \hline
+        $C_5$      & $2$         & $2.2361$       & $3$ \\  
+        $C_7$      & $3$         & $3.3177$       & $4$ \\
+        $GP_{5,2}$ & $4$         & $4$            & $5$ \\
+        $K_5$      & $1$         & $1$            & $1$ \\
+        $S_5$      & $5$         & $5$            & $5$
+    \end{tabular}
+    \caption{$\alpha(G)$, $\vartheta(G)$, $\chi(\bar{G})$ pro vybrané grafy.}
+    \label{tab:sandwitch}
+\end{table}
+
+\subsection*{Co víme o $\Theta(G)$}
+
+Shannonova kapacita je známá jen pro několik málo grafů. V \textbf{[REF]} Shannon dal dolní odhad na $\Theta(C_5)$ a až za 23 let Lovász ukázal pomocí konstrukce, kterou jsme si ukázali výše, že $\Theta(C_5) = \sqrt{5}$. Ve stejném článku \textbf{[REF]} je důkaz, že kapacita Petersenova grafu je $\Theta(GP_{5,2}) = 4$. Triviální případy $S_5$ a $K_5$ dostaneme ze sendvičové věty, tj. $\Theta(S_5) = 5$ a $\Theta(K_5) = 1$. Naopak pro $C_7$ hodnotu $\Theta$ neznáme. Máme dolní odhad $\alpha(C_7) = 3$ a horní odhad $\vartheta(C_7) \approx 3.3177$. Lepší dolní odhad, než dává $\alpha(C_7)$, ukázali Polak a Schriever \textbf{[REF]} tak, že pomocí počítače našli nezávislou množinu v grafu $C_7^5$ velikosti $367$. Z čehož dostaneme dolní odhad $\sqrt[5]{367} \approx 3.2579$. Hodnota $\Theta(C_7)$ je tedy někde mezi
+$$
+    3.2578 < \Theta(C_7^5) \leq 3.3177.
+$$
+
+\section*{TODO}
+podívat se na program na katedralni serveru, k jaké hodnotě jsme se dopracovali, o kolik je horší než Polakuv a Schrieverův odhad???
