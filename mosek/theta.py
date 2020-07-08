@@ -11,9 +11,8 @@ def load_graph(p):
     with open(p, 'r') as f:
         graph = json.load(f)
     n = graph.get('n')
-    edges = graph.get('edges')
     A = np.zeros((n, n))
-    for e in edges:
+    for e in graph.get('edges'):
         s, e = e[0], e[1]
         A[s,e] = A[e,s] = 1
     return A
