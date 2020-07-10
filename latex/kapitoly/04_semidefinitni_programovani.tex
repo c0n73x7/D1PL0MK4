@@ -351,26 +351,41 @@ Obracená implikace sama o sobe neplatí, což znamená, že obecně dualitní r
 \end{vt}
 
 
-\section*{BACKLOG}
+\section{Vektorové programování}
 
-Stopa matice $A \in R^{n \times n}$ je $\textbf{Tr}(A) = \sum_{i=1}^n A_{ii}$.
+Mějme $n$ vektorových proměnných $\mathbf{v}_1, \dots, \mathbf{v}_n$ v $\mathbb{R}^n$. \textbf{Vektorový program} je problém optimalizace lineární funkce skalárních součinů $\langle \mathbf{v}_i, \mathbf{v}_j \rangle$, vzhledem k lineárním omezením na tyto skalární součiny.
+
+Nyní ukážeme, že vektorové programy jsou ekvivalentní semidefinitním programům. Nechť tedy $\mathcal{V}$ je vektorový program s vektorovými proměnnými $\mathbf{v}_1, \dots, \mathbf{v}_n$ v $\mathbb{R}^n$ a $\mathcal{S}$ je příslušný semidefinitní program s $n^2$ proměnnými $y_{ij}$, kde hodnota $y_{ij}$ odpovídá skalárnímu součinu $\langle \mathbf{v}_i, \mathbf{v}_j \rangle$. Matice $\mathbf{Y}$ je navíc pozitivně semidefinitní. Potom platí následující věta.
 
 \begin{vt}
-$S, T$ jsou pozitivně definitní $\implies$ $S + T$ je pozitivně definitní
+    Vektorový program $\mathcal{V}$ je ekvivalentní semidefinitnímu programu $\mathcal{S}$.
 \end{vt}
 
 \begin{proof}
-$x^T (S+T) x = x^T S x + x^T T x > 0$
+    TODO
 \end{proof}
 
 
-\noindent Úlohy s racionálními daty nemusí mít racionální optimální řešení.
-\noindent příklad
-
-\noindent Jen 3 kužely s vlastnostmi jako PSD cone. Zmrzlina, a ještě jeden.
-\noindent Vnitřek $S_+^n$ je $S_{++}^n$.
-
-\noindent Fejérova věta
+% \section*{BACKLOG}
+% 
+% Stopa matice $A \in R^{n \times n}$ je $\textbf{Tr}(A) = \sum_{i=1}^n A_{ii}$.
+% 
+% \begin{vt}
+% $S, T$ jsou pozitivně definitní $\implies$ $S + T$ je pozitivně definitní
+% \end{vt}
+% 
+% \begin{proof}
+% $x^T (S+T) x = x^T S x + x^T T x > 0$
+% \end{proof}
+% 
+% 
+% \noindent Úlohy s racionálními daty nemusí mít racionální optimální řešení.
+% \noindent příklad
+% 
+% \noindent Jen 3 kužely s vlastnostmi jako PSD cone. Zmrzlina, a ještě jeden.
+% \noindent Vnitřek $S_+^n$ je $S_{++}^n$.
+% 
+% \noindent Fejérova věta
 
 
 %spektraedr, formulace, dualita, semidefinitní kužel, duální kužel, ...

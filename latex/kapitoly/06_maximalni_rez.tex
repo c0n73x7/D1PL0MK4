@@ -1,14 +1,65 @@
 \chapter{Problém maximálníhu řezu}
 
-\section{Kvadratické programování}
+\section{Formulace úlohy}
 
-kvadratický program, striktní kvadratický program
+Mějme neorientovaný graf $G = (V, E)$ s nezáporným ohodnocením hran. Cílem je rozložit množinu vrcholů $V$ na nejvýše $k \in \mathbf{N} \setminus \left\{ 1 \right\}$ disjunktních množin tak, aby součet hran spojující různé množiny byl maximální. Pokud $k = 2$ hovoříme o úloze \textbf{MAX CUT} a pro $k \geq 3$ o úloze \textbf{MAX $k$-CUT}.
 
-\section{Relaxace a vektorové programování}
+\section{Úloha MAX CUT}
 
-ekvivalence se semidefinitním programováním
+Nejprve se podíváme na aproximační algoritmus z článku \textbf{[REF]} pro úlohu MAX CUT.
 
-\section*{TODO}
+\subsection*{Striktní kvadratický program pro MAX CUT}
 
-formulace úlohy, approximační algoritmy, porovnání semidefinitních programů, ...
-komplexní semidefinitní programování, ...
+\textbf{Kvadratický program} je problém maximalizace / minimalizace kvadratické funkce celočíselných proměnných, vzhledem ke kvadratickým omezením těchto proměnných. Je-li navíc každý monom (jednočlen) cenové funkce i daných omezení stupně $0$ nebo $2$, potom mluvíme o \textbf{striktním kvadratickém programu}.
+
+Dále odvodíme striktní kvadratický program pro úlohu MAX CUT. Nechť $y_i \in \left\{ 1, -1 \right\}$ je indikátor vrcholu $i$. Množiny $S$ a $\bar{S}$ definujeme následovně
+$$
+    S = \left\{ i \in V \mid y_i = 1 \right\}, \bar{S} = \left\{ i \in V \mid y_i = -1 \right\}.
+$$
+Pokud $i \in S$ a $j \in \bar{S}$, potom je součin $y_i y_j = -1$ a chceme, aby tato hrana přispívala hodnotou $w_{ij}$ k cenové funkci. Ve zbylých dvou možnostech je $y_i y_j = 1$ a chceme, aby se hodnota cenové funce nezměnila. Použitím těchto podmínek definujeme striktní kvadratický program.
+
+\begin{equation}\tag{SQ-MAX-CUT}
+    \begin{split}
+        &\max \frac{1}{2} \sum_{1 \leq i < j \leq n} w_{ij} (1 - y_i y_j) \\
+        &\forall i \in V:\ y_i^2 = 1, \\
+        &\forall i \in V:\ y_i \in \mathbf{Z}.
+    \end{split}
+    \label{eq:SQ-MAX-CUT}
+\end{equation}
+
+
+\subsection*{Vektorový program pro MAX CUT}
+
+Poznamenejme jen, že úloha celočíselného programování je NP-těžká. Proto se dále budeme zabývat relaxací úlohy~\ref{eq:SQ-MAX-CUT}, což znamená, že upustíme od podmínek celočíselnosti. Modifikujeme tedy program~\ref{eq:SQ-MAX-CUT} tak, že každý součin $y_i y_j$ nahradíme skalárním součinem vektorů $\langle \mathbf{v}_i, \mathbf{v}_j \rangle$ v $\mathbf{R}^n$. Dostáváme následující vektorový program.
+
+\begin{equation}\tag{V-MAX-CUT}
+    \begin{split}
+        &\max \frac{1}{2} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle \mathbf{v}_i, \mathbf{v}_j \rangle) \\
+        &\forall i \in V:\ \langle \mathbf{v}_i, \mathbf{v}_i \rangle = 1 \\
+        &\forall i \in V:\ \mathbf{v}_i \in \mathbf{R}^n
+    \end{split}
+    \label{eq:V-MAX-CUT}
+\end{equation}
+
+
+\subsection*{Semidefinitní program pro MAX CUT}
+
+Uvedeme si ještě semidefinitní formulaci předchozí vektorové relaxace. Nechť $W$ je matice vah jednotlivých hran taková, že nenulové prvky má pouze nad diagonálou a $J$ je matice samých jedniček.
+
+\begin{equation}\tag{SDP-MAX-CUT}
+    \begin{split}
+        &\max \frac{1}{2} W \bullet (J - Y) \\
+        &\forall i \in V:\ y_{ii} = 1 \\
+        &Y \succeq 0
+    \end{split}
+    \label{eq:SDP-MAX-CUT}
+\end{equation}
+
+\subsection*{Randomizovaný zaokrouhlovací algoritmus}
+
+
+\section{Úloha MAX $k$-CUT}
+
+\noindent Frieze-Jerrum -- Improved approximation algorithms for max-k-cut and max bisection
+
+\noindent Alantha Newman -- Complex Semidefinite Programming and Max-$k$-Cut
