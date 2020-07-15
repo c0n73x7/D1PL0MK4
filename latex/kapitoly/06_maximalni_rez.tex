@@ -161,9 +161,11 @@ a kroky \textbf{2}, \textbf{3} opakujeme $\lceil \frac{1}{c} \rceil$-krát.
 
 \section{Úloha MAX $k$-CUT}
 
-V následující části si uvedeme jen formulace několika programů pro úlohu MAX-$k$-CUT.
+V následující části si uvedeme jen formulace s aproximačními schématy z několika článků pro úlohu MAX-$k$-CUT a provedeme experiment, ve kterém je porovnáme na náhodných grafech.
 
-\subsection*{Frieze-Jerrum a MAX-$k$-CUT}
+\subsection{Frieze-Jerrum a MAX-$k$-CUT}
+
+\subsubsection*{Formulace}
 
 \begin{equation}\tag{FJ-MAX-$k$-CUT}
     \begin{split}
@@ -175,9 +177,47 @@ V následující části si uvedeme jen formulace několika programů pro úlohu
     \label{eq:FJ-MAX-k-CUT}
 \end{equation}
 
+\subsubsection*{Aproximační schéma}
 
-\subsection*{Goemans-Williamson a MAX-$3$-CUT}
 
-\subsection*{de Klerk-Pasechnik-Warners a MAX-$k$-CUT}
+\subsection{Goemans-Williamson a MAX-$3$-CUT}
 
-\subsection*{Newman a MAX-$k$-CUT}
+\subsubsection*{Formulace}
+
+\begin{equation}\tag{GW-MAX-$3$-CUT}
+    \begin{split}
+        &\max \frac{2}{3} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle \mathbf{v}_i^1, \mathbf{v}_j^1 \rangle) \\
+        &\forall i \in V\ \forall a,b \in \left\{ 1,2,3 \right\}:\ a \neq b \implies \langle v_i^a, v_i^b \rangle = -\frac{1}{2} \\
+        &\forall i,j \in V\ \forall a,b,c \in \left\{ 1,2,3 \right\}:\ \langle v_i^a, v_i^b \rangle = \langle v_i^{a+c}, v_i^{b+c} \rangle \\
+        &\forall i,j \in V\ \forall a,b \in \left\{ 1,2,3 \right\}:\ \langle v_i^a, v_j^b \rangle \geq -\frac{1}{2} \\
+        &\forall i \in V\ \forall a \in \left\{ 1,2,3 \right\}:\ \langle v_i^a, v_i^a \rangle = 1 \\
+        &\forall i \in V\ \forall a \in \left\{ 1,2,3 \right\}:\ v_i^a \in \mathbf{R}^{3n}
+    \end{split}
+    \label{eq:GW-MAX-3-CUT}
+\end{equation}
+
+\subsubsection*{Aproximační schéma}
+
+\subsection{de Klerk-Pasechnik-Warners a MAX-$k$-CUT}
+
+\subsubsection*{Formulace}
+
+\subsubsection*{Aproximační schéma}
+
+\subsection{Newman a MAX-$k$-CUT}
+
+\subsubsection*{Formulace}
+
+Používá formulaci \ref{eq:FJ-MAX-k-CUT}.
+
+\subsubsection*{Aproximační schéma}
+
+
+\subsection{Porovnání algoritmů}
+
+\begin{itemize}
+    \item tabulka s aproximačními poměry (vyznačit nejlepší)
+    \item tabulky s jednotlivými výsledky běhů programů
+\end{itemize}
+
+
