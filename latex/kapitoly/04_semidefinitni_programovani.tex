@@ -1,6 +1,6 @@
 \chapter{Semidefinitní programování}
 
-Na semidefinitní programování se můžeme koukat jako na zobecnění lineárního programování, kde proměnné jsou symetrické matice. Jedná se tedy o optimalizaci lineární funkce vzhledem k tzv. lineárním maticovým nerovnostem.
+Na semidefinitní programování se můžeme dívat jako na zobecnění lineárního programování, kde proměnné jsou symetrické matice. Jedná se tedy o optimalizaci lineární funkce vzhledem k tzv. lineárním maticovým nerovnostem.
 
 \section{Vsuvka z lineární algebry}
 
@@ -24,11 +24,10 @@ $$
     \end{bmatrix} =
     2 x_1^2 + 8 x_1 x_2 + 9 x_2^2
 $$
-Je pro všechny $x$ nenulové $x^TSx > 0$? Ano, protože můžeme výraz přepsat na součet čtverců:
+Je pro všechny $x$ nenulové $x^TSx > 0$? Ano, protože můžeme výraz přepsat na součet čtverců
 $$
     x^TSx = 2 x_1^2 + 8 x_1 x_2 + 9 x_2^2 = 2 (x_1 + 2 x_2)^2 + x_2^2.
 $$
-TODO: obrázek kyblíčku
 \end{pr}
 
 Ukážeme si několik kritérií, jak otestovat pozitivní definitnost dané matice.
@@ -41,7 +40,7 @@ Ukážeme si několik kritérií, jak otestovat pozitivní definitnost dané mat
     \label{eq:tmp}
         x^TSx = x^TA^TAx = (Ax)^T(Ax) = \lVert Ax \rVert^2 \geq 0
     \end{equation}
-    $\lVert Ax \rVert^2 > 0$, jestliže sloupečky matice $A$ jsou lineárně nezávislé
+    $\lVert Ax \rVert^2 > 0$, jestliže sloupečky matice $A$ jsou lineárně nezávislé.
 \end{proof}
 
 \begin{pr}
@@ -63,7 +62,7 @@ Ukážeme si několik kritérií, jak otestovat pozitivní definitnost dané mat
         \end{bmatrix} =
         AA^T
     $$
-    $A$ má lineárně závislé sloupečky, tj. $S$ není pozitivně definitní
+    $A$ má lineárně závislé sloupečky, tj. $S$ není pozitivně definitní.
 \end{pr}
 
 Dalším testem je tzv. Sylvesterovo kritérium.
@@ -84,7 +83,7 @@ Dalším testem je tzv. Sylvesterovo kritérium.
     hlavní minory $D_1, D_2 > 0$; matice $S$ je pozitivně definitní 
 \end{pr}
 
-A poslední, které si uvedeme souvisí s Gaussovou eliminací.
+A poslední, které si uvedeme, souvisí s Gaussovou eliminací.
 
 \begin{vt}
     $S = S^T$ je pozitivně definitní, jestliže jsou všechny pivoty při Gaussově eliminaci kladné.
@@ -108,7 +107,7 @@ A poslední, které si uvedeme souvisí s Gaussovou eliminací.
 
 \subsection*{Pozitivně semidefinitní matice}
 
-Pro pozitivní semidefinitnost modifikujeme předcházejí definice a tvrzení pro pozitivně definitní matice následovně:
+Pro pozitivní semidefinitnost modifikujeme předcházejí definice a tvrzení pro pozitivně definitní matice následovně.
 \begin{enumerate}
     \item $S = S^T$ je pozitivně semidefinitní, jestliže všechna její čísla jsou nezáporná.
     \item $S = S^T$ je pozitivně semidefinitní, jestliže $x^TSx \geq 0$ pro všechny nenulové vektory $x$.
@@ -119,19 +118,19 @@ Pro pozitivní semidefinitnost modifikujeme předcházejí definice a tvrzení p
 
 \subsection*{Pozitivně semidefinitní kužel}
 
-Množinu všech symetrických matic značíme $S^n$, množinu všech pozitivně semidefinitních matic značíme $S_+^n$ a množinu všech pozitivně definitních matic značíme $S_{++}^n$.
+Množinu všech symetrických matic řádu $n$ značíme $S^n$, množinu všech pozitivně semidefinitních matic řádu $n$ značíme $S_+^n$ a množinu všech pozitivně definitních matic řádu $n$ značíme $S_{++}^n$.
 
-\begin{lm}
+\begin{lm2}
     Množina $S_n^+$ je uzavřená
-\end{lm}
+\end{lm2}
 
 \begin{proof}
     TODO
 \end{proof}
 
-\begin{lm}
+\begin{lm2}
     Množina $S_+^n$ tvoří konvexní kužel.
-\end{lm}
+\end{lm2}
 
 \begin{proof}
     $\Theta_1, \Theta_2 \geq 0$, $A, B \in S_+^n$
@@ -140,17 +139,17 @@ Množinu všech symetrických matic značíme $S^n$, množinu všech pozitivně 
     $$
 \end{proof}
 
-\begin{lm}
-    Kužel $S_+^n$ je pointed.
-\end{lm}
+\begin{lm2}
+    Kužel $S_+^n$ je bodový.
+\end{lm2}
 
 \begin{proof}
     TODO
 \end{proof}
 
-\begin{lm}
+\begin{lm2}
     Kužel $S_+^n$ je samoduální.
-\end{lm}
+\end{lm2}
 
 \begin{proof}
     TODO
@@ -158,15 +157,15 @@ Množinu všech symetrických matic značíme $S^n$, množinu všech pozitivně 
 
 \noindent Shrneme předchozí lemmata do následující věty.
 
-\begin{vt}
+\begin{vt2}
     Množina $S_+^n$ tvoří konvexní, pointed a uzavřený kužel, který je samoduální.
-\end{vt}
+\end{vt2}
 
 Říkáme, že $S_+^n$ je \textbf{pozitivně semidefinitní kužel}.
 
 \subsection*{Spektraedry}
 
-Definujeme tzv. \textbf{L\"{o}wnerovo částečné uspořádání}:
+Definujeme tzv. \textbf{L\"{o}wnerovo částečné uspořádání}
 $$
     A \succeq B \iff A - B \in S_+^n,
 $$
@@ -176,7 +175,7 @@ $$
 $$
 kde $A_i \in S^n$.
 
-Množina $S \subset \mathbb{R}^n$, která je definována pomocí konečně mnoha LMI, se nazývá \textbf{spektraedr}. Tedy:
+Množina $S \subset \mathbb{R}^n$, která je definována pomocí konečně mnoha LMI, se nazývá \textbf{spektraedr}. Tedy
 $$
     S = \left\{ (x_1, \dots, x_m) \in \mathbb{R}^m \mid A_0 + \sum_{i=1}^m A_i x_i \succeq 0 \right\}
 $$
@@ -204,7 +203,7 @@ Vždy můžeme několik LMI \uv{scucnout} do jedné. Stačí zvolit matice $A_i$
 
 \section{Primární úloha}
 
-Semidefinitní program je lineární optimalizační problém přes spektraedr. Primární úlohu ve standardním tvaru můžeme napsat jako:
+Semidefinitní program je lineární optimalizační problém přes spektraedr. Primární úlohu ve standardním tvaru můžeme napsat jako
 \begin{equation}\tag{SDP-P}
     \inf \left\{ \langle C, X \rangle \mid \langle A_i, X \rangle = b_i, i=1, \dots, m; X \succeq 0 \right\},
     \label{eq:SDP-P}
@@ -241,7 +240,7 @@ kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{
         \right\}
         \label{eq:P3}
     \end{equation}
-    Po úpravě:
+    Po úpravě
     $$
         \inf \left\{
             2 x_{11} + 2 x_{12} \middle| x_{11} + x_{22} = 1, 
@@ -257,15 +256,15 @@ kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{
     $$
     Z LMI vyjádříme $x_{22}$, tj.
     $$
-        x_{22} = 1 - x_{11}
+        x_{22} = 1 - x_{11}.
     $$
     Dosadíme do přechozího a dostaneme
     $$
-        x_{11} \geq 0, x_{11} \left(1 - x_{11}\right) - x_{12}^2 \geq 0
+        x_{11} \geq 0, x_{11} \left(1 - x_{11}\right) - x_{12}^2 \geq 0.
     $$
     Po úpravě
     $$
-        x_{11} \geq 0, \left(x_{11} - \frac{1}{2}\right)^2 + x_{12}^2 \leq \frac{1}{4}
+        x_{11} \geq 0, \left(x_{11} - \frac{1}{2}\right)^2 + x_{12}^2 \leq \frac{1}{4}.
     $$
     Vidíme tedy, že přípustná množina (zobrazena na obrázku~\ref{fig:ex3}) je kruh s poloměrem $\frac{1}{2}$ a se středem v bodě $(x_{11}, x_{12}) = (\frac{1}{2}, 0)$. Řešením úlohy je matice
     $$
@@ -289,12 +288,12 @@ kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{
 
 \subsubsection*{Duální úloha}
 
-Podobně jako u lineárního programování použijeme Lagrangeovu dualitu k odvození duální úlohy k úloze~\ref{eq:SDP-P}. Lagrangeova funkce je ve tvaru:
+Podobně jako u lineárního programování použijeme Lagrangeovu dualitu k odvození duální úlohy k \ref{eq:SDP-P}. Lagrangeova funkce je ve tvaru
 $$
     L(X, \lambda, Z) = \langle C, X \rangle - \sum_{i=1}^m \lambda_i \left( \langle A_i, X \rangle - b_i \right) - \langle Z, X \rangle.
 $$
 
-\noindent K ní duální funkce:
+\noindent K ní duální funkce
 $$
     d(\lambda, Z) = \inf_{X \in S^n} L(X, \lambda, Z) = 
     \begin{cases}
@@ -303,7 +302,7 @@ $$
     \end{cases}
 $$
 
-\noindent Duální funkci použijeme v duální úloze:
+\noindent Duální funkci použijeme v duální úloze
 \begin{equation}\tag{SDP-D}
     \sup\left\{ \lambda^Tb \mid C - \sum_{i=1}^m \lambda_i A_i \succeq 0 \right\},
     \label{eq:SDP-D}
@@ -321,11 +320,10 @@ Vztah mezi primární a duální úlohou je stejně jako u lineárního programo
     \left\langle C - \sum_{i=1}^m A_i y_i, X \right\rangle \geq 0.
     \label{eq:weak_duality_SDP}
 \end{equation}
-Za pozornost stojí poslední nerovnost, která plyne z toho, že skalární součin dvou pozitivně semidefinitních matic je nezáporný. Odvození je následující: mějme dvě matice $S, T \succeq 0$. Matici $S$ můžeme napsat jako součet \uv{rank one} matic. Označme $r_S = rank(S)$, tj.
+Za pozornost stojí poslední nerovnost, která plyne z toho, že skalární součin dvou pozitivně semidefinitních matic je nezáporný. Odvození je následující. Mějme dvě matice $S, T \succeq 0$. Matici $S$ můžeme napsat jako součet \uv{rank one} matic. Označme $r_S = \textbf{rank}\ S$, tj.
 $$
-    S = \sum_{i=1}^{r_S} \lambda_i s_i s_i^T,
+    S = \sum_{i=1}^{r_S} S_i = \sum_{i=1}^{r_S} \lambda_i s_i s_i^T.
 $$
-kde $s_i$ je i-tý sloupeček matice $S$.
 Dále se podíváme na součin $T \cdot S_i$. Tedy pro $i = 1, \dots, r_S$ platí
 $$
     T \cdot S_i = \lambda_i s_i^T T s_i \geq 0,
@@ -336,30 +334,30 @@ O nerovnosti~\ref{eq:weak_duality_SDP} se mluví jako o slabé dualitě semidefi
 
 \subsubsection*{Silná dualita semidefinitního programování}
 
-\begin{vt}[podmínka optimality]
+\begin{vt2}[podmínka optimality]
     Nechť $X$ je přípustné řešení úlohy~\ref{eq:SDP-P} a $y$ je přípustné řešení úlohy~\ref{eq:SDP-D} taková, že splňují podmínku (komplementární skluzovosti)
     $$
         \left( C - \sum_{i=1}^m A_i y_i \right) X = 0.
     $$
     Potom $X$ je optimální řešení úlohy~\ref{eq:SDP-P} a $y$ je optimální řešení úlohy~\ref{eq:SDP-D}.
-\end{vt}
+\end{vt2}
 
-Obracená implikace sama o sobe neplatí, což znamená, že obecně dualitní rozdíl u semidefinitního programování není nulový. Musíme přidat podmínku kvalifikace omezení, kterou je například již zmíněná Slaterova podmínka. Ta je pro úlohu~\ref{eq:SDP-P} ve tvaru $X \succ 0$ a pro úlohu~\ref{eq:SDP-D} ve tvaru $C - \sum_i A_i y_i \succ 0$.
+Obracená implikace sama o sobě neplatí, což znamená, že obecně dualitní rozdíl u semidefinitního programování není nulový. Musíme přidat podmínku kvalifikace omezení, kterou je například již zmíněná Slaterova podmínka. Ta je pro úlohu~\ref{eq:SDP-P} ve tvaru $X \succ 0$ a pro úlohu~\ref{eq:SDP-D} ve tvaru $C - \sum_i A_i y_i \succ 0$.
 
-\begin{vt}[silná dualita semidefinitního programování]
+\begin{vt2}[silná dualita semidefinitního programování]
     Nechť úloha~\ref{eq:SDP-P} a úloha~\ref{eq:SDP-D} jsou striktně přípustné. Potom dualitní rozdíl jejich optimálních řešení je nulový.
-\end{vt}
+\end{vt2}
 
 
 \section{Vektorové programování}
 
-Mějme $n$ vektorových proměnných $\mathbf{v}_1, \dots, \mathbf{v}_n$ v $\mathbb{R}^n$. \textbf{Vektorový program} je problém optimalizace lineární funkce skalárních součinů $\langle \mathbf{v}_i, \mathbf{v}_j \rangle$, vzhledem k lineárním omezením na tyto skalární součiny.
+Mějme $n$ vektorových proměnných $v_1, \dots, v_n$ v $\mathbb{R}^n$. \textbf{Vektorový program} je problém optimalizace lineární funkce skalárních součinů $\langle v_i, v_j \rangle$, vzhledem k lineárním omezením na tyto skalární součiny.
 
-Nyní ukážeme, že vektorové programy jsou ekvivalentní semidefinitním programům. Nechť tedy $\mathcal{V}$ je vektorový program s vektorovými proměnnými $\mathbf{v}_1, \dots, \mathbf{v}_n$ v $\mathbb{R}^n$ a $\mathcal{S}$ je příslušný semidefinitní program s $n^2$ proměnnými $y_{ij}$, kde hodnota $y_{ij}$ odpovídá skalárnímu součinu $\langle \mathbf{v}_i, \mathbf{v}_j \rangle$. Matice $\mathbf{Y}$ je navíc pozitivně semidefinitní. Potom platí následující věta.
+Nyní ukážeme, že vektorové programy jsou ekvivalentní semidefinitním programům. Nechť tedy $\mathcal{V}$ je vektorový program s vektorovými proměnnými $v_1, \dots, v_n$ v $\mathbb{R}^n$ a $\mathcal{S}$ je příslušný semidefinitní program s $n^2$ proměnnými $y_{ij}$, kde hodnota $y_{ij}$ odpovídá skalárnímu součinu $\langle v_i, v_j \rangle$. Matice $Y$ je navíc pozitivně semidefinitní. Potom platí následující věta.
 
-\begin{vt}
+\begin{vt2}
     Vektorový program $\mathcal{V}$ je ekvivalentní semidefinitnímu programu $\mathcal{S}$.
-\end{vt}
+\end{vt2}
 
 \begin{proof}
     TODO

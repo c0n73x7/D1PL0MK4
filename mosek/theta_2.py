@@ -3,6 +3,7 @@ import os
 import json
 import numpy as np
 from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
+from math import sqrt
 
 
 def test_graph():
@@ -39,22 +40,30 @@ def generate_random_graph(n, seed=23):
 if __name__ == "__main__":
     #assert len(sys.argv) > 1
     #A = load_graph(sys.argv[1])
-    #A = generate_random_graph(100)
+    # A = generate_random_graph(100)
     A = test_graph()
     assert A.shape[0] == A.shape[1]
     n = A.shape[0]
-    #A = (A + 1) % 2 - np.eye(n)
-    with Model('theta') as M:
-        A = Matrix.dense(A)
+    with Model('theta_2') as M:
         # variable
-        X = M.variable('X', Domain.inPSDCone(n))
+        X = M.variable('X', Domain.inPSDCone(n+1))
+        t = M.variable()
         # objective function
-        M.objective(ObjectiveSense.Maximize, Expr.sum(Expr.dot(Matrix.ones(n, n), X)))
+        M.objective(ObjectiveSense.Maximize, t)
         # constraints
-        M.constraint(f'c1', Expr.sum(Expr.dot(X, A)), Domain.equalsTo(0.))
-        M.constraint(f'c2', Expr.sum(Expr.dot(X, Matrix.eye(n))), Domain.equalsTo(1.))
+        for i in range(n+1):
+            M.constraint(f'c{i}{i}', X.index(i, i), Domain.equalsTo(1.))
+            if i == 0:
+                continue
+            M.constraint(f'c0,{i}', Expr.sub(X.index(0, i), t), Domain.greaterThan(0.))
+            for j in range(i+1, n+1):
+                if A[i-1,j-1] == 0:
+                    M.constraint(f'c{i},{j}', X.index(i,j), Domain.equalsTo(0.))
         # solve
         M.solve()
         # solution
-        sol = X.level()
-    print(sum(sol))
+        X_sol = X.level()
+        t_sol = t.level()
+    t_sol = t_sol[0]
+    theta = 1. / t_sol**2
+    print(theta)

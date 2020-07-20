@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.linalg import cholesky, norm
+from numpy.linalg import cholesky
 from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
 from tqdm import tqdm
 
@@ -44,7 +44,7 @@ def find_partition(A, W, k):
     A = A.copy()
     W = W.copy()
     n = A.shape[0]
-    # random vector
+    # random vectors
     random_vectors = [np.random.normal(0, 1, n) for _ in range(k)]
     # find partition
     labels = list()
@@ -66,12 +66,11 @@ def find_partition(A, W, k):
 
 if __name__ == "__main__":
     W = generate_random_graph(100)
-    k = 3
+    k = 7
     RELAX = solve_sdp_program(W, k)
     A = cholesky(RELAX)
     sums = list()
     best_sum = -1
-    # TODO - c-times?
     for _ in tqdm(range(10)):
         res = find_partition(A, W, k)
         s = res.get('sum')
@@ -79,4 +78,4 @@ if __name__ == "__main__":
         if s > best_sum:
             best_sum = s
     print(f'best sum of cut weights is {best_sum}')
-    print(sums)
+    # print(sums)

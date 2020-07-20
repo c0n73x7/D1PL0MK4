@@ -145,13 +145,13 @@ kde $a \neq 0$ a $x_0$ je libovolný bod z nadroviny $\left\{ x \mid a^T x = b \
 
 Polytopy jsou zobecněním konvexních mnohoúhelníků v rovině do více dimenzí. Polytop v $\mathbb{R}^3$ je konvexní množina, která je ohraničena konečně mnoha konvexními mnohoúhelníky (příkladem polytopů v $\mathbb{R}^3$ jsou např. Platónská tělesa). Na takovou množinu je možné nahlížet dvěma způsoby. \textbf{H-polyedr} je průnik konečně mnoha uzavřených poloprostorů v $\mathbb{R}^n$, kde \textbf{H-polytop} je omezený H-polyedr. \textbf{V-polytop} je konvexní obal konečně mnoha bodů v $\mathbb{R}^n$. Následující věta říká, že H-polytop a V-polytop jsou matematicky ekvivalentní množiny.
 
-\begin{vt}
+\begin{vt2}
     Každý V-polytop je H-polytop. Každý H-polytop je V-polytop.
-\end{vt}
+\end{vt2}
 
 Poznamenejme, že V-polytop a H-polytop jsou sice ekvivalentní množiny, ale z algoritmického hlediska je velký rozdíl, zda pracujeme s bodovou množinou, nebo s uzavřenými poloprostory. Pro ilustraci: mějme lineární funkci, kterou chceme minimalizovat na daném polytopu. Pro V-polytop se jedná o triviální problém, protože stačí pro každý bod z množiny $V$ určit hodnotu dané funkce a vybrat minimum. Na druhou stranu pro H-polytop se jedná o netriviální problém, kterým se zabývá lineární programování. Dále budeme mluvit jen o \textbf{polyedrech} a \textbf{polytopech}.
 
 Důležitý fakt, že každý polyedr je konečně generovaný, říká Minkowského-Weylova věta.
-\begin{vt}[Minkowski-Weyl]
+\begin{vt2}[Minkowski-Weyl]
     $P \subseteq \mathbb{R}^n$. Potom $P = \textbf{conv}(u_1, \dots, u_r) + \textbf{cone}(v_1, \dots, v_s)$, kde $u_i, v_i$ jsou extremální vrcholy $P$ právě tehdy, když $P = \left\{ x \in \mathbb{R}^n \mid Ax \leq b \right\}, A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m$.
-\end{vt}
+\end{vt2}

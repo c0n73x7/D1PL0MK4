@@ -37,11 +37,15 @@ Oproti obecné úloze~\ref{eq:constrained_problem} jsou funkce $f(x), g_i(x)$ ko
 
 \section{Lagrangeova dualita}
 
-Mějme úlohu~\ref{eq:constrained_problem} s $\mathcal{D} \neq 0$. Zobrazení $L:\ \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R}^p \rightarrow \mathbb{R}$ takové, že
+Mějme úlohu~\ref{eq:constrained_problem} s $\mathcal{D} \neq \emptyset$. Zobrazení $L:\ \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R}^p \rightarrow \mathbb{R}$ takové, že
 \begin{equation}
     L(x, \lambda, \mu) = f(x) + \sum_{i=1}^m \lambda_i g_i(x) + \sum_{i=1}^p \mu_i h_i(x)
 \end{equation}
-se nazývá \textbf{Lagrangeova funkce}. Definiční obor $\textbf{dom}\ L = \mathcal{D} \times \mathbb{R}^m \times \mathbb{R}^p$. Vektory $\lambda$ a $\mu$ nazýváme \textbf{duální proměnné} a prvkům těchto vektorů říkáme \textbf{Lagrangeovy multiplikátory}. Dále definujeme \textbf{duální funkci} $d:\ \mathbb{R}^m \times \mathbb{R}^p \rightarrow \mathbb{R}$ jako infimum Lagrangeovy funkce $L$ přes všechna $x \in \mathcal{D}$. Tedy
+se nazývá \textbf{Lagrangeova funkce}. Definiční obor $\textbf{dom}\ L = \mathcal{D} \times \mathbb{R}^m \times \mathbb{R}^p$. Vektory $\lambda$ a $\mu$ nazýváme \textbf{duální proměnné} a prvkům těchto vektorů říkáme \textbf{Lagrangeovy multiplikátory}. Dále definujeme \textbf{duální funkci}
+$$
+    d:\ \mathbb{R}^m \times \mathbb{R}^p \rightarrow \mathbb{R}
+$$
+jako infimum Lagrangeovy funkce $L$ přes všechna $x \in \mathcal{D}$. Tedy
 \begin{equation}
     d(\lambda, \mu) = \inf_{x \in \mathcal{D}} L(x, \lambda, \mu) = \inf_{x \in \mathcal{D}} \left( f(x) + \sum_{i=1}^m \lambda_i g_i(x) + \sum_{i=1}^p \mu_i h_i(x) \right).
 \end{equation}
@@ -82,21 +86,21 @@ Optimální řešení Lagrangeovy duální úlohy označíme $d^*$, které je u�
 
 \subsection{Silná dualita a Slaterova podmínka}
 
-Pokud je optimální dualitní rozdíl $p^* - d^* = 0$, pak říkáme, že platí silná dualita. Silná dualita obecně neplatí, ale pro primární úlohu, která splňuje nějaké další podmínky to možné je. Těmto podmínkám se říká \textbf{podmínky kvalifikace omezení}. Jednou takovou je \textbf{Slaterova podmínka}:
+Pokud je optimální dualitní rozdíl $p^* - d^* = 0$, pak říkáme, že platí silná dualita. Silná dualita obecně neplatí, ale pro primární úlohu, která splňuje nějaké další podmínky to možné je. Těmto podmínkám se říká \textbf{podmínky kvalifikace omezení}. Jednou takovou je \textbf{Slaterova podmínka}
 $$
     \exists x \in \textbf{relint}\ \mathcal{D}:\ f_i(x) < 0, i = 1, \dots, m, Ax = b.
 $$
 
-Bodu $x \in \mathcal{D}$, který splňuje Slaterovu podmínku, říkáme, že je \textbf{striktně přípustný}, protože omezení typu nerovnosti jsou ostré. Pokud jsou některé funkce $f_i$ afinní, můžeme Slaterovu podmínku modifikovat. Nechť tedy $f_1, \dots, f_k, k \leq m$, jsou afinní funkce. Potom \textbf{modifikovaná Slaterova podmínka} má tvar:
+Bodu $x \in \mathcal{D}$, který splňuje Slaterovu podmínku, říkáme, že je \textbf{striktně přípustný}, protože omezení typu nerovnosti jsou ostré. Pokud jsou některé funkce $f_i$ afinní, můžeme Slaterovu podmínku modifikovat. Nechť tedy $f_1, \dots, f_k, k \leq m$, jsou afinní funkce. Potom \textbf{modifikovaná Slaterova podmínka} má tvar
 $$
     \exists x \in \textbf{relint}\ \mathcal{D}:\ f_i(x) \leq 0, i = 1, \dots, k, f_i(x) < 0, i = k+1, \dots, m, Ax = b.
 $$
 
 Pro úlohu~\ref{eq:convex_problem} platí následující věta.
-\begin{vt}[Slaterova]
+\begin{vt2}[Slaterova]
     Nechť primární úloha je konvexní a platí (modifikovaná) Slaterova podmínka, potom $p^* = d^*$.
-\end{vt}
+\end{vt2}
 
 
-\section*{TODO}
-\textbf{Použití duální úlohy:} obecnou primární úlohu je těžké vyřešit, ale duální úloha je vždy konvexní, tak vyřeším tu a mám alespoň dolní odhad na primární úlohu
+%\section*{TODO}
+%\textbf{Použití duální úlohy:} obecnou primární úlohu je těžké vyřešit, ale duální úloha je vždy konvexní, tak vyřeším tu a mám alespoň dolní odhad na primární úlohu

@@ -2,7 +2,7 @@
 
 \section{Formulace úlohy}
 
-Mějme neorientovaný graf $G = (V, E)$ s nezáporným ohodnocením hran $w$. Cílem je rozložit množinu vrcholů $V$ na nejvýše $k \in \mathbf{N} \setminus \left\{ 1 \right\}$ disjunktních množin tak, aby součet hran spojující různé množiny byl maximální. Pokud $k = 2$ hovoříme o úloze \textbf{MAX CUT} a pro $k \geq 3$ o úloze \textbf{MAX $k$-CUT}.
+Mějme neorientovaný graf $G = (V, E)$ s nezáporným ohodnocením hran $w$. Cílem je rozložit množinu vrcholů $V$ na nejvýše $k \geq 2$ disjunktních množin tak, aby součet hran vedoucí mezi různými množinamu byl maximální. Pokud $k = 2$ hovoříme o úloze \textbf{MAX CUT} a pro $k \geq 3$ o úloze \textbf{MAX $k$-CUT}.
 
 \section{Úloha MAX CUT}
 
@@ -10,19 +10,19 @@ Nejprve se podíváme na aproximační algoritmus z článku \textbf{[REF]} pro 
 
 \subsection*{Striktní kvadratický program pro MAX CUT}
 
-\textbf{Kvadratický program} je problém maximalizace / minimalizace kvadratické funkce celočíselných proměnných, vzhledem ke kvadratickým omezením těchto proměnných. Je-li navíc každý monom (jednočlen) cenové funkce i daných omezení stupně $0$ nebo $2$, potom mluvíme o \textbf{striktním kvadratickém programu}.
+\textbf{Kvadratický program} je problém optimalizace kvadratické funkce celočíselných proměnných, vzhledem ke kvadratickým omezením těchto proměnných. Je-li navíc každý monom (jednočlen) cenové funkce i daných omezení stupně $0$ nebo $2$, potom mluvíme o \textbf{striktním kvadratickém programu}.
 
-Dále odvodíme striktní kvadratický program pro úlohu MAX CUT. Nechť $y_i \in \left\{ 1, -1 \right\}$ je proměnná příslušná vrcholu $i$. Množiny $S$ a $\bar{S}$ definujeme následovně
+Dále odvodíme striktní kvadratický program pro úlohu MAX CUT. Nechť $y_i \in \left\{ 1, -1 \right\}$ je proměnná příslušná vrcholu $i$. Množiny $S$ a $\bar{S}$ definujeme tak, že
 $$
     S = \left\{ i \in V \mid y_i = 1 \right\}, \bar{S} = \left\{ i \in V \mid y_i = -1 \right\}.
 $$
-Pokud $i \in S$ a $j \in \bar{S}$, potom je součin $y_i y_j = -1$ a chceme, aby tato hrana přispívala hodnotou $w_{ij}$ k cenové funkci. Ve zbylých dvou možnostech je $y_i y_j = 1$ a chceme, aby se hodnota cenové funce nezměnila. Použitím těchto podmínek definujeme striktní kvadratický program.
+Pokud $i \in S$ a $j \in \bar{S}$, potom je součin $y_i y_j = -1$ a chceme, aby tato hrana přispívala hodnotou $w_{ij}$ k cenové funkci. Ve zbylých dvou možnostech je $y_i y_j = 1$ a chceme, aby se hodnota cenové funce nezměnila. Zakomponováním těchto podmínek definujeme striktní kvadratický program.
 
 \begin{equation}\tag{SQ-MAX-CUT}
     \begin{split}
         OPT = &\max \frac{1}{2} \sum_{1 \leq i < j \leq n} w_{ij} (1 - y_i y_j) \\
         &\forall i \in V:\ y_i^2 = 1, \\
-        &\forall i \in V:\ y_i \in \mathbf{Z}.
+        &\forall i \in V:\ y_i \in \mathbb{Z}.
     \end{split}
     \label{eq:SQ-MAX-CUT}
 \end{equation}
@@ -30,13 +30,13 @@ Pokud $i \in S$ a $j \in \bar{S}$, potom je součin $y_i y_j = -1$ a chceme, aby
 
 \subsection*{Vektorový program pro MAX CUT}
 
-Poznamenejme jen, že úloha celočíselného programování je NP-těžká. Proto se dále budeme zabývat relaxací úlohy~\ref{eq:SQ-MAX-CUT}, což znamená, že upustíme od podmínek celočíselnosti a původní úlohu relaxujeme vektorovým programem. Modifikujeme tedy program~\ref{eq:SQ-MAX-CUT} tak, že každý součin $y_i y_j$ nahradíme skalárním součinem vektorů $\langle \mathbf{v}_i, \mathbf{v}_j \rangle$ v $\mathbf{R}^n$. Dostáváme následující vektorový program.
+Poznamenejme jen, že úloha celočíselného programování je NP-těžká. Proto se dále budeme zabývat relaxací úlohy~\ref{eq:SQ-MAX-CUT}, což znamená, že upustíme od podmínek celočíselnosti a původní úlohu aproximujeme vektorovým programem. Modifikujeme tedy program~\ref{eq:SQ-MAX-CUT} tak, že každý součin $y_i y_j$ nahradíme skalárním součinem vektorů $\langle v_i, v_j \rangle$ v $\mathbb{R}^n$. Dostáváme následující vektorový program.
 
 \begin{equation}\tag{V-MAX-CUT}
     \begin{split}
-        RELAX = &\max \frac{1}{2} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle \mathbf{v}_i, \mathbf{v}_j \rangle) \\
-        &\forall i \in V:\ \langle \mathbf{v}_i, \mathbf{v}_i \rangle = 1 \\
-        &\forall i \in V:\ \mathbf{v}_i \in \mathbf{R}^n
+        RELAX = &\max \frac{1}{2} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle v_i, v_j \rangle) \\
+        &\forall i \in V:\ \langle v_i, v_i \rangle = 1, \\
+        &\forall i \in V:\ v_i \in \mathbb{R}^n.
     \end{split}
     \label{eq:V-MAX-CUT}
 \end{equation}
@@ -44,35 +44,36 @@ Poznamenejme jen, že úloha celočíselného programování je NP-těžká. Pro
 
 \subsection*{Semidefinitní program pro MAX CUT}
 
-Uvedeme si ještě semidefinitní formulaci předchozí vektorové relaxace. Nechť $W$ je matice vah jednotlivých hran taková, že nenulové prvky má pouze nad diagonálou a $w_{ij}$ je váha hrany $ij$. Matice $J$ je matice samých jedniček.
+Vektorový program~\ref{eq:V-MAX-CUT} je ekvivalentní s příslušným semidefinitním programem. Nechť $W$ je vážená matice sousednosti grafu $G$ a $w_{ij}$ je váha hrany $ij$, kde $i < j$. Matice $J$ je matice $n \times n$ samých jedniček.
 
 \begin{equation}\tag{SDP-MAX-CUT}
     \begin{split}
-        RELAX = &\max \frac{1}{2} W \bullet (J - Y) \\
-        &\forall i \in V:\ y_{ii} = 1 \\
-        &Y \succeq 0
+        RELAX = &\max \frac{1}{4} \langle W, J - Y \rangle \\
+        &\forall i \in V:\ y_{ii} = 1, \\
+        &Y \succeq 0.
     \end{split}
     \label{eq:SDP-MAX-CUT}
 \end{equation}
 
 \subsection*{Randomizovaný zaokrouhlovací algoritmus}
 
-Mějme dva vektory $\mathbf{a}_i, \mathbf{a}_j$ optimálního řešení programu~\ref{eq:V-MAX-CUT}. Označme $\Theta_{ij}$ úhel, který tyto vektory svírají. Z podmínky
+Mějme dva vektory $a_i, a_j$ optimálního řešení programu~\ref{eq:V-MAX-CUT}. Označme $\Theta_{ij}$ úhel, který tyto vektory svírají. Z podmínky
 $$
-    \forall i \in V:\ \langle \mathbf{v}_i, \mathbf{v}_i \rangle = 1
+    \forall i \in V:\ \langle v_i, v_i \rangle = 1
 $$
-dostáváme, že $\langle \mathbf{a}_i, \mathbf{a}_j \rangle = \cos \Theta_{ij}$ a příspěvěk těchto vektorů k optimálnímu řešení je
+dostáváme, že $\langle a_i, a_j \rangle = \cos \Theta_{ij}$ a příspěvěk těchto vektorů k optimálnímu řešení je
 $$
     \frac{w_{ij}}{2} (1 - \cos \Theta_{ij}).
 $$
-Tedy čím \uv{blíž} je úhel $\Theta_{ij}$ hodnotě $\pi$, tím větší příspěvěk mají tyto vektory k hodnotě optimálního řešení. Dále si uvedeme algoritmus pro řešení úlohy MAX-CUT a jeho analýzu.
+Tedy čím \uv{blíž} je úhel $\Theta_{ij}$ hodnotě $\pi$, tím větší příspěvěk mají tyto vektory k hodnotě optimálního řešení. Dále si uvedeme algoritmus pro řešení úlohy MAX CUT a jeho analýzu.
 
 \begin{alg}[MAX-CUT]$ $
     \begin{enumerate}
-        \item Najdi řešení $\mathbf{a}_1, \dots, \mathbf{a}_n$ programu~\ref{eq:V-MAX-CUT}.
-        \item Zvol náhodně vektor $\mathbf{r}$ na jednotkové sféře $S_{n-1}$.
-        \item $S = \left\{ i \in V \mid \langle \mathbf{a}_i, \mathbf{r} \rangle \geq 0 \right\}$.
+        \item Najdi řešení $a_1, \dots, a_n$ programu~\ref{eq:V-MAX-CUT}.
+        \item Zvol náhodně vektor $r$ na jednotkové sféře $S_{n-1}$.
+        \item $S = \left\{ i \in V \mid \langle a_i, r \rangle \geq 0 \right\}$.
     \end{enumerate}
+    \label{alg:max-cut}
 \end{alg}
 
 Začneme dvěma lemmaty.
@@ -86,15 +87,15 @@ Začneme dvěma lemmaty.
 \end{lm}
 
 \begin{proof}
-    Vektory $\mathbf{a}_i, \mathbf{a}_j$ generují rovinu. Uvažme projekci náhodného vektoru $\mathbf{r}$ na jednotkové sféře $S_{n-1}$ do této roviny. Potom vrcholy $i$ a $j$ jsou separovány, jestliže
+    Vektory $a_i, a_j$ generují rovinu. Uvažme projekci náhodného vektoru $r$ na jednotkové sféře $S_{n-1}$ do této roviny. Potom vrcholy $i$ a $j$ jsou separovány, jestliže
     $$
-        \langle \mathbf{a}_i, \mathbf{a}_j \rangle = \langle \mathbf{r}, \mathbf{a}_i \rangle + \langle \mathbf{r}, \mathbf{a}_j \rangle
+        \langle a_i, a_j \rangle = \langle r, a_i \rangle + \langle r, a_j \rangle
     $$
     \begin{center}
         nebo
     \end{center}
     $$
-        \langle \mathbf{a}_i, \mathbf{a}_j \rangle = \langle \mathbf{-r}, \mathbf{a}_i \rangle + \langle \mathbf{-r}, \mathbf{a}_j \rangle.
+        \langle a_i, a_j \rangle = \langle -r, a_i \rangle + \langle -r, a_j \rangle.
     $$
     Předchozí podmínku separace vrcholů ilustruje obrázek~\ref{fig:lemma_plane}.
 \end{proof}
@@ -102,23 +103,23 @@ Začneme dvěma lemmaty.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{img/lemma_plane.png}   
-    \caption{Separace vrcholů $i$, $j$ náhodným vektorem $\mathbf{r}$.}
+    \caption{Separace vrcholů $i$, $j$ náhodným vektorem $r$.}
     \label{fig:lemma_plane}
 \end{figure}
 
 
 \begin{lm}[KNUTH 2, 135]
-    Nechť $\mathbf{x} = (x_1, \dots, x_n)$ je vektor, jehož prvky jsou zvoleny nezávisle z normovaného normální rozdělení $N(0,1)$. Potom $\mathbf{r} = \frac{\mathbf{x}}{\|\mathbf{x}\|_2}$ je náhodný vektor, který leží na jednotkové sféře $S_{n-1}$.
+    Nechť $x = (x_1, \dots, x_n)$ je vektor, jehož prvky jsou zvoleny nezávisle z normálního normovaného rozdělení $N(0,1)$. Potom $r = \frac{x}{\| x \|}$ je náhodný vektor, který leží na jednotkové sféře $S_{n-1}$.
 \end{lm}
 
-Dále ukážeme, jak \uv{dobrou} aproximaci algoritmem~\textbf{REF} dostaneme. Označme
+Dále ukážeme, jak \uv{dobrou} aproximaci algoritmem~\ref{alg:max-cut} dostaneme. Označme
 $$
     \alpha = \min_{0 \leq \Theta \leq \pi} \frac{2 \Theta}{\pi (1 - \cos \Theta)}.
 $$
 Snadno se ukáže, použitím derivace, že $\alpha \approx 0.87856$.
 
 \begin{lm}
-    Nechť $Y$ je náhodná veličina, která označuje součet vah hran, které vedou z $S$ do $\bar{S}$, nalezeny algoritmem~\textbf{REF}. Potom
+    Nechť $Y$ je náhodná veličina, která označuje součet vah hran, které vedou z $S$ do $\bar{S}$, nalezeny algoritmem~\ref{alg:max-cut}. Potom
     $$
         E\left[ Y \right] \geq \alpha \cdot RELAX.
     $$
@@ -141,18 +142,19 @@ Snadno se ukáže, použitím derivace, že $\alpha \approx 0.87856$.
     \end{equation*}
 \end{proof}
 
-Poznamenejme, že samozřejmě platí
-$$
+\noindent Poznamenejme, že samozřejmě platí
+\begin{equation}
     OPT \geq E\left[ Y \right] \geq \alpha \cdot RELAX.
-$$
+    \label{eq:int-gap}
+\end{equation}
 
-Definujeme \textbf{mezeru celočíselnosti} relaxace (pro maximalizační problém) jako
+\noindent Dále definujeme \textbf{mezeru celočíselnosti} relaxace (pro maximalizační problém) jako
 $$
     \inf_{I} \frac{OPT(I)}{RELAX(I)},
 $$
-kde infimum probíhá přes všechny instance $I$ daného programu. Tedy mezera celočíselnosti relaxace~\ref{eq:V-MAX-CUT} je alespoň $\alpha \approx 0.87856$.
+kde infimum probíhá přes všechny instance $I$ daného programu (pro minimalizační problém by se čitatel a jmenovat prohodily). Ze vztahu~\ref{eq:int-gap} dostáváme, že mezera celočíselnosti relaxace~\ref{eq:V-MAX-CUT} je alespoň $\alpha \approx 0.87856$.
 
-Předchozí odvození je založeno na střední hodnotě náhodné veličiny $Y$. Proto kroky \textbf{2} a \textbf{3}, v algoritmu, opakujeme vícekrát a jako výsledek zvolíme množinu $S$, která dává největší součet hran z $S$ do $\bar{S}$. Dále jen specifikujeme kolikrát musíme tyto kroky opakovat. Kompletní důkaz je v \textbf{CITE}. Zvolíme tedy $\varepsilon > 0$ (malé), nechť
+Předchozí odvození je založeno na střední hodnotě náhodné veličiny $Y$. Proto kroky \textbf{2} a \textbf{3}, v algoritmu~\ref{alg:max-cut}, opakujeme vícekrát a jako výsledek zvolíme množinu $S$, která dává největší součet hran z $S$ do $\bar{S}$. Dále jen specifikujeme kolikrát musíme tyto kroky opakovat. Kompletní odvození je v \textbf{[REF]}. Zvolíme tedy $\varepsilon > 0$ (malé), nechť
 $$
     c = \frac{\varepsilon \alpha}{2 + 2\varepsilon - \alpha},
 $$
@@ -161,30 +163,60 @@ a kroky \textbf{2}, \textbf{3} opakujeme $\lceil \frac{1}{c} \rceil$-krát.
 
 \section{Úloha MAX $k$-CUT}
 
-V následující části si uvedeme jen formulace s aproximačními schématy z několika článků pro úlohu MAX-$k$-CUT a provedeme experiment, ve kterém je porovnáme na náhodných grafech.
+V následující části si představíme semidefinitní (vektorové) formulace s aproximačními schématy z několika článků pro úlohu MAX~$k$-CUT a provedeme experiment, ve kterém je porovnáme na náhodném grafu.
 
-\subsection{Frieze-Jerrum a MAX-$k$-CUT}
+\subsection{Frieze-Jerrum a MAX-$k$-CUT \textbf{[REF]}}
 
 \subsubsection*{Formulace}
 
-\begin{equation}\tag{FJ-MAX-$k$-CUT}
+Uvažujme rovnostranný simplex $\Sigma_k$ v $\mathbf{R}^{k-1}$ s vrcholy $B_1, B_2, \dots, B_k$. Nechť $C = (B_1 + \dots + B_k) / k$ je těžiště $\Sigma_k$ a nechť $\mathbf{a}_i = B_i - C$, kde $i = 1, \dots, k$. Dále předpokládejme, že délka strany $\Sigma_k$ je taková, že $\|\mathbf{a}_i\| = 1$.
+
+\begin{lm}
+    Pro $i \neq j$, platí
+    $$
+        \langle \mathbf{a}_i, \mathbf{a}_j \rangle = -\frac{1}{k-1}.
+    $$
+\end{lm}
+
+\noindent Nyní můžeme formulovat úlohu MAX $k$-CUT následovně.
+
+\begin{equation}\tag{FJ}
+    \begin{split}
+        &\max \frac{k}{k-1} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle \mathbf{y}_i, \mathbf{y}_j \rangle) \\
+        &\mathbf{y}_i \in \left\{ a_1, \dots, a_k \right\}.
+    \end{split}
+    \label{eq:FJ}
+\end{equation}
+
+\noindent Poznamenejme, že
+$$
+    1 - \langle \mathbf{y}_i, \mathbf{y}_j \rangle = 
+    \begin{cases}
+        0           & i = j, \\
+        k / (k - 1) & i \neq j.
+    \end{cases}
+$$
+
+\begin{equation}\tag{FJ-RELAX}
     \begin{split}
         &\max \frac{k}{k-1} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle \mathbf{v}_i, \mathbf{v}_j \rangle) \\
         &\forall i \in V:\ \langle \mathbf{v}_i, \mathbf{v}_i \rangle = 1, \\
         &\forall i,j \in V:\ \langle \mathbf{v}_i, \mathbf{v}_j \rangle \geq -\frac{1}{k-1} \\
         &\forall i \in V:\ \mathbf{v}_i \in \mathbf{R}^n.
     \end{split}
-    \label{eq:FJ-MAX-k-CUT}
+    \label{eq:FJ-RELAX}
 \end{equation}
 
 \subsubsection*{Aproximační schéma}
 
+Zvolíme $k$ náhodných vektorů $\mathbf{x}_1, \dots, \mathbf{x}_k \in \mathbf{R}^n$, kde každá složka každého vektoru je vybrána náhodně z normálního normovaného rozdělení $N(0,1)$. Pro každý vrchol $i \in V$ určíme $k$ skalárních součinů $\langle \mathbf{v}_i, \mathbf{x}_1 \rangle, \dots, \langle \mathbf{v}_i, \mathbf{x}_k \rangle$ a vrchol $i$ přidáme do množiny $V_j$, kde $j = \arg \max \left\{ \langle \mathbf{v}_i, \mathbf{x}_l \rangle \mid l = 1, \dots, k \right\}$.
 
-\subsection{Goemans-Williamson a MAX-$3$-CUT}
+
+\subsection{Goemans-Williamson a MAX-$3$-CUT \textbf{[REF]}}
 
 \subsubsection*{Formulace}
 
-\begin{equation}\tag{GW-MAX-$3$-CUT}
+\begin{equation}\tag{GW-RELAX}
     \begin{split}
         &\max \frac{2}{3} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle \mathbf{v}_i^1, \mathbf{v}_j^1 \rangle) \\
         &\forall i \in V\ \forall a,b \in \left\{ 1,2,3 \right\}:\ a \neq b \implies \langle v_i^a, v_i^b \rangle = -\frac{1}{2} \\
@@ -193,31 +225,157 @@ V následující části si uvedeme jen formulace s aproximačními schématy z 
         &\forall i \in V\ \forall a \in \left\{ 1,2,3 \right\}:\ \langle v_i^a, v_i^a \rangle = 1 \\
         &\forall i \in V\ \forall a \in \left\{ 1,2,3 \right\}:\ v_i^a \in \mathbf{R}^{3n}
     \end{split}
-    \label{eq:GW-MAX-3-CUT}
+    \label{eq:GW-RELAX}
 \end{equation}
 
 \subsubsection*{Aproximační schéma}
 
-\subsection{de Klerk-Pasechnik-Warners a MAX-$k$-CUT}
+Mějme $3n$ vektorů, které tvoří řešení \ref{eq:GW-RELAX}. Pro vrchol $i \in V$ leží vektory $v_i^1, v_i^2, v_i^3$ ve stejné rovině tak, že jsou otočeny o $120^{\circ}$. Nejprve zvolíme vektor $\mathbf{g} \in \mathbb{R}^{3n}$ takový, že každá složka je vybrána nezávisle z normálního normovaného rozdělení $N(0,1)$. Pro každý vrchol $i \in V$ uděláme projekci vektoru $\mathbf{g}$ do příslušné roviny. Odtud dostaneme úhel $\theta_i \in \langle 0, 2pi)$ pro každý vrchol. Náhodně zvolíme úhel $\psi \in \langle 0, \pi)$ a vrchol $i \in V$ přidáme do množiny $V_j$, jestliže
+$$
+    \theta_i \in \psi + \frac{j 2 \pi}{3}, j \in \left\{ 0, 1, 2 \right\},
+$$
+kde úhly počítáme modulo $2$.
+
+\subsection{de Klerk-Pasechnik-Warners a MAX-$k$-CUT \textbf{[REF]}}
 
 \subsubsection*{Formulace}
 
+\begin{equation}\tag{THETA-$\bar{G}$}
+    \begin{split}
+        &\min t \\
+        &\forall ij \in E:\ U_{ij} = -\frac{1}{t - 1} \\
+        &\forall i \in V:\ U_{ii} = 1 \\
+        &U \succeq 0, k \geq 2.
+    \end{split}
+    \label{eq:THETA-BAR-G}
+\end{equation}
+
 \subsubsection*{Aproximační schéma}
 
-\subsection{Newman a MAX-$k$-CUT}
+Mějme optimální řešení $(U, \vartheta(\bar{G}))$ programu \ref{eq:THETA-BAR-G}. Nechť
+\begin{equation}
+    Y = U \otimes \frac{k}{k - 1} \left( I_k - \frac{1}{k} e_k e_k^T \right).
+\end{equation}
+
+Uvažujeme rozklad matice $Y = V^T V$, kde $V = \left[ v_1^1\ v_1^2\ \dots\ v_1^k\ \dots\ v_n^k \right]$. Zvolíme náhodný jednotkový vektor $r \in \mathbb{R}^{kn}$ na sféře v $\mathbb{R}^{kn}$. Potom
+$$
+    x_i^p = 
+    \begin{cases}
+        1  & r^T v_i^p = \max_{q = 1, \dots, k} \left\{ r^T v_i^q \right\}, \\
+        -1 & \text{jinak.}
+    \end{cases}
+$$
+
+
+\subsection{Newman a MAX-$k$-CUT \textbf{[REF]}}
 
 \subsubsection*{Formulace}
 
-Používá formulaci \ref{eq:FJ-MAX-k-CUT}.
+Používá formulaci \ref{eq:FJ-RELAX}.
 
-\subsubsection*{Aproximační schéma}
+\subsubsection*{Aproximační schéma 1}
 
+Následující aproximační schéma zobecňuje přístup z \textbf{[REF]}. Nechť $\mathbf{0}$ je nulový vektor dimenze $n$. Pro každý vrchol $i \in V$ definujeme dva vektory
+$$
+    \mathbf{u}_i = \left( \mathbf{v}_i, \mathbf{0} \right), \mathbf{u}_i^\bot = \left( \mathbf{0}, \mathbf{v}_i \right),
+$$
+které generují rovinu v prostoru $\mathbf{R}^{2n}$. $2$-dimenzionální disk je množina vektorů
+$$
+    \mathbf{u}_i(\theta) = \mathbf{u}_i \cos \theta + \mathbf{u}_i^\bot \sin \theta, \theta \in \langle 0, \pi).
+$$
+Dále zvolíme náhodný vektor $\mathbf{r} \in \mathbb{R}^{2n}$, kde každá složka je vybrána náhodně z normálního normovaného rozdělení $N(0,1)$. Pro každý vrchol $i \in V$ určíme projekci vektoru $\mathbf{r}$ na disk $\left\{ \mathbf{u}_i(\theta) \mid \theta \in \langle 0, \pi ) \right\}$ a určíme úhly
+$$
+    \theta_i = \arctan \left( \frac{\langle \mathbf{r}, \mathbf{u}_i^\bot \rangle}{\langle \mathbf{r}, \mathbf{u}_i \rangle} \right), \langle \mathbf{r}, \mathbf{u}_i^\bot \rangle \geq 0,
+$$
+$$
+    \theta_i = \arctan \left( \frac{\langle \mathbf{r}, \mathbf{u}_i^\bot \rangle}{\langle \mathbf{r}, \mathbf{u}_i \rangle} \right) + \pi,\langle \mathbf{r}, \mathbf{u}_i \rangle \leq 0.
+$$
+
+Pro každý vrchol $i \in V$ máme tedy úhel $\theta_i$. Náhodně zvolíme úhel $\psi \in \langle 0, 2 \pi )$ a vrchol $i \in V$ přidáme do množiny $V_j$, jestliže
+$$
+    \theta_i \in \psi + \frac{j 2 \pi}{k}, j \in \left\{ 0, 1, \dots, k-1 \right\},
+$$
+kde úhly počítáme modulo $2$.
+
+
+\subsubsection*{Aproximační schéma 2}
+
+Princip je podobný, akorát pro každý vrchol $i \in V$ zvolíme $k-1$ náhodných vektorů $\mathbf{g}_1, \dots, \mathbf{g}_k$ takových, že každá složka každého vektoru je vybrána náhodně z normálního normovaného rozdělení $N(0,1)$. Pro každý vrchol $i \in V$ určíme vektor
+$$
+    \left( \langle \mathbf{g}_1, \mathbf{v}_i \rangle, \dots, \langle \mathbf{g}_{k-1}, \mathbf{v}_i \rangle \right) \in \mathbb{R}^{k-1}.
+$$
+Každý z těchto vektorů je přiřazen nejbližšímu vrcholu $\Sigma_k$.
 
 \subsection{Porovnání algoritmů}
 
-\begin{itemize}
-    \item tabulka s aproximačními poměry (vyznačit nejlepší)
-    \item tabulky s jednotlivými výsledky běhů programů
-\end{itemize}
+Pro účely experimentu byl vygenerován náhodný graf $G=(V,E)$ se $100$ vrcholy, kde
+$$
+    \forall i,j \in V:\ P\left[ ij \in E \right] = 0.5.
+$$
+
+\subsubsection*{Aproximační poměry}
+\begin{center}
+    \begin{tabular}{ c c c c c }
+    $k$ & FJ         & GW                  & dKPW                & N1         \\
+    \hline
+    $3$ & $0.832718$ & $\mathbf{0.836008}$ & $\mathbf{0.836008}$ &            \\  
+    $4$ & $0.850304$ &                     & $\mathbf{0.857487}$ & $0.846478$ \\
+    $5$ & $0.874243$ &                     & $\mathbf{0.876610}$ & $0.862440$ \\
+    $6$ & TODO       &                     & TODO                & TODO       \\
+    $7$ & TODO       &                     & TODO                & TODO       \\
+    \end{tabular}
+\end{center}
+
+\subsubsection*{Experiment -- $10$ iterací}
+\begin{center}
+    \begin{tabular}{ c c c c c }
+    $k$ & FJ         & GW                  & N1                  & N2         \\
+    \hline
+    $3$ & $1822$     & TODO                &                     &            \\  
+    $4$ & $2006$     &                     & TODO                & TODO       \\
+    $5$ & $2121$     &                     & TODO                & TODO       \\
+    $6$ & $2172$     &                     & TODO                & TODO       \\
+    $7$ & $2222$     &                     & TODO                & TODO       \\
+    \end{tabular}
+\end{center}
+
+\subsubsection*{Experiment -- $100$ iterací}
+\begin{center}
+    \begin{tabular}{ c c c c c }
+    $k$ & FJ         & GW                  & N1                  & N2         \\
+    \hline
+    $3$ & TODO       & TODO                &                     &            \\  
+    $4$ & TODO       &                     & TODO                & TODO       \\
+    $5$ & TODO       &                     & TODO                & TODO       \\
+    $6$ & TODO       &                     & TODO                & TODO       \\
+    $7$ & TODO       &                     & TODO                & TODO       \\
+    \end{tabular}
+\end{center}
 
 
+\subsubsection*{Experiment -- $1000$ iterací}
+\begin{center}
+    \begin{tabular}{ c c c c c }
+    $k$ & FJ         & GW                  & N1                  & N2         \\
+    \hline
+    $3$ & TODO       & TODO                &                     &            \\  
+    $4$ & TODO       &                     & TODO                & TODO       \\
+    $5$ & TODO       &                     & TODO                & TODO       \\
+    $6$ & TODO       &                     & TODO                & TODO       \\
+    $7$ & TODO       &                     & TODO                & TODO       \\
+    \end{tabular}
+\end{center}
+
+
+\subsubsection*{Experiment -- $10000$ iterací}
+\begin{center}
+    \begin{tabular}{ c c c c c }
+    $k$ & FJ         & GW                  & N1                  & N2          \\
+    \hline
+    $3$ & TODO       & TODO                &                     &            \\  
+    $4$ & TODO       &                     & TODO                & TODO       \\
+    $5$ & TODO       &                     & TODO                & TODO       \\
+    $6$ & TODO       &                     & TODO                & TODO       \\
+    $7$ & TODO       &                     & TODO                & TODO       \\
+    \end{tabular}
+\end{center}

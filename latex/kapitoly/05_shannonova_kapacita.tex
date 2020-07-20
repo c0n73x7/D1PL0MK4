@@ -29,7 +29,7 @@ Pro graf $P_4 = a-b-c-d-e$ je silný součin $P_4 \cdot P_4$ zobrazen na obrázk
     \label{fig:strong_product_P4_P4}
 \end{figure}
 
-Pro jednoduchost budeme silný součin $k$ kopií grafu $G$ značit $G^k$. Tedy $\alpha(G^k)$ je maximální počet nezaměnitelných zpráv délky $k$. \textbf{Shannonova kapacita} grafu $G$ je definována jako:
+Pro jednoduchost budeme silný součin $k$ kopií grafu $G$ značit $G^k$. Tedy $\alpha(G^k)$ je maximální počet nezaměnitelných zpráv délky $k$. \textbf{Shannonova kapacita} grafu $G$ je definována jako
 $$
     \Theta(G) = \sup \left\{ \alpha(G^k)^{1/k} \mid k = 1, 2, \dots \right\}.
 $$
@@ -38,15 +38,15 @@ Neví se, zda pro libovolný graf $G$ existuje vůběc nějaký algoritmus, kter
 
 \section{$\Theta(C_5) = \sqrt{5}$}
 
-Nejprve potřebujeme zavést několik pojmů. \textbf{Tenzorový součin} vektorů $\mathbf{u} = \left(u_1, \dots, u_n \right)$ a $\mathbf{v} = \left(v_1, \dots, v_m \right)$ je
+Nejprve potřebujeme zavést několik pojmů. \textbf{Tenzorový součin} vektorů $u = \left(u_1, \dots, u_n \right)$ a $v = \left(v_1, \dots, v_m \right)$ je
 $$
-    \mathbf{u} \circ \mathbf{v} = \left( u_1 v_1, \dots, u_1 v_m, u_2 v_1, \dots, u_n v_m \right).
+    u \circ v = \left( u_1 v_1, \dots, u_1 v_m, u_2 v_1, \dots, u_n v_m \right).
 $$
 
 Užitečné bude následující pozorování, které dává do souvislosti skalární a tenzorový součin.
 
 \begin{pz}
-    Nechť $\mathbf{x}, \mathbf{u}$ jsou vektory délky $n$ a $\mathbf{y}, \mathbf{v}$ jsou vektory délky $m$. Potom platí
+    Nechť $x, u$ jsou vektory délky $n$ a $y, v$ jsou vektory délky $m$. Potom platí
     \begin{equation}
         \left( x \circ y \right)^T \left( u \circ v \right) = \left( x^T u \right) \left( y^T v \right).
         \label{eq:tensor_scalar_product}
@@ -70,14 +70,14 @@ Užitečné bude následující pozorování, které dává do souvislosti skal�
     \end{equation*}
 \end{proof}
 
-Mějme graf $G = (V,E)$, kde $V = \left\{ 1, \dots, n \right\}$. Systém $\left( \textbf{v}_1, \dots, \textbf{v}_n \right)$ jednotkových vektorů v Euklidovském prostoru takový, že
+Mějme graf $G = (V,E)$, kde $V = \left\{ 1, \dots, n \right\}$. Systém $\left( v_1, \dots, v_n \right)$ jednotkových vektorů v Euklidovském prostoru takový, že
 $$
-    \forall ij \notin E \implies \textbf{v}_i \perp \textbf{v}_j
+    \forall ij \notin E \implies v_i \perp v_j
 $$
-nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že každý graf má nějakou ortonormální reprezentaci, např. $1 \mapsto \mathbf{e}_1, \dots, n \mapsto \mathbf{e}_n$.
+nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že každý graf má nějakou ortonormální reprezentaci, např. $1 \mapsto e_1, \dots, n \mapsto e_n$.
 
 \begin{lm}
-    Nechť $\left( \mathbf{u}_1, \dots, \mathbf{u}_n \right)$ je ortonormální reprezentace grafu $G$ a $\left( \mathbf{v}_1, \dots, \mathbf{v}_m \right)$ je ortonormální reprezentace grafu $H$. Potom $\mathbf{u}_i \circ \mathbf{v}_j$ je ortonormální reprezentace grafu $G \cdot H$.
+    Nechť $\left( u_1, \dots, u_n \right)$ je ortonormální reprezentace grafu $G$ a $\left( v_1, \dots, v_m \right)$ je ortonormální reprezentace grafu $H$. Potom $u_i \circ v_j$ je ortonormální reprezentace grafu $G \cdot H$.
     \label{lemma:shannon}
 \end{lm}
 
@@ -115,29 +115,29 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
 \end{lm}
 
 \begin{proof}
-    Mějme maximální nezávislou množinu $I \subseteq V(G)$ v grafu $G$ a optimální ortonormální reprezentaci $\mathcal{U} = \left(\mathbf{u}_1, \dots, \mathbf{u}_n \right)$ grafu $G$ s handle $\mathbf{c}$. Platí
+    Mějme maximální nezávislou množinu $I \subseteq V(G)$ v grafu $G$ a optimální ortonormální reprezentaci $\mathcal{U} = \left( u_1, \dots, u_n \right)$ grafu $G$ s handle $c$. Platí
     $$
-        \forall i,j \in I:\ i \neq j \implies \mathbf{u}_i \bot \mathbf{u}_j.
+        \forall i,j \in I:\ i \neq j \implies u_i \bot u_j.
     $$
-    Máme tedy systém ortonormálních vektorů $\left\{ u_i \in \mathcal{U} \mid i \in I \right\}$ v $\mathbb{R}^n$. Ten rozšíříme na ortonormální bázi $\mathcal{B}$. Potom $i$-tá souřadnice vektoru $\mathbf{c}$ v bázi $\mathcal{B}$ je $\mathbf{c}^T \mathbf{u}_i$. Tedy
+    Máme tedy systém ortonormálních vektorů $\left\{ u_i \in \mathcal{U} \mid i \in I \right\}$ v $\mathbb{R}^n$. Ten rozšíříme na ortonormální bázi $\mathcal{B}$. Potom $i$-tá souřadnice vektoru $c$ v bázi $\mathcal{B}$ je $c^T u_i$. Tedy
     $$
-        1 = \|\mathbf{c}\|^2 = \sum_{i=1}^n \left( \mathbf{c}^T \mathbf{u}_i \right)^2.
+        1 = \| c \|^2 = \sum_{i=1}^n \left( c^T u_i \right)^2.
     $$
     Dále vynecháme přidáné vektory do ortonormální báze $\mathcal{B}$
     $$
-        \sum_{i=1}^n \left( \mathbf{c}^T \mathbf{u}_i \right)^2 \geq \sum_{i \in I} \left( \mathbf{c}^T \mathbf{u}_i \right)^2.
+        \sum_{i=1}^n \left( c^T u_i \right)^2 \geq \sum_{i \in I} \left( c^T u_i \right)^2.
     $$
     Poslední výraz přepíšeme
     $$
-        \sum_{i \in I} \left( \mathbf{c}^T \mathbf{u}_i \right)^2 \geq |I| \cdot \min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2 = \alpha(G) \cdot \min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2.
+        \sum_{i \in I} \left( c^T u_i \right)^2 \geq |I| \cdot \min_{i \in I}\left( c^T u_i \right)^2 = \alpha(G) \cdot \min_{i \in I}\left( c^T u_i \right)^2.
     $$
     Předchozí výrazy dáme dohromady
     $$
-        1 \geq \alpha(G) \cdot \min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2,
+        1 \geq \alpha(G) \cdot \min_{i \in I}\left( c^T u_i \right)^2,
     $$
     a dostáváme
     $$
-        \alpha(G) \leq \frac{1}{\min_{i \in I}\left( \mathbf{c}^T \mathbf{u}_i \right)^2} = \max_{i \in I} \frac{1}{\left( \mathbf{c}^T \mathbf{u}_i \right)^2} \leq \max_{i \in V(G)} \frac{1}{\left( \mathbf{c}^T \mathbf{u}_i \right)^2} = \vartheta(G).
+        \alpha(G) \leq \frac{1}{\min_{i \in I}\left( c^T u_i \right)^2} = \max_{i \in I} \frac{1}{\left( c^T u_i \right)^2} \leq \max_{i \in V(G)} \frac{1}{\left( c^T u_i \right)^2} = \vartheta(G).
     $$
 \end{proof}
 
@@ -165,13 +165,13 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
 \end{vt}
 
 \begin{proof}
-    Ukážeme konstrukci ortonormální reprezentace grafu $C_5$, ze které dostaneme horní odhad na $\Theta(C_5)$. Nechť $V(C_5) = \left\{ v_1, \dots, v_5 \right\}$ a $E(C_5) = \left\{ v_1v_2, v_2v_3, v_3v_4, v_4v_5, v_1v_5 \right\}$. Mějme vektory $\bar{\mathbf{u}}_i$ ve tvaru
+    Ukážeme konstrukci ortonormální reprezentace grafu $C_5$, ze které dostaneme horní odhad na $\Theta(C_5)$. Nechť $V(C_5) = \left\{ v_1, \dots, v_5 \right\}$ a $E(C_5) = \left\{ v_1v_2, v_2v_3, v_3v_4, v_4v_5, v_1v_5 \right\}$. Mějme vektory $\bar{u}_i$ ve tvaru
     $$
-        \bar{\mathbf{u}}_i = \left( \cos\frac{2 \pi i}{5}, \sin \frac{2 \pi i}{5}, z \right), i = 1, \dots, 5.
+        \bar{u}_i = \left( \cos\frac{2 \pi i}{5}, \sin \frac{2 \pi i}{5}, z \right), i = 1, \dots, 5.
     $$
-    Každý vektor $\bar{\mathbf{u}}_i$ je svázán s vrcholem $v_i$. Chceme, aby dva vektory, které jsou příslušné nesousedním vrcholům, byly ortogonální. Tedy například $\langle \bar{\mathbf{u}}_2, \bar{\mathbf{u}}_5 \rangle = 0$. Dosadíme
+    Každý vektor $\bar{u}_i$ je svázán s vrcholem $v_i$. Chceme, aby dva vektory, které jsou příslušné nesousedním vrcholům, byly ortogonální. Tedy například $\langle \bar{u}_2, \bar{u}_5 \rangle = 0$. Dosadíme
     $$
-        \left\langle \bar{\mathbf{u}}_2, \bar{\mathbf{u}}_5 \right\rangle = 
+        \left\langle \bar{u}_2, \bar{u}_5 \right\rangle = 
         \left\langle ( \cos\frac{4\pi}{5}, \sin\frac{4\pi}{5}, z ), \left( 1, 0, z \right) \right\rangle =
         \cos\frac{4\pi}{5} + z^2 = 0.
     $$
@@ -181,12 +181,12 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
     $$
     Definujeme ortonormální reprezentaci $\mathcal{U}$ grafu $C_5$ (projekce do první a druhé souřadnice, viz Obrázek~\ref{fig:umbrella_projection}) tak, že
     $$
-        \mathbf{u}_i = \frac{\bar{\mathbf{u}}}{\| \bar{\mathbf{u}} \|}, i = 1, \dots, 5,
+        u_i = \frac{\bar{u}}{\| \bar{u} \|}, i = 1, \dots, 5,
     $$
-    s handle $\mathbf{c} = \left( 0, 0, 1 \right)$.
+    s handle $c = \left( 0, 0, 1 \right)$.
     Dostáváme
     $$
-        \vartheta(C_5) \leq \vartheta(\mathcal{U}) = \max_{i = 1, \dots, 5} \frac{1}{(\mathbf{c}^T\mathbf{u}_i)^2} = \frac{1}{(\mathbf{c}^T\mathbf{u}_5)^2} = \frac{1 - \cos\frac{4\pi}{5}}{-\cos\frac{4\pi}{5}}.
+        \vartheta(C_5) \leq \vartheta(\mathcal{U}) = \max_{i = 1, \dots, 5} \frac{1}{(c^T u_i)^2} = \frac{1}{( c^T u_5)^2} = \frac{1 - \cos\frac{4\pi}{5}}{-\cos\frac{4\pi}{5}}.
     $$
     Do posledního výrazu dosadíme známou hodnotu pro $\cos 36^{\circ}$.
     $$
@@ -202,7 +202,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{img/umbrella_projection.png} 
-    \caption{Projekce $\mathbf{u}_i$ do první a druhé souřadnice.}
+    \caption{Projekce $u_i$ do první a druhé souřadnice.}
     \label{fig:umbrella_projection}
 \end{figure}
 
@@ -218,21 +218,21 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
 
 \subsection*{Program pro $1/\sqrt{\vartheta}$}
 
-První formulací je semidefinitní program, jehož řešením je hodnota $\frac{1}{\sqrt{\vartheta}}$. Mějme graf $G = (V,E)$. Hodnota Lovászovy Theta funkce $\vartheta(G)$ je z definice
+První formulací je semidefinitní program, jehož řešením je hodnota $\frac{1}{\sqrt{\vartheta}}$. Mějme graf $G = (V,E)$. Hodnota $\vartheta(G)$ je z definice
 $$
-    \vartheta(G) = \min_\mathcal{U} \vartheta(\mathcal{U}) = \min_\mathcal{U} \min_{\|c\|=1} \max_{i \in V(G)} \frac{1}{\left( \mathbf{c}^T \mathbf{u}_i \right)^2},
+    \vartheta(G) = \min_\mathcal{U} \vartheta(\mathcal{U}) = \min_\mathcal{U} \min_{\|c\|=1} \max_{i \in V(G)} \frac{1}{\left( c^T u_i \right)^2},
 $$
-kde $\mathcal{U}$ probíhá přes všechny ortonormální reprezentace grafu $G$. Pokud se stane, že $\left( \mathbf{c}^T \mathbf{u}_i \right)^2 \leq 0$, potom místo $\mathbf{u}_i$ budeme dále uvažovat vektor $-\mathbf{u}_i$. Můžeme tedy předpokládat, že $\forall i \in V(G):\ \left( \mathbf{c}^T \mathbf{u}_i \right)^2 \geq 0$. Potom hodnotu $1/\sqrt{\vartheta(G)}$ můžeme vyjádřit jako
+kde $\mathcal{U}$ probíhá přes všechny ortonormální reprezentace grafu $G$. Pokud se stane, že $c^T u_i \leq 0$, potom místo $u_i$ budeme dále uvažovat vektor $-u_i$. Můžeme tedy předpokládat, že $\forall i \in V(G):\ c^T u_i \geq 0$. Potom hodnotu $1/\sqrt{\vartheta(G)}$ můžeme vyjádřit jako
 $$
-    \frac{1}{\sqrt{\vartheta(G)}} = \max_\mathcal{U} \frac{1}{\sqrt{\vartheta(\mathcal{U})}} = \max_\mathcal{U} \max_{\|c\|=1} \min_{i \in V(G)} \mathbf{c}^T\mathbf{u}_i.
+    \frac{1}{\sqrt{\vartheta(G)}} = \max_\mathcal{U} \frac{1}{\sqrt{\vartheta(\mathcal{U})}} = \max_\mathcal{U} \max_{\|c\|=1} \min_{i \in V(G)} c^T u_i.
 $$
 Z čehož dostaneme následující vektorový program
 \begin{equation}\tag{VP1}
     \begin{split}
         &\max t \\
-        &\forall ij \in E(\bar{G}):\ \langle \mathbf{u}_i, \mathbf{u}_j \rangle = 0 \\
-        &\forall i \in V(G):\ \langle \mathbf{c}, \mathbf{u}_i \rangle \geq t \\
-        &\forall i \in V(G):\ \| \mathbf{u}_i \| = 1 \\
+        &\forall ij \in E(\bar{G}):\ \langle u_i, u_j \rangle = 0 \\
+        &\forall i \in V(G):\ \langle c, u_i \rangle \geq t \\
+        &\forall i \in V(G):\ \| u_i \| = 1 \\
         &\| c \| = 1.
     \end{split}
     \label{eq:VP1}
@@ -242,23 +242,23 @@ Z vektorového programu~\ref{eq:VP1} dále odvodíme semidefinitní program. Bud
 $$
     X =
     \begin{bmatrix}
-        \horzbar & \mathbf{c}^T   & \horzbar \\
-        \horzbar & \mathbf{u}_1^T & \horzbar \\
-                 & \vdots         & \\
-        \horzbar & \mathbf{u}_n^T & \horzbar
+        \horzbar & c^T    & \horzbar \\
+        \horzbar & u_1^T  & \horzbar \\
+                 & \vdots &          \\
+        \horzbar & u_n^T  & \horzbar
     \end{bmatrix}
     \begin{bmatrix}
-        \vertbar   & \vertbar     &       & \vertbar \\
-        \mathbf{c} & \mathbf{u}_1 & \dots & \mathbf{u}_n \\
-        \vertbar   & \vertbar     &       & \vertbar \\
+        \vertbar & \vertbar &       & \vertbar \\
+        c        & u_1      & \dots & u_n      \\
+        \vertbar & \vertbar &       & \vertbar \\
     \end{bmatrix},
 $$
 která je samozřejme pozitivně semidefinitní.
-Podmínkám $\forall i \in V(G):\ \| \mathbf{u}_i \| = 1$ a $\|c\|=1$ odpovídá podmínka $x_{ii} = 1$ pro $i = 0, 1, \dots, n$ (pro teď budeme indexovat matici $X$ od $0$). Podmínku $\forall ij \in E(\bar{G}):\ \langle \mathbf{u}_i, \mathbf{u}_j \rangle = 0$ přepíšeme na
+Podmínkám $\forall i \in V(G):\ \| u_i \| = 1$ a $\|c\|=1$ odpovídá podmínka $x_{ii} = 1$ pro $i = 0, 1, \dots, n$ (pro teď budeme indexovat matici $X$ od $0$). Podmínku $\forall ij \in E(\bar{G}):\ \langle u_i, u_j \rangle = 0$ přepíšeme na
 $$
     \forall ij \in E(\bar{G}):\ x_{ij} = 0.
 $$
-A konečně poslední podmínku $\forall i \in V(G):\ \langle \mathbf{c}, \mathbf{u}_i \rangle \geq t$ přepíšeme takto
+A konečně poslední podmínku $\forall i \in V(G):\ \langle c, u_i \rangle \geq t$ přepíšeme takto
 $$
     \forall i \in V(G):\ x_{0i} \geq t.
 $$
@@ -277,11 +277,11 @@ Dostáváme tedy semidefinitní program
 
 \subsection*{Program pro $\vartheta$}
 
-V původním článku od L.~Lovásze \textbf{[CITACE]} je další semidefinitní program, jehož řešením je přímo hodnota $\vartheta(G)$.
+V původním článku od L.~Lovásze \textbf{[REF]} je další semidefinitní program, jehož řešením je přímo hodnota $\vartheta(G)$.
 
 \begin{equation}\tag{SDP2}
     \begin{split}
-        &\max \textbf{Tr}\ XJ \\
+        &\max \langle X, J \rangle \\
         &\forall ij \in E(G):\ x_{ij} = 0 \\
         &\textbf{Tr}\ X = 1 \\
         &X \succeq 0,
@@ -335,7 +335,7 @@ Dříve jsme ukázali, že $\vartheta(C_5) = \sqrt{5} \approx 2.2361$. Navíc pr
 $$
     \vartheta(C_n) = \frac{n \cdot \cos(\frac{\pi}{n})}{1 + \cos(\frac{\pi}{n})}.
 $$
-Dostáváme tedy, že $\vartheta({C_7}) \approx 3.3177$. Hodnoty $\vartheta$ pro zbylé grafy byly spočítány na počítači v softwaru Mosek v programovacím jazyku Python (viz \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/theta.py}). Byla využita formulace \ref{eq:SDP2}. V tabulce~\ref{tab:sandwitch} jsou shrnuty všechny zmíněné hodnoty.
+Dostáváme tedy, že $\vartheta({C_7}) \approx 3.3177$. Hodnoty $\vartheta$ pro zbylé grafy byly spočítány na počítači v softwaru Mosek (viz \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/theta.py}). Byla využita formulace \ref{eq:SDP2}. V tabulce~\ref{tab:sandwitch} jsou shrnuty všechny zmíněné hodnoty.
 
 \begin{table}[h!]
     \centering
@@ -354,10 +354,17 @@ Dostáváme tedy, že $\vartheta({C_7}) \approx 3.3177$. Hodnoty $\vartheta$ pro
 
 \subsection*{Co víme o $\Theta(G)$}
 
-Shannonova kapacita je známá jen pro několik málo grafů. V \textbf{[REF]} Shannon dal dolní odhad na $\Theta(C_5)$ a až za 23 let Lovász ukázal pomocí konstrukce, kterou jsme si ukázali výše, že $\Theta(C_5) = \sqrt{5}$. Ve stejném článku \textbf{[REF]} je důkaz, že kapacita Petersenova grafu je $\Theta(GP_{5,2}) = 4$. Triviální případy $S_5$ a $K_5$ dostaneme ze sendvičové věty, tj. $\Theta(S_5) = 5$ a $\Theta(K_5) = 1$. Naopak pro $C_7$ hodnotu $\Theta$ neznáme. Máme dolní odhad $\alpha(C_7) = 3$ a horní odhad $\vartheta(C_7) \approx 3.3177$. Lepší dolní odhad, než dává $\alpha(C_7)$, ukázali Polak a Schriever \textbf{[REF]} tak, že pomocí počítače našli nezávislou množinu v grafu $C_7^5$ velikosti $367$. Z čehož dostaneme dolní odhad $\sqrt[5]{367} \approx 3.2579$. Hodnota $\Theta(C_7)$ je tedy někde mezi
+Shannonova kapacita je známá jen pro několik málo grafů. V \textbf{[REF]} Shannon dal dolní odhad na $\Theta(C_5)$ a až za 23 let Lovász ukázal pomocí konstrukce, kterou jsme si ukázali výše, že $\Theta(C_5) = \sqrt{5}$. Ve stejném článku \textbf{[REF]} je důkaz, že kapacita Petersenova grafu $GP_{5,2}$ je $4$. Triviální případy $S_5$ a $K_5$ dostaneme ze sendvičové věty, tj. $\Theta(S_5) = 5$ a $\Theta(K_5) = 1$. Naopak pro $C_7$ hodnotu $\Theta$ neznáme. Máme dolní odhad $\alpha(C_7) = 3$ a horní odhad $\vartheta(C_7) \approx 3.3177$. Lepší dolní odhad, než dává $\alpha(C_7)$, ukázali Polak a Schriever \textbf{[REF]} tak, že pomocí počítače našli nezávislou množinu v grafu $C_7^5$ velikosti $367$. Z čehož dostaneme dolní odhad $\sqrt[5]{367} \approx 3.2579$. Hodnota $\Theta(C_7)$ je tedy někde mezi
 $$
     3.2578 < \Theta(C_7) \leq 3.3177.
 $$
 
-% \section*{TODO}
-% podívat se na program na katedralni serveru, k jaké hodnotě jsme se dopracovali, o kolik je horší než Polakuv a Schrieverův odhad???
+Poznamenejme, že vylepšit dolní odhad na $\Theta(C_7)$ je výpočetně náročná úloha. Už pro $C_7^4$ se pomocí formulace
+\begin{equation*}
+    \begin{split}
+        &\max \sum_{i=1}^n x_i \\
+        &\forall ij \in E:\ x_i + x_j \leq 1 \\
+        &\forall i \in V:\ x_i \in \left\{ 0, 1 \right\}
+    \end{split}
+\end{equation*}
+nenajde užitečná nezávislá množina, která by měla velikost alespoň $108$ \textbf{[REF-Vesel-Žertovnik]}. K výpočtu byl použit framework \textbf{Gurobi} a program po $7$ měsících našel pouze nezávislou množinu velikosti $102$, která dává dolní odhad $\sqrt[4]{102} \approx 3.1779$.
