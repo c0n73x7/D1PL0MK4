@@ -28,15 +28,25 @@ def solve_sdp_program(A):
     A = A.copy()
     n = A.shape[0]
     with Model('theta_comp') as M:
+        #A = Matrix.dense(A.tolist())
         # variables
         U = M.variable('U', Domain.inPSDCone(n))
         t = M.variable('t', Domain.greaterThan(2.))
         # constraints
+        #print(Expr.reshape(Expr.repeat(Expr.sub(1.,t), n*n, 0), [n,n]).getShape())
+        M.constraint(
+            'xxxx',
+            Expr.mulElm(
+                Expr.mulElm(U, Matrix.dense(A)),
+                Expr.eval(Expr.reshape(Expr.repeat(Expr.sub(1.,t), n*n, 0), [n,n]))),
+            Domain.equalsTo(Matrix.dense(A)))
         for i in range(n):
             M.constraint(f'c{i},{i}', U.index(i, i), Domain.equalsTo(1.))
-            for j in range(i+1, n):
-                if A[i,j] != 0:
-                    pow_inv(M, U.index(i,j), Expr.sub(1., t), 1.)
+        
+            #for j in range(i+1, n):
+            #    if A[i,j] != 0:
+            #        M.constraint(f'c{i},{j}', Expr.mul(U.index(i,j), Expr.sub(1, t),), Domain.equalsTo(1.))
+            #        #pow_inv(M, U.index(i,j), Expr.sub(1., t), 1.)
         # objective function
         M.objective(ObjectiveSense.Minimize, t)
         # solve

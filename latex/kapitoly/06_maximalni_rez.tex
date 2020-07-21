@@ -109,7 +109,7 @@ Začneme dvěma lemmaty.
 
 
 \begin{lm}[KNUTH 2, 135]
-    Nechť $x = (x_1, \dots, x_n)$ je vektor, jehož prvky jsou zvoleny nezávisle z normálního normovaného rozdělení $N(0,1)$. Potom $r = \frac{x}{\| x \|}$ je náhodný vektor, který leží na jednotkové sféře $S_{n-1}$.
+    Nechť $x = (x_1, \dots, x_n)$ je vektor, jehož prvky jsou zvoleny nezávisle z normálního normovaného rozdělení $\mathcal{N}(0,1)$. Potom $r = \frac{x}{\| x \|}$ je náhodný vektor, který leží na jednotkové sféře $S_{n-1}$.
 \end{lm}
 
 Dále ukážeme, jak \uv{dobrou} aproximaci algoritmem~\ref{alg:max-cut} dostaneme. Označme
@@ -165,78 +165,81 @@ a kroky \textbf{2}, \textbf{3} opakujeme $\lceil \frac{1}{c} \rceil$-krát.
 
 V následující části si představíme semidefinitní (vektorové) formulace s aproximačními schématy z několika článků pro úlohu MAX~$k$-CUT a provedeme experiment, ve kterém je porovnáme na náhodném grafu.
 
-\subsection{Frieze-Jerrum a MAX-$k$-CUT \textbf{[REF]}}
+\subsection{Frieze-Jerrum a MAX $k$-CUT \textbf{[REF]}}
 
 \subsubsection*{Formulace}
 
-Uvažujme rovnostranný simplex $\Sigma_k$ v $\mathbf{R}^{k-1}$ s vrcholy $B_1, B_2, \dots, B_k$. Nechť $C = (B_1 + \dots + B_k) / k$ je těžiště $\Sigma_k$ a nechť $\mathbf{a}_i = B_i - C$, kde $i = 1, \dots, k$. Dále předpokládejme, že délka strany $\Sigma_k$ je taková, že $\|\mathbf{a}_i\| = 1$.
+Uvažujme rovnostranný simplex $\Sigma_k$ v $\mathbb{R}^{k-1}$ s vrcholy $b_1, b_2, \dots, b_k$. Nechť $c = (b_1 + \dots + b_k) / k$ je těžiště $\Sigma_k$ a nechť $a_i = b_i - c$, kde $i = 1, \dots, k$. Dále předpokládejme, že délka strany $\Sigma_k$ je taková, že $\| a_i\| = 1$.
 
-\begin{lm}
+\begin{lm}\textbf{[REF]}
     Pro $i \neq j$, platí
     $$
-        \langle \mathbf{a}_i, \mathbf{a}_j \rangle = -\frac{1}{k-1}.
+        \langle a_i, a_j \rangle = -\frac{1}{k-1}.
     $$
 \end{lm}
 
-\noindent Nyní můžeme formulovat úlohu MAX $k$-CUT následovně.
+\noindent Nyní můžeme formulovat úlohu MAX $k$-CUT následovně:
 
 \begin{equation}\tag{FJ}
     \begin{split}
-        &\max \frac{k}{k-1} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle \mathbf{y}_i, \mathbf{y}_j \rangle) \\
-        &\mathbf{y}_i \in \left\{ a_1, \dots, a_k \right\}.
+        &\max \frac{k-1}{k} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle y_i, y_j \rangle) \\
+        &y_i \in \left\{ a_1, \dots, a_k \right\}.
     \end{split}
     \label{eq:FJ}
 \end{equation}
 
 \noindent Poznamenejme, že
 $$
-    1 - \langle \mathbf{y}_i, \mathbf{y}_j \rangle = 
+    1 - \langle y_i, y_j \rangle = 
     \begin{cases}
-        0           & i = j, \\
-        k / (k - 1) & i \neq j.
+        0           & y_i = y_j, \\
+        k / (k - 1) & y_i \neq y_j.
     \end{cases}
 $$
 
+K získání vektorové relaxace programu~\ref{eq:FJ} nahradíme vektor $y_i$ vektorem $v_i$, kde $v_i$ je vektor na $S_{n-1}$.
+
 \begin{equation}\tag{FJ-RELAX}
     \begin{split}
-        &\max \frac{k}{k-1} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle \mathbf{v}_i, \mathbf{v}_j \rangle) \\
-        &\forall i \in V:\ \langle \mathbf{v}_i, \mathbf{v}_i \rangle = 1, \\
-        &\forall i,j \in V:\ \langle \mathbf{v}_i, \mathbf{v}_j \rangle \geq -\frac{1}{k-1} \\
-        &\forall i \in V:\ \mathbf{v}_i \in \mathbf{R}^n.
+        &\max \frac{k}{k-1} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle v_i, v_j \rangle) \\
+        &\forall i \in V:\ \langle v_i, v_i \rangle = 1, \\
+        &\forall i \neq j \in V:\ \langle v_i, v_j \rangle \geq -\frac{1}{k-1}, \\
+        &\forall i \in V:\ v_i \in \mathbb{R}^n.
     \end{split}
     \label{eq:FJ-RELAX}
 \end{equation}
 
+
 \subsubsection*{Aproximační schéma}
 
-Zvolíme $k$ náhodných vektorů $\mathbf{x}_1, \dots, \mathbf{x}_k \in \mathbf{R}^n$, kde každá složka každého vektoru je vybrána náhodně z normálního normovaného rozdělení $N(0,1)$. Pro každý vrchol $i \in V$ určíme $k$ skalárních součinů $\langle \mathbf{v}_i, \mathbf{x}_1 \rangle, \dots, \langle \mathbf{v}_i, \mathbf{x}_k \rangle$ a vrchol $i$ přidáme do množiny $V_j$, kde $j = \arg \max \left\{ \langle \mathbf{v}_i, \mathbf{x}_l \rangle \mid l = 1, \dots, k \right\}$.
+Zvolíme $k$ náhodných vektorů $z_1, \dots, z_k$ na jednotkové sféře $S_{n-1}$. Pro každý vrchol $i \in V$ určíme $k$ skalárních součinů $\langle v_i, z_1 \rangle, \dots, \langle v_i, z_k \rangle$ a vrchol $i$ přidáme do množiny $V_j$, kde $j = \arg \max \left\{ \langle v_i, x_l \rangle \mid l = 1, \dots, k \right\}$.
 
 
-\subsection{Goemans-Williamson a MAX-$3$-CUT \textbf{[REF]}}
+\subsection{Goemans-Williamson a MAX $3$-CUT \textbf{[REF]}}
 
 \subsubsection*{Formulace}
 
 \begin{equation}\tag{GW-RELAX}
     \begin{split}
-        &\max \frac{2}{3} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle \mathbf{v}_i^1, \mathbf{v}_j^1 \rangle) \\
-        &\forall i \in V\ \forall a,b \in \left\{ 1,2,3 \right\}:\ a \neq b \implies \langle v_i^a, v_i^b \rangle = -\frac{1}{2} \\
+        &\max \frac{2}{3} \sum_{1 \leq i < j \leq n} w_{ij} (1 - \langle v_i^1, v_j^1 \rangle) \\
+        &\forall i \in V\ \forall a,b \in \left\{ 1,2,3 \right\}, a \neq b:\ \langle v_i^a, v_i^b \rangle = -\frac{1}{2}, \\
         &\forall i,j \in V\ \forall a,b,c \in \left\{ 1,2,3 \right\}:\ \langle v_i^a, v_i^b \rangle = \langle v_i^{a+c}, v_i^{b+c} \rangle \\
         &\forall i,j \in V\ \forall a,b \in \left\{ 1,2,3 \right\}:\ \langle v_i^a, v_j^b \rangle \geq -\frac{1}{2} \\
         &\forall i \in V\ \forall a \in \left\{ 1,2,3 \right\}:\ \langle v_i^a, v_i^a \rangle = 1 \\
-        &\forall i \in V\ \forall a \in \left\{ 1,2,3 \right\}:\ v_i^a \in \mathbf{R}^{3n}
+        &\forall i \in V\ \forall a \in \left\{ 1,2,3 \right\}:\ v_i^a \in \mathbb{R}^{3n}
     \end{split}
     \label{eq:GW-RELAX}
 \end{equation}
 
 \subsubsection*{Aproximační schéma}
 
-Mějme $3n$ vektorů, které tvoří řešení \ref{eq:GW-RELAX}. Pro vrchol $i \in V$ leží vektory $v_i^1, v_i^2, v_i^3$ ve stejné rovině tak, že jsou otočeny o $120^{\circ}$. Nejprve zvolíme vektor $\mathbf{g} \in \mathbb{R}^{3n}$ takový, že každá složka je vybrána nezávisle z normálního normovaného rozdělení $N(0,1)$. Pro každý vrchol $i \in V$ uděláme projekci vektoru $\mathbf{g}$ do příslušné roviny. Odtud dostaneme úhel $\theta_i \in \langle 0, 2pi)$ pro každý vrchol. Náhodně zvolíme úhel $\psi \in \langle 0, \pi)$ a vrchol $i \in V$ přidáme do množiny $V_j$, jestliže
+Mějme $3n$ vektorů, které tvoří řešení \ref{eq:GW-RELAX}. Pro vrchol $i \in V$ leží vektory $v_i^1, v_i^2, v_i^3$ ve stejné rovině tak, že jsou otočeny o $\frac{2\pi}{3}$. Nejprve zvolíme vektor $g \in \mathbb{R}^{3n}$ takový, že každá složka je vybrána nezávisle z normálního normovaného rozdělení $\mathcal{N}(0,1)$. Pro každý vrchol $i \in V$ uděláme projekci vektoru $g$ do příslušné roviny. Odtud dostaneme úhel $\theta_i \in \langle 0, 2\pi)$ pro každý vrchol. Náhodně zvolíme úhel $\psi \in \langle 0, \pi)$ a vrchol $i \in V$ přidáme do množiny $V_j$, jestliže
 $$
     \theta_i \in \psi + \frac{j 2 \pi}{3}, j \in \left\{ 0, 1, 2 \right\},
 $$
 kde úhly počítáme modulo $2$.
 
-\subsection{de Klerk-Pasechnik-Warners a MAX-$k$-CUT \textbf{[REF]}}
+\subsection{de Klerk-Pasechnik-Warners a MAX $k$-CUT \textbf{[REF]}}
 
 \subsubsection*{Formulace}
 
@@ -257,17 +260,17 @@ Mějme optimální řešení $(U, \vartheta(\bar{G}))$ programu \ref{eq:THETA-BA
     Y = U \otimes \frac{k}{k - 1} \left( I_k - \frac{1}{k} e_k e_k^T \right).
 \end{equation}
 
-Uvažujeme rozklad matice $Y = V^T V$, kde $V = \left[ v_1^1\ v_1^2\ \dots\ v_1^k\ \dots\ v_n^k \right]$. Zvolíme náhodný jednotkový vektor $r \in \mathbb{R}^{kn}$ na sféře v $\mathbb{R}^{kn}$. Potom
+Uvažujeme rozklad matice $Y = V^T V$, kde $V = \left[ v_1^1\ v_1^2\ \dots\ v_1^k\ \dots\ v_n^k \right]$. Zvolíme náhodný jednotkový vektor $g \in \mathbb{R}^{kn}$ na sféře v $\mathbb{R}^{kn}$. Potom
 $$
     x_i^p = 
     \begin{cases}
-        1  & r^T v_i^p = \max_{q = 1, \dots, k} \left\{ r^T v_i^q \right\}, \\
+        1  & r^T v_i^p = \max \left\{ \langle g, v_i^q \rangle \mid q = 1, \dots, k \right\}, \\
         -1 & \text{jinak.}
     \end{cases}
 $$
 
 
-\subsection{Newman a MAX-$k$-CUT \textbf{[REF]}}
+\subsection{Newman a MAX $k$-CUT \textbf{[REF]}}
 
 \subsubsection*{Formulace}
 
@@ -275,20 +278,26 @@ Používá formulaci \ref{eq:FJ-RELAX}.
 
 \subsubsection*{Aproximační schéma 1}
 
-Následující aproximační schéma zobecňuje přístup z \textbf{[REF]}. Nechť $\mathbf{0}$ je nulový vektor dimenze $n$. Pro každý vrchol $i \in V$ definujeme dva vektory
+Následující aproximační schéma zobecňuje přístup z \textbf{[REF]}. Vyřešením programu~\ref{eq:FJ-RELAX} dostaneme řešení $v_1, \dots, v_n$. Pro každý vrchol $i \in V$ definujeme dva vektory v $\mathbb{R}^{2n}$
 $$
-    \mathbf{u}_i = \left( \mathbf{v}_i, \mathbf{0} \right), \mathbf{u}_i^\bot = \left( \mathbf{0}, \mathbf{v}_i \right),
+    u_i = \left( v_i, 0 \right), u_i^\bot = \left( 0, v_i \right).
 $$
-které generují rovinu v prostoru $\mathbf{R}^{2n}$. $2$-dimenzionální disk je množina vektorů
+$2$-dimenzionální disk je množina vektorů
 $$
-    \mathbf{u}_i(\theta) = \mathbf{u}_i \cos \theta + \mathbf{u}_i^\bot \sin \theta, \theta \in \langle 0, \pi).
+    u_i(\theta) = u_i \cos \theta + u_i^\bot \sin \theta, \theta \in \langle 0, \pi).
 $$
-Dále zvolíme náhodný vektor $\mathbf{r} \in \mathbb{R}^{2n}$, kde každá složka je vybrána náhodně z normálního normovaného rozdělení $N(0,1)$. Pro každý vrchol $i \in V$ určíme projekci vektoru $\mathbf{r}$ na disk $\left\{ \mathbf{u}_i(\theta) \mid \theta \in \langle 0, \pi ) \right\}$ a určíme úhly
+Dále zvolíme náhodný vektor $g \in \mathbb{R}^{2n}$, kde každá složka je vybrána náhodně z normálního normovaného rozdělení $\mathcal{N}(0,1)$. Pro každý vrchol $i \in V$ uděláme projekci vektoru $g$ na disk $\left\{ u_i(\theta) \mid \theta \in \langle 0, \pi ) \right\}$ a určíme úhly
 $$
-    \theta_i = \arctan \left( \frac{\langle \mathbf{r}, \mathbf{u}_i^\bot \rangle}{\langle \mathbf{r}, \mathbf{u}_i \rangle} \right), \langle \mathbf{r}, \mathbf{u}_i^\bot \rangle \geq 0,
+    \theta_i = \arctan \left( \frac{\langle g, u_i^\bot \rangle}{\langle g, u_i \rangle} \right), \langle g, u_i \rangle \geq 0, \langle g, u_i^\bot \rangle \geq 0,
 $$
 $$
-    \theta_i = \arctan \left( \frac{\langle \mathbf{r}, \mathbf{u}_i^\bot \rangle}{\langle \mathbf{r}, \mathbf{u}_i \rangle} \right) + \pi,\langle \mathbf{r}, \mathbf{u}_i \rangle \leq 0.
+    \theta_i = \arctan \left( \frac{\langle g, u_i^\bot \rangle}{\langle g, u_i \rangle} \right) + \pi, \langle g, u_i \rangle \leq 0, \langle g, u_i^\bot \rangle \geq 0,
+$$
+$$
+    \theta_i = \arctan \left( \frac{\langle g, u_i^\bot \rangle}{\langle g, u_i \rangle} \right) + \pi, \langle g, u_i \rangle \geq 0, \langle g, u_i^\bot \rangle \leq 0,
+$$
+$$
+    \theta_i = \arctan \left( \frac{\langle g, u_i^\bot \rangle}{\langle g, u_i \rangle} \right) + 2\pi, \langle g, u_i \rangle \leq 0, \langle g, u_i^\bot \rangle \leq 0.
 $$
 
 Pro každý vrchol $i \in V$ máme tedy úhel $\theta_i$. Náhodně zvolíme úhel $\psi \in \langle 0, 2 \pi )$ a vrchol $i \in V$ přidáme do množiny $V_j$, jestliže
@@ -300,9 +309,9 @@ kde úhly počítáme modulo $2$.
 
 \subsubsection*{Aproximační schéma 2}
 
-Princip je podobný, akorát pro každý vrchol $i \in V$ zvolíme $k-1$ náhodných vektorů $\mathbf{g}_1, \dots, \mathbf{g}_k$ takových, že každá složka každého vektoru je vybrána náhodně z normálního normovaného rozdělení $N(0,1)$. Pro každý vrchol $i \in V$ určíme vektor
+Princip je podobný, akorát pro každý vrchol $i \in V$ zvolíme $k-1$ náhodných vektorů $g_1, \dots, g_k$ takových, že každá složka každého vektoru je vybrána náhodně z normálního normovaného rozdělení $\mathcal{N}(0,1)$. Pro každý vrchol $i \in V$ určíme vektor
 $$
-    \left( \langle \mathbf{g}_1, \mathbf{v}_i \rangle, \dots, \langle \mathbf{g}_{k-1}, \mathbf{v}_i \rangle \right) \in \mathbb{R}^{k-1}.
+    \left( \langle g_1, v_i \rangle, \dots, \langle g_{k-1}, v_i \rangle \right) \in \mathbb{R}^{k-1}.
 $$
 Každý z těchto vektorů je přiřazen nejbližšímu vrcholu $\Sigma_k$.
 
@@ -316,13 +325,12 @@ $$
 \subsubsection*{Aproximační poměry}
 \begin{center}
     \begin{tabular}{ c c c c c }
-    $k$ & FJ         & GW                  & dKPW                & N1         \\
+    $k$  & FJ         & GW                  & dKPW                & N1         \\
     \hline
-    $3$ & $0.832718$ & $\mathbf{0.836008}$ & $\mathbf{0.836008}$ &            \\  
-    $4$ & $0.850304$ &                     & $\mathbf{0.857487}$ & $0.846478$ \\
-    $5$ & $0.874243$ &                     & $\mathbf{0.876610}$ & $0.862440$ \\
-    $6$ & TODO       &                     & TODO                & TODO       \\
-    $7$ & TODO       &                     & TODO                & TODO       \\
+    $3$  & $0.832718$ & $\mathbf{0.836008}$ & $\mathbf{0.836008}$ &            \\  
+    $4$  & $0.850304$ &                     & $\mathbf{0.857487}$ & $0.846478$ \\
+    $5$  & $0.874243$ &                     & $\mathbf{0.876610}$ & $0.862440$ \\
+    $10$ & $0.926642$ &                     & $\mathbf{0.926788}$ & $0.915885$ \\
     \end{tabular}
 \end{center}
 
@@ -332,10 +340,10 @@ $$
     $k$ & FJ         & GW                  & N1                  & N2         \\
     \hline
     $3$ & $1822$     & TODO                &                     &            \\  
-    $4$ & $2006$     &                     & TODO                & TODO       \\
-    $5$ & $2121$     &                     & TODO                & TODO       \\
-    $6$ & $2172$     &                     & TODO                & TODO       \\
-    $7$ & $2222$     &                     & TODO                & TODO       \\
+    $4$ & $2006$     &                     & $1875$              & TODO       \\
+    $5$ & $2121$     &                     & $2008$              & TODO       \\
+    $6$ & $2172$     &                     & $2069$              & TODO       \\
+    $7$ & $2222$     &                     & $2141$              & TODO       \\
     \end{tabular}
 \end{center}
 

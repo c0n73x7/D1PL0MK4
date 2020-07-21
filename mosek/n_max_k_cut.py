@@ -45,12 +45,27 @@ def find_partition(A, W, k):
     W = W.copy()
     n = A.shape[0]
     # random vectors
-    random_vectors = [np.random.normal(0, 1, n) for _ in range(k)]
+    g = np.random.normal(0, 1, 2*n)
+    psi = np.random.uniform(0,2*np.pi)
     # labels
     labels = list()
     for i in range(n):
-        prods = np.array([np.dot(A[i,:], g) for g in random_vectors])
-        labels.append(np.argmax(prods))
+        vi = A[i,:]
+        ui1 = np.concatenate((vi, np.zeros(n, dtype=float)))
+        ui2 = np.concatenate((np.zeros(n, dtype=float), vi))
+        prod1 = np.dot(g, ui1)
+        prod2 = np.dot(g, ui2)
+        theta = psi
+        if prod1 >= 0 and prod2 >= 0:
+            theta += np.arctan(prod2 / prod1)
+        elif prod1 <= 0 and prod2 >= 0:
+            theta += np.arctan(prod2 / prod1) + np.pi
+        elif prod1 <= 0 and prod2 <= 0:
+            theta += np.arctan(prod2 / prod1) + np.pi
+        elif prod1 >= 0 and prod2 <= 0:
+            theta += np.arctan(prod2 / prod1) + 2 * np.pi
+        theta = theta % 2*np.pi
+        labels.append(int((theta * k) / (2 * np.pi)))
     labels = np.array(labels)
     # sum of weights
     s = 0
@@ -71,11 +86,10 @@ if __name__ == "__main__":
     A = cholesky(RELAX)
     sums = list()
     best_sum = -1
-    for _ in tqdm(range(10)):
+    for _ in range(10):
         res = find_partition(A, W, k)
         s = res.get('sum')
         sums.append(s)
         if s > best_sum:
             best_sum = s
     print(f'best sum of cut weights is {best_sum}')
-    # print(sums)
