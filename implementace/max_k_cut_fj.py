@@ -1,16 +1,5 @@
 import numpy as np
-from numpy.linalg import cholesky
 from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
-from tqdm import tqdm
-
-
-def generate_random_graph(n, seed=23):
-    np.random.seed(seed)
-    W = np.zeros((n,n))
-    for i in range(n):
-        for j in range(i+1, n):
-            W[i,j] = W[j,i] = np.random.randint(2)
-    return W
 
 
 def solve_sdp_program(W, k):
@@ -58,24 +47,4 @@ def find_partition(A, W, k):
         for i in np.argwhere(labels == l).flatten():
             for j in np.argwhere(labels != l).flatten():
                 s += W[i][j]
-    return {
-        'labels': labels,
-        'sum': s/2.,
-    }
-
-
-if __name__ == "__main__":
-    W = generate_random_graph(100)
-    k = 7
-    RELAX = solve_sdp_program(W, k)
-    A = cholesky(RELAX)
-    sums = list()
-    best_sum = -1
-    for _ in tqdm(range(10)):
-        res = find_partition(A, W, k)
-        s = res.get('sum')
-        sums.append(s)
-        if s > best_sum:
-            best_sum = s
-    print(f'best sum of cut weights is {best_sum}')
-    # print(sums)
+    return s/2.

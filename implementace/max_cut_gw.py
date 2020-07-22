@@ -1,7 +1,6 @@
 import numpy as np
-from numpy.linalg import cholesky, norm
+from numpy.linalg import norm
 from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
-from tqdm import tqdm
 
 
 def generate_random_graph(n, seed=23):
@@ -52,35 +51,8 @@ def find_cut(A, W):
         else:
             S_comp.append(i)
     # sum of cut weights
-    sum_cut_weights = 0
+    s = 0
     for i in S:
         for j in S_comp:
-            sum_cut_weights += W[i][j]
-    return {
-        'S': S,
-        'S_comp': S_comp,
-        'sum_cut_weights': sum_cut_weights,
-    }
-
-
-if __name__ == "__main__":
-    W = generate_random_graph(100)
-    RELAX = solve_sdp_program(W)
-    A = cholesky(RELAX)
-    np.random.seed(1)
-    eps   = 0.00001
-    alpha = 0.87856
-    c = (eps * alpha) / (2 + 2 * eps - alpha)
-    print(f'for eps={eps}, run step 2 and 3 {int(1/c + 1)} times')
-    cut_sums = list()
-    best_sum = -1
-    best_S, best_S_comp = list(), list()
-    for _ in tqdm(range(int(1/c + 1))):
-        res = find_cut(A, W)
-        cut_sum = res.get('sum_cut_weights')
-        cut_sums.append(cut_sum)
-        if cut_sum > best_sum:
-            best_sum = cut_sum
-            best_S = res.get('S')
-            best_S_comp = res.get('S_comp')
-    print(f'best sum of cut weights is {best_sum}')
+            s += W[i][j]
+    return s
