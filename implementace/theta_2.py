@@ -1,6 +1,14 @@
-
 import numpy as np
 from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
+
+
+def test_graph():
+    return np.array([
+        [0, 1, 0, 0, 1],
+        [1, 0, 1, 0, 0],
+        [0, 1, 0, 1, 0],
+        [0, 0, 1, 0, 1],
+        [1, 0, 0, 1, 0]])
 
 
 def solve_sdp_program(A):
@@ -23,11 +31,15 @@ def solve_sdp_program(A):
             for j in range(i+1, n+1):
                 if A[i-1,j-1] == 0:
                     M.constraint(f'c{i},{j}', X.index(i,j), Domain.equalsTo(0.))
-        # solve
-        M.solve()
         # solution
+        M.solve()
         X_sol = X.level()
         t_sol = t.level()
     t_sol = t_sol[0]
     theta = 1. / t_sol**2
     return theta
+
+
+if __name__ == "__main__":
+    A = test_graph()
+    print(solve_sdp_program(A))

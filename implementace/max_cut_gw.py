@@ -1,15 +1,16 @@
 import numpy as np
-from numpy.linalg import norm
+from numpy.linalg import norm, cholesky
 from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
 
 
-def generate_random_graph(n, seed=23):
-    np.random.seed(seed)
-    W = np.zeros((n,n))
-    for i in range(n):
-        for j in range(i+1, n):
-            W[i,j] = W[j,i] = np.random.randint(2)
-    return W
+def test_graph():
+    return np.array([
+        [0, 0, 0, 1, 1, 1],
+        [0, 0, 0, 1, 1, 1],
+        [0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0],
+        [1, 1, 1, 0, 0, 0],
+        [1, 1, 1, 0, 0, 0]])
 
 
 def solve_sdp_program(W):
@@ -34,19 +35,19 @@ def solve_sdp_program(W):
     return np.reshape(Y_opt, (n,n))
 
 
-def find_cut(A, W):
-    assert A.ndim == W.ndim == 2
-    assert A.shape[0] == A.shape[1] == W.shape[0] == W.shape[1]
-    A = A.copy()
+def find_cut(L, W):
+    assert L.ndim == W.ndim == 2
+    assert L.shape[0] == L.shape[1] == W.shape[0] == W.shape[1]
+    L = L.copy()
     W = W.copy()
-    n = A.shape[0]
+    n = L.shape[0]
     # generate random vector on ndim-sphere
     r = np.random.normal(0, 1, n)
     r /= norm(r)
     # find cut
     S, S_comp = list(), list()
     for i in range(n): 
-        if np.dot(A[i,:], r) >= 0:
+        if np.dot(L[i,:], r) >= 0:
             S.append(i)
         else:
             S_comp.append(i)
@@ -56,3 +57,14 @@ def find_cut(A, W):
         for j in S_comp:
             s += W[i][j]
     return s
+
+
+if __name__ == "__main__":
+    W = test_graph()
+    relax = solve_sdp_program(W)
+    L = cholesky(relax)
+    sums = list()
+    for _ in range(1000):
+        s = find_cut(L, W)
+        sums.append(s)
+    print(max(sums))
