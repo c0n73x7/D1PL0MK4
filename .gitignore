@@ -3,6 +3,7 @@
 venv
 literatura
 .ipynb_checkpoints
+__pycache__
 
 *.toc
 *.log
