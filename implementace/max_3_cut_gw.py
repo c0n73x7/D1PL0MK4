@@ -1,20 +1,20 @@
 import numpy as np
 from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
 from itertools import product
-from numpy.linalg import cholesky
+from numpy.linalg import cholesky, norm
 
 
 def test_graph():
     return np.array([
-        [0, 0, 0, 1, 1, 1, 0, 0, 0],
-        [0, 0, 0, 1, 1, 1, 0, 0, 0],
-        [0, 0, 0, 1, 1, 1, 0, 0, 0],
+        [0, 0, 0, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 1, 1, 1, 1, 1, 1],
+        [0, 0, 0, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 0, 0, 0, 1, 1, 1],
         [1, 1, 1, 0, 0, 0, 1, 1, 1],
         [1, 1, 1, 0, 0, 0, 1, 1, 1],
-        [0, 0, 0, 1, 1, 1, 0, 0, 0],
-        [0, 0, 0, 1, 1, 1, 0, 0, 0],
-        [0, 0, 0, 1, 1, 1, 0, 0, 0]])
+        [1, 1, 1, 1, 1, 1, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 0, 0, 0]])
 
 
 def expand_matrix(A):
@@ -58,12 +58,58 @@ def solve_sdp_program(W):
     return np.reshape(Y_opt, (3*n,3*n))
 
 
-def find_partition(L, W):
-    pass
+def find_partition(L, W, iters=1000):
+    assert L.ndim == W.ndim == 2
+    assert L.shape[0] == L.shape[1]
+    assert W.shape[0] == W.shape[1]
+    assert L.shape[0] == 3*W.shape[0]
+    L = L.copy()
+    W = W.copy()
+    n = W.shape[0]
+    sums = list()
+    for _ in range(iters):
+        # random vector and random angle
+        g = np.random.normal(0, 1, 3*n)
+        psi = np.random.uniform(0, 2*np.pi)
+        # angles
+        angles = list()
+        for i in range(n):
+            vi1, vi2, vi3 = L[3*i,:], L[3*i+1,:], L[3*i+2,:]
+            a = vi1
+            b = vi2 - np.dot(vi2, a) * a
+            gproj = np.dot(g, a) * a + np.dot(g, b) * b
+            gproj /= norm(gproj)
+            theta1 = np.arccos(np.dot(gproj, vi1))
+            theta2 = np.arccos(np.dot(gproj, vi2))
+            theta3 = np.arccos(np.dot(gproj, vi3))
+            angle = 2 * np.pi / 3
+            if theta1 <= angle and theta3 < angle:
+                angles.append(theta3)
+            elif theta2 < angle and theta3 <= angle:
+                angles.append(2*np.pi - theta3)
+            elif theta1 < angle and theta2 <= angle:
+                angles.append(angle + theta1)
+            else:
+                raise Exception('angle error')
+        # labels
+        labels = list()
+        for angle in angles:
+            label = int(((angle + psi) % 2*np.pi) / (2 * np.pi / 3))
+            labels.append(label)
+        labels = np.array(labels)
+        # sum
+        s = 0
+        for l in range(3):
+            for i in np.argwhere(labels == l).flatten():
+                for j in np.argwhere(labels != l).flatten():
+                    s += W[i][j]
+        sums.append(int(s/2))
+    return max(sums)
 
 
 if __name__ == "__main__":
     W = test_graph()
     relax = solve_sdp_program(W)
     L = cholesky(relax)
-    print(L)
+    best_sum = find_partition(L, W)
+    print(best_sum)

@@ -35,36 +35,36 @@ def solve_sdp_program(W):
     return np.reshape(Y_opt, (n,n))
 
 
-def find_cut(L, W):
+def find_cut(L, W, iters=1000):
     assert L.ndim == W.ndim == 2
     assert L.shape[0] == L.shape[1] == W.shape[0] == W.shape[1]
     L = L.copy()
     W = W.copy()
     n = L.shape[0]
-    # generate random vector on ndim-sphere
-    r = np.random.normal(0, 1, n)
-    r /= norm(r)
-    # find cut
-    S, S_comp = list(), list()
-    for i in range(n): 
-        if np.dot(L[i,:], r) >= 0:
-            S.append(i)
-        else:
-            S_comp.append(i)
-    # sum of cut weights
-    s = 0
-    for i in S:
-        for j in S_comp:
-            s += W[i][j]
-    return s
+    sums = list()
+    for _ in range(iters):
+        # generate random vector on ndim-sphere
+        r = np.random.normal(0, 1, n)
+        r /= norm(r)
+        # find cut
+        S, S_comp = list(), list()
+        for i in range(n): 
+            if np.dot(L[i,:], r) >= 0:
+                S.append(i)
+            else:
+                S_comp.append(i)
+        # sum of cut weights
+        s = 0
+        for i in S:
+            for j in S_comp:
+                s += W[i][j]
+        sums.append(s)
+    return max(sums)
 
 
 if __name__ == "__main__":
     W = test_graph()
     relax = solve_sdp_program(W)
     L = cholesky(relax)
-    sums = list()
-    for _ in range(1000):
-        s = find_cut(L, W)
-        sums.append(s)
-    print(max(sums))
+    best_sum = find_cut(L, W)
+    print(best_sum)
