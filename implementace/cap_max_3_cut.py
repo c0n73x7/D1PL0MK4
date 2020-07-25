@@ -12,10 +12,8 @@ def find_partition(L, W, iters=1000):
     L = L.copy()
     W = W.copy()
     n = W.shape[0]
-    best_sum = -1
-    best_angles = list()
-    best_labels = list()
-    best_psi = -1
+    best_sum, best_psi = -1, -1
+    best_angles, best_labels = list(), list()
     for _ in range(iters):
         # random vector and random angle
         g = np.random.normal(0, 1, 3*n)
@@ -39,24 +37,12 @@ def find_partition(L, W, iters=1000):
             elif theta1 < angle and theta2 <= angle:
                 angles.append(angle + theta1)
             else:
-                raise Exception('angle error')
-        # labels
-        labels = list()
-        for angle in angles:
-            label = int(((angle + psi) % 2*np.pi) / (2 * np.pi / 3))
-            labels.append(label)
-        labels = np.array(labels)
-        # sum
-        s = 0
-        for l in range(3):
-            for i in np.argwhere(labels == l).flatten():
-                for j in np.argwhere(labels != l).flatten():
-                    s += W[i][j]
+                raise Exception('Angle Error')
+        labels = get_labels(angles, psi)
+        s = get_sum_of_weights(labels, W)
         if s > best_sum:
-            best_sum = s
-            best_psi = psi
-            best_angles = angles.copy()
-            best_labels = labels.copy()
+            best_sum, best_psi = s, psi
+            best_angles, best_labels = angles.copy(), labels.copy()
     return {
         'sum': best_sum,
         'psi': best_psi,
@@ -65,34 +51,65 @@ def find_partition(L, W, iters=1000):
     }
 
 
+def get_labels(angles, psi):
+    labels = list()
+    for angle in angles:
+        label = int(((angle + psi) % 2*np.pi) / (2 * np.pi / 3))
+        labels.append(label)
+    return np.array(labels)
+
+
+def get_sum_of_weights(labels, W):
+    s = 0
+    for l in range(3):
+        for i in np.argwhere(labels == l).flatten():
+            for j in np.argwhere(labels != l).flatten():
+                s += W[i][j]
+    return int(s / 2.)
+
+
+def balance(seq, psi, angles, labels):
+    seq, angles, labels = seq.copy(), angles.copy(), labels.copy()
+    centers = [(psi + np.pi / 3) % (2*np.pi), (psi + np.pi) % (2*np.pi), (psi + 5 * np.pi / 3) % (2*np.pi)]
+    filling = get_filling(seq, labels)
+    while any([x > 0 for x in filling.values()]):
+        label = [l for l, f in filling.items() if f > 0][0]
+        label_ids = [i for i, m in enumerate(labels == label) if m]
+        label_angles = np.array([angles[i] for i in label_ids])
+        min_angle_idx, max_angle_idx = np.argmin(label_angles), np.argmax(label_angles)
+        candidates = list()
+        for free_label in [l for l, f in filling.items() if f < 0]:
+            dist4min = np.abs(label_angles[min_angle_idx] - centers[free_label]) % (2*np.pi)
+            dist4max = np.abs(label_angles[max_angle_idx] - centers[free_label]) % (2*np.pi)
+            vertex_idx = label_ids[min_angle_idx] if dist4min < dist4max else label_ids[max_angle_idx]
+            candidates.append({
+                'to': free_label,
+                'vertex_idx': vertex_idx,
+                'dist': min(dist4min, dist4max),
+            })
+        best_candidate = sorted(candidates, key=lambda x: x['dist'])[0]
+        labels[best_candidate['vertex_idx']] = best_candidate['to']
+        filling = get_filling(seq, labels)
+    return labels
+
+
+def get_filling(seq, labels):
+    state = dict(Counter(labels))
+    state = sorted(state.items(), key = lambda x:(x[1], -x[0]) , reverse=True)
+    filling = dict()
+    for s, item in zip(seq, state):
+        label, count = item[0], item[1]
+        filling[label] = s - count
+    return filling
+
+
 if __name__ == "__main__":
     W = test_graph()
     seq = [4, 3, 2]
     relax = solve_sdp_program(W)
     L = cholesky(relax)
     res = find_partition(L, W)
-    angles, labels = res.get('angles'), res.get('labels')
-    psi = res.get('psi')
-    centers = [psi + np.pi / 3, psi + np.pi, psi + 5 * np.pi / 3]
-    counter = dict(Counter(labels))
-    counter = sorted(counter.items(), key = lambda x:(x[1], -x[0]) , reverse=True)
-
-    candidates = dict()
-    for s, c_item in zip(seq, counter):
-        label, count = c_item[0], c_item[1]
-        candidates[label] = s - count
-    for label, fullnes in candidates.items():
-        if fullnes > 0:
-            # kandidati k presunuti
-            mask = labels == label
-            angles4set = list()
-            for i, m in enumerate(mask):
-                if m:
-                    angles4set.append(angles[i])
-            min_angle, max_angle = min(angles4set), max(angles4set)
-            # najdi vsechny volne mnoziny
-            available_sets = [k for k,v in candidates.items() if v < 0]
-            for av_set in available_sets:
-                print(np.abs(min_angle - centers[av_set]))
-                print(np.abs(max_angle - centers[av_set]))
-                # TODO: dodelat a rozdelit do funkci, je to takhle hnus
+    print(res.get('sum'))
+    labels = balance(seq, res.get('psi'), res.get('angles'), res.get('labels'))
+    s = get_sum_of_weights(labels, W)
+    print(s)
