@@ -12,66 +12,65 @@ def test_graph():
         [1, 1, 1, 0, 0, 0]])
 
 
-def initialization(n):
+def initialization(n, seq):
     random.seed(23)
-    vertices = [i for i in range(n)]
-    partition = list()
-    for i in range(k):
-        V = list()
-        while len(V) < n / k:
-            item = random.choice(vertices)
-            V.append(item)
-            vertices.remove(item)
-        partition.append(V)
-    return partition
+    k = len(seq)
+    labels = np.array([-1 for _ in range(n)])
+    for v in range(n):
+        available_labels = list()
+        for label in range(k):
+            if sum(labels == label) < seq[label]:
+                available_labels.append(label)
+        random_label = random.choice(available_labels)
+        labels[v] = random_label
+    return len(set(labels)), labels
 
 
-def iterative_step(k, partition, W):
+def iterative_step(labels, k, W):
+    labels = labels.copy()
+    W = W.copy()
     for i in range(k):
+        Si = [i for i, b in enumerate(labels == i) if b]
         for l in range(i+1, k):
-            for u in partition[i]:
-                wui = sum([W[u,x] for x in partition[i]])
-                wul = sum([W[u,x] for x in partition[l]])
-                for v in partition[l]:
-                    wvi = sum([W[v,x] for x in partition[i]])
-                    wvl = sum([W[v,x] for x in partition[l]])
+            Sl = [i for i, b in enumerate(labels == l) if b]
+            for u in Si:
+                wui = sum([W[u,x] for x in Si])
+                wul = sum([W[u,x] for x in Sl])
+                for v in Sl:
+                    wvi = sum([W[v,x] for x in Si])
+                    wvl = sum([W[v,x] for x in Sl])
+                    #  len(Si)*wui + len(Sl)*wvl > len(Si)*wul + len(Sl)*wvi ... algoritmus se cyklí (v paperu to tak ale je..)
                     if wui + wvl > wul + wvi:
-                        return dict(i=i, l=l, u=u, v=v)
-    return dict()
+                        labels[u], labels[v] = l, i
+                        return True, labels
+    return False, labels
 
 
-def local_search(W, k):
+def local_search(W, seq):
     assert W.ndim == 2
     assert W.shape[0] == W.shape[1]
+    assert len(seq) > 1
     n = W.shape[0]
-    assert n % k == 0
-    partition = initialization(W.shape[0])
+    k, labels = initialization(n, seq)
     while True:
-        step = iterative_step(k, partition, W)
+        step, labels = iterative_step(labels, k, W)
         if not step:
             break
-        i, l = step.get('i'), step.get('l')
-        u, v = step.get('u'), step.get('v')
-        partition[i].append(v)
-        partition[i].remove(u)
-        partition[l].append(u)
-        partition[l].remove(v)
-    # labels
-    labels = np.zeros(n) - 1
-    for label, V in enumerate(partition):
-        for i in V:
-            labels[i] = label
-    # sum
+    return labels
+
+def get_sum_of_weights(labels, W):
+    k = len(set(labels))
     s = 0
     for l in range(k):
         for i in np.argwhere(labels == l).flatten():
             for j in np.argwhere(labels != l).flatten():
                 s += W[i][j]
-    return s/2.
+    return int(s / 2)
 
 
 if __name__ == "__main__":
-    k = 2
     W = test_graph()
-    s = local_search(W, k)
+    seq = [3, 3]
+    labels = local_search(W, seq)
+    s = get_sum_of_weights(labels, W)
     print(s)
