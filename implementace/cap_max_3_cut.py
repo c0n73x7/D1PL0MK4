@@ -89,7 +89,8 @@ def balance(seq, psi, angles, labels):
             })
         best_candidate = sorted(candidates, key=lambda x: x['dist'])[0]
         labels[best_candidate['vertex_idx']] = best_candidate['to']
-        filling = get_filling(seq, labels)
+        filling[label] -= 1
+        filling[best_candidate['to']] += 1
     return labels
 
 
@@ -99,13 +100,13 @@ def get_filling(seq, labels):
     filling = dict()
     for s, item in zip(seq, state):
         label, count = item[0], item[1]
-        filling[label] = s - count
+        filling[label] = count - s
     return filling
 
 
 if __name__ == "__main__":
     W = test_graph()
-    seq = [4, 3, 2]
+    seq = [5, 2, 2]
     relax = solve_sdp_program(W)
     L = cholesky(relax)
     res = find_partition(L, W)
