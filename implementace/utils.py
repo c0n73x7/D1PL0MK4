@@ -1,5 +1,6 @@
 import json
 import os
+import random
 import numpy as np
 import numpy.linalg as la
 
@@ -39,12 +40,19 @@ def generate_simplex(k):
     return Q[:,1:]
 
 
-def generate_random_graph(n, seed=23):
-    np.random.seed(seed)
-    W = np.zeros((n,n))
+def generate_random_graph(n, density=0.5, seed=23):
+    random.seed(seed)
+    W = np.zeros((n, n))
+    m = int(density * n * (n - 1) / 2)
+    edges = list()
     for i in range(n):
         for j in range(i+1, n):
-            W[i,j] = W[j,i] = np.random.randint(2)
+            edges.append([i,j])
+    for _ in range(m):
+        e = random.choice(edges)
+        edges.remove(e)
+        i, j = e[0], e[1]
+        W[i, j] = W[j, i] = 1
     return W
 
 

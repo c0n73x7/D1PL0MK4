@@ -2,6 +2,7 @@ import numpy as np
 from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
 from itertools import product
 from numpy.linalg import cholesky, norm
+from utils import generate_random_graph
 
 
 def test_graph():
@@ -49,9 +50,9 @@ def solve_sdp_program(W):
             M.constraint(f'c_{i}^12', Y.index(i*3+1, i*3+2), Domain.equalsTo(-1/2.))
             for j in range(i+1, n):
                 for a, b in product(range(3), repeat=2):
-                    M.constraint(f'c_{i}{j}^{a}{b}', Y.index(i*3 + a, j*3 + b), Domain.greaterThan(-1/2.))
-                    M.constraint(f'c_{i}{j}^{a}{b}1', Expr.sub(Y.index(i*3 + a, j*3 + b), Y.index(i*3 + (a + 1) % 3, j*3 + (b + 1) % 3)), Domain.equalsTo(0.))
-                    M.constraint(f'c_{i}{j}^{a}{b}2', Expr.sub(Y.index(i*3 + a, j*3 + b), Y.index(i*3 + (a + 2) % 3, j*3 + (b + 2) % 3)), Domain.equalsTo(0.))
+                    M.constraint(f'c_{i}{j}^{a}{b}-0', Y.index(i*3 + a, j*3 + b), Domain.greaterThan(-1/2.))
+                    M.constraint(f'c_{i}{j}^{a}{b}-1', Expr.sub(Y.index(i*3 + a, j*3 + b), Y.index(i*3 + (a + 1) % 3, j*3 + (b + 1) % 3)), Domain.equalsTo(0.))
+                    M.constraint(f'c_{i}{j}^{a}{b}-2', Expr.sub(Y.index(i*3 + a, j*3 + b), Y.index(i*3 + (a + 2) % 3, j*3 + (b + 2) % 3)), Domain.equalsTo(0.))
         # solution
         M.solve()
         Y_opt = Y.level()
@@ -90,7 +91,7 @@ def find_partition(L, W, iters=1000):
             elif theta1 < angle and theta2 <= angle:
                 angles.append(angle + theta1)
             else:
-                raise Exception('angle error')
+                raise Exception(f'{theta1} ... {theta2} ... {theta3}')
         # labels
         labels = list()
         for angle in angles:
@@ -108,7 +109,7 @@ def find_partition(L, W, iters=1000):
 
 
 if __name__ == "__main__":
-    W = test_graph()
+    W = generate_random_graph(30)
     relax = solve_sdp_program(W)
     L = cholesky(relax)
     best_sum = find_partition(L, W)
