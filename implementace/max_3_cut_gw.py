@@ -80,9 +80,12 @@ def find_partition(L, W, iters=1000):
             b = vi2 - np.dot(vi2, a) * a
             gproj = np.dot(g, a) * a + np.dot(g, b) * b
             gproj /= norm(gproj)
-            theta1 = np.arccos(np.dot(gproj, vi1))
-            theta2 = np.arccos(np.dot(gproj, vi2))
-            theta3 = np.arccos(np.dot(gproj, vi3))
+            prod1 = np.dot(gproj, vi1)
+            prod2 = np.dot(gproj, vi2)
+            prod3 = np.dot(gproj, vi3)
+            theta1 = np.arccos(prod1 if abs(prod1) <= 1 else np.sign(prod1))
+            theta2 = np.arccos(prod2 if abs(prod2) <= 1 else np.sign(prod2))
+            theta3 = np.arccos(prod3 if abs(prod3) <= 1 else np.sign(prod3))
             angle = 2 * np.pi / 3
             if theta1 <= angle and theta3 < angle:
                 angles.append(theta3)
