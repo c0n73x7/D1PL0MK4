@@ -371,3 +371,38 @@ nenajde užitečná nezávislá množina, která by měla velikost alespoň $108
 
 
 \section{Experimenty}
+
+Porovnáme formulace \ref{eq:SDP1} a \ref{eq:SDP2}, které byly naimplementovány ve frameworku \textbf{Mosek}, na lichých kružnicích s přesnou hodnotou a dále určíme hodnoty $\vartheta$ pro náhodné grafy řádu $30$.
+
+\begin{center}
+    \begin{tabular}{ c | c c c }
+    $n$    & $\vartheta(C_n)$ & \ref{eq:SDP1} & \ref{eq:SDP2} \\
+    \hline
+    $5$    & $X$              & $X$           & $X$           \\
+    $7$    & $X$              & $X$           & $X$           \\
+    $9$    & $X$              & $X$           & $X$           \\
+    $11$   & $X$              & $X$           & $X$           \\
+    $13$   & $X$              & $X$           & $X$           \\
+    $15$   & $X$              & $X$           & $X$           \\
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{ c c c c c c c c c c c c }
+    $m$    & \ref{eq:SDP1} & \ref{eq:SDP2} \\
+    \hline
+    $0$    & $X$           & $X$           \\
+    $43$   & $X$           & $X$           \\
+    $87$   & $X$           & $X$           \\
+    $130$  & $X$           & $X$           \\
+    $174$  & $X$           & $X$           \\
+    $217$  & $X$           & $X$           \\
+    $261$  & $X$           & $X$           \\
+    $304$  & $X$           & $X$           \\
+    $348$  & $X$           & $X$           \\
+    $391$  & $X$           & $X$           \\
+    $435$  & $X$           & $X$           \\
+    \end{tabular}
+\end{center}
+
+
