@@ -290,11 +290,11 @@ V původním článku od L.~Lovásze \textbf{[REF]} je další semidefinitní pr
 \end{equation}
 kde $J$ je matice samých jedniček.
 
-\section{Určení hodnoty $\vartheta$ pro konkrétní grafy}
+\section{$\vartheta$ a související grafové parametry}
 
-Pomocí formulace \ref{eq:SDP2} určíme hodnotu $\vartheta$ pro $C_5$, $C_7$, Petersenův graf, $K_5$ a $S_5$. Nejdříve však uvedeme tzv. Sendvičovou větu.
+Začneme tzv. Sendvičovou větou a dále zaměříme na grafy $C_5$, $C_7$, Petersenův graf, $K_5$ a $S_5$.
 
-\begin{vt}
+\begin{vt}\textbf{[REF]}
     Mějme graf $G$ a jeho doplněk $\bar{G}$. Potom
     $$
         \alpha(G) \leq \vartheta(G) \leq \chi(\bar{G}).
@@ -331,11 +331,11 @@ Doplněk $C_5$ je opět $C_5$ a lichá kružnice má chromatické číslo $3$. $
 
 \subsection*{$\vartheta(G)$ pro vybrané grafy}
 
-Dříve jsme ukázali, že $\vartheta(C_5) = \sqrt{5} \approx 2.2361$. Navíc pro liché $n$ platí, že
+Dříve jsme ukázali, že $\vartheta(C_5) = \sqrt{5} \approx 2.2361$. Navíc pro liché $n$ \textbf{[REF]} platí, že
 $$
     \vartheta(C_n) = \frac{n \cdot \cos(\frac{\pi}{n})}{1 + \cos(\frac{\pi}{n})}.
 $$
-Dostáváme tedy, že $\vartheta({C_7}) \approx 3.3177$. Hodnoty $\vartheta$ pro zbylé grafy byly spočítány na počítači v softwaru Mosek (viz \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/theta.py}). Byla využita formulace \ref{eq:SDP2}. V tabulce~\ref{tab:sandwitch} jsou shrnuty všechny zmíněné hodnoty.
+Dostáváme tedy, že $\vartheta({C_7}) \approx 3.3177$. Zbylé hodnoty plynou ze sendivičové věty. V tabulce~\ref{tab:sandwitch} jsou shrnuty všechny zmíněné hodnoty.
 
 \begin{table}[h!]
     \centering
@@ -368,3 +368,6 @@ Poznamenejme, že vylepšit dolní odhad na $\Theta(C_7)$ je výpočetně náro�
     \end{split}
 \end{equation*}
 nenajde užitečná nezávislá množina, která by měla velikost alespoň $108$ \textbf{[REF-Vesel-Žertovnik]}. K výpočtu byl použit framework \textbf{Gurobi} a program po $7$ měsících našel pouze nezávislou množinu velikosti $102$, která dává dolní odhad $\sqrt[4]{102} \approx 3.1779$.
+
+
+\section{Experimenty}

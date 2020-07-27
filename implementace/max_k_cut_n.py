@@ -70,11 +70,11 @@ def find_partition_2(L, W, k, iters=1000):
     simplex = generate_simplex(k)
     sums = list()
     for _ in range(iters):
-        # labels
+        random_vectors = [np.random.normal(0, 1, n) for _ in range(k-1)]
         labels = list()
         for i in range(n):
             vi = L[i,:]
-            label_vertex = np.array([np.dot(vi, np.random.normal(0, 1, n)) for _ in range(k-1)])
+            label_vertex = np.array([np.dot(vi, g) for g in random_vectors])
             distances = list()
             for j in range(k):
                 simplex_vertex = simplex[j,:]
