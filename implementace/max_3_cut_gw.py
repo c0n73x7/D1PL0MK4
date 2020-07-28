@@ -112,7 +112,7 @@ def find_partition(L, W, iters=1000):
 
 
 if __name__ == "__main__":
-    W = generate_random_graph(30)
+    W = generate_random_graph(30, 0.2)
     relax = solve_sdp_program(W)
     L = cholesky(relax)
     best_sum = find_partition(L, W)

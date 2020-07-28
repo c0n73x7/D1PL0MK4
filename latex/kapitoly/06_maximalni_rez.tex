@@ -382,6 +382,27 @@ Z $X$ vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ 
 
 \subsection{MAX $k$-CUT}
 
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c c c c }
+        $m$    & \ref{eq:FJ-RELAX} -- $1000$ iterací & \ref{eq:GW-RELAX}  -- $1000$ iterací & \ref{eq:FJ-RELAX} -- $10000$ iterací & \ref{eq:GW-RELAX}  -- $10000$ iterací \\
+        \hline
+        $0$   & $0$   & $0$  & $x$ & $x$ \\
+        $43$  & $43$  & $38$ & $x$ & $x$ \\
+        $87$  & $81$  & $76$ & $x$ & $x$ \\
+        $130$ & $116$ & $x$  & $x$ & $x$ \\
+        $174$ & $153$ & $x$  & $x$ & $x$ \\
+        $217$ & $181$ & $x$  & $x$ & $x$ \\
+        $261$ & $210$ & $x$  & $x$ & $x$ \\
+        $304$ & $241$ & $x$  & $x$ & $x$ \\
+        $348$ & $265$ & $x$  & $x$ & $x$ \\
+        $391$ & $288$ & $x$  & $x$ & $x$ \\
+        \end{tabular}
+    \end{center}
+    \caption{MAX $3$-CUT na náhodných grafech řádu $30$.}
+    \label{tab:cycles_theta}
+\end{table}
+
 \subsection{CMAX $3$-CUT}
 
 

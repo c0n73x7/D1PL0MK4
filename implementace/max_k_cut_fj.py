@@ -1,6 +1,7 @@
 import numpy as np
 from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
 from numpy.linalg import cholesky
+from utils import generate_random_graph
 
 
 def test_graph():
@@ -66,7 +67,8 @@ def find_partition(L, W, k, iters=1000):
 
 
 if __name__ == "__main__":
-    W = test_graph()
+    #W = test_graph()
+    W = generate_random_graph(30, 1)
     k = 3
     relax = solve_sdp_program(W, k)
     L = cholesky(relax)

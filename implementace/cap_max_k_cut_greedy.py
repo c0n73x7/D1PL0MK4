@@ -40,7 +40,7 @@ def iterative_step(labels, k, W):
                     wvi = sum([W[v,x] for x in Si])
                     wvl = sum([W[v,x] for x in Sl])
                     #  len(Si)*wui + len(Sl)*wvl > len(Si)*wul + len(Sl)*wvi ... algoritmus se cyklí (v paperu to tak ale je..)
-                    if wui + wvl > wul + wvi:
+                    if wui + wvl > wul + wvi - 2 * W[u,v]:
                         labels[u], labels[v] = l, i
                         return True, labels
     return False, labels
