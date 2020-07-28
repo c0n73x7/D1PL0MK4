@@ -30,16 +30,15 @@ def iterative_step(labels, k, W):
     labels = labels.copy()
     W = W.copy()
     for i in range(k):
-        Si = [i for i, b in enumerate(labels == i) if b]
+        Vi = [i for i, b in enumerate(labels == i) if b]
         for l in range(i+1, k):
-            Sl = [i for i, b in enumerate(labels == l) if b]
-            for u in Si:
-                wui = sum([W[u,x] for x in Si])
-                wul = sum([W[u,x] for x in Sl])
-                for v in Sl:
-                    wvi = sum([W[v,x] for x in Si])
-                    wvl = sum([W[v,x] for x in Sl])
-                    #  len(Si)*wui + len(Sl)*wvl > len(Si)*wul + len(Sl)*wvi ... algoritmus se cyklí (v paperu to tak ale je..)
+            Vl = [i for i, b in enumerate(labels == l) if b]
+            for u in Vi:
+                wui = sum([W[u,x] for x in Vi]) # W[u,u] = 0
+                wul = sum([W[u,x] for x in Vl])
+                for v in Vl:
+                    wvi = sum([W[v,x] for x in Vi])
+                    wvl = sum([W[v,x] for x in Vl]) # W[v,v] = 0
                     if wui + wvl > wul + wvi - 2 * W[u,v]:
                         labels[u], labels[v] = l, i
                         return True, labels
