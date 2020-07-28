@@ -374,18 +374,24 @@ nenajde užitečná nezávislá množina, která by měla velikost alespoň $108
 
 Porovnáme formulace \ref{eq:SDP1} a \ref{eq:SDP2}, které byly naimplementovány ve frameworku \textbf{Mosek}, na lichých kružnicích s přesnou hodnotou a dále určíme hodnoty $\vartheta$ pro náhodné grafy řádu $30$.
 
+\subsection{Liché kružnice}
+
 \begin{center}
     \begin{tabular}{ c | c c c }
-    $n$    & $\vartheta(C_n)$ & \ref{eq:SDP1} & \ref{eq:SDP2} \\
+    $n$     & $\vartheta(C_n)$ & \ref{eq:SDP1} & \ref{eq:SDP2} \\
     \hline
-    $5$    & $X$              & $X$           & $X$           \\
-    $7$    & $X$              & $X$           & $X$           \\
-    $9$    & $X$              & $X$           & $X$           \\
-    $11$   & $X$              & $X$           & $X$           \\
-    $13$   & $X$              & $X$           & $X$           \\
-    $15$   & $X$              & $X$           & $X$           \\
+    $5$     & $2.236067977$    & $X$           & $X$           \\
+    $7$     & $3.317667207$    & $X$           & $X$           \\
+    $9$     & $4.360089581$    & $X$           & $X$           \\
+    $11$    & $5.386302911$    & $X$           & $X$           \\
+    $13$    & $6.404168562$    & $X$           & $X$           \\
+    $15$    & $7.417148247$    & $X$           & $X$           \\
+    $\dots$ & $\dots$          & $\dots$       & $\dots$       \\
+    $221$   & $110.494417456$  & $X$           & $X$           \\
     \end{tabular}
 \end{center}
+
+\subsection{Náhodné grafy řádu $30$}
 
 \begin{center}
     \begin{tabular}{ c c c c c c c c c c c c }

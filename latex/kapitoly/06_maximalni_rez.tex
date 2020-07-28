@@ -341,9 +341,40 @@ Vektor $i \in V$ jsme přiřadili do množiny $V_j$, jestliže $x_i^j = 1$.
 
 \section{Úloha CMAX $k$-CUT}
 
-O úloze CMAX $k$-CUT toho není mnoho známo. ...
+O úloze CMAX $k$-CUT toho není mnoho známo. V \textbf{[REF]} je popsán hladový algoritmus, který nám pro $k \geq 2$ nedá řešení horší než faktor $(k-1) / k$ optimálního řešení. Dále vyzkoušíme pro úlohu CMAX $3$-CUT přístup, ve kterém využijeme semidefinitní programování.
 
-Greedy algoritmus, použití SDP pro CMAX $3$-CUT, ...
+\subsection{Hladový algoritmus}
+
+Nechť $G = (V,E)$ je neorientovaný graf s $n$ vrcholy. Označíme $w(u,v)$ váhu hrany $uv$. Na vstupu máme zadáno $k \geq 2$ a maximální počty vrcholů v jednotlivých množinách
+$$
+    |V_1| \leq s_1, \dots, |V_k| \leq s_k.
+$$
+
+Algoritmus začíná \textbf{inicializací}, kde libovolně rozdělíme vrcholy do $k$ množin tak, aby $|V_i| \leq s_i, i = 1, \dots, k$.
+
+V \textbf{iteračním kroku} hledáme dvojici vrcholů $u \in V_i$ a $v \in V_j, i \neq j$, pro který
+$$
+    |V_i| \sum_{x \in V_i, x \neq u} w(u,x) + |V_j| \sum_{x \in V_j, x \neq v} w(v,x) > 
+    |V_i| \sum_{x \in V_j, x \neq u} w(u,x) + |V_j| \sum_{x \in V_i, x \neq v} w(v,x).
+$$
+Pokud takové vrcholy najdeme, tak vrchol $u$ přesuneme do množiny $V_j$ a vrchol $v$ přesuneme do množiny $V_i$ a iterační krok opakujeme. Jestliže takové vrcholy neexistují algoritmus končí.
+
+\subsection{CMAX $3$-CUT pomocí SDP}
+
+V našem přístupu pro CMAX $3$-CUT použijeme algoritmus~\ref{alg:gw-max-3-cut}, ze kterého potřebujeme rozklad vrcholů do množin $V_1, V_2, V_3$, úhel $\psi \in \langle 0, \pi )$ a úhel $\Theta_i$ pro každý vrchol $i \in V$.
+
+Nejprve určíme středy množin $V_1, V_2, V_3$, tj.
+$$
+    c_1 = \psi + \frac{\pi}{3}, c_2 = \psi + \pi \text{ a } c_3 = \psi + \frac{5}{3} \pi.
+$$
+Dále máme zadány kapacity $s_1 \geq s_2 \geq s_3$. Množiny, které dostaneme z algoritmu~\ref{alg:gw-max-3-cut}, přeznačíme tak, aby součet záporných rezerv $r_i = s_i - |V_i|$ množin $V_1, V_2, V_3$ byl maximální.
+
+Pro každou množinu $V_1, V_2, V_3$ určíme její rezervu $r_i$. Pokud jsou všechny rezervy nezáporné, vrátíme množiny $V_1, V_2, V_3$ jako výsledek. Jinak z množiny, která má zápornou rezervu vybereme dva vrcholy $u$ a $v$, které mají maximální a minimální úhel. Definujeme množinu
+$$
+    X = \bigcup_{i, r_i > 0} \left\{ c_i - \Theta_u, c_i - \Theta_v \right\}.
+$$
+Z $X$ vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ přesuneme do množiny $V_i$. Takto iterujeme dokud nejsou všechny rezervy nezáporné.
+
 
 \section{Experimenty}
 
