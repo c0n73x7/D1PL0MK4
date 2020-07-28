@@ -56,6 +56,15 @@ def generate_random_graph(n, density=0.5, seed=23):
     return W
 
 
+def generate_cycle(n):
+    A = np.zeros((n, n))
+    for i in range(n-1):
+        A[i,i+1] = A[i+1,i] = 1
+    A[0,n-1] = A[n-1,0] = 1
+    return A
+
+
+
 def load_gset_graph(path):
     # load file
     with open(path) as f:

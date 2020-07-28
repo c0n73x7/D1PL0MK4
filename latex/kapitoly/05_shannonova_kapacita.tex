@@ -332,9 +332,10 @@ Doplněk $C_5$ je opět $C_5$ a lichá kružnice má chromatické číslo $3$. $
 \subsection*{$\vartheta(G)$ pro vybrané grafy}
 
 Dříve jsme ukázali, že $\vartheta(C_5) = \sqrt{5} \approx 2.2361$. Navíc pro liché $n$ \textbf{[REF]} platí, že
-$$
+\begin{equation}
     \vartheta(C_n) = \frac{n \cdot \cos(\frac{\pi}{n})}{1 + \cos(\frac{\pi}{n})}.
-$$
+    \label{eq:cycle_theta}
+\end{equation}
 Dostáváme tedy, že $\vartheta({C_7}) \approx 3.3177$. Zbylé hodnoty plynou ze sendivičové věty. V tabulce~\ref{tab:sandwitch} jsou shrnuty všechny zmíněné hodnoty.
 
 \begin{table}[h!]
@@ -376,39 +377,58 @@ Porovnáme formulace \ref{eq:SDP1} a \ref{eq:SDP2}, které byly naimplementován
 
 \subsection{Liché kružnice}
 
-\begin{center}
-    \begin{tabular}{ c | c c c }
-    $n$     & $\vartheta(C_n)$ & \ref{eq:SDP1} & \ref{eq:SDP2} \\
-    \hline
-    $5$     & $2.236067977$    & $X$           & $X$           \\
-    $7$     & $3.317667207$    & $X$           & $X$           \\
-    $9$     & $4.360089581$    & $X$           & $X$           \\
-    $11$    & $5.386302911$    & $X$           & $X$           \\
-    $13$    & $6.404168562$    & $X$           & $X$           \\
-    $15$    & $7.417148247$    & $X$           & $X$           \\
-    $\dots$ & $\dots$          & $\dots$       & $\dots$       \\
-    $221$   & $110.494417456$  & $X$           & $X$           \\
-    \end{tabular}
-\end{center}
+V tabulce~\ref{tab:cycles_theta} jsou napočítané hodnoty $\vartheta$ funkce pro liché kružnice pomocí formulací \ref{eq:SDP1} a \ref{eq:SDP2}. Tučně jsou zvýrazněny číslice, které se shodují s přesnou hodnotou určenou ze vztahu~\ref{eq:cycle_theta}.
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c c c }
+        $m$     & $\vartheta(C_n)$ & \ref{eq:SDP1}          & \ref{eq:SDP2} \\
+        \hline
+        $5$     & $2.236067977$    & $\mathbf{2.23606}8103$ & $\mathbf{2.23606797}8$ \\
+        $7$     & $3.317667207$    & $\mathbf{3.317667}960$ & $\mathbf{3.317667207}$ \\
+        $9$     & $4.360089581$    & $\mathbf{4.3600895}96$ & $\mathbf{4.360089}606$ \\
+        $11$    & $5.386302911$    & $\mathbf{5.3863029}51$ & $\mathbf{5.38630291}4$ \\
+        $13$    & $6.404168562$    & $\mathbf{6.404168}697$ & $\mathbf{6.404168562}$ \\
+        $15$    & $7.417148247$    & $\mathbf{7.41714}9582$ & $\mathbf{7.417148247}$ \\
+        $\dots$ & $\dots$          & $\dots$                & $\dots$ \\
+        $121$   & $110.494417456$  & nedoběhlo              & $\mathbf{110.494417456}$ \\
+        \end{tabular}
+    \end{center}
+    \caption{Porovnání implementací $\vartheta$ funkce na lichých kružnicích.}
+    \label{tab:cycles_theta}
+\end{table}
+
+Jednodušší model \ref{eq:SDP2} dává přesnější výsledky a je schopen upočítat i větší úlohy. Nepřesnosti jsou dány tím, že solver v modelu \ref{eq:SDP1} má mnohem více omezení a dvě proměnné $X \succeq 0$, $t \geq 0$. Největší problém představuje omezení
+$$
+    \forall i \in V(G):\ x_{0i} \geq t.
+$$
+V implementaci se totiž od sebe odečítají dvě proměnné a to v tomto frameworku není doporučovaná operace.
+ 
 
 \subsection{Náhodné grafy řádu $30$}
 
-\begin{center}
-    \begin{tabular}{ c c c c c c c c c c c c }
-    $m$    & \ref{eq:SDP1} & \ref{eq:SDP2} \\
-    \hline
-    $0$    & $X$           & $X$           \\
-    $43$   & $X$           & $X$           \\
-    $87$   & $X$           & $X$           \\
-    $130$  & $X$           & $X$           \\
-    $174$  & $X$           & $X$           \\
-    $217$  & $X$           & $X$           \\
-    $261$  & $X$           & $X$           \\
-    $304$  & $X$           & $X$           \\
-    $348$  & $X$           & $X$           \\
-    $391$  & $X$           & $X$           \\
-    $435$  & $X$           & $X$           \\
-    \end{tabular}
-\end{center}
+U větších grafů s nepravidelnou strukturou se rozdíly prohlubují a je vidět, že ani pro úplný graf, který je v tabulce~\ref{tab:random_theta} uveden na posledním řádku, není hodnota u \ref{eq:SDP1} přesná.
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c c }
+        $m$    & \ref{eq:SDP1}  &  \ref{eq:SDP2}  \\
+        \hline
+        $0$    & $30.000000007$ &  $30.0$         \\
+        $43$   & $16.000005889$ &  $17.690577212$ \\
+        $87$   & $11.151050632$ &  $14.385152039$ \\
+        $130$  & $9.0000004168$ &  $11.557666814$ \\
+        $174$  & $7.0892127153$ &  $9.9856302253$ \\
+        $217$  & $6.1569911550$ &  $9.5632864871$ \\
+        $261$  & $5.0000131024$ &  $7.6828991181$ \\
+        $304$  & $4.0323146793$ &  $6.8219576402$ \\
+        $348$  & $3.2171989901$ &  $5.1733914919$ \\
+        $391$  & $3.0000021103$ &  $4.0513834517$ \\
+        $435$  & $1.0000007203$ &  $1.0$          \\
+        \end{tabular}
+    \end{center}
+    \caption{Výsledky implementací $\vartheta$ funkce na náhodných grafech řádu $30$ s daným počtem hran.}
+    \label{tab:random_theta}
+\end{table}
 
 
