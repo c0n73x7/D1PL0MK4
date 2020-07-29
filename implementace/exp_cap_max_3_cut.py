@@ -13,10 +13,3 @@ if __name__ == "__main__":
         s = get_sum_of_weights(labels, W)
         print(f'algorithm=local_search, density={density}, sol={s}')
         # ------------------------------------------------------------
-        path = f'./experiments/relax_gw_30_{density}_3.npy'
-        relax = np.load(path)
-        L = cholesky(relax)
-        res = find_partition(L, W, 10000)
-        labels = balance(seq, res.get('psi'), res.get('angles'), res.get('labels'))
-        s = get_sum_of_weights(labels, W)
-        print(f'algorithm=SDP, density={density}, sol={s}')
