@@ -373,11 +373,11 @@ $$
 $$
 Dále máme zadány kapacity $s_1 \geq s_2 \geq s_3$. Množiny, které dostaneme z algoritmu~\ref{alg:gw-max-3-cut}, přeznačíme tak, aby součet záporných rezerv $r_i = s_i - |V_i|$ množin $V_1, V_2, V_3$ byl maximální.
 
-Pro každou množinu $V_1, V_2, V_3$ určíme její rezervu $r_i$. Pokud jsou všechny rezervy nezáporné, vrátíme množiny $V_1, V_2, V_3$ jako výsledek. Jinak z množiny, která má zápornou rezervu vybereme dva vrcholy $u$ a $v$, které mají maximální a minimální úhel. Definujeme množinu
+Pro každou množinu $V_1, V_2, V_3$ určíme její rezervu $r_i$. Pokud jsou všechny rezervy nezáporné, vrátíme množiny $V_1, V_2, V_3$ jako výsledek. Jinak z množiny, která má zápornou rezervu vybereme dva vrcholy $u$ a $v$, které mají maximální a minimální úhel. Z množiny
 $$
-    \bigcup_{i, r_i > 0} \left\{ c_i - \Theta_u, c_i - \Theta_v \right\},
+    \bigcup_{i, r_i > 0} \left\{ c_i - \Theta_u, c_i - \Theta_v \right\}
 $$
-ze které vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ přesuneme do množiny $V_i$. Takto iterujeme dokud nejsou všechny rezervy nezáporné.
+vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ přesuneme do množiny $V_i$. Takto iterujeme dokud nejsou všechny rezervy nezáporné.
 
 
 \section{Experimenty}
