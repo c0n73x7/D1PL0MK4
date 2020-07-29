@@ -2,6 +2,7 @@ import numpy as np
 from numpy.linalg import cholesky
 from max_k_cut_fj import find_partition as find_partition_fj
 from max_3_cut_gw import find_partition as find_partition_gw
+from max_k_cut_n import find_partition_2 as find_partition_n2
 from utils import generate_random_graph
 
 
@@ -22,5 +23,10 @@ if __name__ == "__main__":
         print(f'algorithm=GW, density={density}')
         for iters in [100, 10000]:
             s = find_partition_gw(L, W, iters)
+            print(f'iters={iters}, sol={s}')
+        # ------------------------------------------------------------
+        print(f'algorithm=N2, density={density}')
+        for iters in [100, 10000]:
+            s = find_partition_n2(L, W, 3, iters)
             print(f'iters={iters}, sol={s}')
         print()

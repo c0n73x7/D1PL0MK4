@@ -48,7 +48,7 @@ Poznamenejme jen, že úloha celočíselného programování je NP-těžká. Pro
 
 \subsection{Semidefinitní program pro MAX CUT}
 
-Vektorový program~\ref{eq:V-MAX-CUT} je ekvivalentní s příslušným semidefinitním programem (viz věta~\textbf{[REF]}). Nechť $W$ je vážená matice sousednosti grafu $G$ a $w_{ij}$ je váha hrany $ij$, kde $i < j$. Matice $J$ je matice $n \times n$ samých jedniček.
+Vektorový program~\ref{eq:V-MAX-CUT} je ekvivalentní s příslušným semidefinitním programem. Nechť $W$ je vážená matice sousednosti grafu $G$ a $w_{ij}$ je váha hrany $ij$, kde $i < j$. Matice $J$ je matice $n \times n$ samých jedniček.
 
 \begin{equation}\tag{SDP-MAX-CUT}
     \begin{split}
@@ -364,23 +364,23 @@ K implementaci algoritmů je použit programovací jazyk \textbf{Python 3} a fra
 
 \subsection{MAX $k$-CUT}
 
-Pro úlohu MAX $3$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut} a algoritmus~\ref{alg:gw-max-3-cut}.
+Pro úlohu MAX $3$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut}, algoritmus~\ref{alg:gw-max-3-cut} a algoritmus~\ref{alg:n-max-k-cut-2}.
 
 \begin{table}[h!]
     \begin{center}
-        \begin{tabular}{ c | c c | c c }
-            $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{GW MAX $3$-CUT} \\
+        \begin{tabular}{ c | c c | c c | c c }
+            $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{GW MAX $3$-CUT} & \multicolumn{2}{c}{N2 MAX $k$-CUT} \\
             $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
             \hline
-            $43$  & $41$ & $\mathbf{43}$ & $37$ & $40$ \\
-            $87$  & $80$ & $\mathbf{82}$ & $72$ & $77$ \\
-            $130$ & $116$ & $\mathbf{117}$ & $104$ & $115$ \\
-            $174$ & $150$ & $\mathbf{153}$ & $140$ & $147$ \\
-            $217$ & $178$ & $\mathbf{182}$ & $166$ & $175$ \\
-            $261$ & $208$ & $\mathbf{210}$ & $194$ & $203$ \\
-            $304$ & $239$ & $\mathbf{241}$ & $226$ & $240$ \\
-            $348$ & $263$ & $\mathbf{265}$ & $251$ & $261$ \\
-            $391$ & $287$ & $\mathbf{289}$ & $281$ & $287$ \\
+            $43$  & $41$ & $\mathbf{43}$ & $37$ & $40$ & $41$ & $\mathbf{43}$ \\
+            $87$  & $80$ & $\mathbf{82}$ & $72$ & $77$ & $80$ & $81$ \\
+            $130$ & $116$ & $\mathbf{117}$ & $104$ & $115$ & $114$ & $\mathbf{117}$ \\
+            $174$ & $150$ & $\mathbf{153}$ & $140$ & $147$ & $152$ & $152$ \\
+            $217$ & $178$ & $\mathbf{182}$ & $166$ & $175$ & $178$ & $\mathbf{182}$ \\
+            $261$ & $208$ & $\mathbf{210}$ & $194$ & $203$ & $206$ & $\mathbf{210}$ \\
+            $304$ & $239$ & $\mathbf{241}$ & $226$ & $240$ & $237$ & $\mathbf{241}$ \\
+            $348$ & $263$ & $\mathbf{265}$ & $251$ & $261$ & $263$ & $\mathbf{265}$ \\
+            $391$ & $287$ & $\mathbf{289}$ & $281$ & $287$ & $288$ & $\mathbf{289}$ \\
         \end{tabular}
     \end{center}
     \caption{MAX $3$-CUT na náhodných grafech řádu $30$.}

@@ -1,5 +1,7 @@
 \chapter{Základní geometrické pojmy}
 
+Kapitola je zpracována z \textbf{[REF]}, \textbf{[REF]}, ...
+
 \section{Přímky a úsečky}
 
 Mějme dva body $x_1, x_2 \in \mathbb{R}^n$ takové, že $x_1 \neq x_2$ a parametr $\theta \in \mathbb{R}$. Potom výraz
@@ -33,7 +35,11 @@ kde $V$ je vektorový prostor a $x_0$ je počátek. Poznamenejme, že vektorový
 $$
     \textbf{aff } C = \left\{ \theta_1 x_1 + \dots + \theta_k x_k \mid x_1, \dots, x_k \in C, \theta_1 + \dots + \theta_k = 1 \right\}.
 $$
-Afinní obal je nejmenší afinní prostor, který obsahuje množinu $C$. Tedy, jestliže $S$ je afinní prostor takový, že $C \subseteq S$, potom $\textbf{aff }C \subseteq S$.
+Afinní obal je nejmenší afinní prostor, který obsahuje množinu $C$. Tedy, jestliže $S$ je afinní prostor takový, že $C \subseteq S$, potom $\textbf{aff }C \subseteq S$. Definujeme \textbf{relativní vnitřek} množiny $C$ tak, že
+$$
+    \textbf{relint }\left\{ x \in C \mid B(x,r) \cap \textbf{aff }C \subseteq C \text{ pro nějaké } r > 0 \right\},
+$$
+kde $B(x,r) = \left\{ y \mid \| y - x \| \leq r \right\}$.
 
 
 \section{Konvexní množiny}
@@ -75,6 +81,16 @@ $$
 $$
 Kuželový obal množiny $C$ je zároveň nejmenší konvexní kužel, který obsahuje množinu $C$. Pro představu viz obrázek~\ref{fig:cone_hull}.
 
+Kužel $C$ nazýváme \textbf{bodový kužel}, jestliže
+$$
+    (x \in C \wedge -x \in C) \implies x = 0.
+$$
+\textbf{Duální kužel} $C^*$ ke kuželu $C$ je množina
+$$
+    C^* = \left\{ y \mid \langle x, y \rangle \geq 0 \text{ pro } x \in C \right\}.
+$$
+Říkáme, že kužel $C$ je \textbf{samoduální}, jestliže $C = C^*$.
+
 \begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.3\textwidth}
@@ -96,6 +112,7 @@ Kuželový obal množiny $C$ je zároveň nejmenší konvexní kužel, který ob
     \caption{Kuželový obal množiny}
     \label{fig:cone_hull}
 \end{figure}
+
 
 \section{Nadroviny a poloprostory}
 

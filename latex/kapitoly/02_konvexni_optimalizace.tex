@@ -1,5 +1,7 @@
 \chapter{Konvexní optimalizace}
 
+Kapitola je zpracována z \textbf{[REF]}, \textbf{[REF]}, ...
+
 \section{Obecná podmíněná úloha}
 
 \begin{equation}\label{eq:constrained_problem}
@@ -27,7 +29,7 @@ $$
 
 \begin{equation}\label{eq:convex_problem}
     \begin{split}
-        &\min\ f(x) \\
+        &\inf\ f(x) \\
         &g_i(x) \leq 0, i = 1, \dots, m \\
         &a_i^Tx = b_i, i = 1, \dots, p
     \end{split}
@@ -72,7 +74,7 @@ $$
 V části~\ref{s:lower_bound} jsme si ukázali, že duální funkce dává dolní odhad na optimální hodnotu $x^*$ úlohy~\ref{eq:constrained_problem}. Stále jsme si ale neřekli, jaký je nejlepší dolní odhad, který pomocí duální funkce jsme schopni dostat. To nás dostává k následující optimalizační úloze.
 \begin{equation}\label{eq:dual_problem}
     \begin{split}
-        &\max d(\lambda, \mu) \\
+        &\sup d(\lambda, \mu) \\
         &\lambda \geq 0
     \end{split}
 \end{equation}
@@ -98,7 +100,7 @@ $$
 
 \noindent Pro úlohu~\ref{eq:convex_problem} platí následující věta.
 \begin{vt2}[Slaterova]
-    Nechť primární úloha je konvexní a platí (modifikovaná) Slaterova podmínka, potom $p^* = d^*$.
+    Nechť primární úloha je konvexní a platí (modifikovaná) Slaterova podmínka, potom $f^* = d^*$.
 \end{vt2}
 
 
