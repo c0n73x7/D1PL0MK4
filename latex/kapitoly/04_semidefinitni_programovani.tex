@@ -1,6 +1,6 @@
 \chapter{Semidefinitní programování}
 
-Na semidefinitní programování se můžeme dívat jako na zobecnění lineárního programování, kde proměnné jsou symetrické matice. Jedná se tedy o optimalizaci lineární funkce vzhledem k tzv. lineárním maticovým nerovnostem.
+Na semidefinitní programování se můžeme dívat jako na zobecnění lineárního programování, kde proměnné jsou symetrické matice, namísto vektorů. Jedná se tedy o optimalizaci lineární funkce vzhledem k tzv. lineárním maticovým nerovnostem (viz dále).
 
 \section{Vsuvka z lineární algebry}
 
@@ -33,14 +33,14 @@ $$
 Ukážeme si několik kritérií, jak otestovat pozitivní definitnost dané matice.
 
 \begin{vt}
-    $S = S^T$ je pozitivně definitní, jestliže lze napsat jako $S = A^T A$ pro nějakou matici $A$, která má lineárně nezávislé sloupečky.
+    $S = S^T$ je pozitivně definitní, jestliže ji lze napsat jako $S = A^T A$ pro nějakou matici $A$, která má lineárně nezávislé sloupce.
 \end{vt}
 \begin{proof}
     \begin{equation}
     \label{eq:tmp}
         x^TSx = x^TA^TAx = (Ax)^T(Ax) = \lVert Ax \rVert^2 \geq 0
     \end{equation}
-    $\lVert Ax \rVert^2 > 0$, jestliže sloupečky matice $A$ jsou lineárně nezávislé.
+    $\lVert Ax \rVert^2 > 0$, jestliže sloupce matice $A$ jsou lineárně nezávislé.
 \end{proof}
 
 \begin{pr}
@@ -62,13 +62,13 @@ Ukážeme si několik kritérií, jak otestovat pozitivní definitnost dané mat
         \end{bmatrix} =
         AA^T
     $$
-    $A$ má lineárně závislé sloupečky, tj. $S$ není pozitivně definitní.
+    $A$ má lineárně závislé sloupce, tj. $S$ není pozitivně definitní.
 \end{pr}
 
 Dalším testem je tzv. Sylvesterovo kritérium.
 
 \begin{vt}
-    $S = S^T$ je pozitivně definitní, jestliže všechny hlavní minory $S$ jsou kladné.
+    $S = S^T$ je pozitivně definitní, jestliže všechny vedoucí hlavní minory $S$ jsou kladné.
 \end{vt}
 
 \begin{pr}
@@ -80,7 +80,7 @@ Dalším testem je tzv. Sylvesterovo kritérium.
         D_1 = 3,
         D_2 = 3 \cdot 6 - 4 \cdot 4 = 2 
     $$
-    hlavní minory $D_1, D_2 > 0$; matice $S$ je pozitivně definitní 
+    vedoucí hlavní minory $D_1, D_2 > 0$; matice $S$ je pozitivně definitní 
 \end{pr}
 
 A poslední, které si uvedeme, souvisí s Gaussovou eliminací.
@@ -107,12 +107,12 @@ A poslední, které si uvedeme, souvisí s Gaussovou eliminací.
 
 \subsection*{Pozitivně semidefinitní matice}
 
-Pro pozitivní semidefinitnost modifikujeme předcházejí definice a tvrzení pro pozitivně definitní matice následovně.
+Pro pozitivní semidefinitnost modifikujeme předcházejí definice a tvrzení pro pozitivně definitní matice. Všechna tvrzení by se samozřejmě měla dokázat, ale uvedeme je jen bez důkazů.
 \begin{enumerate}
     \item $S = S^T$ je pozitivně semidefinitní, jestliže všechna její čísla jsou nezáporná.
     \item $S = S^T$ je pozitivně semidefinitní, jestliže $x^TSx \geq 0$ pro všechny nenulové vektory $x$.
     \item $S = S^T$ je pozitivně semidefinitní, jestliže lze napsat jako $S = A^T A$ pro nějakou matici $A$.
-    \item $S = S^T$ je pozitivně semidefinitní, jestliže všechny hlavní minory $S$ jsou nezáporné.
+    \item $S = S^T$ je pozitivně semidefinitní, jestliže všechny vedoucí hlavní minory $S$ jsou nezáporné.
     \item $S = S^T$ je pozitivně semidefinitní, jestliže jsou všechny pivoty při eliminaci nezáporné.
 \end{enumerate}
 
@@ -139,7 +139,7 @@ Množinu všech symetrických matic řádu $n$ značíme $S^n$, množinu všech 
     $$
 \end{proof}
 
-Říkáme, že $K$ je \textbf{bodový kužel}, jestliže neobsahuje žádnou přímku, tj.
+\noindent Říkáme, že $K$ je \textbf{bodový kužel}, jestliže neobsahuje žádnou přímku, tj.
 $$
     (x \in K \wedge -x \in K) \implies x = 0.
 $$
@@ -153,7 +153,7 @@ $$
 \end{proof}
 
 \begin{lm2}
-    Kužel $S_+^n$ je samoduální.
+    Kužel $S_+^n$ je samoduální, tj. $S_+^n = (S_+^n)^*$.
 \end{lm2}
 
 \begin{proof}
@@ -166,7 +166,7 @@ $$
     Množina $S_+^n$ tvoří konvexní, pointed a uzavřený kužel, který je samoduální.
 \end{vt2}
 
-Říkáme, že $S_+^n$ je \textbf{pozitivně semidefinitní kužel}.
+\noindent Množinu $S_+^n$ nazýváme \textbf{pozitivně semidefinitní kužel}.
 
 \subsection*{Spektraedry}
 
@@ -192,7 +192,7 @@ Geometricky je spektraedr definován jako průnik pozitivně semidefinitního ku
 
 Spektraedry jsou uzavřené množiny, neboť LMI je ekvivalentní nekonečně mnoha skalárním nerovnostem ve tvaru $v^T(A_0 + \sum_{i=1}^m A_ix_i)v \geq 0$, jednu pro každou hodnotu $v \in \mathbb{R}^n$.
 
-Vždy můžeme několik LMI \uv{scucnout} do jedné. Stačí zvolit matice $A_i$ blokově diagonální. Odtud snadno vídíme, že polyedr je speciálním případem spektraedru. Polyedr bude mít všechny matice $A_i$ diagonální.
+Vždy můžeme několik LMI \uv{scucnout} do jedné. Stačí zvolit matice $A_i$ blokově diagonální. Odtud snadno vidíme, že polyedr je speciálním případem spektraedru. Polyedr bude mít všechny matice $A_i$ diagonální.
 
 \begin{pr}
     $$

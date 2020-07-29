@@ -18,9 +18,9 @@ $$
 $$
 Říkáme, že bod $x \in \mathcal{D}$ je \textbf{přípustný}, jestliže splňuje všechna omezení $g_i(x) \leq 0$ a $h_i(x) = 0$. Úloha~\ref{eq:constrained_problem} je \textbf{přípustná}, jestliže existuje alespoň jeden bod $x \in \mathcal{D}$, který je přípustný. Množina všech přípustných bodů $x \in \mathcal{D}$ se nazývá \textbf{přípustná množina}.
 
-\textbf{Optimální hodnota} $x^*$ úlohy~\ref{eq:constrained_problem} je definována jako
+\textbf{Optimální hodnota} $f^*$ úlohy~\ref{eq:constrained_problem} je definována jako
 $$
-    x^* = \left\{ f(x) \mid g_i(x) \leq 0, i = 1, \dots, m, h_i(x) = 0, i = 1, \dots, p \right\}.
+    f^* = \inf \left\{ f(x) \mid g_i(x) \leq 0, i = 1, \dots, m, h_i(x) = 0, i = 1, \dots, p \right\}.
 $$
 
 \section{Konvexní podmíněná úloha}
@@ -41,7 +41,7 @@ Mějme úlohu~\ref{eq:constrained_problem} s $\mathcal{D} \neq \emptyset$. Zobra
 \begin{equation}
     L(x, \lambda, \mu) = f(x) + \sum_{i=1}^m \lambda_i g_i(x) + \sum_{i=1}^p \mu_i h_i(x)
 \end{equation}
-se nazývá \textbf{Lagrangeova funkce}. Definiční obor $\textbf{dom}\ L = \mathcal{D} \times \mathbb{R}^m \times \mathbb{R}^p$. Vektory $\lambda$ a $\mu$ nazýváme \textbf{duální proměnné} a prvkům těchto vektorů říkáme \textbf{Lagrangeovy multiplikátory}. Dále definujeme \textbf{duální funkci}
+se nazývá \textbf{Lagrangeova funkce}. Definiční obor $\textbf{dom}\ L = \mathcal{D} \times \mathbb{R}^m \times \mathbb{R}^p$. Vektory $\lambda = (\lambda_1, \dots, \lambda_m)$ a $\mu = (\mu_1, \dots, \mu_p)$ nazýváme \textbf{duální proměnné} a prvkům těchto vektorů říkáme \textbf{Lagrangeovy multiplikátory}. Dále definujeme \textbf{duální funkci}
 $$
     d:\ \mathbb{R}^m \times \mathbb{R}^p \rightarrow \mathbb{R}
 $$

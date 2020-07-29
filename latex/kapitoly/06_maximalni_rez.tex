@@ -283,7 +283,7 @@ $$
 $$
 kde úhly počítáme modulo $2\pi$.
 
-\begin{alg}[N MAX $k$-CUT]$ $
+\begin{alg}[N1 MAX $k$-CUT]$ $
     \begin{enumerate}
         \item Najdi řešení $a_1, \dots, a_n$ programu~\ref{eq:FJ-RELAX}.
         \item Pro každý vrchol $i \in V$ urči vektory $u_i = (a_i, 0)$ a $u_i^\bot = (0, a_i)$ v $\mathbb{R}^{2n}$.
@@ -296,7 +296,7 @@ kde úhly počítáme modulo $2\pi$.
 
 V závěru článku je navrhnuté ještě jedno aproximační schéma. Shrneme ho v následujícím algoritmu.
 
-\begin{alg}[N MAX $k$-CUT]$ $
+\begin{alg}[N2 MAX $k$-CUT]$ $
     \begin{enumerate}
         \item Najdi řešení $a_1, \dots, a_n$ programu~\ref{eq:FJ-RELAX}.
         \item Zvol náhodně $k-1$ vektorů $g_1, \dots, g_{k-1} \in \mathbb{R}^n$ tak, že každá složka je vybrána nezávisle z normálního normovaného rozdělení $\mathcal{N}(0, 1)$.
@@ -341,9 +341,13 @@ Vektor $i \in V$ jsme přiřadili do množiny $V_j$, jestliže $x_i^j = 1$.
 
 \section{Úloha CMAX $k$-CUT}
 
-O úloze CMAX $k$-CUT toho není mnoho známo. V \textbf{[REF]} je popsán hladový algoritmus, který nám pro $k \geq 2$ nedá řešení horší než faktor $(k-1) / k$ optimálního řešení. Dále vyzkoušíme pro úlohu CMAX $3$-CUT přístup, ve kterém využijeme semidefinitní programování.
+O obecné úloze CMAX $k$-CUT toho není mnoho známo. V \textbf{[REF]} (a později v jeho opravě \textbf{[REF]}) je popsán algoritmus, který využívá lokální prohledávání, jehož aproximační poměr je
+$$
+    \frac{t(k-1)}{2(s-1)+t(k-1)},
+$$
+kde $k\geq 2$, $t = \min_{i=1,\dots,k} |V_i|$ a $s = \max_{i=1,\dots,k} |V_i|$. Dále vyzkoušíme pro úlohu CMAX $3$-CUT přístup, ve kterém využijeme semidefinitní programování.
 
-\subsection{Hladový algoritmus}
+\subsection{Lokální prohledávání}
 
 Nechť $G = (V,E)$ je neorientovaný graf s $n$ vrcholy. Označíme $w(u,v)$ váhu hrany $uv$. Na vstupu máme zadáno $k \geq 2$ a maximální počty vrcholů v jednotlivých množinách
 $$
@@ -354,8 +358,8 @@ Algoritmus začíná \textbf{inicializací}, kde libovolně rozdělíme vrcholy 
 
 V \textbf{iteračním kroku} hledáme dvojici vrcholů $u \in V_i$ a $v \in V_j, i \neq j$, pro který
 $$
-    |V_i| \sum_{x \in V_i, x \neq u} w(u,x) + |V_j| \sum_{x \in V_j, x \neq v} w(v,x) > 
-    |V_i| \sum_{x \in V_j, x \neq u} w(u,x) + |V_j| \sum_{x \in V_i, x \neq v} w(v,x).
+    \sum_{x \in V_i, x \neq u} w(u,x) + \sum_{x \in V_j, x \neq v} w(v,x) > 
+    \sum_{x \in V_j, x \neq u} w(u,x) + \sum_{x \in V_i, x \neq v} w(v,x) - 2 w(u,v).
 $$
 Pokud takové vrcholy najdeme, tak vrchol $u$ přesuneme do množiny $V_j$ a vrchol $v$ přesuneme do množiny $V_i$ a iterační krok opakujeme. Jestliže takové vrcholy neexistují algoritmus končí.
 
@@ -371,50 +375,121 @@ Dále máme zadány kapacity $s_1 \geq s_2 \geq s_3$. Množiny, které dostaneme
 
 Pro každou množinu $V_1, V_2, V_3$ určíme její rezervu $r_i$. Pokud jsou všechny rezervy nezáporné, vrátíme množiny $V_1, V_2, V_3$ jako výsledek. Jinak z množiny, která má zápornou rezervu vybereme dva vrcholy $u$ a $v$, které mají maximální a minimální úhel. Definujeme množinu
 $$
-    X = \bigcup_{i, r_i > 0} \left\{ c_i - \Theta_u, c_i - \Theta_v \right\}.
+    \bigcup_{i, r_i > 0} \left\{ c_i - \Theta_u, c_i - \Theta_v \right\},
 $$
-Z $X$ vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ přesuneme do množiny $V_i$. Takto iterujeme dokud nejsou všechny rezervy nezáporné.
+ze které vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ přesuneme do množiny $V_i$. Takto iterujeme dokud nejsou všechny rezervy nezáporné.
 
 
 \section{Experimenty}
 
-\subsection{MAX CUT}
+%\subsection{MAX CUT}
 
 \subsection{MAX $k$-CUT}
 
 \begin{table}[h!]
     \begin{center}
-        \begin{tabular}{ c | c c c c }
-        $m$    & \ref{eq:FJ-RELAX} -- $1000$ iterací & \ref{eq:GW-RELAX}  -- $1000$ iterací & \ref{eq:FJ-RELAX} -- $10000$ iterací & \ref{eq:GW-RELAX}  -- $10000$ iterací \\
-        \hline
-        $0$   & $0$   & $0$  & $x$ & $x$ \\
-        $43$  & $43$  & $38$ & $x$ & $x$ \\
-        $87$  & $81$  & $76$ & $x$ & $x$ \\
-        $130$ & $116$ & $x$  & $x$ & $x$ \\
-        $174$ & $153$ & $x$  & $x$ & $x$ \\
-        $217$ & $181$ & $x$  & $x$ & $x$ \\
-        $261$ & $210$ & $x$  & $x$ & $x$ \\
-        $304$ & $241$ & $x$  & $x$ & $x$ \\
-        $348$ & $265$ & $x$  & $x$ & $x$ \\
-        $391$ & $288$ & $x$  & $x$ & $x$ \\
+        \begin{tabular}{ c | c c | c c }
+            $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{GW MAX $3$-CUT} \\
+            $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
+            \hline
+            $43$  & $???$ & $???$ & $???$ & $???$ \\
+            $87$  & $???$ & $???$ & $???$ & $???$ \\
+            $130$ & $???$ & $???$ & $???$ & $???$ \\
+            $174$ & $???$ & $???$ & $???$ & $???$ \\
+            $217$ & $???$ & $???$ & $???$ & $???$ \\
+            $261$ & $???$ & $???$ & $???$ & $???$ \\
+            $304$ & $???$ & $???$ & $???$ & $???$ \\
+            $348$ & $???$ & $???$ & $???$ & $???$ \\
+            $391$ & $???$ & $???$ & $???$ & $???$ \\
         \end{tabular}
     \end{center}
     \caption{MAX $3$-CUT na náhodných grafech řádu $30$.}
-    \label{tab:cycles_theta}
+    \label{tab:max-3-cut-random}
 \end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c c | c c | c c }
+            $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{N1 MAX $k$-CUT} & \multicolumn{2}{c}{N2 MAX $k$-CUT} \\
+            $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
+            \hline
+            $43$  & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $87$  & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $130$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $174$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $217$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $261$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $304$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $348$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $391$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+        \end{tabular}
+    \end{center}
+    \caption{MAX $4$-CUT na náhodných grafech řádu $30$.}
+    \label{tab:max-4-cut-random}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c c | c c | c c }
+            $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{N1 MAX $k$-CUT} & \multicolumn{2}{c}{N2 MAX $k$-CUT} \\
+            $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
+            \hline
+            $43$  & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $87$  & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $130$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $174$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $217$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $261$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $304$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $348$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $391$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+        \end{tabular}
+    \end{center}
+    \caption{MAX $5$-CUT na náhodných grafech řádu $30$.}
+    \label{tab:max-5-cut-random}
+\end{table}
+
 
 \subsection{CMAX $3$-CUT}
 
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c c | c c }
+            $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{GW MAX $3$-CUT} \\
+            $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
+            \hline
+            $43$  & $???$ & $???$ & $???$ & $???$ \\
+            $87$  & $???$ & $???$ & $???$ & $???$ \\
+            $130$ & $???$ & $???$ & $???$ & $???$ \\
+            $174$ & $???$ & $???$ & $???$ & $???$ \\
+            $217$ & $???$ & $???$ & $???$ & $???$ \\
+            $261$ & $???$ & $???$ & $???$ & $???$ \\
+            $304$ & $???$ & $???$ & $???$ & $???$ \\
+            $348$ & $???$ & $???$ & $???$ & $???$ \\
+            $391$ & $???$ & $???$ & $???$ & $???$ \\
+        \end{tabular}
+    \end{center}
+    \caption{CMAX $3$-CUT na náhodných grafech řádu $30$ s kapacitami $10, 10, 10$.}
+    \label{tab:cmax-3-cut-random-10-10-10}
+\end{table}
 
-
-
-%\begin{center}
-%    \begin{tabular}{ c c c c c }
-%    $k$  & FJ         & GW                  & dKPW                & N1         \\
-%    \hline
-%    $3$  & $0.832718$ & $\mathbf{0.836008}$ & $\mathbf{0.836008}$ &            \\  
-%    $4$  & $0.850304$ &                     & $\mathbf{0.857487}$ & $0.846478$ \\
-%    $5$  & $0.874243$ &                     & $\mathbf{0.876610}$ & $0.862440$ \\
-%    $10$ & $0.926642$ &                     & $\mathbf{0.926788}$ & $0.915885$ \\
-%    \end{tabular}
-%\end{center}
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c c | c c }
+            $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{GW MAX $3$-CUT} \\
+            $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
+            \hline
+            $43$  & $???$ & $???$ & $???$ & $???$ \\
+            $87$  & $???$ & $???$ & $???$ & $???$ \\
+            $130$ & $???$ & $???$ & $???$ & $???$ \\
+            $174$ & $???$ & $???$ & $???$ & $???$ \\
+            $217$ & $???$ & $???$ & $???$ & $???$ \\
+            $261$ & $???$ & $???$ & $???$ & $???$ \\
+            $304$ & $???$ & $???$ & $???$ & $???$ \\
+            $348$ & $???$ & $???$ & $???$ & $???$ \\
+            $391$ & $???$ & $???$ & $???$ & $???$ \\
+        \end{tabular}
+    \end{center}
+    \caption{CMAX $3$-CUT na náhodných grafech řádu $30$ s kapacitami $15, 10, 5$.}
+    \label{tab:cmax-3-cut-random-15-10-5}
+\end{table}
