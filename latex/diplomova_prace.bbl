@@ -1,0 +1,38 @@
+\begin{thebibliography}{1}
+
+\bibitem{understanding-and-using-linear-programming}
+J.~Matoušek B.~G\"{a}rtner.
+\newblock {\em Understanding and Using Linear Programming}.
+\newblock Springer, 2007.
+
+\bibitem{aspects-of-semidefinite-programming}
+E.~de~Klerk.
+\newblock {\em Aspects of Semidefinite Programming}.
+\newblock Kluwer Academic Publishers, 2004.
+
+\bibitem{semidefinite-optimization-and-convex-algebraic-geometry}
+R.~R.~Thomas G.~Blekherman, P. A.~Parrilo.
+\newblock {\em Semidefinite Optimization and Convex Algebraic Geometry}.
+\newblock Siam, 2013.
+
+\bibitem{lectures-on-discrete-geometry}
+J.~Matoušek.
+\newblock {\em Lectures on Discrete Geometry}.
+\newblock Springer, 2002.
+
+\bibitem{convex-optimization}
+L.~Vandenberghe S.~Boyd.
+\newblock {\em Convex Optimization}.
+\newblock Cambridge University Press, 2013.
+
+\bibitem{linear-algebra-and-learning-from-data}
+G.~Strang.
+\newblock {\em Linear Algebra and Learning from Data}.
+\newblock Wellesley Cambridge Press, 2019.
+
+\bibitem{approximation-algorithms}
+V.~V. Vazirani.
+\newblock {\em Approximation Algorithms}.
+\newblock Springer, 2001.
+
+\end{thebibliography}

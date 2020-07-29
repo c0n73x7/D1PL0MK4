@@ -1,6 +1,6 @@
 \chapter{Semidefinitní programování}
 
-Kapitola je zpracována z \textbf{[REF]}, \textbf{[REF]}, ...
+Kapitola je zpracována z \cite{linear-algebra-and-learning-from-data}, \cite{aspects-of-semidefinite-programming}, \cite{semidefinite-optimization-and-convex-algebraic-geometry} a \cite{approximation-algorithms}.
 
 Na semidefinitní programování se můžeme dívat jako na zobecnění lineárního programování, kde proměnné jsou symetrické matice, namísto vektorů. Jedná se tedy o optimalizaci lineární funkce vzhledem k tzv. lineárním maticovým nerovnostem (viz dále).
 
@@ -34,14 +34,13 @@ $$
 
 Ukážeme si několik kritérií, jak otestovat pozitivní definitnost dané matice.
 
-\begin{vt2}
+\begin{vt2}\cite{linear-algebra-and-learning-from-data}
     $S = S^T$ je pozitivně definitní, jestliže ji lze napsat jako $S = A^T A$ pro nějakou matici $A$, která má lineárně nezávislé sloupce.
 \end{vt2}
 \begin{proof}
-    \begin{equation}
-    \label{eq:tmp}
+    $$
         x^TSx = x^TA^TAx = (Ax)^T(Ax) = \lVert Ax \rVert^2 \geq 0
-    \end{equation}
+    $$
     $\lVert Ax \rVert^2 > 0$, jestliže sloupce matice $A$ jsou lineárně nezávislé.
 \end{proof}
 
@@ -62,14 +61,18 @@ Ukážeme si několik kritérií, jak otestovat pozitivní definitnost dané mat
             1 & 1 & 1 \\
             1 & 2 & 3
         \end{bmatrix} =
-        AA^T
+        A^TA
     $$
-    $A$ má lineárně závislé sloupce, tj. $S$ není pozitivně definitní.
+    $A$ má lineárně závislé sloupce. Vezměme vektor $x = (1, -2, 1)$. Platí
+    $$
+        x^TSx = x^T A^TA x = (Ax)^T Ax = 0,
+    $$
+    tj. existuje nenulový vektor $x$, pro který $x^TSx = 0$. Tedy $S$ není pozitivně definitní.
 \end{pr}
 
 Dalším testem je tzv. Sylvesterovo kritérium.
 
-\begin{vt2}
+\begin{vt2}\cite{linear-algebra-and-learning-from-data}
     $S = S^T$ je pozitivně definitní, jestliže všechny vedoucí hlavní minory $S$ jsou kladné.
 \end{vt2}
 
@@ -82,12 +85,12 @@ Dalším testem je tzv. Sylvesterovo kritérium.
         D_1 = 3,
         D_2 = 3 \cdot 6 - 4 \cdot 4 = 2 
     $$
-    vedoucí hlavní minory $D_1, D_2 > 0$; matice $S$ je pozitivně definitní 
+    Vedoucí hlavní minory $D_1, D_2 > 0$, tj. matice $S$ je pozitivně definitní.
 \end{pr}
 
 A poslední, které si uvedeme, souvisí s Gaussovou eliminací.
 
-\begin{vt2}
+\begin{vt2}\cite{linear-algebra-and-learning-from-data}
     $S = S^T$ je pozitivně definitní, jestliže jsou všechny pivoty při Gaussově eliminaci kladné.
 \end{vt2}
 
@@ -104,7 +107,7 @@ A poslední, které si uvedeme, souvisí s Gaussovou eliminací.
         \end{bmatrix},
         p_1 = 3, p_2 = \frac{2}{3} 
     $$
-    pivoty $p_1, p_2 > 0$; matice $S$ je pozitivně definitní
+    Pivoty $p_1, p_2 > 0$? tj. matice $S$ je pozitivně definitní.
 \end{pr}
 
 \subsection*{Pozitivně semidefinitní matice}
@@ -113,9 +116,9 @@ Pro pozitivní semidefinitnost modifikujeme předcházejí definice a tvrzení p
 \begin{enumerate}
     \item $S = S^T$ je pozitivně semidefinitní, jestliže všechna její čísla jsou nezáporná.
     \item $S = S^T$ je pozitivně semidefinitní, jestliže $x^TSx \geq 0$ pro všechny nenulové vektory $x$.
-    \item $S = S^T$ je pozitivně semidefinitní, jestliže lze napsat jako $S = A^T A$ pro nějakou matici $A$.
-    \item $S = S^T$ je pozitivně semidefinitní, jestliže všechny vedoucí hlavní minory $S$ jsou nezáporné.
-    \item $S = S^T$ je pozitivně semidefinitní, jestliže jsou všechny pivoty při eliminaci nezáporné.
+    \item \cite{linear-algebra-and-learning-from-data} $S = S^T$ je pozitivně semidefinitní, jestliže lze napsat jako $S = A^T A$ pro nějakou matici $A$.
+    \item \cite{linear-algebra-and-learning-from-data} $S = S^T$ je pozitivně semidefinitní, jestliže všechny vedoucí hlavní minory $S$ jsou nezáporné.
+    \item \cite{linear-algebra-and-learning-from-data} $S = S^T$ je pozitivně semidefinitní, jestliže jsou všechny pivoty při eliminaci nezáporné.
 \end{enumerate}
 
 \subsection*{Pozitivně semidefinitní kužel}
@@ -315,6 +318,6 @@ Mějme $n$ vektorových proměnných $v_1, \dots, v_n$ v $\mathbb{R}^n$. \textbf
 
 Nyní ukážeme, že vektorové programy jsou ekvivalentní semidefinitním programům. Nechť tedy $\mathcal{V}$ je vektorový program s vektorovými proměnnými $v_1, \dots, v_n$ v $\mathbb{R}^n$ a $\mathcal{S}$ je příslušný semidefinitní program s $n^2$ proměnnými $y_{ij}$, kde hodnota $y_{ij}$ odpovídá skalárnímu součinu $\langle v_i, v_j \rangle$. Matice $Y$ je navíc pozitivně semidefinitní. Potom platí následující věta.
 
-\begin{vt2}\textbf{[REF]}
+\begin{vt2}\cite{approximation-algorithms}
     Vektorový program $\mathcal{V}$ je ekvivalentní semidefinitnímu programu $\mathcal{S}$.
 \end{vt2}

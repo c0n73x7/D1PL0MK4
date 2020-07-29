@@ -1,6 +1,6 @@
 \chapter{Shannonova kapacita}
 
-Kapitola je zpracována z \textbf{[REF]} a citovaných článků. \uv{Zřejmá} tvrzení jsou více rozepsána.
+Kapitola je zpracována z \cite{approximation-algorithms-and-semidefinite-programming} a citovaných článků. \uv{Zřejmá} tvrzení jsou více rozepsána.
 
 \section{Formulace úlohy}
 
@@ -36,7 +36,7 @@ $$
     \Theta(G) = \sup \left\{ \alpha(G^k)^{1/k} \mid k = 1, 2, \dots \right\}.
 $$
 
-Neví se, zda pro libovolný graf $G$ existuje vůběc nějaký algoritmus, kterým bychom určili hodnotu $\Theta(G)$. Přesto je alespoň něco známo. Pro perfektní grafy Claude E. Shannon ukázal, že $\Theta(G) = \alpha(G)$. To také znamená, že pro perfektní grafy lze $\Theta(G)$ určit v polynomiálním čase. Dalším kdo se problémem zabýval byl László Lovász, který velmi hezkým způsobem ukázal, že kružnice délky $5$ má kapacitu $\sqrt{5}$. Na Lovászův postup se dále podíváme, protože vede k obecnému hornímu odhadu na $\Theta(G)$.
+Neví se, zda pro libovolný graf $G$ existuje vůběc nějaký algoritmus, kterým bychom určili hodnotu $\Theta(G)$. Přesto je alespoň něco známo. Pro perfektní grafy Claude E. Shannon \textbf{[REF]} ukázal, že $\Theta(G) = \alpha(G)$. To také znamená, že pro perfektní grafy lze $\Theta(G)$ určit v polynomiálním čase. Dalším kdo se problémem zabýval byl László Lovász \textbf{[REF]}, který velmi hezkým způsobem ukázal, že kružnice délky $5$ má kapacitu $\sqrt{5}$. Na Lovászův postup se dále podíváme, protože vede k obecnému hornímu odhadu na $\Theta(G)$.
 
 \section{$\Theta(C_5) = \sqrt{5}$}
 
@@ -78,7 +78,7 @@ $$
 $$
 nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že každý graf má nějakou ortonormální reprezentaci, např. $1 \mapsto e_1, \dots, n \mapsto e_n$.
 
-\begin{lm}
+\begin{lm}\textbf{[REF]}
     Nechť $\left( u_1, \dots, u_n \right)$ je ortonormální reprezentace grafu $G$ a $\left( v_1, \dots, v_m \right)$ je ortonormální reprezentace grafu $H$. Potom $u_i \circ v_j$ je ortonormální reprezentace grafu $G \cdot H$.
     \label{lemma:shannon}
 \end{lm}
@@ -101,7 +101,7 @@ Vektoru $c$, pro který nastává minimum říkáme \textbf{handle} dané ortono
 
 Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny ortonormální reprezentace grafu $G$. Ortonormální reprezentaci, pro kterou nastává minumum nazýváme \textbf{optimální}. Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je právě již zmíněným horním odhadem na $\Theta(G)$. Podívejme se na některé její vlastnosti.
 
-\begin{lm}
+\begin{lm}\textbf{[REF]}
     $\vartheta(G \cdot H) \leq \vartheta(G) \vartheta(H)$
 \end{lm}
 
@@ -112,7 +112,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
     $$
 \end{proof}
 
-\begin{lm}
+\begin{lm}\textbf{[REF]}
     $\alpha(G) \leq \vartheta(G)$
 \end{lm}
 
@@ -143,7 +143,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
     $$
 \end{proof}
 
-\begin{lm}
+\begin{lm}\textbf{[REF]}
     $\Theta(G) \leq \vartheta(G)$
 \end{lm}
 
@@ -162,7 +162,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
     $$
 \end{proof}
 
-\begin{vt}
+\begin{vt}\textbf{[REF]}
     $\Theta(C_5) = \sqrt{5}$
 \end{vt}
 
@@ -220,7 +220,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
 
 \subsection*{Program pro $1/\sqrt{\vartheta}$}
 
-První formulací je semidefinitní program, jehož řešením je hodnota $\frac{1}{\sqrt{\vartheta}}$. Mějme graf $G = (V,E)$. Hodnota $\vartheta(G)$ je z definice
+První formulací je semidefinitní program (\textbf{[REF]}), jehož řešením je hodnota $\frac{1}{\sqrt{\vartheta}}$. Mějme graf $G = (V,E)$. Hodnota $\vartheta(G)$ je z definice
 $$
     \vartheta(G) = \min_\mathcal{U} \vartheta(\mathcal{U}) = \min_\mathcal{U} \min_{\|c\|=1} \max_{i \in V(G)} \frac{1}{\left( c^T u_i \right)^2},
 $$
