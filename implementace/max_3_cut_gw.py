@@ -3,6 +3,7 @@ from mosek.fusion import Matrix, Model, Domain, Expr, ObjectiveSense
 from itertools import product
 from numpy.linalg import cholesky, norm
 from utils import generate_random_graph
+from tqdm import tqdm
 
 
 def test_graph():
@@ -67,8 +68,8 @@ def find_partition(L, W, iters=1000):
     L = L.copy()
     W = W.copy()
     n = W.shape[0]
-    sums = list()
-    for _ in range(iters):
+    best_sum = -1
+    for _ in tqdm(range(iters)):
         # random vector and random angle
         g = np.random.normal(0, 1, 3*n)
         psi = np.random.uniform(0, 2*np.pi)
@@ -107,8 +108,10 @@ def find_partition(L, W, iters=1000):
             for i in np.argwhere(labels == l).flatten():
                 for j in np.argwhere(labels != l).flatten():
                     s += W[i][j]
-        sums.append(int(s/2))
-    return max(sums)
+        s = int(s/2)
+        if best_sum < s:
+            best_sum = s
+    return best_sum
 
 
 if __name__ == "__main__":

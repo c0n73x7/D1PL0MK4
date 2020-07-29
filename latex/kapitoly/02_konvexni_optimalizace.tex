@@ -4,7 +4,7 @@
 
 \begin{equation}\label{eq:constrained_problem}
     \begin{split}
-        &\min\ f(x) \\
+        &\inf\ f(x) \\
         &g_i(x) \leq 0, i = 1, \dots, m \\
         &h_i(x) = 0, i = 1, \dots, p
     \end{split}
@@ -52,7 +52,7 @@ jako infimum Lagrangeovy funkce $L$ přes všechna $x \in \mathcal{D}$. Tedy
 
 Poznamenejme, že duální funkce je konkávní bez ohledu na to, zda je úloha konvexní a je-li $L$ zdola neomezená v proměnné $x$, potom duální funkce nabývá hodnoty $-\infty$.
 
-\subsection{Dolní odhad na $x^*$}\label{s:lower_bound}
+\subsection*{Dolní odhad na $f^*$}\label{s:lower_bound}
 
 Nechť $\tilde{x}$ je přípustný bod. Pro $\lambda \geq 0$ je
 $$
@@ -67,7 +67,7 @@ $$
     d(\lambda, \mu) = \inf_{x \in \mathcal{D}} L(x, \lambda, \mu) \leq L(\tilde{x}, \lambda, \mu) \leq f(\tilde{x}).
 $$
 
-\subsection{Duální úloha}
+\subsection*{Duální úloha}
 
 V části~\ref{s:lower_bound} jsme si ukázali, že duální funkce dává dolní odhad na optimální hodnotu $x^*$ úlohy~\ref{eq:constrained_problem}. Stále jsme si ale neřekli, jaký je nejlepší dolní odhad, který pomocí duální funkce jsme schopni dostat. To nás dostává k následující optimalizační úloze.
 \begin{equation}\label{eq:dual_problem}
@@ -79,24 +79,24 @@ V části~\ref{s:lower_bound} jsme si ukázali, že duální funkce dává doln�
 
 Úloze~\ref{eq:dual_problem} se říká \textbf{Lagrangeova duální úloha} příslušná k úloze~\ref{eq:constrained_problem}, kterou nazýváme \textbf{primární úlohou}.
 
-\subsection{Slabá dualita}
+\subsection*{Slabá dualita}
 
-Optimální řešení Lagrangeovy duální úlohy označíme $d^*$, které je už z definice nejlepší dolní odhad na optimální řešení primární úlohy $p^*$. Tato nerovnost platí i pokud primární úloha není konvexní. Této nerovnosti říkáme \textbf{slabá dualita}. Rozdíl optimálních řešení $p^* - d^*$ označujeme jako \textbf{optimální dualitní rozdíl} primární úlohy. Poznamenejme, že optimální dualitní rozdíl je vždy nezáporný.
+Optimální řešení Lagrangeovy duální úlohy označíme $d^*$, které je už z definice nejlepší dolní odhad na optimální řešení primární úlohy $f^*$. Tato nerovnost platí i pokud primární úloha není konvexní. Této nerovnosti říkáme \textbf{slabá dualita}. Rozdíl optimálních řešení $f^* - d^*$ označujeme jako \textbf{optimální dualitní rozdíl} primární úlohy. Poznamenejme, že optimální dualitní rozdíl je vždy nezáporný.
 
 
-\subsection{Silná dualita a Slaterova podmínka}
+\subsection*{Silná dualita a Slaterova podmínka}
 
-Pokud je optimální dualitní rozdíl $p^* - d^* = 0$, pak říkáme, že platí silná dualita. Silná dualita obecně neplatí, ale pro primární úlohu, která splňuje nějaké další podmínky to možné je. Těmto podmínkám se říká \textbf{podmínky kvalifikace omezení}. Jednou takovou je \textbf{Slaterova podmínka}
+Pokud je optimální dualitní rozdíl $f^* - d^* = 0$, pak říkáme, že platí silná dualita. Silná dualita obecně neplatí, ale pro primární úlohu, která splňuje nějaké další podmínky to možné je. Těmto podmínkám se říká \textbf{podmínky kvalifikace omezení}. Jednou takovou je \textbf{Slaterova podmínka}
 $$
-    \exists x \in \textbf{relint}\ \mathcal{D}:\ f_i(x) < 0, i = 1, \dots, m, Ax = b.
-$$
-
-Bodu $x \in \mathcal{D}$, který splňuje Slaterovu podmínku, říkáme, že je \textbf{striktně přípustný}, protože omezení typu nerovnosti jsou ostré. Pokud jsou některé funkce $f_i$ afinní, můžeme Slaterovu podmínku modifikovat. Nechť tedy $f_1, \dots, f_k, k \leq m$, jsou afinní funkce. Potom \textbf{modifikovaná Slaterova podmínka} má tvar
-$$
-    \exists x \in \textbf{relint}\ \mathcal{D}:\ f_i(x) \leq 0, i = 1, \dots, k, f_i(x) < 0, i = k+1, \dots, m, Ax = b.
+    \exists x \in \textbf{relint}\ \mathcal{D}:\ g_i(x) < 0, i = 1, \dots, m, Ax = b.
 $$
 
-Pro úlohu~\ref{eq:convex_problem} platí následující věta.
+Bodu $x \in \mathcal{D}$, který splňuje Slaterovu podmínku, říkáme, že je \textbf{striktně přípustný}, protože omezení typu nerovnosti jsou ostré. Pokud jsou některé funkce $g_i$ afinní, můžeme Slaterovu podmínku modifikovat. Nechť tedy $g_1, \dots, g_k, k \leq m$, jsou afinní funkce. Potom \textbf{modifikovaná Slaterova podmínka} má tvar
+$$
+    \exists x \in \textbf{relint}\ \mathcal{D}:\ g_i(x) \leq 0, i = 1, \dots, k, g_i(x) < 0, i = k+1, \dots, m, Ax = b.
+$$
+
+\noindent Pro úlohu~\ref{eq:convex_problem} platí následující věta.
 \begin{vt2}[Slaterova]
     Nechť primární úloha je konvexní a platí (modifikovaná) Slaterova podmínka, potom $p^* = d^*$.
 \end{vt2}

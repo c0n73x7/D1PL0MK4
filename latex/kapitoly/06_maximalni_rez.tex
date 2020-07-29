@@ -96,20 +96,6 @@ Dále se budeme snažit objasnit kroky \textbf{1} a \textbf{2} v algoritmu~\ref{
     \label{lemma:sep}
 \end{lm}
 
-\begin{proof}
-    Vektory $a_i, a_j$ generují rovinu. Uvažme projekci náhodného vektoru $r$ na jednotkové sféře $S_{n-1}$ do této roviny. Potom vrcholy $i$ a $j$ jsou separovány, jestliže
-    $$
-        \langle a_i, a_j \rangle = \langle r, a_i \rangle + \langle r, a_j \rangle
-    $$
-    \begin{center}
-        nebo
-    \end{center}
-    $$
-        \langle a_i, a_j \rangle = \langle -r, a_i \rangle + \langle -r, a_j \rangle.
-    $$
-    Předchozí podmínku separace vrcholů ilustruje obrázek~\ref{fig:lemma_plane}.
-\end{proof}
-
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{img/lemma_plane.png}   
@@ -345,7 +331,7 @@ O obecné úloze CMAX $k$-CUT toho není mnoho známo. V \textbf{[REF]} (a pozd�
 $$
     \frac{t(k-1)}{2(s-1)+t(k-1)},
 $$
-kde $k\geq 2$, $t = \min_{i=1,\dots,k} |V_i|$ a $s = \max_{i=1,\dots,k} |V_i|$. Dále vyzkoušíme pro úlohu CMAX $3$-CUT přístup, ve kterém využijeme semidefinitní programování.
+kde $k\geq 2$, $t = \min_{i=1,\dots,k} |V_i|$ a $s = \max_{i=1,\dots,k} |V_i|$. Dále vyzkoušíme pro úlohu CMAX $k$-CUT přístup, ve kterém využijeme semidefinitní programování.
 
 \subsection{Lokální prohledávání}
 
@@ -363,28 +349,22 @@ $$
 $$
 Pokud takové vrcholy najdeme, tak vrchol $u$ přesuneme do množiny $V_j$ a vrchol $v$ přesuneme do množiny $V_i$ a iterační krok opakujeme. Jestliže takové vrcholy neexistují algoritmus končí.
 
-\subsection{CMAX $3$-CUT pomocí SDP}
+\subsection{CMAX $k$-CUT pomocí SDP}
 
-V našem přístupu pro CMAX $3$-CUT použijeme algoritmus~\ref{alg:gw-max-3-cut}, ze kterého potřebujeme rozklad vrcholů do množin $V_1, V_2, V_3$, úhel $\psi \in \langle 0, \pi )$ a úhel $\Theta_i$ pro každý vrchol $i \in V$.
+V našem přístupu pro CMAX $k$-CUT použijeme algoritmus~\ref{alg:n-max-k-cut-2}, ze kterého potřebujeme rozklad vrcholů do množin $V_1, \dots, V_k$, vygenerovaný simplex a vektory příslušné jednotlivým vrcholům.
 
-Nejprve určíme středy množin $V_1, V_2, V_3$, tj.
-$$
-    c_1 = \psi + \frac{\pi}{3}, c_2 = \psi + \pi \text{ a } c_3 = \psi + \frac{5}{3} \pi.
-$$
-Dále máme zadány kapacity $s_1 \geq s_2 \geq s_3$. Množiny, které dostaneme z algoritmu~\ref{alg:gw-max-3-cut}, přeznačíme tak, aby součet záporných rezerv $r_i = s_i - |V_i|$ množin $V_1, V_2, V_3$ byl maximální.
+Máme zadány kapacity $s_1 \geq \dots \geq s_k$. Množiny, které dostaneme z algoritmu~\ref{alg:n-max-k-cut-2}, přeznačíme tak, aby součet záporných rezerv $r_i = s_i - |V_i|$ množin $V_1, \dots, V_k$ byl maximální.
 
-Pro každou množinu $V_1, V_2, V_3$ určíme její rezervu $r_i$. Pokud jsou všechny rezervy nezáporné, vrátíme množiny $V_1, V_2, V_3$ jako výsledek. Jinak z množiny, která má zápornou rezervu vybereme dva vrcholy $u$ a $v$, které mají maximální a minimální úhel. Z množiny
-$$
-    \bigcup_{i, r_i > 0} \left\{ c_i - \Theta_u, c_i - \Theta_v \right\}
-$$
-vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ přesuneme do množiny $V_i$. Takto iterujeme dokud nejsou všechny rezervy nezáporné.
-
+Pro každou množinu $V_1, \dots, V_k$ určíme její rezervu $r_i$. Pokud jsou všechny rezervy nezáporné, vrátíme množiny $V_1, \dots, V_k$ jako výsledek. Jinak z množiny, která má zápornou rezervu vybereme vrchol, který má nejkratší vzdálenost do nějakého jiného vrcholu simplexu $\Sigma_k$. Takto iterujeme dokud nejsou všechny rezervy nezáporné.
 
 \section{Experimenty}
 
-%\subsection{MAX CUT}
+K implementaci algoritmů je použit programovací jazyk Python 3 a framework Mosek. Jsou naimplementovány algoritmy~\ref{alg:fj-max-k-cut}, \ref{alg:gw-max-3-cut}, \ref{alg:n-max-k-cut-1}, \ref{alg:n-max-k-cut-2} pro úlohu MAX $k$-CUT a pro kapacitní verzi také algoritmus využívající lokální prohledávání a náš přístup využívající semidefinitní programování. Experimenty jsou realizovány na náhodných grafech řádu $30$ s předepsaným počtem hran. Tučně jsou vždy vyznačeny nejlepší výsledky.
+
 
 \subsection{MAX $k$-CUT}
+
+Pro úlohu MAX $3$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut} a algoritmus~\ref{alg:gw-max-3-cut}.
 
 \begin{table}[h!]
     \begin{center}
@@ -392,20 +372,22 @@ vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ přesu
             $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{GW MAX $3$-CUT} \\
             $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
             \hline
-            $43$  & $???$ & $???$ & $???$ & $???$ \\
-            $87$  & $???$ & $???$ & $???$ & $???$ \\
-            $130$ & $???$ & $???$ & $???$ & $???$ \\
-            $174$ & $???$ & $???$ & $???$ & $???$ \\
-            $217$ & $???$ & $???$ & $???$ & $???$ \\
-            $261$ & $???$ & $???$ & $???$ & $???$ \\
-            $304$ & $???$ & $???$ & $???$ & $???$ \\
-            $348$ & $???$ & $???$ & $???$ & $???$ \\
-            $391$ & $???$ & $???$ & $???$ & $???$ \\
+            $43$  & $41$ & $\mathbf{43}$ & $37$ & $40$ \\
+            $87$  & $80$ & $\mathbf{82}$ & $72$ & $77$ \\
+            $130$ & $116$ & $\mathbf{117}$ & $104$ & $115$ \\
+            $174$ & $150$ & $\mathbf{153}$ & $140$ & $147$ \\
+            $217$ & $178$ & $\mathbf{182}$ & $166$ & $175$ \\
+            $261$ & $208$ & $\mathbf{210}$ & $194$ & $203$ \\
+            $304$ & $239$ & $\mathbf{241}$ & $226$ & $240$ \\
+            $348$ & $263$ & $\mathbf{265}$ & $251$ & $261$ \\
+            $391$ & $287$ & $\mathbf{289}$ & $281$ & $287$ \\
         \end{tabular}
     \end{center}
     \caption{MAX $3$-CUT na náhodných grafech řádu $30$.}
     \label{tab:max-3-cut-random}
 \end{table}
+
+Pro úlohy MAX $4$-CUT a MAX $5$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut}, algoritmus~\ref{alg:n-max-k-cut-1} a algoritmus~\ref{alg:n-max-k-cut-2}.
 
 \begin{table}[h!]
     \begin{center}
@@ -413,15 +395,15 @@ vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ přesu
             $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{N1 MAX $k$-CUT} & \multicolumn{2}{c}{N2 MAX $k$-CUT} \\
             $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
             \hline
-            $43$  & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $87$  & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $130$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $174$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $217$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $261$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $304$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $348$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $391$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $43$  & $\mathbf{43}$ & $\mathbf{43}$ & $39$ & $42$ & $42$ & $\mathbf{43}$ \\
+            $87$  & $84$ & $\mathbf{87}$ & $76$ & $81$ & $85$ & $\mathbf{87}$ \\
+            $130$ & $125$ & $\mathbf{129}$ & $114$ & $119$ & $127$ & $\mathbf{129}$ \\
+            $174$ & $163$ & $\mathbf{164}$ & $149$ & $157$ & $161$ & $\mathbf{164}$ \\
+            $217$ & $195$ & $201$ & $185$ & $188$ & $197$ & $\mathbf{202}$ \\
+            $261$ & $229$ & $\mathbf{233}$ & $215$ & $225$ & $230$ & $\mathbf{233}$ \\
+            $304$ & $265$ & $267$ & $249$ & $258$ & $263$ & $\mathbf{268}$ \\
+            $348$ & $289$ & $\mathbf{294}$ & $277$ & $287$ & $292$ & $\mathbf{294}$ \\
+            $391$ & $321$ & $\mathbf{323}$ & $312$ & $319$ & $319$ & $\mathbf{323}$ \\
         \end{tabular}
     \end{center}
     \caption{MAX $4$-CUT na náhodných grafech řádu $30$.}
@@ -434,15 +416,15 @@ vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ přesu
             $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{N1 MAX $k$-CUT} & \multicolumn{2}{c}{N2 MAX $k$-CUT} \\
             $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
             \hline
-            $43$  & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $87$  & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $130$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $174$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $217$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $261$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $304$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $348$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
-            $391$ & $???$ & $???$ & $???$ & $???$ & $???$ & $???$ \\
+            $43$  & $\mathbf{43}$ & $\mathbf{43}$ & $40$ & $\mathbf{43}$ & $\mathbf{43}$ & $\mathbf{43}$ \\
+            $87$  & $\mathbf{87}$ & $\mathbf{87}$ & $78$ & $84$ & $\mathbf{87}$ & $\mathbf{87}$ \\
+            $130$ & $128$ & $\mathbf{130}$ & $119$ & $123$ & $128$ & $\mathbf{130}$ \\
+            $174$ & $167$ & $\mathbf{170}$ & $156$ & $160$ & $167$ & $\mathbf{170}$ \\
+            $217$ & $206$ & $208$ & $194$ & $199$ & $204$ & $\mathbf{209}$ \\
+            $261$ & $242$ & $\mathbf{244}$ & $229$ & $234$ & $\mathbf{244}$ & $243$ \\
+            $304$ & $276$ & $\mathbf{282}$ & $263$ & $270$ & $279$ & $\mathbf{282}$ \\
+            $348$ & $309$ & $311$ & $294$ & $302$ & $307$ & $\mathbf{312}$ \\
+            $391$ & $337$ & $\mathbf{343}$ & $328$ & $336$ & $339$ & $342$ \\
         \end{tabular}
     \end{center}
     \caption{MAX $5$-CUT na náhodných grafech řádu $30$.}
@@ -450,46 +432,6 @@ vybereme minimum, které odpovídá výrazu $c_i - \Theta_x$ a vrchol $x$ přesu
 \end{table}
 
 
-\subsection{CMAX $3$-CUT}
+\subsection{CMAX $k$-CUT}
 
-\begin{table}[h!]
-    \begin{center}
-        \begin{tabular}{ c | c c | c c }
-            $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{GW MAX $3$-CUT} \\
-            $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
-            \hline
-            $43$  & $???$ & $???$ & $???$ & $???$ \\
-            $87$  & $???$ & $???$ & $???$ & $???$ \\
-            $130$ & $???$ & $???$ & $???$ & $???$ \\
-            $174$ & $???$ & $???$ & $???$ & $???$ \\
-            $217$ & $???$ & $???$ & $???$ & $???$ \\
-            $261$ & $???$ & $???$ & $???$ & $???$ \\
-            $304$ & $???$ & $???$ & $???$ & $???$ \\
-            $348$ & $???$ & $???$ & $???$ & $???$ \\
-            $391$ & $???$ & $???$ & $???$ & $???$ \\
-        \end{tabular}
-    \end{center}
-    \caption{CMAX $3$-CUT na náhodných grafech řádu $30$ s kapacitami $10, 10, 10$.}
-    \label{tab:cmax-3-cut-random-10-10-10}
-\end{table}
-
-\begin{table}[h!]
-    \begin{center}
-        \begin{tabular}{ c | c c | c c }
-            $$ & \multicolumn{2}{c}{FJ MAX $k$-CUT} & \multicolumn{2}{c}{GW MAX $3$-CUT} \\
-            $m$ & $100$ iterací & $10000$ iterací & $100$ iterací & $10000$ iterací \\
-            \hline
-            $43$  & $???$ & $???$ & $???$ & $???$ \\
-            $87$  & $???$ & $???$ & $???$ & $???$ \\
-            $130$ & $???$ & $???$ & $???$ & $???$ \\
-            $174$ & $???$ & $???$ & $???$ & $???$ \\
-            $217$ & $???$ & $???$ & $???$ & $???$ \\
-            $261$ & $???$ & $???$ & $???$ & $???$ \\
-            $304$ & $???$ & $???$ & $???$ & $???$ \\
-            $348$ & $???$ & $???$ & $???$ & $???$ \\
-            $391$ & $???$ & $???$ & $???$ & $???$ \\
-        \end{tabular}
-    \end{center}
-    \caption{CMAX $3$-CUT na náhodných grafech řádu $30$ s kapacitami $15, 10, 5$.}
-    \label{tab:cmax-3-cut-random-15-10-5}
-\end{table}
+Pro úlohu CMAX $k$-CUT jsou porovnány dva algoritmy. Jeden využívající lokální prohledávání a druhý přístup, který je založen na semidefinitním programování.
