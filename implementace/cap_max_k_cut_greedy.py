@@ -63,7 +63,7 @@ def get_sum_of_weights(labels, W):
         for i in np.argwhere(labels == l).flatten():
             for j in np.argwhere(labels != l).flatten():
                 s += W[i][j]
-    return int(s / 2)
+    return int(s/2)
 
 
 if __name__ == "__main__":
