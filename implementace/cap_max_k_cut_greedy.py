@@ -13,7 +13,6 @@ def test_graph():
 
 
 def initialization(n, seq):
-    random.seed(23)
     k = len(seq)
     labels = np.array([-1 for _ in range(n)])
     for v in range(n):
