@@ -435,3 +435,69 @@ Pro úlohy MAX $4$-CUT a MAX $5$-CUT byl otestován algoritmus~\ref{alg:fj-max-k
 \subsection{CMAX $k$-CUT}
 
 Pro úlohu CMAX $k$-CUT jsou porovnány dva algoritmy. Jeden využívající lokální prohledávání a druhý přístup, který je založen na semidefinitním programování.
+
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c c | c c }
+            $$ & \multicolumn{2}{c}{lokální prohledávání} & \multicolumn{2}{c}{SDP} \\
+            $m$ & nejhorší & nejlepší & nejhorší & nejlepší \\
+            \hline
+            $43$  & $40$  & $\mathbf{43}$  & $34$  & $\mathbf{43}$ \\
+            $87$  & $77$  & $\mathbf{82}$  & $73$  & $\mathbf{82}$ \\
+            $130$ & $110$ & $\mathbf{117}$ & $105$ & $\mathbf{117}$ \\
+            $174$ & $142$ & $\mathbf{153}$ & $142$ & $\mathbf{153}$ \\
+            $217$ & $174$ & $\mathbf{182}$ & $175$ & $\mathbf{182}$ \\
+            $261$ & $202$ & $\mathbf{210}$ & $203$ & $\mathbf{210}$ \\
+            $304$ & $231$ & $\mathbf{241}$ & $235$ & $\mathbf{241}$ \\
+            $348$ & $258$ & $\mathbf{265}$ & $259$ & $\mathbf{265}$ \\
+            $391$ & $282$ & $\mathbf{289}$ & $284$ & $\mathbf{289}$ \\
+        \end{tabular}
+    \end{center}
+    \caption{CMAX $3$-CUT na náhodných grafech řádu $30$ s kapacitami $(10, 10, 10)$.}
+    \label{tab:cmax-3-cut-random-10-10-10}
+\end{table}
+
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c c | c c }
+            $$ & \multicolumn{2}{c}{lokální prohledávání} & \multicolumn{2}{c}{SDP} \\
+            $m$ & nejhorší & nejlepší & nejhorší & nejlepší \\
+            \hline
+            $43$  & $\mathbf{43}$ & $\mathbf{43}$ & $37$ & $\mathbf{43}$ \\
+            $87$  & $83$ & $\mathbf{87}$ & $77$ & $85$ \\
+            $130$ & $120$ & $\mathbf{129}$ & $118$ & $\mathbf{129}$ \\
+            $174$ & $158$ & $\mathbf{166}$ & $151$ & $165$ \\
+            $217$ & $190$ & $\mathbf{201}$ & $189$ & $200$ \\
+            $261$ & $226$ & $\mathbf{233}$ & $225$ & $\mathbf{233}$ \\
+            $304$ & $258$ & $\mathbf{268}$ & $257$ & $267$ \\
+            $348$ & $289$ & $\mathbf{295}$ & $288$ & $\mathbf{295}$ \\
+            $391$ & $316$ & $322$ & $319$ & $\mathbf{323}$ \\
+        \end{tabular}
+    \end{center}
+    \caption{CMAX $4$-CUT na náhodných grafech řádu $30$ s kapacitami $(8, 8, 8, 8)$.}
+    \label{tab:cmax-4-cut-random-8-8-8-8}
+\end{table}
+
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c c | c c }
+            $$ & \multicolumn{2}{c}{lokální prohledávání} & \multicolumn{2}{c}{SDP} \\
+            $m$ & nejhorší & nejlepší & nejhorší & nejlepší \\
+            \hline
+            $43$  & $37$ & $\mathbf{43}$ & $42$ & $\mathbf{43}$ \\
+            $87$  & $73$ & $\mathbf{87}$ & $82$ & $85$ \\
+            $130$ & $102$ & $\mathbf{129}$ & $126$ & $\mathbf{129}$ \\
+            $174$ & $140$ & $\mathbf{166}$ & $159$ & $165$ \\
+            $217$ & $165$ & $200$ & $195$ & $\mathbf{201}$ \\
+            $261$ & $204$ & $232$ & $228$ & $\mathbf{233}$ \\
+            $304$ & $224$ & $266$ & $263$ & $\mathbf{268}$ \\
+            $348$ & $253$ & $294$ & $291$ & $\mathbf{295}$ \\
+            $391$ & $278$ & $320$ & $320$ & $\mathbf{323}$ \\
+        \end{tabular}
+    \end{center}
+    \caption{CMAX $4$-CUT na náhodných grafech řádu $30$ s kapacitami $(20, 20, 20, 20)$.}
+    \label{tab:cmax-4-cut-random-20-20-20-20}
+\end{table}
