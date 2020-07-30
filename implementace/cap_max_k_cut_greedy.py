@@ -69,7 +69,7 @@ def get_sum_of_weights(labels, W):
 
 if __name__ == "__main__":
     W = test_graph()
-    seq = [3, 3]
+    seq = [3, 2, 2]
     labels = local_search(W, seq)
     s = get_sum_of_weights(labels, W)
     print(s)
