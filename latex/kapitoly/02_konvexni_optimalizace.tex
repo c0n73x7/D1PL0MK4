@@ -12,15 +12,11 @@ Kapitola je zpracována z \cite{convex-optimization}.
     \end{split}
 \end{equation}
 
-Hledáme $x \in \mathbb{R}^n$, které minimalizuje $f(x)$, vzhledem k omezením $g_i(x)$ a $h_i(x)$. Proměnné $x$ říkáme \textbf{optimalizační proměnná}, funkci $f(x)$ říkáme \textbf{cenová} nebo \textbf{účelová funkce}. Výrazy $g_i(x) \leq 0$ jsou \textbf{omezení typu nerovnosti} a $h_i(x) = 0$ jsou \textbf{omezení typu rovnosti}. Říkáme, že problém~\ref{eq:constrained_problem} je \textbf{úloha nepodmíněné optimalizace}, jestliže $m = p = 0$. Jinak se jedná o \textbf{úlohu podmíněné optimalizace}.
-
-\textbf{Definiční obor} $\mathcal{D}$ úlohy~\ref{eq:constrained_problem} je
+\noindent Hledáme $x \in \mathbb{R}^n$, které minimalizuje $f(x)$ (pro maximalizaci minimalizujeme $-f(x)$), vzhledem k omezením $g_i(x)$ a $h_i(x)$. Proměnné $x$ říkáme \textbf{optimalizační proměnná}, funkci $f(x)$ říkáme \textbf{cenová} nebo \textbf{účelová funkce}. Výrazy $g_i(x) \leq 0$ jsou \textbf{omezení typu nerovnosti} a $h_i(x) = 0$ jsou \textbf{omezení typu rovnosti}. Říkáme, že problém~\ref{eq:constrained_problem} je \textbf{úloha nepodmíněné optimalizace}, jestliže $m = p = 0$. Jinak se jedná o \textbf{úlohu podmíněné optimalizace}. \textbf{Definiční obor} $\mathcal{D}$ úlohy~\ref{eq:constrained_problem} je
 $$
     \mathcal{D} = \bigcap_{i=1}^m \textbf{dom}\ g_i \cap \bigcap_{i=1}^p \textbf{dom}\ h_i.
 $$
-Říkáme, že bod $x \in \mathcal{D}$ je \textbf{přípustný}, jestliže splňuje všechna omezení $g_i(x) \leq 0$ a $h_i(x) = 0$. Úloha~\ref{eq:constrained_problem} je \textbf{přípustná}, jestliže existuje alespoň jeden bod $x \in \mathcal{D}$, který je přípustný. Množina všech přípustných bodů $x \in \mathcal{D}$ se nazývá \textbf{přípustná množina}.
-
-\textbf{Optimální hodnota} $f^*$ úlohy~\ref{eq:constrained_problem} je definována jako
+Říkáme, že bod $x \in \mathcal{D}$ je \textbf{přípustný}, jestliže splňuje všechna omezení $g_i(x) \leq 0$ a $h_i(x) = 0$. Úloha~\ref{eq:constrained_problem} je \textbf{přípustná}, jestliže existuje alespoň jeden bod $x \in \mathcal{D}$, který je přípustný. Množina všech přípustných bodů $x \in \mathcal{D}$ se nazývá \textbf{přípustná množina}. \textbf{Optimální hodnota} $f^*$ úlohy~\ref{eq:constrained_problem} je definována jako
 $$
     f^* = \inf \left\{ f(x) \mid g_i(x) \leq 0, i = 1, \dots, m, h_i(x) = 0, i = 1, \dots, p \right\}.
 $$
@@ -35,7 +31,7 @@ $$
     \end{split}
 \end{equation}
 
-Oproti obecné úloze~\ref{eq:constrained_problem} jsou funkce $f(x), g_i(x)$ konvexní a funkce $h_i(x) = a_i^Tx - b_i$ jsou afinní. Přípustná množina takové úlohy je konvexní množinou.
+\noindent Oproti obecné úloze~\ref{eq:constrained_problem} jsou funkce $f(x), g_i(x)$ konvexní a funkce $h_i(x) = a_i^Tx - b_i$ jsou afinní. Přípustná množina takové úlohy je konvexní množinou.
 
 \section{Lagrangeova dualita}
 
@@ -71,7 +67,7 @@ $$
 
 \subsection*{Duální úloha}
 
-V části~\ref{s:lower_bound} jsme si ukázali, že duální funkce dává dolní odhad na optimální hodnotu $x^*$ úlohy~\ref{eq:constrained_problem}. Stále jsme si ale neřekli, jaký je nejlepší dolní odhad, který pomocí duální funkce jsme schopni dostat. To nás dostává k následující optimalizační úloze.
+V části~\ref{s:lower_bound} jsme si ukázali, že duální funkce dává dolní odhad na optimální hodnotu $f^*$ úlohy~\ref{eq:constrained_problem}. Stále jsme si ale neřekli, jaký je nejlepší dolní odhad, který pomocí duální funkce jsme schopni dostat. To nás dostává k následující optimalizační úloze.
 \begin{equation}\label{eq:dual_problem}
     \begin{split}
         &\sup d(\lambda, \mu) \\
@@ -93,7 +89,7 @@ $$
     \exists x \in \textbf{relint}\ \mathcal{D}:\ g_i(x) < 0, i = 1, \dots, m, Ax = b.
 $$
 
-Bodu $x \in \mathcal{D}$, který splňuje Slaterovu podmínku, říkáme, že je \textbf{striktně přípustný}, protože omezení typu nerovnosti jsou ostré. Pokud jsou některé funkce $g_i$ afinní, můžeme Slaterovu podmínku modifikovat. Nechť tedy $g_1, \dots, g_k, k \leq m$, jsou afinní funkce. Potom \textbf{modifikovaná Slaterova podmínka} má tvar
+Bodu $x \in \mathcal{D}$, který splňuje Slaterovu podmínku, říkáme, že je \textbf{striktně přípustný}, protože omezení typu nerovnosti jsou ostré. Pokud jsou některé funkce $g_i$ afinní, můžeme Slaterovu podmínku modifikovat. Nechť tedy $g_1, \dots, g_k$ pro $k \leq m$, jsou afinní funkce. Potom \textbf{modifikovaná Slaterova podmínka} má tvar
 $$
     \exists x \in \textbf{relint}\ \mathcal{D}:\ g_i(x) \leq 0, i = 1, \dots, k, g_i(x) < 0, i = k+1, \dots, m, Ax = b.
 $$

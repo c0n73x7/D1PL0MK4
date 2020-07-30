@@ -10,7 +10,7 @@ kde $|V| = n \leq \sum_i s_i$, jedná se o kapacitní MAX $k$-CUT úlohu, kterou
 
 \section{Úloha MAX CUT}
 
-Nejprve se podíváme na aproximační algoritmus z článku \textbf{[REF]} pro úlohu MAX CUT.
+Nejprve se podíváme na aproximační algoritmus z článku \cite{max-cut} pro úlohu MAX CUT.
 
 \subsection{Striktní kvadratický program pro MAX CUT}
 
@@ -71,13 +71,13 @@ Označme $\Theta_{ij}$ úhel, který svírají vektory $a_i$ a $a_j$. Z podmínk
 $$
     \forall i \in V:\ \langle v_i, v_i \rangle = 1
 $$
-dostáváme, že $\langle a_i, a_j \rangle = \cos \Theta_{ij}$ a příspěvěk těchto vektorů k optimálnímu řešení je
+dostáváme, že $\langle a_i, a_j \rangle = \cos \Theta_{ij}$ a příspěvek těchto vektorů k optimálnímu řešení je
 $$
     \frac{w_{ij}}{2} (1 - \cos \Theta_{ij}).
 $$
-Tedy čím \uv{blíž} je úhel $\Theta_{ij}$ hodnotě $\pi$, tím větší příspěvěk mají tyto vektory k hodnotě optimálního řešení. Algoritmus je následující.
+Tedy čím \uv{blíž} je úhel $\Theta_{ij}$ hodnotě $\pi$, tím větší příspěvek mají tyto vektory k hodnotě optimálního řešení. Algoritmus je následující.
 
-\begin{alg}[MAX-CUT]$ $
+\begin{alg}[MAX-CUT]\cite{max-cut}$ $
     \begin{enumerate}
         \item Najdi řešení $a_1, \dots, a_n$ programu~\ref{eq:V-MAX-CUT}.
         \item Zvol náhodně vektor $r$ na jednotkové sféře $S_{n-1}$.
@@ -88,7 +88,7 @@ Tedy čím \uv{blíž} je úhel $\Theta_{ij}$ hodnotě $\pi$, tím větší př�
 
 Dále se budeme snažit objasnit kroky \textbf{1} a \textbf{2} v algoritmu~\ref{alg:max-cut}.
 
-\begin{lm}\textbf{[REF]}
+\begin{lm}\cite{shannon-capacity-lower-bound-on-c7-worst}
     Nechť $X_{ij}$ je jev takový, že vrcholy $i$ a $j$ jsou od sebe separovány, tj. jsou v různých množinách. Potom
     $$
         P\left[ X_{ij} \right] = \frac{\Theta_{ij}}{\pi}.
@@ -103,7 +103,7 @@ Dále se budeme snažit objasnit kroky \textbf{1} a \textbf{2} v algoritmu~\ref{
     \label{fig:lemma_plane}
 \end{figure}
 
-\begin{lm}[KNUTH 2, 135]
+\begin{lm}\cite{seminumerical-algorithms}
     Nechť $x = (x_1, \dots, x_n)$ je vektor, jehož prvky jsou zvoleny nezávisle z normálního normovaného rozdělení $\mathcal{N}(0,1)$. Potom $r = \frac{x}{\| x \|}$ je náhodný vektor, který leží na jednotkové sféře $S_{n-1}$.
     \label{lemma:random-vector-on-sphere}
 \end{lm}
@@ -114,7 +114,7 @@ $$
 $$
 Snadno se ukáže, použitím derivace, že $\alpha \approx 0.87856$.
 
-\begin{lm}\textbf{[REF]}
+\begin{lm}\cite{max-cut}
     Nechť $Y$ je náhodná veličina, která označuje součet vah hran, které vedou z $S$ do $\bar{S}$, nalezeny algoritmem~\ref{alg:max-cut}. Potom
     $$
         E\left[ Y \right] \geq \alpha \cdot RELAX.
@@ -148,9 +148,9 @@ Snadno se ukáže, použitím derivace, že $\alpha \approx 0.87856$.
 $$
     \inf_{I} \frac{OPT(I)}{RELAX(I)},
 $$
-kde infimum probíhá přes všechny instance $I$ daného programu (pro minimalizační problém by se čitatel a jmenovat prohodily). Ze vztahu~\ref{eq:int-gap} dostáváme, že mezera celočíselnosti relaxace~\ref{eq:V-MAX-CUT} je alespoň $\alpha \approx 0.87856$.
+kde infimum probíhá přes všechny instance $I$ daného programu (pro minimalizační problém by se čitatel a jmenovat prohodily). Ze vztahu~\ref{eq:int-gap} dostáváme, že mezera celočíselnosti relaxace~\ref{eq:V-MAX-CUT} je alespoň $\alpha \approx 0.87856$. Číslu $\alpha$ ze \ref{eq:int-gap} se říká \textbf{aproximační poměr} a algoritmus~\ref{alg:max-cut} je tedy $0.87856$-aproximační algoritmus.
 
-Předchozí odvození je založeno na střední hodnotě náhodné veličiny $Y$. Proto kroky \textbf{2} a \textbf{3}, v algoritmu~\ref{alg:max-cut}, opakujeme vícekrát a jako výsledek zvolíme množinu $S$, která dává největší součet hran z $S$ do $\bar{S}$. Dále jen specifikujeme kolikrát musíme tyto kroky opakovat. Kompletní odvození je v \textbf{[REF]}. Zvolíme tedy $\varepsilon > 0$ (malé), nechť
+Předchozí odvození je založeno na střední hodnotě náhodné veličiny $Y$. Proto kroky \textbf{2} a \textbf{3}, v algoritmu~\ref{alg:max-cut}, opakujeme vícekrát a jako výsledek zvolíme množinu $S$, která dává největší součet hran z $S$ do $\bar{S}$. Dále jen specifikujeme kolikrát musíme tyto kroky opakovat. Kompletní odvození je v \cite{approximation-algorithms}. Zvolíme tedy $\varepsilon > 0$ (malé), nechť
 $$
     c = \frac{\varepsilon \alpha}{2 + 2\varepsilon - \alpha},
 $$
@@ -163,9 +163,9 @@ V této části shrneme semidefinitní (vektorové) formulace s aproximačními 
 
 \subsection{Frieze-Jerrum a MAX $k$-CUT}
 
-Začneme článkem \textbf{[REF]}. Uvažme rovnostranný simplex $\Sigma_k$ v $\mathbb{R}^{k-1}$ s vrcholy $b_1, b_2, \dots, b_k$. Nechť $c = (b_1 + \dots + b_k) / k$ je těžiště $\Sigma_k$ a nechť $a_i = b_i - c$, kde $i = 1, \dots, k$. Dále předpokládejme, že délka strany $\Sigma_k$ je taková, že $\| a_i\| = 1$.
+Začneme článkem \cite{frieze-jerrum}. Uvažme rovnostranný simplex $\Sigma_k$ v $\mathbb{R}^{k-1}$ s vrcholy $b_1, b_2, \dots, b_k$. Nechť $c = (b_1 + \dots + b_k) / k$ je těžiště $\Sigma_k$ a nechť $a_i = b_i - c$, kde $i = 1, \dots, k$. Dále předpokládejme, že délka strany $\Sigma_k$ je taková, že $\| a_i\| = 1$.
 
-\begin{lm}\textbf{[REF]}
+\begin{lm}\cite{frieze-jerrum}
     Pro $i \neq j$, platí
     $$
         \langle a_i, a_j \rangle = -\frac{1}{k-1}.
@@ -206,7 +206,7 @@ $$
 
 Máme řešení $a_1, \dots, a_n$ programu~\ref{eq:FJ-RELAX}. Zvolíme $k$ náhodných vektorů $z_1, \dots, z_k$ na jednotkové sféře $S_{n-1}$. Pro každý vrchol $i \in V$ určíme $k$ skalárních součinů $\langle a_i, z_1 \rangle, \dots, \langle a_i, z_k \rangle$ a vrchol $i$ přidáme do množiny $V_j$, jestliže $j = \arg \max \left\{ \langle a_i, z_l \rangle \mid l = 1, \dots, k \right\}$. Použitím tohoto postupu dostáváme následující algoritmus.
 
-\begin{alg}[FJ MAX $k$-CUT]$ $
+\begin{alg}[FJ MAX $k$-CUT]\cite{frieze-jerrum}$ $
     \begin{enumerate}
         \item Najdi řešení $a_1, \dots, a_n$ programu~\ref{eq:FJ-RELAX}.
         \item Zvol náhodně $k$ vektorů $z_1, \dots, z_k$ na jednotkové sféře $S_{n-1}$.
@@ -219,7 +219,7 @@ Máme řešení $a_1, \dots, a_n$ programu~\ref{eq:FJ-RELAX}. Zvolíme $k$ náho
 
 \subsection{Goemans-Williamson a MAX $3$-CUT}
 
-Algoritmus vycházející z článku \textbf{[REF]} využívá komplexní semidefinitní programování, tj. každý prvek je reprezentován komplexním vektorem. Následující vektorový program je relaxací úlohy MAX $3$-CUT, viz \textbf{[REF]}. 
+Algoritmus vycházející z článku \cite{complex-max-3-cut} využívá komplexní semidefinitní programování, tj. každý prvek je reprezentován komplexním vektorem. Následující vektorový program je relaxací úlohy MAX $3$-CUT, viz \cite{newman}. 
 
 \begin{equation}\tag{GW-RELAX}
     \begin{split}
@@ -240,7 +240,7 @@ $$
 $$
 kde úhly počítáme modulo $2$. Dostáváme algoritmus pro MAX $3$-CUT.
 
-\begin{alg}[GW MAX $3$-CUT]$ $
+\begin{alg}[GW MAX $3$-CUT]\cite{complex-max-3-cut}$ $
     \begin{enumerate}
         \item Najdi řešení $a_1^1, a_1^2, a_1^3, \dots, a_n^3$ programu~\ref{eq:GW-RELAX}.
         \item Zvol náhodně vektor $g \in \mathbb{R}^{3n}$ tak, že každá složka je vybrána nezávisle z normálního normovaného rozdělelní $\mathcal{N}(0,1)$.
@@ -254,7 +254,7 @@ kde úhly počítáme modulo $2$. Dostáváme algoritmus pro MAX $3$-CUT.
 
 \subsection{Newman a MAX $k$-CUT}
 
-Cílem \textbf{[REF]} je rozšířit přístup, pomocí komplexního semidefinitního programování, z \textbf{[REF]} pro MAX $3$-CUT na libovolné $k \geq 3$. Využívá se formulace \ref{eq:FJ-RELAX}, jejíž vyřešením dostaneme vektory $a_1, \dots, a_n$. Pro každý vrchol $i \in V$ definujeme dva ortonormální vektory v $\mathbb{R}^{2n}$ tak, že
+Cílem \cite{newman} je rozšířit přístup, pomocí komplexního semidefinitního programování, z \cite{complex-max-3-cut} pro MAX $3$-CUT na libovolné $k \geq 3$. Využívá se formulace \ref{eq:FJ-RELAX}, jejíž vyřešením dostaneme vektory $a_1, \dots, a_n$. Pro každý vrchol $i \in V$ definujeme dva ortonormální vektory v $\mathbb{R}^{2n}$ tak, že
 $$
     u_i = \left( a_i, 0 \right) \text{ a } u_i^\bot = \left( 0, a_i \right).
 $$
@@ -269,7 +269,7 @@ $$
 $$
 kde úhly počítáme modulo $2\pi$.
 
-\begin{alg}[N1 MAX $k$-CUT]$ $
+\begin{alg}[N1 MAX $k$-CUT]\cite{newman}$ $
     \begin{enumerate}
         \item Najdi řešení $a_1, \dots, a_n$ programu~\ref{eq:FJ-RELAX}.
         \item Pro každý vrchol $i \in V$ urči vektory $u_i = (a_i, 0)$ a $u_i^\bot = (0, a_i)$ v $\mathbb{R}^{2n}$.
@@ -282,7 +282,7 @@ kde úhly počítáme modulo $2\pi$.
 
 V závěru článku je navrhnuté ještě jedno aproximační schéma. Shrneme ho v následujícím algoritmu.
 
-\begin{alg}[N2 MAX $k$-CUT]$ $
+\begin{alg}[N2 MAX $k$-CUT]\cite{newman}$ $
     \begin{enumerate}
         \item Najdi řešení $a_1, \dots, a_n$ programu~\ref{eq:FJ-RELAX}.
         \item Zvol náhodně $k-1$ vektorů $g_1, \dots, g_{k-1} \in \mathbb{R}^n$ tak, že každá složka je vybrána nezávisle z normálního normovaného rozdělení $\mathcal{N}(0, 1)$.
@@ -296,7 +296,7 @@ V závěru článku je navrhnuté ještě jedno aproximační schéma. Shrneme h
 
 \subsection{de Klerk-Pasechnik-Warners a MAX $k$-CUT}
 
-Jako poslední ještě zmíníme algoritmus z \textbf{[REF]}, ve kterém nejprve vyřešíme následující semidefinitní program pro $\vartheta(\bar{G})$.
+Jako poslední ještě zmíníme algoritmus z \cite{theta-max-k-cut}, ve kterém nejprve vyřešíme následující semidefinitní program pro $\vartheta(\bar{G})$.
 
 \begin{equation}\tag{THETA-$\bar{G}$}
     \begin{split}
@@ -324,10 +324,30 @@ $$
 $$
 Vektor $i \in V$ jsme přiřadili do množiny $V_j$, jestliže $x_i^j = 1$.
 
+\subsection{Aproximační poměry}
+
+V tabulce~\ref{tab:approx-ratio}, která je převzána z \cite{newman}, jsou uvedeny aproximační poměry pro jednotlivé algoritmy.
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ c | c | c | c | c | c }
+            $k$  & MAX CUT & FJ MAX $k$-CUT & GW MAX $3$-CUT & dKPW \cite{theta-max-k-cut} & N1 MAX $k$-CUT \\
+            \hline
+            $2$  & $.878956$ & $ $ & $ $ & $ $ & $ $ \\
+            $3$  & $ $       & $.832718$ & $.836008$ & $.836008$ & $ $ \\
+            $4$  & $ $       & $.850304$ & $ $ & $.857487$ & $.846478$ \\
+            $5$  & $ $       & $.874243$ & $ $ & $.876610$ & $.862440$ \\
+            $10$ & $ $       & $.926642$ & $ $ & $.926788$ & $.915885$ \\
+        \end{tabular}
+    \end{center}
+    \caption{Aproximační poměry pro MAX $k$-CUT.}
+    \label{tab:approx-ratio}
+\end{table}
+
 
 \section{Úloha CMAX $k$-CUT}
 
-O obecné úloze CMAX $k$-CUT toho není mnoho známo. V \textbf{[REF]} (a později v jeho opravě \textbf{[REF]}) je popsán algoritmus, který využívá lokální prohledávání, jehož aproximační poměr je
+O obecné úloze CMAX $k$-CUT toho není mnoho známo. V \cite{cmax-k-cut-1} (a později v opravě \cite{cmax-k-cut-2}) je popsán algoritmus, který využívá lokální prohledávání, jehož aproximační poměr je
 $$
     \frac{t(k-1)}{2(s-1)+t(k-1)},
 $$
@@ -351,20 +371,20 @@ Pokud takové vrcholy najdeme, tak vrchol $u$ přesuneme do množiny $V_j$ a vrc
 
 \subsection{CMAX $k$-CUT pomocí SDP}
 
-V našem přístupu pro CMAX $k$-CUT použijeme algoritmus~\ref{alg:n-max-k-cut-2}, ze kterého potřebujeme rozklad vrcholů do množin $V_1, \dots, V_k$, vygenerovaný simplex a vektory příslušné jednotlivým vrcholům.
+V našem přístupu pro CMAX $k$-CUT použijeme algoritmus~\ref{alg:n-max-k-cut-2}, ze kterého potřebujeme rozklad vrcholů do množin $V_1, \dots, V_k$, vygenerovaný simplex a $k-1$ náhodných vektorů pomocí, kterých byl určen rozklad vrcholů do množin $V_1, \dots, V_k$.
 
 Máme zadány kapacity $s_1 \geq \dots \geq s_k$. Množiny, které dostaneme z algoritmu~\ref{alg:n-max-k-cut-2}, přeznačíme tak, aby součet záporných rezerv $r_i = s_i - |V_i|$ množin $V_1, \dots, V_k$ byl maximální.
 
-Pro každou množinu $V_1, \dots, V_k$ určíme její rezervu $r_i$. Pokud jsou všechny rezervy nezáporné, vrátíme množiny $V_1, \dots, V_k$ jako výsledek. Jinak z množiny, která má zápornou rezervu vybereme vrchol, který má nejkratší vzdálenost do nějakého jiného vrcholu simplexu $\Sigma_k$. Takto iterujeme dokud nejsou všechny rezervy nezáporné.
+Pro každou množinu $V_1, \dots, V_k$ určíme její rezervu $r_i$. Pokud jsou všechny rezervy nezáporné, vrátíme množiny $V_1, \dots, V_k$ jako výsledek. Jinak z množiny, která má zápornou rezervu vybereme vrchol, který má nejkratší vzdálenost do nějakého jiného \uv{volného vrcholu} simplexu $\Sigma_k$. Takto iterujeme dokud nejsou všechny rezervy nezáporné.
 
 \section{Experimenty}
 
-K implementaci algoritmů je použit programovací jazyk \textbf{Python 3} a framework \textbf{Mosek}. Jsou naimplementovány algoritmy~\ref{alg:fj-max-k-cut}, \ref{alg:gw-max-3-cut}, \ref{alg:n-max-k-cut-1}, \ref{alg:n-max-k-cut-2} pro úlohu MAX $k$-CUT a pro kapacitní verzi také algoritmus využívající lokální prohledávání a náš přístup využívající semidefinitní programování. Experimenty jsou realizovány na náhodných grafech řádu $30$ s předepsaným počtem hran. Tučně jsou vždy vyznačeny nejlepší výsledky.
+K implementaci algoritmů je použit framework \textbf{Mosek}. Jsou naimplementovány algoritmy~\ref{alg:fj-max-k-cut}, \ref{alg:gw-max-3-cut}, \ref{alg:n-max-k-cut-1}, \ref{alg:n-max-k-cut-2} pro úlohu MAX $k$-CUT a pro kapacitní verzi také algoritmus využívající lokální prohledávání a náš přístup využívající semidefinitní programování. Experimenty jsou realizovány na náhodných grafech řádu $30$ s předepsaným počtem hran. Tučně jsou vždy vyznačeny nejlepší výsledky.
 
 
 \subsection{MAX $k$-CUT}
 
-Pro úlohu MAX $3$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut}, algoritmus~\ref{alg:gw-max-3-cut} a algoritmus~\ref{alg:n-max-k-cut-2}.
+Pro úlohu MAX $3$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut}, algoritmus~\ref{alg:gw-max-3-cut} a algoritmus~\ref{alg:n-max-k-cut-2} viz tabulka~\ref{tab:max-3-cut-random}. Srovnatelné jsou algoritmy \ref{alg:fj-max-k-cut} a \ref{alg:n-max-k-cut-2}. Algoritmus~\ref{alg:gw-max-3-cut}, který by teoreticky měl vycházet nejlépe (viz tabulka s aproximačními poměry v \cite{newman}), je nejhorší. V semidefinitní formulaci, kterou využívá tento algoritmus je velké množství omezení a velikost úlohy (optimalizační proměnná) je třikrát větší než u formulace \ref{eq:FJ-RELAX}. Problémy s přesností byly indikovány tím, že při výpočtu úhlu pro vrchol na příslušném disku, skalární součin dvou vektorů, které by měly být jednotkové, vždy neležel v intervalu $\langle -1, 1 \rangle$ a bylo potřeba zaokrouhlovat.
 
 \begin{table}[h!]
     \begin{center}
@@ -387,7 +407,7 @@ Pro úlohu MAX $3$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut}, algorit
     \label{tab:max-3-cut-random}
 \end{table}
 
-Pro úlohy MAX $4$-CUT a MAX $5$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut}, algoritmus~\ref{alg:n-max-k-cut-1} a algoritmus~\ref{alg:n-max-k-cut-2}.
+Pro úlohy MAX $4$-CUT a MAX $5$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut}, algoritmus~\ref{alg:n-max-k-cut-1} a algoritmus~\ref{alg:n-max-k-cut-2}, viz tabulky~\ref{tab:max-4-cut-random}~--~\ref{tab:max-5-cut-random}. Zde nejlépe vychází algoritmus~\ref{alg:n-max-k-cut-2}, pro který není zatím známý aproximační poměr (aproximační schéma je jen zmíněno v závěru článku \cite{newman}).
 
 \begin{table}[h!]
     \begin{center}
@@ -434,7 +454,7 @@ Pro úlohy MAX $4$-CUT a MAX $5$-CUT byl otestován algoritmus~\ref{alg:fj-max-k
 
 \subsection{CMAX $k$-CUT}
 
-Pro úlohu CMAX $k$-CUT jsou porovnány dva algoritmy. Jeden využívající lokální prohledávání a druhý přístup, který je založen na semidefinitním programování.
+Pro úlohu CMAX $k$-CUT jsou porovnány dva algoritmy. Jeden využívající lokální prohledávání a druhý přístup, který je založen na semidefinitním programování. Byly provedeny $3$ experimenty, viz tabulky~\ref{tab:cmax-3-cut-random-10-10-10}~--~\ref{tab:cmax-4-cut-random-20-20-20-20}. Jeden pro CMAX $3$-CUT s kapacitami $(10, 10, 10)$ a dva pro CMAX $4$-CUT s kapacitami $(8, 8, 8, 8)$ a $(20, 20, 20, 20)$. Výsledky obou algoritmů jsou srovnatelné, ale je nutné poznamenat, že výpočet využívající lokální prohledávání zabere mnohem méně strojového času.
 
 
 \begin{table}[h!]
@@ -454,7 +474,7 @@ Pro úlohu CMAX $k$-CUT jsou porovnány dva algoritmy. Jeden využívající lok
             $391$ & $282$ & $\mathbf{289}$ & $284$ & $\mathbf{289}$ \\
         \end{tabular}
     \end{center}
-    \caption{CMAX $3$-CUT na náhodných grafech řádu $30$ s kapacitami $(10, 10, 10)$.}
+    \caption{CMAX $3$-CUT na náhodných grafech řádu $30$ s kapacitami $(10, 10, 10)$, $100$ iterací.}
     \label{tab:cmax-3-cut-random-10-10-10}
 \end{table}
 
@@ -476,7 +496,7 @@ Pro úlohu CMAX $k$-CUT jsou porovnány dva algoritmy. Jeden využívající lok
             $391$ & $316$ & $322$ & $319$ & $\mathbf{323}$ \\
         \end{tabular}
     \end{center}
-    \caption{CMAX $4$-CUT na náhodných grafech řádu $30$ s kapacitami $(8, 8, 8, 8)$.}
+    \caption{CMAX $4$-CUT na náhodných grafech řádu $30$ s kapacitami $(8, 8, 8, 8)$, $100$ iterací.}
     \label{tab:cmax-4-cut-random-8-8-8-8}
 \end{table}
 
@@ -498,6 +518,6 @@ Pro úlohu CMAX $k$-CUT jsou porovnány dva algoritmy. Jeden využívající lok
             $391$ & $278$ & $320$ & $320$ & $\mathbf{323}$ \\
         \end{tabular}
     \end{center}
-    \caption{CMAX $4$-CUT na náhodných grafech řádu $30$ s kapacitami $(20, 20, 20, 20)$.}
+    \caption{CMAX $4$-CUT na náhodných grafech řádu $30$ s kapacitami $(20, 20, 20, 20)$, $100$ iterací.}
     \label{tab:cmax-4-cut-random-20-20-20-20}
 \end{table}

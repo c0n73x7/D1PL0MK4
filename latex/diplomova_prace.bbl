@@ -1,29 +1,103 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{understanding-and-using-linear-programming}
-J.~Matoušek B.~G\"{a}rtner.
-\newblock {\em Understanding and Using Linear Programming}.
-\newblock Springer, 2007.
+\bibitem{semidefinite-optimization-and-convex-algebraic-geometry}
+G.~Blekherman, P.~A. Parrilo, and R.~R. Thomas.
+\newblock {\em Semidefinite Optimization and Convex Algebraic Geometry}.
+\newblock Siam, 2013.
+
+\bibitem{convex-optimization}
+S.~Boyd and L.~Vandenberghe.
+\newblock {\em Convex Optimization}.
+\newblock Cambridge University Press, 2013.
 
 \bibitem{aspects-of-semidefinite-programming}
 E.~de~Klerk.
 \newblock {\em Aspects of Semidefinite Programming}.
 \newblock Kluwer Academic Publishers, 2004.
 
-\bibitem{semidefinite-optimization-and-convex-algebraic-geometry}
-R.~R.~Thomas G.~Blekherman, P. A.~Parrilo.
-\newblock {\em Semidefinite Optimization and Convex Algebraic Geometry}.
-\newblock Siam, 2013.
+\bibitem{theta-max-k-cut}
+E.~de~Klerk, D.~V. Pasechnik, and J.~P. Warners.
+\newblock On approximate graph colouring and max-$k$-cut algorithms base od the
+  $\vartheta$-function.
+\newblock 2004.
+
+\bibitem{frieze-jerrum}
+A.~Frieze and Mark Jerrum.
+\newblock Improved approximation algorithms for max $k$-cut and max bisection.
+\newblock 1995.
+
+\bibitem{understanding-and-using-linear-programming}
+B.~G\"{a}rtner and J.~Matoušek.
+\newblock {\em Understanding and Using Linear Programming}.
+\newblock Springer, 2007.
+
+\bibitem{approximation-algorithms-and-semidefinite-programming}
+B.~G\"{a}rtner and J.~Matoušek.
+\newblock {\em Approximation Algorithms and Semidefinite Programming}.
+\newblock Springer, 2012.
+
+\bibitem{cmax-k-cut-1}
+D.~R. Gaur, R.~Krishnamurti, and R.~Kohli.
+\newblock The capacited max $k$-cut problem.
+\newblock 2008.
+
+\bibitem{max-cut}
+M.~X. Goemans and D.~P. Williamson.
+\newblock $.878$-approximation algorithms for max cut and max 2sat.
+\newblock 1994.
+
+\bibitem{complex-max-3-cut}
+M.~X. Goemans and D.~P. Williamson.
+\newblock Approximation algorithms for max-3-cut and other problems via complex
+  semidefinite programming.
+\newblock 2001.
+
+\bibitem{sdp-cone}
+R.~D. Hill and S.~R. Waters.
+\newblock On the cone of positive semidefinite matrices.
+\newblock 1987.
+
+\bibitem{knuth-sandwich}
+D.~E. Knuth.
+\newblock The sandwich theorem.
+\newblock 1993.
+
+\bibitem{seminumerical-algorithms}
+D.~E. Knuth.
+\newblock {\em The Art of Computer Programming}.
+\newblock Addison-Wesley, third edition, 1997.
+
+\bibitem{lovasz}
+L.~Lovász.
+\newblock On the shannon capacity of a graph.
+\newblock 1979.
 
 \bibitem{lectures-on-discrete-geometry}
 J.~Matoušek.
 \newblock {\em Lectures on Discrete Geometry}.
 \newblock Springer, 2002.
 
-\bibitem{convex-optimization}
-L.~Vandenberghe S.~Boyd.
-\newblock {\em Convex Optimization}.
-\newblock Cambridge University Press, 2013.
+\bibitem{newman}
+A.~Newman.
+\newblock Complex semidefinite programming and max-$k$-cut.
+\newblock 2018.
+
+\bibitem{shannon-capacity-lower-bound-on-c7}
+S.~Polak and A.~Schrijver.
+\newblock New lower bound on the shannon capacity of $c_7$ from circular
+  graphs.
+\newblock 2018.
+
+\bibitem{shannon}
+C.~E. Shannon.
+\newblock The zero error capacity of a noisy crannel.
+\newblock 1956.
+
+\bibitem{history}
+B.~Singh and M.~Eisner.
+\newblock A brief history of optimization and mathematical programming.
+\newblock
+  \url{https://www.informs.org/Explore/History-of-O.R.-Excellence/O.R.-Methodologies/Optimization-Mathematical-Programming}.
 
 \bibitem{linear-algebra-and-learning-from-data}
 G.~Strang.
@@ -34,5 +108,19 @@ G.~Strang.
 V.~V. Vazirani.
 \newblock {\em Approximation Algorithms}.
 \newblock Springer, 2001.
+
+\bibitem{shannon-capacity-lower-bound-on-c7-worst}
+A.~Vesel and J.~Žerovnik.
+\newblock Improved lower bound on the shannon capacity of $c_7$.
+\newblock 2002.
+
+\bibitem{cmax-k-cut-2}
+Jinglan Wu and Wenxing Zhu.
+\newblock On a local search algorithm for the capacited max-$k$-cut problem.
+\newblock 2014.
+
+\bibitem{ko}
+R.~Čada.
+\newblock Přednášky z předmětu kombinatorická optimalizace.
 
 \end{thebibliography}

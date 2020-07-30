@@ -169,6 +169,6 @@ Polytopy jsou zobecněním konvexních mnohoúhelníků v rovině do více dimen
 Poznamenejme, že V-polytop a H-polytop jsou sice ekvivalentní množiny, ale z algoritmického hlediska je velký rozdíl, zda pracujeme s bodovou množinou, nebo s uzavřenými poloprostory. Pro ilustraci: mějme lineární funkci, kterou chceme minimalizovat na daném polytopu. Pro V-polytop se jedná o triviální problém, protože stačí pro každý bod z množiny $V$ určit hodnotu dané funkce a vybrat minimum. Na druhou stranu pro H-polytop se jedná o netriviální problém, kterým se zabývá lineární programování. Dále budeme mluvit jen o \textbf{polyedrech} a \textbf{polytopech}.
 
 Důležitý fakt, že každý polyedr je konečně generovaný, říká Minkowského-Weylova věta.
-\begin{vt2}[Minkowski-Weyl]
+\begin{vt2}[Minkowski-Weyl]\cite{semidefinite-optimization-and-convex-algebraic-geometry}
     $P \subseteq \mathbb{R}^n$. Potom $P = \textbf{conv}(u_1, \dots, u_r) + \textbf{cone}(v_1, \dots, v_s)$, kde $u_i, v_i$ jsou extremální vrcholy $P$ právě tehdy, když $P = \left\{ x \in \mathbb{R}^n \mid Ax \leq b \right\}, A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m$.
 \end{vt2}

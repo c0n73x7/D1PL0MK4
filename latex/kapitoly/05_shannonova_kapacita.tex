@@ -1,6 +1,6 @@
 \chapter{Shannonova kapacita}
 
-Kapitola je zpracována z \cite{approximation-algorithms-and-semidefinite-programming} a citovaných článků. \uv{Zřejmá} tvrzení jsou více rozepsána.
+Kapitola je zpracována z \cite{approximation-algorithms-and-semidefinite-programming} a citovaných článků, ze kterých jsou \uv{zřejmá} tvrzení více rozepsána.
 
 \section{Formulace úlohy}
 
@@ -36,7 +36,7 @@ $$
     \Theta(G) = \sup \left\{ \alpha(G^k)^{1/k} \mid k = 1, 2, \dots \right\}.
 $$
 
-Neví se, zda pro libovolný graf $G$ existuje vůběc nějaký algoritmus, kterým bychom určili hodnotu $\Theta(G)$. Přesto je alespoň něco známo. Pro perfektní grafy Claude E. Shannon \textbf{[REF]} ukázal, že $\Theta(G) = \alpha(G)$. To také znamená, že pro perfektní grafy lze $\Theta(G)$ určit v polynomiálním čase. Dalším kdo se problémem zabýval byl László Lovász \textbf{[REF]}, který velmi hezkým způsobem ukázal, že kružnice délky $5$ má kapacitu $\sqrt{5}$. Na Lovászův postup se dále podíváme, protože vede k obecnému hornímu odhadu na $\Theta(G)$.
+Neví se, zda pro libovolný graf $G$ existuje vůběc nějaký algoritmus, kterým bychom určili hodnotu $\Theta(G)$. Přesto je alespoň něco známo. Pro perfektní grafy Claude E. Shannon \cite{shannon} ukázal, že $\Theta(G) = \alpha(G)$. To také znamená, že pro perfektní grafy lze $\Theta(G)$ určit v polynomiálním čase. Dalším kdo se problémem zabýval byl László Lovász \cite{lovasz}, který velmi hezkým způsobem ukázal, že kružnice délky $5$ má kapacitu $\sqrt{5}$. Na Lovászův postup se dále podíváme, protože vede k obecnému hornímu odhadu na $\Theta(G)$.
 
 \section{$\Theta(C_5) = \sqrt{5}$}
 
@@ -78,9 +78,9 @@ $$
 $$
 nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že každý graf má nějakou ortonormální reprezentaci, např. $1 \mapsto e_1, \dots, n \mapsto e_n$.
 
-\begin{lm}\textbf{[REF]}
+\begin{lm}\cite{lovasz}
     Nechť $\left( u_1, \dots, u_n \right)$ je ortonormální reprezentace grafu $G$ a $\left( v_1, \dots, v_m \right)$ je ortonormální reprezentace grafu $H$. Potom $u_i \circ v_j$ je ortonormální reprezentace grafu $G \cdot H$.
-    \label{lemma:shannon}
+    \label{lemma:lovasz}
 \end{lm}
 
 \begin{proof}
@@ -90,7 +90,7 @@ nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že ka�
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{img/shannon_lemma.png} 
-    \caption{Lemma~\ref{lemma:shannon}}
+    \caption{Lemma~\ref{lemma:lovasz}}
 \end{figure}
 
 \noindent \textbf{Hodnotu} ortonormální reprezentace $\left(u_1, \dots, u_n \right)$ definujeme jako
@@ -101,7 +101,7 @@ Vektoru $c$, pro který nastává minimum říkáme \textbf{handle} dané ortono
 
 Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny ortonormální reprezentace grafu $G$. Ortonormální reprezentaci, pro kterou nastává minumum nazýváme \textbf{optimální}. Funkci $\vartheta(G)$ se říká \textbf{Lovászova theta funkce} a ona je právě již zmíněným horním odhadem na $\Theta(G)$. Podívejme se na některé její vlastnosti.
 
-\begin{lm}\textbf{[REF]}
+\begin{lm}\cite{lovasz}
     $\vartheta(G \cdot H) \leq \vartheta(G) \vartheta(H)$
 \end{lm}
 
@@ -112,7 +112,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
     $$
 \end{proof}
 
-\begin{lm}\textbf{[REF]}
+\begin{lm}\cite{lovasz}
     $\alpha(G) \leq \vartheta(G)$
 \end{lm}
 
@@ -143,7 +143,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
     $$
 \end{proof}
 
-\begin{lm}\textbf{[REF]}
+\begin{lm}\cite{lovasz}
     $\Theta(G) \leq \vartheta(G)$
 \end{lm}
 
@@ -162,7 +162,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
     $$
 \end{proof}
 
-\begin{vt}\textbf{[REF]}
+\begin{vt}\cite{lovasz}
     $\Theta(C_5) = \sqrt{5}$
 \end{vt}
 
@@ -220,7 +220,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
 
 \subsection*{Program pro $1/\sqrt{\vartheta}$}
 
-První formulací je semidefinitní program (\textbf{[REF]}), jehož řešením je hodnota $\frac{1}{\sqrt{\vartheta}}$. Mějme graf $G = (V,E)$. Hodnota $\vartheta(G)$ je z definice
+První formulací je semidefinitní program \cite{approximation-algorithms-and-semidefinite-programming}, jehož řešením je hodnota $1/\sqrt{\vartheta}$. Mějme graf $G = (V,E)$. Hodnota $\vartheta(G)$ je z definice
 $$
     \vartheta(G) = \min_\mathcal{U} \vartheta(\mathcal{U}) = \min_\mathcal{U} \min_{\|c\|=1} \max_{i \in V(G)} \frac{1}{\left( c^T u_i \right)^2},
 $$
@@ -279,7 +279,7 @@ Dostáváme tedy semidefinitní program
 
 \subsection*{Program pro $\vartheta$}
 
-V původním článku od L.~Lovásze \textbf{[REF]} je další semidefinitní program, jehož řešením je přímo hodnota $\vartheta(G)$.
+V původním článku od L.~Lovásze \cite{lovasz} je další semidefinitní program, jehož řešením je přímo hodnota $\vartheta(G)$.
 
 \begin{equation}\tag{SDP2}
     \begin{split}
@@ -294,9 +294,9 @@ kde $J$ je matice samých jedniček.
 
 \section{$\vartheta$ a související grafové parametry}
 
-Začneme tzv. Sendvičovou větou a dále zaměříme na grafy $C_5$, $C_7$, Petersenův graf, $K_5$ a $S_5$.
+Začneme tzv. Sendvičovou větou a dále se zaměříme na grafy $C_5$, $C_7$, Petersenův graf, $K_5$ a $S_5$.
 
-\begin{vt}\textbf{[REF]}
+\begin{vt}\cite{knuth-sandwich}
     Mějme graf $G$ a jeho doplněk $\bar{G}$. Potom
     $$
         \alpha(G) \leq \vartheta(G) \leq \chi(\bar{G}).
@@ -333,12 +333,12 @@ Doplněk $C_5$ je opět $C_5$ a lichá kružnice má chromatické číslo $3$. $
 
 \subsection*{$\vartheta(G)$ pro vybrané grafy}
 
-Dříve jsme ukázali, že $\vartheta(C_5) = \sqrt{5} \approx 2.2361$. Navíc pro liché $n$ \textbf{[REF]} platí, že
+Dříve jsme ukázali, že $\vartheta(C_5) = \sqrt{5} \approx 2.2361$. Navíc pro liché $n$ \cite{lovasz} platí, že
 \begin{equation}
     \vartheta(C_n) = \frac{n \cdot \cos(\frac{\pi}{n})}{1 + \cos(\frac{\pi}{n})}.
     \label{eq:cycle_theta}
 \end{equation}
-Dostáváme tedy, že $\vartheta({C_7}) \approx 3.3177$. Zbylé hodnoty plynou ze sendivičové věty. V tabulce~\ref{tab:sandwitch} jsou shrnuty všechny zmíněné hodnoty.
+Dostáváme tedy, že $\vartheta({C_7}) \approx 3.3177$. Zbylé hodnoty plynou ze sendvičové věty. V tabulce~\ref{tab:sandwitch} jsou shrnuty všechny zmíněné hodnoty.
 
 \begin{table}[h!]
     \centering
@@ -357,7 +357,7 @@ Dostáváme tedy, že $\vartheta({C_7}) \approx 3.3177$. Zbylé hodnoty plynou z
 
 \subsection*{Co víme o $\Theta(G)$}
 
-Shannonova kapacita je známá jen pro několik málo grafů. V \textbf{[REF]} Shannon dal dolní odhad na $\Theta(C_5)$ a až za 23 let Lovász ukázal pomocí konstrukce, kterou jsme si ukázali výše, že $\Theta(C_5) = \sqrt{5}$. Ve stejném článku \textbf{[REF]} je důkaz, že kapacita Petersenova grafu $GP_{5,2}$ je $4$. Triviální případy $S_5$ a $K_5$ dostaneme ze sendvičové věty, tj. $\Theta(S_5) = 5$ a $\Theta(K_5) = 1$. Naopak pro $C_7$ hodnotu $\Theta$ neznáme. Máme dolní odhad $\alpha(C_7) = 3$ a horní odhad $\vartheta(C_7) \approx 3.3177$. Lepší dolní odhad, než dává $\alpha(C_7)$, ukázali Polak a Schriever \textbf{[REF]} tak, že pomocí počítače našli nezávislou množinu v grafu $C_7^5$ velikosti $367$. Z čehož dostaneme dolní odhad $\sqrt[5]{367} \approx 3.2579$. Hodnota $\Theta(C_7)$ je tedy někde mezi
+Shannonova kapacita je známá jen pro několik málo grafů. V \cite{shannon} Shannon dal dolní odhad na $\Theta(C_5)$ a až za 23 let Lovász ukázal pomocí konstrukce, kterou jsme si ukázali výše, že $\Theta(C_5) = \sqrt{5}$. Ve stejném článku je důkaz, že kapacita Petersenova grafu $GP_{5,2}$ je $4$. Triviální případy $S_5$ a $K_5$ dostaneme ze sendvičové věty, tj. $\Theta(S_5) = 5$ a $\Theta(K_5) = 1$. Naopak pro $C_7$ hodnotu $\Theta$ neznáme. Máme dolní odhad $\alpha(C_7) = 3$ a horní odhad $\vartheta(C_7) \approx 3.3177$. Lepší dolní odhad, než dává $\alpha(C_7)$, ukázali Polak a Schrijver \cite{shannon-capacity-lower-bound-on-c7} tak, že pomocí počítače našli nezávislou množinu v grafu $C_7^5$ velikosti $367$. Z čehož dostaneme dolní odhad $\sqrt[5]{367} \approx 3.2579$. Hodnota $\Theta(C_7)$ je tedy někde mezi
 $$
     3.2578 < \Theta(C_7) \leq 3.3177.
 $$
@@ -370,7 +370,7 @@ Poznamenejme, že vylepšit dolní odhad na $\Theta(C_7)$ je výpočetně náro�
         &\forall i \in V:\ x_i \in \left\{ 0, 1 \right\}
     \end{split}
 \end{equation*}
-nenajde užitečná nezávislá množina, která by měla velikost alespoň $108$ \textbf{[REF-Vesel-Žertovnik]}. K výpočtu byl použit framework \textbf{Gurobi} a program po $7$ měsících našel pouze nezávislou množinu velikosti $102$, která dává dolní odhad $\sqrt[4]{102} \approx 3.1779$.
+nenajde užitečná nezávislá množina, která by měla velikost alespoň $108$ \cite{shannon-capacity-lower-bound-on-c7-worst}. K výpočtu byl použit framework \textbf{Gurobi} a program po $7$ měsících našel pouze nezávislou množinu velikosti $102$, která dává dolní odhad $\sqrt[4]{102} \approx 3.1779$.
 
 
 \section{Experimenty}
@@ -432,5 +432,3 @@ U větších grafů s nepravidelnou strukturou se rozdíly prohlubují a je vid�
     \caption{Výsledky implementací $\vartheta$ funkce na náhodných grafech řádu $30$ s daným počtem hran.}
     \label{tab:random_theta}
 \end{table}
-
-

@@ -1,6 +1,6 @@
 \chapter{Semidefinitní programování}
 
-Kapitola je zpracována z \cite{linear-algebra-and-learning-from-data}, \cite{aspects-of-semidefinite-programming}, \cite{semidefinite-optimization-and-convex-algebraic-geometry} a \cite{approximation-algorithms}.
+Kapitola je zpracována z \cite{linear-algebra-and-learning-from-data}, \cite{aspects-of-semidefinite-programming}, \cite{semidefinite-optimization-and-convex-algebraic-geometry}, \cite{approximation-algorithms} a \cite{ko}.
 
 Na semidefinitní programování se můžeme dívat jako na zobecnění lineárního programování, kde proměnné jsou symetrické matice, namísto vektorů. Jedná se tedy o optimalizaci lineární funkce vzhledem k tzv. lineárním maticovým nerovnostem (viz dále).
 
@@ -123,7 +123,7 @@ Pro pozitivní semidefinitnost modifikujeme předcházejí definice a tvrzení p
 
 \subsection*{Pozitivně semidefinitní kužel}
 
-Množinu všech symetrických matic řádu $n$ značíme $S^n$, množinu všech pozitivně semidefinitních matic řádu $n$ značíme $S_+^n$ a množinu všech pozitivně definitních matic řádu $n$ značíme $S_{++}^n$. $S_+^n$ je uzavřený, konvexní, bodový kužel, který je navíc samoduální a jako vnitřek má $S_{++}^n$ (více viz \textbf{[REF]}). Množinu $S_+^n$ nazýváme \textbf{pozitivně semidefinitní kužel}.
+Množinu všech symetrických matic řádu $n$ značíme $S^n$, množinu všech pozitivně semidefinitních matic řádu $n$ značíme $S_+^n$ a množinu všech pozitivně definitních matic řádu $n$ značíme $S_{++}^n$. $S_+^n$ je uzavřený, konvexní, bodový kužel, který je navíc samoduální a jako vnitřek má $S_{++}^n$ (více viz \cite{sdp-cone}). Množinu $S_+^n$ nazýváme \textbf{pozitivně semidefinitní kužel}.
 
 
 \subsection*{Spektraedry}
@@ -237,7 +237,7 @@ kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{
             -0.3536 &  0.8536
         \end{bmatrix}
     $$
-    s cenou $\approx -0.4142$. Implementace v softwaru MOSEK: \url{https://github.com/c0n73x7/D1PL0MK4/blob/master/mosek/ex3.py}.
+    s cenou $\approx -0.4142$.
 \end{pr}
 
 \begin{figure}[h!]

@@ -1,2 +1,10 @@
 \chapter*{Závěr}
 \addcontentsline{toc}{chapter}{Závěr}
+
+V prvních čtyřech kapitolách je shrnuta teorie, která se dále využívá při popisu úloh kombinatorické optimalizace.
+
+V kapitole o Shannonově kapacitě se věnujeme Lovászově $\vartheta$ funkci a jejímu využití. Byly naimplementovány a následně porovnány dva modely s přesnou hodnotou pro liché kružnice. Jednodušší model, který dává rovnou hodnotu $\vartheta$ funkce byl přesnější. U druhého modelu, ze kterého dostaneme hodnotu $1/\sqrt{\vartheta}$, byly patrné chyby už pro malé grafy. Problémem je, že úloha není ve standardním tvaru a frameworky typu Mosek jsou optimalizovány hlavně na práci s úlohami ve standardním tvaru. Dále byl puštěn výpočet pro vylepšení dolního odhadu Shannonovy kapacity kružnice $C_7$, ale nezávislá množina, která by odhad vylepšila se nenašla.
+
+Pro úlohu MAX $k$-CUT byly pro účely testování implementovány čtyři algoritmy a pro úlohu kapacitního MAX $k$-CUTu další dva. U experimentu pro úlohu MAX $3$-CUT vyšel nejhůře algoritmus~\ref{alg:gw-max-3-cut}, který má nejlepší aproximační poměr, což je to dáno složitostí modelu založeného na komplexním semidefinitním programování, který je třikrát větší než model použitý v ostatních algoritmech a navíc obsahuje hodně omezení (vznikaly zaokrouhlovací chyby). Pro MAX $4$-CUT a MAX $5$-CUT vyšel nejlépe algoritmus~\ref{alg:n-max-k-cut-2}, který je jen navrhnut v závěru článku \cite{newman} a není pro něj znám aproximační poměr. U kapacitní verze byly porovnány dva přístupy: algoritmus založený na lokálním prohledávání a náš algoritmus využívající semidefinitní programování. Oba algoritmy dávaly srovnatelné výsledky, ale rozdíl byl hlavně v době běhu, kde jasně vyhrává algoritmus využívající lokální prohledávání. Algoritmus založený na semidefinitní programování dával lepší výsledky, když součet kapacit jednotlivých množin byl větší než počet vrcholů grafu. 
+
+Dále by mohla být věnována pozornost analýze algoritmu~\ref{alg:n-max-k-cut-2}, o kterém není známé nic.
