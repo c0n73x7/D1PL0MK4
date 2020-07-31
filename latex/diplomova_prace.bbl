@@ -19,12 +19,12 @@ E.~de~Klerk.
 E.~de~Klerk, D.~V. Pasechnik, and J.~P. Warners.
 \newblock On approximate graph colouring and max-$k$-cut algorithms base od the
   $\vartheta$-function.
-\newblock 2004.
+\newblock {\em Journal of Combinatorial Optimization}, 2004.
 
 \bibitem{frieze-jerrum}
 A.~Frieze and Mark Jerrum.
 \newblock Improved approximation algorithms for max $k$-cut and max bisection.
-\newblock 1995.
+\newblock {\em Algorithmica}, 1995.
 
 \bibitem{understanding-and-using-linear-programming}
 B.~G\"{a}rtner and J.~Matoušek.
@@ -39,28 +39,28 @@ B.~G\"{a}rtner and J.~Matoušek.
 \bibitem{cmax-k-cut-1}
 D.~R. Gaur, R.~Krishnamurti, and R.~Kohli.
 \newblock The capacited max $k$-cut problem.
-\newblock 2008.
+\newblock {\em Mathematical Programming}, 2008.
 
 \bibitem{max-cut}
 M.~X. Goemans and D.~P. Williamson.
 \newblock $.878$-approximation algorithms for max cut and max 2sat.
-\newblock 1994.
+\newblock {\em Journal of the ACM}, 1994.
 
 \bibitem{complex-max-3-cut}
 M.~X. Goemans and D.~P. Williamson.
 \newblock Approximation algorithms for max-3-cut and other problems via complex
   semidefinite programming.
-\newblock 2001.
+\newblock {\em Journal of Computer and System Sciences}, 2001.
 
 \bibitem{sdp-cone}
 R.~D. Hill and S.~R. Waters.
 \newblock On the cone of positive semidefinite matrices.
-\newblock 1987.
+\newblock {\em Linear Algebra and its Applications}, 1987.
 
 \bibitem{knuth-sandwich}
 D.~E. Knuth.
 \newblock The sandwich theorem.
-\newblock 1993.
+\newblock {\em The Electronic Journal of Combinatorics}, 1993.
 
 \bibitem{seminumerical-algorithms}
 D.~E. Knuth.
@@ -70,7 +70,7 @@ D.~E. Knuth.
 \bibitem{lovasz}
 L.~Lovász.
 \newblock On the shannon capacity of a graph.
-\newblock 1979.
+\newblock {\em IEEE Transactions on Information Theory}, 1979.
 
 \bibitem{lectures-on-discrete-geometry}
 J.~Matoušek.
@@ -86,12 +86,12 @@ A.~Newman.
 S.~Polak and A.~Schrijver.
 \newblock New lower bound on the shannon capacity of $c_7$ from circular
   graphs.
-\newblock 2018.
+\newblock {\em Information Processing Letters}, 2018.
 
 \bibitem{shannon}
 C.~E. Shannon.
 \newblock The zero error capacity of a noisy crannel.
-\newblock 1956.
+\newblock {\em IRE Transactions on Information Theory}, 1956.
 
 \bibitem{history}
 B.~Singh and M.~Eisner.
@@ -112,12 +112,12 @@ V.~V. Vazirani.
 \bibitem{shannon-capacity-lower-bound-on-c7-worst}
 A.~Vesel and J.~Žerovnik.
 \newblock Improved lower bound on the shannon capacity of $c_7$.
-\newblock 2002.
+\newblock {\em Information Processing Letters}, 2002.
 
 \bibitem{cmax-k-cut-2}
 Jinglan Wu and Wenxing Zhu.
 \newblock On a local search algorithm for the capacited max-$k$-cut problem.
-\newblock 2014.
+\newblock {\em Kuwait Journal of Science}, 2014.
 
 \bibitem{ko}
 R.~Čada.

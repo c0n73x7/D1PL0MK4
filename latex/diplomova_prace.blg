@@ -3,58 +3,46 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: diplomova_prace.aux
 The style file: plain.bst
 Database file #1: citace.bib
-Warning--empty journal in theta-max-k-cut
-Warning--empty journal in frieze-jerrum
-Warning--empty journal in cmax-k-cut-1
-Warning--empty journal in max-cut
-Warning--empty journal in complex-max-3-cut
-Warning--empty journal in sdp-cone
-Warning--empty journal in knuth-sandwich
-Warning--empty journal in lovasz
 Warning--empty journal in newman
-Warning--empty journal in shannon-capacity-lower-bound-on-c7
-Warning--empty journal in shannon
-Warning--empty journal in shannon-capacity-lower-bound-on-c7-worst
-Warning--empty journal in cmax-k-cut-2
 You've used 24 entries,
             2118 wiz_defined-function locations,
-            591 strings with 6458 characters,
-and the built_in function-call counts, 5606 in all, are:
-= -- 503
+            599 strings with 6707 characters,
+and the built_in function-call counts, 5618 in all, are:
+= -- 515
 > -- 267
 < -- 0
 + -- 110
 - -- 82
 * -- 261
-:= -- 1015
+:= -- 1027
 add.period$ -- 71
 call.type$ -- 24
 change.case$ -- 105
 chr.to.int$ -- 0
-cite$ -- 37
+cite$ -- 25
 duplicate$ -- 252
 empty$ -- 464
 format.name$ -- 82
-if$ -- 1137
+if$ -- 1149
 int.to.chr$ -- 0
 int.to.str$ -- 24
 missing$ -- 31
 newline$ -- 122
 num.names$ -- 48
-pop$ -- 182
+pop$ -- 158
 preamble$ -- 1
 purify$ -- 89
 quote$ -- 0
 skip$ -- 173
 stack$ -- 0
 substring$ -- 124
-swap$ -- 11
+swap$ -- 23
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 78
-warning$ -- 13
+warning$ -- 1
 while$ -- 48
 width$ -- 26
-write$ -- 226
-(There were 13 warnings)
+write$ -- 238
+(There was 1 warning)

@@ -2,7 +2,7 @@
 
 \section{Formulace úloh}
 
-Mějme neorientovaný graf $G = (V, E)$ s nezáporným ohodnocením hran $w$. Cílem je rozložit množinu vrcholů $V$ na nejvýše $k \geq 2$ disjunktních množin $V_1, \dots, V_k$ tak, aby součet vah hran vedoucí mezi různými množinami byl maximální. Pokud $k = 2$ hovoříme o úloze \textbf{MAX CUT} a pro $k \geq 3$ o úloze \textbf{MAX $k$-CUT}. Máme-li navíc předepsané maximální počty vrcholů v jednotlivách množinách, tj.
+Mějme neorientovaný graf $G = (V, E)$ s nezáporným ohodnocením hran $w$. Cílem je rozložit množinu vrcholů $V$ na nejvýše $k \geq 2$ disjunktních množin $V_1, \dots, V_k$ tak, aby součet vah hran vedoucí mezi různými množinami byl maximální. Pokud $k = 2$ hovoříme o úloze \textbf{MAX CUT} a pro $k \geq 3$ o~úloze \textbf{MAX $k$-CUT}. Máme-li navíc předepsané maximální počty vrcholů v jednotlivách množinách, tj.
 $$
     |V_1| \leq s_1, \dots, |V_k| \leq s_k,
 $$
@@ -10,7 +10,7 @@ kde $|V| = n \leq \sum_i s_i$, jedná se o kapacitní MAX $k$-CUT úlohu, kterou
 
 \section{Úloha MAX CUT}
 
-Nejprve se podíváme na aproximační algoritmus z článku \cite{max-cut} pro úlohu MAX CUT.
+Nejprve se podíváme na aproximační algoritmus z článku \cite{max-cut} pro úlohu MAX CUT. Bylo čerpáno také z \cite{approximation-algorithms}.
 
 \subsection{Striktní kvadratický program pro MAX CUT}
 
@@ -219,7 +219,7 @@ Máme řešení $a_1, \dots, a_n$ programu~\ref{eq:FJ-RELAX}. Zvolíme $k$ náho
 
 \subsection{Goemans-Williamson a MAX $3$-CUT}
 
-Algoritmus vycházející z článku \cite{complex-max-3-cut} využívá komplexní semidefinitní programování, tj. každý prvek je reprezentován komplexním vektorem. Následující vektorový program je relaxací úlohy MAX $3$-CUT, viz \cite{newman}. 
+Algoritmus vycházející z článku \cite{complex-max-3-cut} využívá komplexní semidefinitní programování, tj. každý prvek je reprezentován komplexním vektorem. Následující vektorový program je jeho relaxací, viz \cite{newman}. 
 
 \begin{equation}\tag{GW-RELAX}
     \begin{split}
@@ -238,15 +238,15 @@ Mějme $3n$ vektorů, které tvoří řešení \ref{eq:GW-RELAX}. Pro vrchol $i 
 $$
     \theta_i \in \psi + \frac{j 2 \pi}{3}, j \in \left\{ 0, 1, 2 \right\},
 $$
-kde úhly počítáme modulo $2$. Dostáváme algoritmus pro MAX $3$-CUT.
+kde úhly počítáme modulo $2\pi$. Dostáváme algoritmus pro MAX $3$-CUT.
 
 \begin{alg}[GW MAX $3$-CUT]\cite{complex-max-3-cut}$ $
     \begin{enumerate}
         \item Najdi řešení $a_1^1, a_1^2, a_1^3, \dots, a_n^3$ programu~\ref{eq:GW-RELAX}.
         \item Zvol náhodně vektor $g \in \mathbb{R}^{3n}$ tak, že každá složka je vybrána nezávisle z normálního normovaného rozdělelní $\mathcal{N}(0,1)$.
-        \item Pro každý vrchol $i \in V$ urči projekci vektoru $g$ do příslušné roviny a vypočítej úhel $\theta_i$, který svírá projekce $g$ a vektor $a_i^3$.
+        \item Pro každý vrchol $i \in V$ urči projekci vektoru $g$ do příslušné roviny a~vypočítej úhel $\theta_i$, který svírá projekce $g$ a vektor $a_i^3$.
         \item Zvol libovolně úhel $\psi \in \langle 0, \pi)$.
-        \item Vrchol $i$ přidej do množiny $V_j$, jestliže $\theta_i \in \psi + \frac{j 2 \pi}{3}, j \in \left\{ 0, 1, 2 \right\}$, kde úhly počítáme modulo $2$.
+        \item Vrchol $i$ přidej do množiny $V_j$, jestliže $\theta_i \in \psi + \frac{j 2 \pi}{3}, j \in \left\{ 0, 1, 2 \right\}$, kde úhly počítáme modulo $2\pi$.
     \end{enumerate}
     \label{alg:gw-max-3-cut}
 \end{alg}
@@ -310,9 +310,9 @@ Jako poslední ještě zmíníme algoritmus z \cite{theta-max-k-cut}, ve kterém
 
 \noindent Dostaneme optimální řešení $(U, \vartheta(\bar{G}))$, kde matici $U$ použijeme k určení matice $Y$.
 $$
-    Y = U \otimes \frac{k}{k - 1} \left( I_k - \frac{1}{k} e_k e_k^T \right).
+    Y = U \otimes \frac{k}{k - 1} \left( I_k - \frac{1}{k} e_k e_k^T \right),
 $$
-
+kde $I_k$ je jednotková matice $k \times k$ a $e_k$ je vektor samých jedniček v $\mathbb{R}^k$.
 \noindent Rozkladem $Y = V^TV$ získáme matici $V = \left[ v_1^1\ v_1^2\ \dots\ v_1^k\ \dots\ v_n^k \right]$.
 Zvolíme náhodný vektor $g \in \mathbb{R}^{kn}$ na sféře $S_{kn-1}$ a určíme vektor $x$ tak, že
 $$
@@ -347,7 +347,7 @@ V tabulce~\ref{tab:approx-ratio}, která je převzána z \cite{newman}, jsou uve
 
 \section{Úloha CMAX $k$-CUT}
 
-O obecné úloze CMAX $k$-CUT toho není mnoho známo. V \cite{cmax-k-cut-1} (a později v opravě \cite{cmax-k-cut-2}) je popsán algoritmus, který využívá lokální prohledávání, jehož aproximační poměr je
+O obecné úloze CMAX $k$-CUT toho není mnoho známo. V \cite{cmax-k-cut-1} (a později v~opravě \cite{cmax-k-cut-2}) je popsán algoritmus, který využívá lokální prohledávání, jehož aproximační poměr je
 $$
     \frac{t(k-1)}{2(s-1)+t(k-1)},
 $$
@@ -355,7 +355,7 @@ kde $k\geq 2$, $t = \min_{i=1,\dots,k} |V_i|$ a $s = \max_{i=1,\dots,k} |V_i|$. 
 
 \subsection{Lokální prohledávání}
 
-Nechť $G = (V,E)$ je neorientovaný graf s $n$ vrcholy. Označíme $w(u,v)$ váhu hrany $uv$. Na vstupu máme zadáno $k \geq 2$ a maximální počty vrcholů v jednotlivých množinách
+Nechť $G = (V,E)$ je neorientovaný graf s $n$ vrcholy. Označíme $w(u,v)$ váhu hrany $uv$. Na vstupu máme zadáno $k \geq 2$ a maximální počty vrcholů v~jednotlivých množinách
 $$
     |V_1| \leq s_1, \dots, |V_k| \leq s_k.
 $$
@@ -367,7 +367,7 @@ $$
     \sum_{x \in V_i, x \neq u} w(u,x) + \sum_{x \in V_j, x \neq v} w(v,x) > 
     \sum_{x \in V_j, x \neq u} w(u,x) + \sum_{x \in V_i, x \neq v} w(v,x) - 2 w(u,v).
 $$
-Pokud takové vrcholy najdeme, tak vrchol $u$ přesuneme do množiny $V_j$ a vrchol $v$ přesuneme do množiny $V_i$ a iterační krok opakujeme. Jestliže takové vrcholy neexistují algoritmus končí.
+Pokud takové vrcholy najdeme, tak vrchol $u$ přesuneme do množiny $V_j$ a~vrchol $v$ přesuneme do množiny $V_i$ a iterační krok opakujeme. Jestliže takové vrcholy neexistují algoritmus končí.
 
 \subsection{CMAX $k$-CUT pomocí SDP}
 
@@ -384,7 +384,7 @@ K implementaci algoritmů je použit framework \textbf{Mosek}. Jsou naimplemento
 
 \subsection{MAX $k$-CUT}
 
-Pro úlohu MAX $3$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut}, algoritmus~\ref{alg:gw-max-3-cut} a algoritmus~\ref{alg:n-max-k-cut-2} viz tabulka~\ref{tab:max-3-cut-random}. Srovnatelné jsou algoritmy \ref{alg:fj-max-k-cut} a \ref{alg:n-max-k-cut-2}. Algoritmus~\ref{alg:gw-max-3-cut}, který by teoreticky měl vycházet nejlépe (viz tabulka s aproximačními poměry v \cite{newman}), je nejhorší. V semidefinitní formulaci, kterou využívá tento algoritmus je velké množství omezení a velikost úlohy (optimalizační proměnná) je třikrát větší než u formulace \ref{eq:FJ-RELAX}. Problémy s přesností byly indikovány tím, že při výpočtu úhlu pro vrchol na příslušném disku, skalární součin dvou vektorů, které by měly být jednotkové, vždy neležel v intervalu $\langle -1, 1 \rangle$ a bylo potřeba zaokrouhlovat.
+Pro úlohu MAX $3$-CUT byl otestován algoritmus~\ref{alg:fj-max-k-cut}, algoritmus~\ref{alg:gw-max-3-cut} a algoritmus~\ref{alg:n-max-k-cut-2}, viz tabulka~\ref{tab:max-3-cut-random}. Srovnatelné jsou algoritmy \ref{alg:fj-max-k-cut} a \ref{alg:n-max-k-cut-2}. Algoritmus~\ref{alg:gw-max-3-cut}, který by teoreticky měl vycházet nejlépe (viz tabulka~\ref{tab:approx-ratio} s aproximačními poměry), je nejhorší. V semidefinitní formulaci, kterou využívá tento algoritmus je velké množství omezení a velikost úlohy (optimalizační proměnná) je třikrát větší než u formulace \ref{eq:FJ-RELAX}. Problémy s přesností byly indikovány tím, že při výpočtu úhlu pro vrchol na příslušném disku, skalární součin dvou vektorů, které by měly být jednotkové, vždy neležel v intervalu $\langle -1, 1 \rangle$ a bylo potřeba zaokrouhlovat.
 
 \begin{table}[h!]
     \begin{center}

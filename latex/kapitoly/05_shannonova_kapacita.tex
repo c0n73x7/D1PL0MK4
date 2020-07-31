@@ -6,7 +6,7 @@ Kapitola je zpracována z \cite{approximation-algorithms-and-semidefinite-progra
 
 Představme si komunikační kanál, kterým posíláme zprávy. Tyto zprávy jsou složeny ze symbolů nějaké konečné abecedy. Vlivem šumu mohou být některé symboly druhou stranou špatně interpretovány a naším cílem je vybrat co největší množinu slov délky $k$ tak, aby žádná dvě odeslaná slova nebyla vlivem tohoto šumu zaměnitelná.
 
-Problém si formalizujeme v řeči teorie grafů. Mějme neorientovaný graf $G = (V, E)$, kde množina vrcholů představuje symboly z konečné abecedy a dva vrcholy $x, y$ jsou spojeny hranou, pokud vrchol $x$ může být vlivem šumu zaměněn za $y$.
+Problém si formalizujeme v řeči teorie grafů. Mějme neorientovaný graf $G = (V, E)$, kde množina vrcholů představuje symboly z konečné abecedy a~dva vrcholy $x, y$ jsou spojeny hranou, pokud vrchol $x$ může být vlivem šumu zaměněn za $y$.
 
 Maximální počet nezaměnitelných zpráv délky $1$ je roven $\alpha(G)$, kde $\alpha(G)$ značí velikost největší nezávislé množiny v grafu $G$. Pro popis delších zpráv definujeme \textbf{silný součin} $G \cdot H$ grafů $G$ a $H$ následovně
 \begin{equation*}
@@ -36,7 +36,7 @@ $$
     \Theta(G) = \sup \left\{ \alpha(G^k)^{1/k} \mid k = 1, 2, \dots \right\}.
 $$
 
-Neví se, zda pro libovolný graf $G$ existuje vůběc nějaký algoritmus, kterým bychom určili hodnotu $\Theta(G)$. Přesto je alespoň něco známo. Pro perfektní grafy Claude E. Shannon \cite{shannon} ukázal, že $\Theta(G) = \alpha(G)$. To také znamená, že pro perfektní grafy lze $\Theta(G)$ určit v polynomiálním čase. Dalším kdo se problémem zabýval byl László Lovász \cite{lovasz}, který velmi hezkým způsobem ukázal, že kružnice délky $5$ má kapacitu $\sqrt{5}$. Na Lovászův postup se dále podíváme, protože vede k obecnému hornímu odhadu na $\Theta(G)$.
+Neví se, zda pro libovolný graf $G$ existuje vůběc nějaký algoritmus, kterým bychom určili hodnotu $\Theta(G)$. Přesto je alespoň něco známo. Pro perfektní grafy Claude E. Shannon \cite{shannon} ukázal, že $\Theta(G) = \alpha(G)$. To také znamená, že pro perfektní grafy lze $\Theta(G)$ určit v polynomiálním čase. Poznamenejme, že perfektní graf je takový, jehož chromatické číslo každého indukovaného podgrafu je stejné jako velikost největší kliky v tomto podgrafu. Příklady perfektních grafů jsou například bipartitní grafy a hranové grafy. Dalším kdo se problémem zabýval byl László Lovász \cite{lovasz}, který velmi hezkým způsobem ukázal, že kružnice délky $5$ má kapacitu $\sqrt{5}$. Na Lovászův postup se dále podíváme, protože vede k obecnému hornímu odhadu na $\Theta(G)$.
 
 \section{$\Theta(C_5) = \sqrt{5}$}
 
@@ -79,7 +79,7 @@ $$
 nazýváme \textbf{ortonormální reprezentace} grafu $G$. Poznamenejme, že každý graf má nějakou ortonormální reprezentaci, např. $1 \mapsto e_1, \dots, n \mapsto e_n$.
 
 \begin{lm}\cite{lovasz}
-    Nechť $\left( u_1, \dots, u_n \right)$ je ortonormální reprezentace grafu $G$ a $\left( v_1, \dots, v_m \right)$ je ortonormální reprezentace grafu $H$. Potom $u_i \circ v_j$ je ortonormální reprezentace grafu $G \cdot H$.
+    Nechť $\left( u_1, \dots, u_n \right)$ je ortonormální reprezentace grafu $G$ a~$\left( v_1, \dots, v_m \right)$ je ortonormální reprezentace grafu $H$. Potom $u_i \circ v_j$ je ortonormální reprezentace grafu $G \cdot H$.
     \label{lemma:lovasz}
 \end{lm}
 
@@ -106,7 +106,7 @@ Dále definujeme funkci $\vartheta(G)$ jako minimální hodnotu přes všechny o
 \end{lm}
 
 \begin{proof}
-    Nechť $\left( u_1, \dots, u_n \right)$ je optimální ortonormální reprezentace grafu $G$ s handle $c$ a $\left( v_1, \dots, v_m \right)$ je optimální ortonormální reprezentace grafu $H$ s handle $d$. Pak $c \circ d$ je jednotkový vektor a platí
+    Nechť $\left( u_1, \dots, u_n \right)$ je optimální ortonormální reprezentace grafu $G$ s handle $c$ a $\left( v_1, \dots, v_m \right)$ je optimální ortonormální reprezentace grafu $H$ s~handle $d$. Pak $c \circ d$ je jednotkový vektor a platí
     $$
         \vartheta(G \cdot H) \leq \max_{i,j} \frac{1}{\left( \left( c \circ d \right)^T \left( u_i \circ v_j \right) \right)^2} = \max_i \frac{1}{\left( c^T u_i \right)^2} \cdot \max_j \frac{1}{\left( d^T v_j \right)^2} = \vartheta(G)\vartheta(H).
     $$
@@ -315,7 +315,7 @@ Je zřejmé, že pro $\alpha(C_5) = 2$, $\alpha(C_7) = 3$, $\alpha(K_5) = 1$ a $
 
 \subsection*{$\chi(\bar{G})$ pro vybrané grafy}
 
-Doplněk $C_5$ je opět $C_5$ a lichá kružnice má chromatické číslo $3$. $K_5$ má jako svůj doplněk diskrétní graf, který má chromatické číslo $1$. U hvězdy $S_5$ dostaneme jako doplněk graf s šesti vrcholy, kde pět z nich tvoří úplný graf a jeden vrchol nemá žádného souseda. Takový graf má chromatické číslo $5$. Pro Petersenův graf je jeho doplněk $T_5$, který má $\chi(T_5) = 5$ ($T_5$ viz Obrázek~\ref{fig:complement_petersen}). Nakonec doplněk k $C_7$ je na obrázku~\ref{fig:complement_c7} a opět probírkou všech možností zjistíme, že chromatické číslo je $4$.
+Doplněk $C_5$ je opět $C_5$ a lichá kružnice má chromatické číslo $3$. $K_5$ má jako svůj doplněk diskrétní graf, který má chromatické číslo $1$. U hvězdy $S_5$ dostaneme jako doplněk graf s šesti vrcholy, kde pět z nich tvoří úplný graf a~jeden vrchol nemá žádného souseda. Takový graf má chromatické číslo $5$. Pro Petersenův graf je jeho doplněk $T_5$, který má $\chi(T_5) = 5$ ($T_5$ viz Obrázek~\ref{fig:complement_petersen}). Nakonec doplněk k $C_7$ je na obrázku~\ref{fig:complement_c7} a opět probírkou všech možností zjistíme, že chromatické číslo je $4$.
 
 \begin{figure}[h!]
     \centering
@@ -370,7 +370,7 @@ Poznamenejme, že vylepšit dolní odhad na $\Theta(C_7)$ je výpočetně náro�
         &\forall i \in V:\ x_i \in \left\{ 0, 1 \right\}
     \end{split}
 \end{equation*}
-nenajde užitečná nezávislá množina, která by měla velikost alespoň $108$ \cite{shannon-capacity-lower-bound-on-c7-worst}. K výpočtu byl použit framework \textbf{Gurobi} a program po $7$ měsících našel pouze nezávislou množinu velikosti $102$, která dává dolní odhad $\sqrt[4]{102} \approx 3.1779$.
+nenajde užitečná nezávislá množina, která by měla velikost alespoň $108$ \cite{shannon-capacity-lower-bound-on-c7-worst}. K výpočtu byl použit framework \textbf{Gurobi} a program po $7$ měsících našel pouze nezávislou množinu velikosti $102$, která dává pouze dolní odhad $\sqrt[4]{102} \approx 3.1779$.
 
 
 \section{Experimenty}
@@ -379,7 +379,7 @@ Porovnáme formulace \ref{eq:SDP1} a \ref{eq:SDP2}, které byly naimplementován
 
 \subsection{Liché kružnice}
 
-V tabulce~\ref{tab:cycles_theta} jsou napočítané hodnoty $\vartheta$ funkce pro liché kružnice pomocí formulací \ref{eq:SDP1} a \ref{eq:SDP2}. Tučně jsou zvýrazněny číslice, které se shodují s přesnou hodnotou určenou ze vztahu~\ref{eq:cycle_theta}.
+V tabulce~\ref{tab:cycles_theta} jsou napočítané hodnoty $\vartheta$ funkce pro liché kružnice pomocí formulací \ref{eq:SDP1} a \ref{eq:SDP2}. Tučně jsou zvýrazněny číslice, které se shodují s~přesnou hodnotou určenou ze vztahu~\ref{eq:cycle_theta}.
 
 \begin{table}[h!]
     \begin{center}
@@ -400,7 +400,7 @@ V tabulce~\ref{tab:cycles_theta} jsou napočítané hodnoty $\vartheta$ funkce p
     \label{tab:cycles_theta}
 \end{table}
 
-Jednodušší model \ref{eq:SDP2} dává přesnější výsledky a je schopen upočítat i větší úlohy. Nepřesnosti jsou dány tím, že solver v modelu \ref{eq:SDP1} má mnohem více omezení a dvě proměnné $X \succeq 0$, $t \geq 0$. Největší problém představuje omezení
+Jednodušší model \ref{eq:SDP2} dává přesnější výsledky a je schopen upočítat i~větší úlohy. Nepřesnosti jsou dány tím, že solver v modelu \ref{eq:SDP1} má mnohem více omezení a dvě proměnné $X \succeq 0$, $t \geq 0$. Největší problém představuje omezení
 $$
     \forall i \in V(G):\ x_{0i} \geq t.
 $$

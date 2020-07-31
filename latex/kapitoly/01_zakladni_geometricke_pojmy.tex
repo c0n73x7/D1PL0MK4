@@ -9,7 +9,7 @@ Mějme dva body $x_1, x_2 \in \mathbb{R}^n$ takové, že $x_1 \neq x_2$ a parame
     y = \theta x_1 + (1 - \theta) x_2
     \label{line}
 \end{equation}
-popisuje \textbf{přímku} procházející body $x_1$ a $x_2$. Pro $\theta = 0$ dostáváme bod $x_2$ a pro $\theta = 1$ bod $x_1$. Omezíme-li $\theta$ na interval $\langle 0, 1 \rangle$, dostaneme \textbf{úsečku} s koncovými body $x_1$ a $x_2$. Výraz \ref{line} lze přepsat do tvaru
+popisuje \textbf{přímku} procházející body $x_1$ a $x_2$. Pro $\theta = 0$ dostáváme bod $x_2$ a pro $\theta = 1$ bod $x_1$. Omezíme-li $\theta$ na interval $\langle 0, 1 \rangle$, dostaneme \textbf{úsečku} s~koncovými body $x_1$ a $x_2$. Výraz \ref{line} lze přepsat do tvaru
 $$
     y = x_2 + \theta (x_1 - x_2),
 $$
@@ -17,13 +17,13 @@ který můžeme interpretovat jako součet počátečního bodu $x_2$ a nějaké
 
 \section{Afinní prostory}
 
-Říkáme, že $C \subseteq \mathbb{R}^n$ je \textbf{afinní prostor}, jestliže přímka procházející libovolnými dvěma různými body z $C$ leží v $C$. Tedy $C$ obsahuje lineární kombinace libovolných dvou bodů z $C$, jestliže součet koeficientů lineární kombinace je roven jedné. To lze zobecnit i pro více než dva body. Lineární kombinace $\theta_1 x_1 + \dots + \theta_k x_k$ bodů $x_1, \dots, x_k$ taková, že $\theta_1 + \dots + \theta_k = 1$, se nazývá \textbf{afinní kombinace} bodů $x_1, \dots, x_k$. Indukcí z definice afinního prostoru lze snadno ukázat, že pokud $C$ je afinní množina, $x_1, \dots, x_k \in C$ a $\theta_1 + \dots + \theta_k = 1$, potom bod $\theta_1 x_1 + \dots + \theta_k x_k \in C$.
+Říkáme, že $C \subseteq \mathbb{R}^n$ je \textbf{afinní prostor}, jestliže přímka procházející libovolnými dvěma různými body z $C$ leží celá v $C$. Tedy $C$ obsahuje lineární kombinace libovolných dvou bodů z $C$, jestliže součet koeficientů lineární kombinace je roven jedné. To lze zobecnit i pro více než dva body. Lineární kombinace $\theta_1 x_1 + \dots + \theta_k x_k$ bodů $x_1, \dots, x_k$ taková, že $\theta_1 + \dots + \theta_k = 1$, se nazývá \textbf{afinní kombinace} bodů $x_1, \dots, x_k$. Indukcí z definice afinního prostoru lze snadno ukázat, že pokud $C$ je afinní množina, $x_1, \dots, x_k \in C$ a~$\theta_1 + \dots + \theta_k = 1$, potom bod $\theta_1 x_1 + \dots + \theta_k x_k \in C$.
 
 \noindent Nechť $C$ je afinní prostor a $x_0 \in C$, potom množina
 $$
     V = C - x_0 = \left\{ x - x_0 \mid c \in C \right\}
 $$
-je \textbf{lineární vektorový prostor}, tj. množina, která je uzavřená na sčítání a násobení skalárem.
+je \textbf{lineární vektorový prostor}, tj. množina, která je uzavřená na sčítání a~násobení skalárem.
 
 \noindent Afinní prostor $C$ lze vyjádřit jako
 $$
@@ -134,7 +134,7 @@ kde $a \neq 0$ se nazývá (uzavřený) \textbf{poloprostor}, resp. \textbf{otev
 $$
     \left\{ x \mid a^T (x - x_0) \leq 0 \right\}, \text{ resp. } \left\{ x \mid a^T (x - x_0) < 0 \right\},
 $$
-kde $a \neq 0$ a $x_0$ je libovolný bod z nadroviny $\left\{ x \mid a^T x = b \right\}$. Poloprostor tedy obsahuje bod $x_0$ a libovolný bod $x_0 + v$, kde $v$ je vektor, který s vnějším normálovým vektorem svírá tupý nebo pravý úhel. Tato interpretace je v $\mathbb{R}^2$ ilustrována na obrázku~\ref{fig:halfspace}. Ještě poznamenejme, že poloprostory jsou konvexní množiny, ale samozřejmě nejsou afinní.
+kde $a \neq 0$ a $x_0$ je libovolný bod z nadroviny $\left\{ x \mid a^T x = b \right\}$. Poloprostor tedy obsahuje bod $x_0$ a libovolný bod $x_0 + v$, kde $v$ je vektor, který s vnějším normálovým vektorem svírá tupý nebo pravý úhel. Tato interpretace je v~$\mathbb{R}^2$ ilustrována na obrázku~\ref{fig:halfspace}. Ještě poznamenejme, že poloprostory jsou konvexní množiny, ale samozřejmě nejsou afinní.
 
 \begin{figure}[h!]
     \centering
@@ -166,9 +166,13 @@ Polytopy jsou zobecněním konvexních mnohoúhelníků v rovině do více dimen
     Každý V-polytop je H-polytop. Každý H-polytop je V-polytop.
 \end{vt2}
 
-Poznamenejme, že V-polytop a H-polytop jsou sice ekvivalentní množiny, ale z algoritmického hlediska je velký rozdíl, zda pracujeme s bodovou množinou, nebo s uzavřenými poloprostory. Pro ilustraci: mějme lineární funkci, kterou chceme minimalizovat na daném polytopu. Pro V-polytop se jedná o triviální problém, protože stačí pro každý bod z množiny $V$ určit hodnotu dané funkce a vybrat minimum. Na druhou stranu pro H-polytop se jedná o netriviální problém, kterým se zabývá lineární programování. Dále budeme mluvit jen o \textbf{polyedrech} a \textbf{polytopech}.
+Poznamenejme, že V-polytop a H-polytop jsou sice ekvivalentní množiny, ale z algoritmického hlediska je velký rozdíl, zda pracujeme s bodovou množinou, nebo s uzavřenými poloprostory. Pro ilustraci: mějme lineární funkci, kterou chceme minimalizovat na daném polytopu. Pro V-polytop se jedná o triviální problém, protože stačí pro každý bod z množiny $V$ určit hodnotu dané funkce a vybrat minimum. Na druhou stranu pro H-polytop se jedná o netriviální problém, kterým se zabývá lineární programování. Dále nebudeme rozlišovat mezi V-polytop a H-polytop a budeme mluvit jen o \textbf{polytopu}. A o H-polyedru budeme mluvit jen jako o \textbf{polyedru}.
 
 Důležitý fakt, že každý polyedr je konečně generovaný, říká Minkowského-Weylova věta.
 \begin{vt2}[Minkowski-Weyl]\cite{semidefinite-optimization-and-convex-algebraic-geometry}
-    $P \subseteq \mathbb{R}^n$. Potom $P = \textbf{conv}(u_1, \dots, u_r) + \textbf{cone}(v_1, \dots, v_s)$, kde $u_i, v_i$ jsou extremální vrcholy $P$ právě tehdy, když $P = \left\{ x \in \mathbb{R}^n \mid Ax \leq b \right\}, A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m$.
+    $P \subseteq \mathbb{R}^n$. Potom
+    $$
+        P = \textbf{conv}(u_1, \dots, u_r) + \textbf{cone}(v_1, \dots, v_s),
+    $$
+    kde $u_i, v_i$ jsou extremální vrcholy $P$ právě tehdy, když $P = \left\{ x \in \mathbb{R}^n \mid Ax \leq b \right\}, A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m$.
 \end{vt2}

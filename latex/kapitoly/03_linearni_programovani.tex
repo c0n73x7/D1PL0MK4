@@ -1,6 +1,6 @@
 \chapter{Lineární programování}
 
-Kapitola je zpracována z \cite{understanding-and-using-linear-programming}, \cite{semidefinite-optimization-and-convex-algebraic-geometry} a \cite{ko}.
+Kapitola je zpracována z \cite{semidefinite-optimization-and-convex-algebraic-geometry}, \cite{understanding-and-using-linear-programming} a \cite{ko}.
 
 \section{Primární úloha}
 
@@ -175,7 +175,7 @@ $$
     0
     \end{bmatrix}.
 $$
-Dostáváme tedy soustavu rovnic $y_i^* \left( b_i - a_{i\_} x^* \right) = 0$, kde $i = 1, \dots, m$. Tedy buď $y_i^* = 0$ nebo $ b_i - a_{i\_} x^* = 0$. \textbf{Podmínka komplementární skluzovosti} je splněna, jestliže pro přípustná řešení $\tilde{x}, \tilde{y}$ platí buď $\tilde{y}_i = 0$ nebo $b_i - a_{i\_} \tilde{x} = 0$, $i = 1, \dots, m$. Pokud nastane $b_i - a_{i\_} \tilde{x} = 0$, potom říkáme, že \textbf{vazba $a_{i\_} \tilde{x} \leq b_i$ je aktivní}.
+Dostáváme tedy soustavu rovnic $y_i^* \left( b_i - a_{i\_} x^* \right) = 0$, kde $i = 1, \dots, m$. Tedy buď $y_i^* = 0$ nebo $ b_i - a_{i\bullet} x^* = 0$ ($a_{i\bullet}$ značí $i$-tý řádek matice $A$). \textbf{Podmínka komplementární skluzovosti} je splněna, jestliže pro přípustná řešení $\tilde{x}, \tilde{y}$ platí buď $\tilde{y}_i = 0$ nebo $b_i - a_{i\bullet} \tilde{x} = 0$, $i = 1, \dots, m$. Pokud nastane $b_i - a_{i\bullet} \tilde{x} = 0$, potom říkáme, že \textbf{vazba $a_{i\_} \tilde{x} \leq b_i$ je aktivní}.
 
 \begin{vt2}
     Nechť $\tilde{x}$ je přípustné řešení \ref{eq:LP-P2} a $\tilde{y}$ je přípustné řešení \ref{eq:LP-D2}. Potom $\tilde{x}, \tilde{y}$ jsou optimální právě tehdy, když platí podmínka komplementární skluzovosti.

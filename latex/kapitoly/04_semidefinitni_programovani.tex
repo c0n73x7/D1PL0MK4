@@ -1,6 +1,6 @@
 \chapter{Semidefinitní programování}
 
-Kapitola je zpracována z \cite{linear-algebra-and-learning-from-data}, \cite{aspects-of-semidefinite-programming}, \cite{semidefinite-optimization-and-convex-algebraic-geometry}, \cite{approximation-algorithms} a \cite{ko}.
+Kapitola je zpracována z \cite{semidefinite-optimization-and-convex-algebraic-geometry}, \cite{aspects-of-semidefinite-programming}, \cite{linear-algebra-and-learning-from-data}, \cite{approximation-algorithms} a \cite{ko}.
 
 Na semidefinitní programování se můžeme dívat jako na zobecnění lineárního programování, kde proměnné jsou symetrické matice, namísto vektorů. Jedná se tedy o optimalizaci lineární funkce vzhledem k tzv. lineárním maticovým nerovnostem (viz dále).
 
@@ -70,7 +70,7 @@ Ukážeme si několik kritérií, jak otestovat pozitivní definitnost dané mat
     tj. existuje nenulový vektor $x$, pro který $x^TSx = 0$. Tedy $S$ není pozitivně definitní.
 \end{pr}
 
-Dalším testem je tzv. Sylvesterovo kritérium.
+Dalším testem je tzv. Sylvesterovo kritérium. \textbf{Vedoucí hlavní minor} čtvercové matice $A$ je determinant podmatice, která vznikne z matice $A$ vynecháním posledních několika jejích řádků a sloupců.
 
 \begin{vt2}\cite{linear-algebra-and-learning-from-data}
     $S = S^T$ je pozitivně definitní, jestliže všechny vedoucí hlavní minory $S$ jsou kladné.
@@ -107,7 +107,7 @@ A poslední, které si uvedeme, souvisí s Gaussovou eliminací.
         \end{bmatrix},
         p_1 = 3, p_2 = \frac{2}{3} 
     $$
-    Pivoty $p_1, p_2 > 0$? tj. matice $S$ je pozitivně definitní.
+    Pivoty $p_1, p_2 > 0$, tj. matice $S$ je pozitivně definitní.
 \end{pr}
 
 \subsection*{Pozitivně semidefinitní matice}
@@ -229,7 +229,7 @@ kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{
     $$
         x_{11} \geq 0, \left(x_{11} - \frac{1}{2}\right)^2 + x_{12}^2 \leq \frac{1}{4}.
     $$
-    Vidíme tedy, že přípustná množina (zobrazena na obrázku~\ref{fig:ex3}) je kruh s poloměrem $\frac{1}{2}$ a se středem v bodě $(x_{11}, x_{12}) = (\frac{1}{2}, 0)$. Řešením úlohy je matice
+    Vidíme tedy, že přípustná množina (zobrazena na obrázku~\ref{fig:ex3}) je kruh s~poloměrem $\frac{1}{2}$ a se středem v bodě $(x_{11}, x_{12}) = (\frac{1}{2}, 0)$. Řešením úlohy je matice
     $$
         X^* \approx
         \begin{bmatrix}
@@ -251,7 +251,7 @@ kde $C, A_i \in S^n$, $\langle X, Y \rangle = \textbf{Tr}(X^T Y) = \sum_{ij} X_{
 
 \subsubsection*{Duální úloha}
 
-Podobně jako u lineárního programování použijeme Lagrangeovu dualitu k odvození duální úlohy k \ref{eq:SDP-P}. Lagrangeova funkce je ve tvaru
+Podobně jako u lineárního programování použijeme Lagrangeovu dualitu k~odvození duální úlohy k \ref{eq:SDP-P}. Lagrangeova funkce je ve tvaru
 $$
     L(X, \lambda, Z) = \langle C, X \rangle - \sum_{i=1}^m \lambda_i \left( \langle A_i, X \rangle - b_i \right) - \langle Z, X \rangle.
 $$
@@ -298,7 +298,7 @@ O nerovnosti~\ref{eq:weak_duality_SDP} se mluví jako o slabé dualitě semidefi
 \subsubsection*{Silná dualita semidefinitního programování}
 
 \begin{vt2}[podmínka optimality]
-    Nechť $X$ je přípustné řešení úlohy~\ref{eq:SDP-P} a $y$ je přípustné řešení úlohy~\ref{eq:SDP-D} taková, že splňují podmínku (komplementární skluzovosti)
+    Nechť $X$ je přípustné řešení úlohy~\ref{eq:SDP-P} a~$y$ je přípustné řešení úlohy~\ref{eq:SDP-D} taková, že splňují podmínku (komplementární skluzovosti)
     $$
         \left( C - \sum_{i=1}^m A_i y_i \right) X = 0.
     $$
@@ -314,7 +314,7 @@ Obracená implikace sama o sobě neplatí, což znamená, že obecně dualitní 
 
 \section{Vektorové programování}
 
-Mějme $n$ vektorových proměnných $v_1, \dots, v_n$ v $\mathbb{R}^n$. \textbf{Vektorový program} je problém optimalizace lineární funkce skalárních součinů $\langle v_i, v_j \rangle$, vzhledem k lineárním omezením na tyto skalární součiny.
+Mějme $n$ vektorových proměnných $v_1, \dots, v_n$ v $\mathbb{R}^n$. \textbf{Vektorový program} je problém optimalizace lineární funkce skalárních součinů $\langle v_i, v_j \rangle$, vzhledem k~lineárním omezením na tyto skalární součiny.
 
 Nyní ukážeme, že vektorové programy jsou ekvivalentní semidefinitním programům. Nechť tedy $\mathcal{V}$ je vektorový program s vektorovými proměnnými $v_1, \dots, v_n$ v $\mathbb{R}^n$ a $\mathcal{S}$ je příslušný semidefinitní program s $n^2$ proměnnými $y_{ij}$, kde hodnota $y_{ij}$ odpovídá skalárnímu součinu $\langle v_i, v_j \rangle$. Matice $Y$ je navíc pozitivně semidefinitní. Potom platí následující věta.
 
